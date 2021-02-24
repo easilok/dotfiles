@@ -1,0 +1,13 @@
+# /etc/pacman.d/hooks/<file>.hook
+[Trigger]
+Operation = Upgrade
+Operation = Install
+Type = Package
+Target = jlink-software-and-documentation
+
+[Action]
+Description = Update JLink NIBBLE devices
+# Depends is optional if this should depend on another package
+# Depends =
+When = PostTransaction
+Exec = /home/luis/scripts/update_jlink_files

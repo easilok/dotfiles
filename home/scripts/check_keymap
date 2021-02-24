@@ -1,0 +1,5 @@
+#!/bin/bash
+
+LINE=$(xmodmap -pke | grep " 21 = less greater")
+
+[ -z "$LINE" ] && /home/luis/scripts/kbdrestore

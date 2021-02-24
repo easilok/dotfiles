@@ -1,0 +1,20 @@
+#!/bin/bash
+
+ping -q -c 1 1.1.1.1 > /dev/null || exit
+
+WEATHER=$(curl --silent "http://wttr.in/Porto?format=%l:+%c+%C+%t+(%f)+%w+%p+%m")
+MOON=$(curl --silent "http://wttr.in/Porto?format=%m")
+
+case "$MOON" in
+	🌑) MOON_PHASE="New" ;;
+	🌒) MOON_PHASE="Waxing Crescent" ;;
+	🌓) MOON_PHASE="First Quarter" ;;
+	🌔) MOON_PHASE="Waxing Gibbous" ;;
+	🌕) MOON_PHASE="Full" ;;
+	🌖) MOON_PHASE="Waning Gibbous" ;;
+	🌗) MOON_PHASE="Last Quarter" ;;
+	🌘) MOON_PHASE="Waning Crescent" ;;
+	*) exit 1 ;;
+esac
+
+echo "$WEATHER $MOON_PHASE"

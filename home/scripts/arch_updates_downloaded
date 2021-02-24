@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if command -v pacman >/dev/null 2>/dev/null; then
+
+	updates=$(pacman -Qu | grep -v "\[ignored\]" | wc -l)
+
+	if [ "$updates" -gt "0" ] ; then
+
+		echo "You have $updates updates pending"
+
+	fi
+
+fi

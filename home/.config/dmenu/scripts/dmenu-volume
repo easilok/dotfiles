@@ -1,0 +1,73 @@
+#!/bin/bash
+#  ____ _____ 
+# |  _ \_   _|  Derek Taylor (DistroTube)
+# | | | || |    http://www.youtube.com/c/DistroTube
+# | |_| || |    http://www.gitlab.com/dwt1/ 
+# |____/ |_| 
+#
+# Dmenu script for editing some of my more frequently edited config files.
+
+# myTerminal=st
+myTerminal=termite
+myEditor=vim
+useQuotes=true
+commandType=exec
+volumeController=pulsemixer
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+declare -a options=(" mute 
+ volUp 
+ volDown 
+ volCtrl 
+ quit ")
+
+choice=$(echo -e "${options[@]}" | $DMENU -p 'Volume Operation: ')
+
+	if [ "$choice" == ' quit ' ]; then
+		echo "Program terminated."
+    exit
+	fi
+
+  if [ -z "$choice" ]; then
+		echo "Exit Esc"
+    exit
+  fi
+
+	if [ "$choice" == ' mute ' ]; then
+		if [ "$volumeController" == 'amixer' ]; then
+			exec amixer set Master toggle
+		else
+			exec pulsemixer --toggle-mute
+		fi
+		exit
+	fi
+	if [ "$choice" == ' volUp ' ]; then
+		if [ "$volumeController" == 'amixer' ]; then
+			exec amixer set Master 5%+ unmute
+		else
+			exec pulsemixer --change-volume +5 --unmute
+		fi
+		exit
+	fi
+	if [ "$choice" == ' volDown ' ]; then
+		if [ "$volumeController" == 'amixer' ]; then
+			exec amixer set Master 5%- unmute
+		else
+			exec pulsemixer --change-volume -5 --unmute
+		fi
+		exit
+	fi
+	if [ "$choice" == ' volCtrl ' ]; then
+		if [ "$volumeController" == 'amixer' ]; then
+			exec $myTerminal -e alsamixer 
+		else
+			exec pavucontrol
+		fi
+		exit
+	fi
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+pulsemixer --get-volume --get-mute | tr '\n' ' ' | 
+	awk '{ if($3=="1") {print "  mutted"} else {printf("  %d%"),$1}}'

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Add env varibles
+# TRANSMISSION_REMOTE_USER
+# TRANSMISSION_REMOTE_PASS
+
+if [[ -z "$1" ]]; then
+  echo "Must receive an argument"
+elif [[ -f "$1" ]]; then 
+  transmission-remote -n "$TRANSMISSION_REMOTE_USER:$TRANSMISSION_REMOTE_PASS" -a "$1"
+else
+  echo "Argument is not a file"
+fi

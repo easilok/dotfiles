@@ -1,0 +1,9 @@
+[Unit]
+Description=Update Sonoff devices every 30 minutes
+
+[Timer]
+OnCalendar=*:0/59
+Persistent=true     
+
+[Install]
+WantedBy=timers.target

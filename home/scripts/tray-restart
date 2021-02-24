@@ -1,0 +1,6 @@
+#!/bin/bash
+
+{ pkill stalonetray &
+  sleep 2
+  stalonetray &
+} &> /dev/null

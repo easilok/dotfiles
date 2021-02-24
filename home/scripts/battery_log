@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#BAT_INFO="upower -i `upower -e | grep 'BAT0'`)"
+#BAT_STATE=$($BAT_INFO | grep state | awk '{print $2}')
+BAT_STATE=$(upower -i `upower -e | grep 'BAT0'` | grep state | awk '{print $2}')
+BAT_PERCENTAGE=$(upower -i `upower -e | grep 'BAT0'` | grep percentage | awk '{print $2}')
+BAT_LOG_DATE=$(date +'%Y%m%d')
+BAT_LOG_FILE="/home/luis/.logs/battery/"$BAT_LOG_DATA"_bat_discharge.log"
+
+if [ "$BAT_STATE" == "discharging" ]; then
+  while [ "$BAT_STATE" == "discharging" ]; do
+    BAT_STATE=$(upower -i `upower -e | grep 'BAT0'` | grep state | awk '{print $2}')
+    BAT_PERCENTAGE=$(upower -i `upower -e | grep 'BAT0'` | grep percentage | awk '{print $2}')
+    BAT_LOG_DATE=$(date +'%Y/%m/%d;%H:%M')
+    echo $BAT_LOG_DATE";"$BAT_STATE";"$BAT_PERCENTAGE >> $BAT_LOG_FILE
+    sleep 60
+  done
+  BAT_LOG_DATE=$(date +'%Y-%m-%;%H-%M')
+  echo $BAT_LOG_DATE";"$BAT_STATE";"$BAT_PERCENTAGE >> $BAT_LOG_FILE
+fi

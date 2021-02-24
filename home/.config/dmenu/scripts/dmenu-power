@@ -1,0 +1,67 @@
+#!/bin/bash
+#  ____ _____ 
+# |  _ \_   _|  Derek Taylor (DistroTube)
+# | | | || |    http://www.youtube.com/c/DistroTube
+# | |_| || |    http://www.gitlab.com/dwt1/ 
+# |____/ |_| 
+#
+# Dmenu script for editing some of my more frequently edited config files.
+
+# myTerminal=st
+myTerminal=termite
+useQuotes=true
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+declare -a options=(" lock 
+ log out 
+ suspend 
+ hibernate 
+ reboot 
+ shutdown 
+ quit ")
+
+choice=$(echo -e "${options[@]}" | $DMENU -p 'Choose System Operation: ')
+
+	if [ "$choice" == ' quit ' ]; then
+		echo "Program terminated."
+    exit
+	fi
+
+  if [ -z "$choice" ]; then
+		echo "Exit Esc"
+    exit
+  fi
+
+	if [ "$choice" == ' lock ' ]; then
+				command="betterlockscreen -l dim"
+	fi
+	if [ "$choice" == ' log out ' ]; then
+        # command="$HOME/.config/awesome/rc.lua"
+				exit
+	fi
+	if [ "$choice" == ' suspend ' ]; then
+        command="systemctl suspend"
+	fi
+	if [ "$choice" == ' hibernate ' ]; then
+        command="systemctl hibernate"
+	fi
+	if [ "$choice" == ' reboot ' ]; then
+        command="systemctl reboot"
+	fi
+	if [ "$choice" == ' shutdown ' ]; then
+        command="systemctl poweroff"
+	fi
+
+  # if [ "$useQuotes" = true ]; then
+  #       exec $myTerminal -e "vim $command"
+  # else
+  #       exec $myTerminal -e vim $command
+  # fi
+
+	exec $command
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+THEME='-nb #292d3e -nf #bbc5ff -sb #82AAFF -sf #292d3e ' 
+
+DMENU='dmenu -i '$THEME
+DMENU_RUN='dmenu_run -i '$THEME

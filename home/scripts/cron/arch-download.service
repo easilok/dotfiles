@@ -1,0 +1,10 @@
+
+[Unit]
+Description=Run commands for arch-update-download
+
+[Service]
+#Environment="PATH=/bin:/usr/bin"
+ExecStart=/bin/bash /usr/bin/arch-update-download
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# verify minimum params
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <command> <notification>"
+    exit 1;
+fi;
+
+$1
+notify-send "$2"

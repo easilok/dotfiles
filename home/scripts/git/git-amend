@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Small wrapper around git commit --ammend. Bare 'amend' will enter normal git commit
+# editor, but with args it will do a direct `amend -m`
+
+if [[ $# > 0 ]]; then
+    git commit --amend -m "$@"
+else
+    git commit --amend -v
+fi

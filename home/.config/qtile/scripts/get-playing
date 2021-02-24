@@ -1,0 +1,10 @@
+#!/bin/bash
+if command -v tidal-hifi-cli >/dev/null 2>/dev/null; then
+    PLAYING_STATUS=$(tidal-hifi-cli status)
+    if [ "$PLAYING_STATUS" = "playing" ]; then
+        PLAYING_INFO=$(tidal-hifi-cli info)
+        if [ "$PLAYING_INFO" != "No music info available" ]; then
+            echo $PLAYING_INFO
+        fi
+    fi
+fi

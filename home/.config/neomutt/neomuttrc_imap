@@ -1,0 +1,29 @@
+# vim: filetype=muttrc
+
+source ~/.config/neomutt/settings
+source ~/.config/neomutt/colors
+source ~/.config/neomutt/mappings
+source ~/.config/neomutt/alias
+
+## Acounts Shortcuts
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/nibble_imap<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/uab<enter><change-folder>!<enter>'
+macro index,pager <f4> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/personal_imap<enter><change-folder>!<enter>'
+macro index,pager <f5> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/professional_imap<enter><change-folder>!<enter>'
+
+# Accounts
+source ~/.config/neomutt/accounts/personal_imap
+folder-hook $folder 'source ~/.config/neomutt/accounts/personal_imap'
+
+source ~/.config/neomutt/accounts/professional_imap
+folder-hook $folder 'source ~/.config/neomutt/accounts/professional_imap'
+
+source ~/.config/neomutt/accounts/uab
+folder-hook $folder 'source ~/.config/neomutt/accounts/uab'
+
+source ~/.config/neomutt/accounts/nibble_imap
+folder-hook $folder 'source ~/.config/neomutt/accounts/nibble_imap'
+
+set new_mail_command="notify-send \
+'New email' '%n new messages, %u unread.' &"
+

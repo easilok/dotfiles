@@ -1,0 +1,10 @@
+[Unit]
+Description=Weather synchronization timer
+
+[Timer]
+OnBootSec=2m
+OnUnitActiveSec=60m
+Unit=weather-sync.service
+
+[Install]
+WantedBy=timers.target

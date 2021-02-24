@@ -1,0 +1,90 @@
+#!/bin/bash
+
+editor=vim
+
+if hash vexp 2>/dev/null; then
+  editor=vexp
+fi
+
+case "$1" in
+  "balance")
+    if [ $# -ge 2 ]
+    then
+      case "$2" in
+        "watch")
+          cd /srv/http/balance-manager && npm run watch
+          ;;
+         *)
+          cd /srv/http/balance-manager
+          ;;
+      esac
+    else
+      cd /srv/http/balance-manager && $editor
+    fi
+    ;;
+  "sonoff")
+    if [ $# -ge 2 ]
+    then
+      case "$2" in
+        "watch")
+          cd /srv/http/sonoff && npm run watch
+          ;;
+         *)
+          cd /srv/http/sonoff
+          ;;
+      esac
+    else
+      cd /srv/http/sonoff && $editor
+    fi
+    ;;
+  "littlefrench")
+    if [ $# -ge 2 ]
+    then
+      case "$2" in
+        "watch")
+          cd /srv/http/little-french-ratings && npm run watch
+          ;;
+         *)
+          cd /srv/http/little-french-ratings
+          ;;
+      esac
+    else
+      cd /srv/http/little-french-ratings && $editor
+    fi
+    ;;
+  "schedule")
+    if [ $# -ge 2 ]
+    then
+      case "$2" in
+        "watch")
+          cd /srv/http/schedule-store-service && npm run watch
+          ;;
+         *)
+          cd /srv/http/schedule-store-service
+          ;;
+      esac
+    else
+      cd /srv/http/schedule-store-service && $editor
+    fi
+    ;;
+  "ginger")
+    if [ $# -ge 2 ]
+    then
+      case "$2" in
+        "watch")
+          cd /srv/http/ginger-store && npm run watch
+          ;;
+         *)
+          cd /srv/http/ginger-store 
+          ;;
+      esac
+    else
+      cd /srv/http/ginger-store && $editor
+     fi
+    ;;
+  *)
+    echo "project not found";
+    ;;
+esac
+
+

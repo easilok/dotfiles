@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -L https://marketplace.rocket.chat/v1/apps/$1/download >> app.rc.zip

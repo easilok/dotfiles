@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rclone mount mygoogledrive: /mnt/coisas/gdrive --vfs-cache-mode writes

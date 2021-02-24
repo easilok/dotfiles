@@ -1,0 +1,96 @@
+#!/bin/bash
+
+DEFAULT_DOTFILES=$HOME/git/dotfiles
+
+# check if file .config in home exists
+if [[ ! -d "$HOME/.config" ]]; then 
+    echo ".config don't exist. creating..."
+    mkdir $HOME/.config
+else
+    echo ".config exists in system...ok"
+fi
+# check if file .local in home exists
+if [[ ! -d "$HOME/.local" ]]; then 
+    echo ".local don't exist. creating..."
+    mkdir $HOME/.local
+else
+    echo ".local exists in system...ok"
+fi
+# check if file bin in .local exists
+if [[ ! -d "$HOME/.local/bin" ]]; then 
+    echo ".local/bin don't exist. creating..."
+    mkdir $HOME/.local/bin
+else
+    echo ".local/bin exists in system...ok"
+fi
+
+# linking scrips only if it don't already exists
+if [[ ! -d "$HOME/scripts" ]]; then 
+    echo "scripts don't exist. linking scripts"
+    ln -sf $DEFAULT_DOTFILES/home/scripts $HOME/scripts
+else
+    echo "scripts already exists. skip linking"
+fi
+# check if folder .vim exists
+if [[ ! -d "$HOME/.vim" ]]; then 
+    echo ".vim don't exist. creating..."
+    mkdir $HOME/.vim
+else
+    echo ".vim exists in system...ok"
+fi
+# check if folder nvim exists
+if [[ ! -d "$HOME/.config/nvim" ]]; then 
+    echo "nvim don't exist. creating..."
+    mkdir $HOME/.config/nvim
+else
+    echo "nvim exists in system...ok"
+fi
+# check if folder neomutt exists
+if [[ ! -d "$HOME/.config/neomutt" ]]; then 
+    echo "neomutt don't exist. creating..."
+    mkdir $HOME/.config/neomutt
+else
+    echo "neomutt exists in system...ok"
+fi
+mkdir -p $HOME/.cache/neomutt
+# check if folder app exists
+if [[ ! -d "$HOME/app" ]]; then 
+    echo "app don't exist. creating..."
+    mkdir $HOME/app
+else
+    echo "app exists in system...ok"
+fi
+# check if folder systemd/user exists
+if [[ ! -d "$HOME/.config/systemd/user" ]]; then 
+    echo "systemd/user don't exist. creating..."
+    mkdir -p $HOME/.config/systemd/user
+else
+    echo "systemd/user exists in system...ok"
+fi
+
+ln -sf $DEFAULT_DOTFILES/home/.config/.profile $HOME/.bash_profile
+ln -sf $DEFAULT_DOTFILES/home/.bashrc $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/ctags $HOME/.ctags
+ln -sf $DEFAULT_DOTFILES/home/.config/git/.gitconfig $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/git/.gitignore $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/.ncmpcpp $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/.profile $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/.stalonetrayrc $HOME
+ln -sf $DEFAULT_DOTFILES/home/scripts/git/* $HOME/.local/bin
+ln -sf $DEFAULT_DOTFILES/home/.config/ctags $HOME/.ctags
+ln -sf $DEFAULT_DOTFILES/home/.config/tmux/tmux.conf $HOME/.tmux.conf
+ln -sf $DEFAULT_DOTFILES/home/.config/.todo $HOME
+ln -sf $DEFAULT_DOTFILES/home/.vimrc $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/vim/* $HOME/.vim/
+ln -sf $DEFAULT_DOTFILES/home/.vimrc $HOME/.config/nvim/init.vim
+ln -sf $DEFAULT_DOTFILES/home/.xinitrc $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/.xmonad $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/zsh $HOME/.config
+ln -sf $DEFAULT_DOTFILES/home/.config/.profile $HOME/.zprofile
+ln -sf $DEFAULT_DOTFILES/home/.zshrc $HOME
+ln -sf $DEFAULT_DOTFILES/home/.Xmonad $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/* $HOME/.config
+ln -sf $DEFAULT_DOTFILES/home/.config/neomutt/* $HOME/.config/neomutt/
+ln -sf $DEFAULT_DOTFILES/home/.config/systemd/user/* $HOME/.config/systemd/user/
+ln -sf $DEFAULT_DOTFILES/home/app/* $HOME/app
+ln -sf $DEFAULT_DOTFILES/home/.config/.doom.d $HOME

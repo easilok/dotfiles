@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -d "/mnt/coisas/.mail" ]; then
+    unread="$(find /mnt/coisas/.mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+
+    echo "<fc=#666666>|</fc> <fc=#FFB86C> $unread</fc> "
+else
+    echo ""
+fi
+
+
+

@@ -1,0 +1,5 @@
+! === rofi ===
+
+rofi.combi-modi:                     window,drun,ssh,run
+rofi.modi:                           combi,ssh,window,drun,run,combi
+rofi.theme: ~/.config/rofi/themes/default.rasi

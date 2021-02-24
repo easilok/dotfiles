@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+  echo "Must receive an argument"
+elif [[ -d "$1" ]]; then
+  sudo chmod ug+rwx -R "$1"
+elif [[ -f "$1" ]]; then
+  sudo chmod ug+rwx "$1"
+else
+  echo "What have you provided? File or Folder please..."
+fi

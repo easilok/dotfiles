@@ -1,0 +1,6 @@
+#!/bin/bash
+
+curl -s "https://www.archlinux.org/mirrorlist/?country=FR&country=DE&country=PT&country=ES&country=GB&protocol=https&use_mirror_status=on" \
+| sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 6 -
+
+

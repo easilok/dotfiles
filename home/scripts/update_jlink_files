@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Add folder local env
+#JLINK_SOURCE_FOLDEr
+
+JLINK_INSTALL_FOLDER=/opt/SEGGER/JLink
+
+sudo cp -f $JLINK_SOURCE_FOLDER/JLinkDevices.xml $JLINK_INSTALL_FOLDER
+sudo cp -f $JLINK_SOURCE_FOLDER/Devices/ST/STM32F7/NIBBLE_ExternalLoader.elf $JLINK_INSTALL_FOLDER/Devices/ST/STM32F7 

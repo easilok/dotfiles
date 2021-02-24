@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if command -v upower >/dev/null 2>/dev/null; then
+
+	upower -i $(upower -e | grep 'BAT') | grep -E "state|to\ full|percentage" | tr '\n' ' ' | awk '{print " "$4}'
+
+fi

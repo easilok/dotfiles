@@ -1,0 +1,3 @@
+SURFRAW_graphical_browser=qutebrowser
+SURFRAW_text_browser=lynx
+SURFRAW_graphical=yes

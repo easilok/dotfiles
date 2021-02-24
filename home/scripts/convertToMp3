@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if [ "$#" -gt 1 ]; then
+  ffmpeg -i $1 -vn -ac 2 -b:a 320k $2
+else
+  echo "Wrong Number of Arguments. Pass input file and output file"
+fi

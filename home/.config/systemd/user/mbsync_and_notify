@@ -1,0 +1,29 @@
+#!/usr/bin/env /bin/bash
+
+ping -q -c 1 1.1.1.1 > /dev/null || exit
+
+maildirs=("personal" "professional" "nibble" "luispereira" "uab")
+
+if [ -f /usr/bin/mbsync ]; then
+    /usr/bin/mbsync -a 
+    if [ -d "/mnt/coisas/.mail" ]; then
+	hasNewMail=false
+	notifyMessage=""
+	for maildir in "${maildirs[@]}"
+	do
+	    unread=$(find /mnt/coisas/.*mail/$maildir/[Ii][Nn][Bb][Oo][Xx]/new/* -type f 2>/dev/null | wc -l )
+
+	    if [ $unread -gt 0 ]; then
+		hasNewMail=true
+		notifyMessage=$notifyMessage"Unreaded ($maildir): $unread\n"
+	    fi
+	done
+	if [ "$hasNewMail" = true ]; then
+	    notify-send "Mail Synced" "$notifyMessage"
+	fi
+    fi
+fi
+
+if [ -f /usr/bin/mu ]; then
+  /usr/bin/mu index 
+fi

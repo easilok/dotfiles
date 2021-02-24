@@ -1,0 +1,7 @@
+[Unit]
+Description=Weather synchronization service
+
+[Service]
+Type=oneshot
+# ExecStart=/usr/bin/mbsync -Va && notify-send "Mail Synced \n Unreaded: $(find /mnt/coisas/.mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+ExecStart=/bin/bash /usr/bin/weather-sync

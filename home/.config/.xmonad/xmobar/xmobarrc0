@@ -1,0 +1,31 @@
+-- http://projects.haskell.org/xmobar/
+-- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
+-- you can find weather location codes here: http://weather.noaa.gov/index.html
+
+Config { font    = "xft:Roboto:medium:pixelsize=11:antialias=true:hinting=true,FontAwesome:Regular:pixelsize=10"
+       , additionalFonts = [ "xft:FontAwesome:Regular:pixelsize=10" ]
+       -- , bgColor = "#282A36"
+       , bgColor = "#222222"
+       , fgColor = "#B45BCF"
+       , position = Top L 100
+       , lowerOnStart = True
+       , hideOnStart = False
+       , allDesktops = True
+       , persistent = True
+       , iconRoot = "/home/luis/.xmonad/xpm/"  -- default: "."
+       , commands = [ Run Date "%d/%b- %H:%M" "date" 10
+                    , Run ThermalZone 0 ["-t", "T: <temp>ºC"] 30
+                    , Run Cpu ["-t", "P: <total>%", "-p 3", "-H","50","--high","red"] 30
+                    , Run Memory ["-t", "M: <usedratio>%", "-p 3"] 30
+                    , Run Com "/bin/bash" ["-c", "~/.xmonad/xmobar/scripts/get-kbd"] "mykbd" 30
+                    , Run Com "/bin/bash" ["-c", "~/.xmonad/xmobar/scripts/get-volume"] "myvolume" 10
+                    , Run Com "/bin/bash" ["-c", "~/.xmonad/xmobar/scripts/get-bat"] "battery" 10
+                    , Run Com "/bin/bash" ["-c", "~/.xmonad/xmobar/scripts/get-playing"] "playing" 10
+                    , Run Com "/bin/bash" ["-c", "~/.xmonad/xmobar/scripts/get-mail"] "mail" 10
+                    , Run UnsafeStdinReader
+                    , Run Com "/home/luis/.xmonad/xmobar/trayer-padding-icon.sh" [] "trayerpad" 100
+                   ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %UnsafeStdinReader% }{ <fc=#8BE9FD>%playing%</fc> <fc=#FFB86C>%battery%</fc> <fc=#666666>|</fc> <fc=#B45BCF>%myvolume%</fc> <fc=#666666>|</fc> <fc=#FF5555>%mykbd%</fc> <fc=#666666>|</fc> <fc=#FFB86C>%cpu%</fc> <fc=#666666>|</fc> <fc=#FF5555>%memory%</fc> <fc=#666666>|</fc> <fc=#B45BCF>%thermal0%</fc> %mail%<fc=#666666>|</fc> <fc=#8BE9FD>%date%</fc>%trayerpad%"
+       }

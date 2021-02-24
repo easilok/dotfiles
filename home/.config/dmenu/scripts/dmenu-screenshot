@@ -1,0 +1,42 @@
+#!/bin/bash
+
+NEXT_APP=""
+COMMON_FLAGS="--delay 2 --count --quality 100 --freeze"
+FILENAME="$HOME/Screenshots/%Y-%m-%d-%H%M%S_$wx$h_scrot.png"
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+declare -a options=(" fullscreen 
+ window 
+ select 
+ quit ")
+
+choice=$(echo -e "${options[@]}" | $DMENU -p 'Select screenshot type')
+
+if [ "$choice" == ' quit ' ]; then
+    echo "Program terminated."
+exit
+fi
+
+if [ -z "$choice" ]; then
+    echo "Exit Esc"
+exit
+fi
+
+if [ "$choice" == ' fullscreen ' ]; then
+    command="scrot $COMMON_FLAGS $FILENAME $NEXT_APP"
+fi
+if [ "$choice" == ' window ' ]; then
+    command="scrot $COMMON_FLAGS --focused $FILENAME $NEXT_APP"
+fi
+if [ "$choice" == ' select ' ]; then
+    command="scrot $COMMON_FLAGS --line style=dash,width=3 --select $FILENAME $NEXT_APP"
+fi
+
+exec $command 
+#&& pcmanfm $HOME/Screenshots &
+

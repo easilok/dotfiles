@@ -1,0 +1,18 @@
+#!/bin/bash
+
+EPISODE_PATH="/mnt/coisas/rtorrent/download/[HorribleSubs] One Piece [480p]" 
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+choice=$(\ls "$EPISODE_PATH" | sed -n -e "/mkv$/p" | $DMENU -l 30)
+
+if [ -z "$choice" ]; then
+	echo "Exit Esc"
+	exit
+fi
+
+mpv "$EPISODE_PATH/$choice" --speed=1.30 --start=00:02:10

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+SCREEN_CONFIG_PATH="$HOME/.screenlayout" 
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+choice=$(\ls "$SCREEN_CONFIG_PATH" | $DMENU -p "Choose screen layout: ")
+
+if [ -z "$choice" ]; then
+	echo "Exit Esc"
+	exit
+fi
+
+$SCREEN_CONFIG_PATH/$choice

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if test -r "./workspace.vim"; then
+  vim -S workspace.vim
+else
+  vim
+fi

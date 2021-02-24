@@ -1,0 +1,3 @@
+#!/bin/bash
+
+avahi-browse _ewelink._tcp -r -t

@@ -1,0 +1,39 @@
+#!/bin/bash
+# myTerminal=st
+myTerminal=termite
+myEditor=vim
+useQuotes=true
+commandType=exec
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+declare -a options=(" Doom 
+ Raw 
+ quit ")
+
+choice=$(echo -e "${options[@]}" | $DMENU -p 'Choose a emacs config')
+
+if [ "$choice" == ' quit ' ]; then
+    echo "Program terminated."
+    exit
+fi
+
+if [ -z "$choice" ]; then
+    echo "Exit Esc"
+    exit
+fi
+
+if [ "$choice" == ' Doom ' ]; then
+    rm ~/.emacs.d
+    ln -sf ~/.emacs.d.doom ~/.emacs.d
+fi
+if [ "$choice" == ' Raw ' ]; then
+    rm ~/.emacs.d
+    ln -sf ~/.config/emacs.d.raw ~/.emacs.d
+fi
+
+emacs &
