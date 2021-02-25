@@ -1,7 +1,12 @@
 #!/bin/sh
+# Run the screen compositor
+picom &
 
-# NOTE: This is only for the live demo, not needed for your configuration!
-# spice-vdagent
+wmname compiz
+
+# Enable screen locking on suspend
+# xss-lock -- slock &
+xss-lock -- betterlockscreen -l dim &
 
 # Fire it up
-exec dbus-launch --exit-with-session emacs -mm --debug-init
+exec dbus-launch --exit-with-session emacs -mm --debug-init -l ~/.emacs.d/desktop.el

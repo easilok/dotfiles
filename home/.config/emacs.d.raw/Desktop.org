@@ -13,75 +13,178 @@ We use the excellent [[https://github.com/ch11ng/exwm][EXWM]] module as the basi
 
 #+begin_src emacs-lisp
 
-  (defun efs/exwm-update-class ()
-    (exwm-workspace-rename-buffer exwm-class-name))
+  (defun efs/run-in-background (command)
+    (let ((command-parts (split-string command "[ ]+")))
+      (apply #'call-process `(,(car command-parts) nil 0 nil ,@(cdr command-parts)))))
 
-  (use-package exwm
-    :config
-    ;; Set the default number of workspaces
-    (setq exwm-workspace-number 10)
+  (defun efs/set-wallpaper ()
+    (interactive)
+    ;; NOTE: You will need to update this to a valid background path!
+    (start-process-shell-command
+        "background" nil  "~/scripts/set_wallpaper"))
 
-    ;; When window "class" updates, use it to set the buffer name
-    (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
+  (defun efs/exwm-init-hook ()
+    ;; Make workspace 1 be the one where we land at startup
+    (exwm-workspace-switch-create 1)
 
-    ;; Rebind CapsLock to Ctrl
-    (start-process-shell-command "xmodmap" nil "xmodmap ~/.Xmodmap")
+    ;; Open eshell by default
+    ;;(eshell)
 
-    ;; Set the screen resolution (update this to be the correct resolution for your screen!)
-    (require 'exwm-randr)
-    (exwm-randr-enable)
-    (start-process-shell-command "xrandr" nill "~/.screenlayout/internal_monitor")
-    ;; (start-process-shell-command "xrandr" nil "xrandr --output Virtual-1 --primary --mode 2048x1152 --pos 0x0 --rotate normal")
+    ;; Launch apps that will run in the background
+    (efs/run-in-background "nm-applet")
+    (efs/run-in-background "pasystray")
+    (efs/run-in-background "clipit")
+    (efs/run-in-background "dunst")
+    (efs/run-in-background "blueman-applet"))
 
-    ;; Load the system tray before exwm-init
-    (require 'exwm-systemtray)
-    (exwm-systemtray-enable)
+    (defun efs/exwm-update-class ()
+      (exwm-workspace-rename-buffer exwm-class-name))
 
-    ;; These keys should always pass through to Emacs
-    (setq exwm-input-prefix-keys
-      '(?\C-x
-        ?\C-u
-        ?\C-h
-        ?\M-x
-        ?\M-`
-        ?\M-&
-        ?\M-:
-        ?\C-\M-j  ;; Buffer list
-        ?\C-\ ))  ;; Ctrl+Space
+    (use-package exwm
+      :config
+      ;; Set the default number of workspaces
+      (setq exwm-workspace-number 10)
 
-    ;; Ctrl+Q will enable the next key to be sent directly
-    (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+      ;; When window "class" updates, use it to set the buffer name
+      (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
 
-    ;; Set up global key bindings.  These always work, no matter the input state!
-    ;; Keep in mind that changing this list after EXWM initializes has no effect.
-    (setq exwm-input-global-keys
-          `(
-            ;; Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)
-            ([?\s-r] . exwm-reset)
+      ;; When EXWM starts up, do some extra confifuration
+      (add-hook 'exwm-init-hook #'efs/exwm-init-hook)
 
-            ;; Move between windows
-            ([s-left] . windmove-left)
-            ([s-right] . windmove-right)
-            ([s-up] . windmove-up)
-            ([s-down] . windmove-down)
+      ;; Rebind Keyboard
+      (start-process-shell-command "xmodmap" nil "xmodmap ~/.Xmodmap")
 
-            ;; Launch applications via shell command
-            ([?\s-&] . (lambda (command)
-                         (interactive (list (read-shell-command "$ ")))
-                         (start-process-shell-command command nil command)))
+      ;; Set the screen resolution (update this to be the correct resolution for your screen!)
+      (require 'exwm-randr)
+      (exwm-randr-enable)
+      (start-process-shell-command "xrandr" nill "~/.screenlayout/internal_monitor")
+      ;; (start-process-shell-command "xrandr" nil "xrandr --output Virtual-1 --primary --mode 2048x1152 --pos 0x0 --rotate normal")
 
-            ;; Switch workspace
-            ([?\s-w] . exwm-workspace-switch)
-            ;; ([?\s-`] . (lambda () (interactive) (exwm-workspace-switch-create 0)))
+      ;; Set the wallpaper after changing the resolution
+      (efs/set-wallpaper)
 
-            ;; 's-N': Switch to certain workspace with Super (Win) plus a number key (0 - 9)
-            ,@(mapcar (lambda (i)
-                        `(,(kbd (format "s-%d" i)) .
-                          (lambda ()
-                            (interactive)
-                            (exwm-workspace-switch-create ,i))))
-                      (number-sequence 0 9))))
+      ;; Load the system tray before exwm-init
+      (require 'exwm-systemtray)
+      (setq exwm-systemtray-height 26)
+      (exwm-systemtray-enable)
 
-    (exwm-enable))
+      ;; These keys should always pass through to Emacs
+      (setq exwm-input-prefix-keys
+        '(?\C-x
+          ?\C-u
+          ?\C-h
+          ?\M-x
+          ?\M-`
+          ?\M-&
+          ?\M-:
+          ?\C-\M-j  ;; Buffer list
+          ?\C-\ ))  ;; Ctrl+Space
+
+      ;; Ctrl+Q will enable the next key to be sent directly
+      (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+
+      ;; Set up global key bindings.  These always work, no matter the input state!
+      ;; Keep in mind that changing this list after EXWM initializes has no effect.
+      (setq exwm-input-global-keys
+            `(
+              ;; Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)
+              ([?\s-r] . exwm-reset)
+
+              ;; Move between windows
+              ([s-left] . windmove-left)
+              ([s-right] . windmove-right)
+              ([s-up] . windmove-up)
+              ([s-down] . windmove-down)
+
+              ;; Launch applications via shell command
+              ([?\s-&] . (lambda (command)
+                           (interactive (list (read-shell-command "$ ")))
+                           (start-process-shell-command command nil command)))
+
+              ;; Switch workspace
+              ([?\s-w] . exwm-workspace-switch)
+              ;; ([?\s-`] . (lambda () (interactive) (exwm-workspace-switch-create 0)))
+
+              ;; 's-N': Switch to certain workspace with Super (Win) plus a number key (0 - 9)
+              ,@(mapcar (lambda (i)
+                          `(,(kbd (format "s-%d" i)) .
+                            (lambda ()
+                              (interactive)
+                              (exwm-workspace-switch-create ,i))))
+                        (number-sequence 0 9))))
+
+      (exwm-input-set-key (kbd "s-SPC") 'counsel-linux-app)
+
+      (exwm-enable))
+
+#+end_src
+
+* Desktop Environment
+
+** Desktop Key Bindings
+
+We use the [[https://github.com/DamienCassou/desktop-environment][desktop-environment]] package to automatically bind to well-known programs for controlling the volume, screen brightness, media playback, and doing other things like locking the screen and taking screenshots.  Make sure that you install the necessary programs to make this functionality work!  Check the [[https://github.com/DamienCassou/desktop-environment#default-configuration][default programs]] list to know what you need to install.
+
+#+begin_src emacs-lisp
+
+  (use-package desktop-environment
+    :after exwm
+    :config (desktop-environment-mode)
+    :custom
+    (desktop-environment-brightness-small-increment "2%+")
+    (desktop-environment-brightness-small-decrement "2%-")
+    (desktop-environment-brightness-normal-increment "5%+")
+    (desktop-environment-brightness-normal-decrement "5%-"))
+
+#+end_src
+
+** Desktop File
+
+This file is used by your "login manager" (GDM, LightDM, etc) to display EXWM as a desktop environment option when you log in.
+
+*IMPORTANT*: Make sure you create a symbolic link for this file into =/usr/share/xsessions=:
+
+#+begin_src sh :tangle no
+
+sudo ln -f ~/.emacs.d/exwm/exwm.desktop /usr/share/xsessions/exwm.desktop
+
+#+end_src
+
+#+begin_src shell :tangle ./exwm/exwm.desktop :mkdirp yes
+
+  [Desktop Entry]
+  Version=1.0
+  Type=Application
+  Name=EXWM
+  Comment=Emacs Window Manager
+  Exec=sh /home/luis/.emacs.d/exwm/start-exwm.sh
+  TryExec=sh
+  Type=Application
+  X-LightDM-DesktopName=exwm
+  DesktopNames=exwm
+  Icon=exwm
+  Terminal=false
+  StartupNotify=false
+  Categories=Application;
+
+#+end_src
+
+** Launcher Script
+
+This launcher script is invoked by =EXWM.desktop= to start Emacs and load our desktop environment configuration.  We also start up some other helpful applications to configure the desktop experience.
+
+#+begin_src shell :tangle ./exwm/start-exwm.sh :shebang #!/bin/sh
+
+    # Run the screen compositor
+    picom &
+
+    wmname compiz
+
+    # Enable screen locking on suspend
+    # xss-lock -- slock &
+    xss-lock -- betterlockscreen -l dim &
+
+    # Fire it up
+    exec dbus-launch --exit-with-session emacs -mm --debug-init -l ~/.emacs.d/desktop.el
 
 #+end_src

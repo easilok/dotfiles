@@ -28,3 +28,5 @@ transient
 var
 network-security.data
 emacs.d.raw/init-new.el
+Email.org
+myLibs
