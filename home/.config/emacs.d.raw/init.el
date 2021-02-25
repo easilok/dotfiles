@@ -47,17 +47,6 @@
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Cantarell" :height efs/default-variable-font-size :weight 'regular)
 
-;; NOTE: If you want to move everything out of the ~/.emacs.d folder
-;; reliably, set `user-emacs-directory` before loading no-littering!
-;(setq user-emacs-directory "~/.cache/emacs")
-
-(use-package no-littering)
-
-;; no-littering doesn't set this by default so we must place
-;; auto save files in the same path as it uses for sessions
-(setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
-
 ;; Initialize package sources
 (require 'package)
 
@@ -76,6 +65,9 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 ;; (setq use-package-verbose t)
+
+;; Add my library path to load-path
+(push "~/.emacs.d/myLibs" load-path)
 
 ;; M-x all-the-icons-install-fonts
 (use-package all-the-icons)
@@ -113,6 +105,17 @@
 (use-package perspective
   :config
   (persp-mode))
+
+;; NOTE: If you want to move everything out of the ~/.emacs.d folder
+;; reliably, set `user-emacs-directory` before loading no-littering!
+;(setq user-emacs-directory "~/.cache/emacs")
+
+(use-package no-littering)
+
+;; no-littering doesn't set this by default so we must place
+;; auto save files in the same path as it uses for sessions
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 ;; Org Mode Configuration ------------------------------------------------------
 
@@ -341,6 +344,7 @@
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("scm" . "src scheme"))
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
@@ -767,6 +771,8 @@
   :mode "\\.php$"
   :hook (php-mode . lsp-deferred))
 
+(require 'lp-mail)
+
 (use-package mu4e
   ;; :commands (mu4e efs/mu4e-org-setup mu4e-compose-new)
   :defer 2
@@ -794,6 +800,8 @@
   ;; From Doom - Html mails might be better rendered in a browser
   (add-to-list 'mu4e-view-actions '("View in browser" . mu4e-action-view-in-browser))
 
+  (lp/set-mu4e-contexts)
+
   (add-to-list 'mu4e-bookmarks '("(m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox) and flag:unread" "Unread inbox" ?n))
   (add-to-list 'mu4e-bookmarks '("m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox" "All Inboxes" ?i))
 
@@ -801,7 +809,7 @@
   (setq mu4e-headers-time-format "%H:%M")
   ;; the headers to show in the headers list -- a pair of a field
   ;; and its width, with `nil' meaning 'unlimited'
-  ;; (better only use that for the last field.
+  ;; better only use that for the last field.
   ;; These are the defaults:
   (setq mu4e-headers-fields
         '( (:date          .  15)    ;; alternatively, use :human-date
