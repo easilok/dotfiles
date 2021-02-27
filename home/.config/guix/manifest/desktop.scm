@@ -1,115 +1,105 @@
 ;; -*- mode: guix-scheme -*-
 
-(use-modules
- (lp suckless))
+(specifications->manifest
+ '(
+   ;; wm / xtools
+   "arandr"
+   "autorandr"
+   "picom"
+   "dunst"
+   "fontconfig"
+   "lxappearance"
 
-(concatenate-manifests
- (list
-  (packages->manifest
-   `((,my-dmenu "out"))
-   `((,my-dwm "out"))
-   `((,my-dwmblocks "out"))
-   )
-  (specifications->manifest
-   '(
-     ;; wm / xtools
-     "arandr"
-     "autorandr"
-     "picom"
-     "dunst"
-     "fontconfig"
-     "lxappearance"
+   "libnotify"
+   "wmctrl"
+   "xclip"
+   "xdotool"
+   "xsel"
+   "xev"
+   "xset"
+   "xrdb"
+   "xmodmap"
+   "setxkbmap"
+   "xss-lock"
 
-     "libnotify"
-     "wmctrl"
-     "xclip"
-     "xdotool"
-     "xsel"
-     "xev"
-     "xset"
-     "xrdb"
-     "xmodmap"
-     "setxkbmap"
-     "xss-lock"
+   "flatpak"
+   
+   "scrot"
+   "lxsession"
+   "polkit"
+   ;;"mate-polkit"
+   "mpv"
+   "mpv-mpris"
+   "playerctl"
+   "libmediainfo"
+   "feh"
+   "nitrogen"
+   "ristretto"
+   "viewnior"
+   "xwallpaper"
+   "flameshot"
+   ;;"mupdf"
+   ;;"poppler"
+   ;;   "libreoffice"
+   "zathura"
+   "zathura-pdf-mupdf"
+   "zathura-djvu"
+   "sxiv"
+   "gimp"
+   "evince"
+   ;; need a replacement. brings the whole gnome desktop: "cheese"
+   
+   ;; editor
+   "emacs"
+   
+   ;; devtools
+   ;;   "clojure"
+   ;;   "clojure-lsp-bin"
+   "cmake"
+   "git"
+   "go"
+   "guile"
+   ;;   "leiningen"
+   "maven"
+   "openjdk@11."
+   "tidy"
+   ;; TODO enable docker
+   ;;   "docker"
+   
+   ;; browsers
+   "qutebrowser"
+   "w3m"
+   "lynx"
+   "ungoogled-chromium"
+   "icecat"
+   ;;   "firefox"
+   
+   ;; network tools
+   "transmission" ;; out and gui
+   "youtube-dl"
 
-     "flatpak"
-          
-     "scrot"
-     "lxsession"
-     "polkit"
-     ;;"mate-polkit"
-     "mpv"
-     "mpv-mpris"
-     "playerctl"
-     "libmediainfo"
-     "feh"
-     "nitrogen"
-     "ristretto"
-     "viewnior"
-     "xwallpaper"
-     "flameshot"
-     ;;"mupdf"
-     ;;"poppler"
-     ;;   "libreoffice"
-     "zathura"
-     "zathura-pdf-mupdf"
-     "zathura-djvu"
-     "sxiv"
-     "gimp"
-     "evince"
-     ;; need a replacement. brings the whole gnome desktop: "cheese"
-     
-     ;; editor
-     "emacs"
-     
-     ;; devtools
-     ;;   "clojure"
-     ;;   "clojure-lsp-bin"
-     "cmake"
-     "git"
-     "go"
-     "guile"
-     ;;   "leiningen"
-     "maven"
-     "openjdk@11."
-     "tidy"
-     ;; TODO enable docker
-     ;;   "docker"
-     
-     ;; browsers
-     "qutebrowser"
-     "w3m"
-     "lynx"
-     "ungoogled-chromium"
-     "icecat"
-     ;;   "firefox"
-     
-     ;; network tools
-     "transmission" ;; out and gui
-     "youtube-dl"
+   ;; apps from systray
+   "clipit"
+   "network-manager-applet"
+   "system-config-printer"
 
-     ;; apps from systray
-     "clipit"
-     "network-manager-applet"
-     "system-config-printer"
+   ;; tools
+   "redshift"
+   ;;"gucharmap"
+   ;;"fontmanager"
+   "brightnessctl"
+   "xdg-utils"      ;; For xdg-open, etc
+   "xdg-dbus-proxy" ;; For Flatpak
+   "gtk+:bin"       ;; For gtk-launch
+   "glib:bin"       ;; For gio-launch-desktop
+   "shared-mime-info"
 
-     ;; tools
-     "redshift"
-     ;;"gucharmap"
-     ;;"fontmanager"
-     "brightnessctl"
-     "xdg-utils"      ;; For xdg-open, etc
-     "xdg-dbus-proxy" ;; For Flatpak
-     "gtk+:bin"       ;; For gtk-launch
-     "glib:bin"       ;; For gio-launch-desktop
-     "shared-mime-info"
-
-     ;; remote access
-     "freerdp"
-     "rdesktop"
-     "vinagre" ;; remmina not present
-     
-     ))))
+   ;; remote access
+   "freerdp"
+   "rdesktop"
+   "vinagre" ;; remmina not present
+   
+   ))
 
 ;; others
 ;; 

@@ -38,7 +38,8 @@
    "recutils" ;; piping tools like recsel
 
    ;; file processing
-   "fzf"
+   "fzy"
+   "go-github-com-junegunn-fzf"
    "jq"
    "mediainfo"
    "pv" ;; pipe progress monitor
@@ -47,7 +48,7 @@
    ;; spell checker
    "aspell"
    "aspell-dict-en"
-   "aspell-dict-pt"
+   "aspell-dict-pt-pt"
 
 
    ))

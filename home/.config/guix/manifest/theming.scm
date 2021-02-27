@@ -5,7 +5,7 @@
      "font-adobe-source-code-pro"
      "font-dejavu"
      "font-fira-code"
-     "font-google-noto"
+     ;;"font-google-noto"
      "font-hack"
      "font-abattis-cantarell"
      "font-awesome"
