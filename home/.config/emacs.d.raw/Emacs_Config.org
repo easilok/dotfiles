@@ -101,20 +101,23 @@ Setup for use of the /use-package/ for package installs:
 * Doom Things
 #+begin_src emacs-lisp
 
-  ;; M-x all-the-icons-install-fonts
-  (use-package all-the-icons)
+      ;; M-x all-the-icons-install-fonts
+      (use-package all-the-icons)
 
-  (use-package doom-modeline
-    :init (doom-modeline-mode 1)
-    :custom ((doom-modeline-height 15)))
+      (use-package doom-modeline
+        :init (doom-modeline-mode 1)
+        :custom (
+        (doom-modeline-height 15)
+        (doom-modeline-modal-icon nil) ;; vim modes
+        ))
 
-  ;; (display-time-mode 1) ;; Enable time in the mode-line
-  (unless (equal "Battery status not available"
-                 (battery))
-    (display-battery-mode 1)) ; On laptops it's nice to know how much power you have
+      ;; (display-time-mode 1) ;; Enable time in the mode-line
+      (unless (equal "Battery status not available"
+                     (battery))
+        (display-battery-mode 1)) ; On laptops it's nice to know how much power you have
 
-  (use-package doom-themes
-    :init (load-theme 'doom-one t))
+      (use-package doom-themes
+        :init (load-theme 'doom-one t))
 
 #+end_src
 

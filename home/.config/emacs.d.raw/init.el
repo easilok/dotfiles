@@ -74,7 +74,10 @@
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
+  :custom (
+  (doom-modeline-height 15)
+  (doom-modeline-modal-icon nil) ;; vim modes
+  ))
 
 ;; (display-time-mode 1) ;; Enable time in the mode-line
 (unless (equal "Battery status not available"

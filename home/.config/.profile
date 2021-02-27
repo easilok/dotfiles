@@ -27,8 +27,25 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # sudo -n loadkeys ~/.local/bin/ttymaps.kmap 2>/dev/null
 
 export PATH="$HOME/.cargo/bin:$HOME/.emacs.d/bin:$PATH"
-export GUIX_PROFILE="/home/luis/.guix-profile"
+
+## Extra Guix profiles section
+unset GUIX_PROFILE
+GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
+if [ -d "$GUIX_EXTRA_PROFILES" ]; then
+    for i in $GUIX_EXTRA_PROFILES/*; do
+	profile=$i/$(basename "$i")
+	if [ -f "$profile"/etc/profile ]; then
+	    GUIX_PROFILE="$profile"
+	    . "$GUIX_PROFILE"/etc/profile
+	fi
+	unset profile
+    done
+fi
+
+## Default Guix
+export GUIX_PROFILE="$HOME/.guix-profile"
 [ -d "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"
+
 [ -f "$HOME/.config/local_profile" ] && source "$HOME/.config/local_profile"
 
 
