@@ -21,7 +21,7 @@
       (git-file-name name version))
      (sha256
       (base32
-       "127wqlnrbi5zwz598vqdv7pa6r981ks9j9s8s1rmwr9l1m3rnffs"))))))
+       "091l2vb1y3qd0g6r3wwzm55lddk6g3c7nh840xz1c2v7a4ykhcm7"))))))
 
 (define-public my-dwm
   (package
@@ -39,7 +39,7 @@
       (git-file-name name version))
      (sha256
       (base32
-       "127wqlnrbi5zwz598vqdv7pa6r981ks9j9s8s1rmwr9l1m3rnffs"))))))
+       "1yc3nsbjhs6q2sg6s25dw1qg2rixpxf2fsg588mksvjcj086vc2r"))))))
 
 (define-public my-dwmblocks
   (package
@@ -57,4 +57,4 @@
       (git-file-name name version))
      (sha256
       (base32
-       "127wqlnrbi5zwz598vqdv7pa6r981ks9j9s8s1rmwr9l1m3rnffs"))))))
+       "03nsbjgknbkm9ybz9m4m0d6y950hyy8majdjj8kqnh1bvzbb4ns5"))))))

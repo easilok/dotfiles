@@ -42,7 +42,7 @@
     ;; Set the screen resolution (update this to be the correct resolution for your screen!)
     (require 'exwm-randr)
     (exwm-randr-enable)
-    (start-process-shell-command "xrandr" nill "~/.screenlayout/internal_monitor")
+    (start-process-shell-command "xrandr" nil "~/.screenlayout/internal_monitor")
     ;; (start-process-shell-command "xrandr" nil "xrandr --output Virtual-1 --primary --mode 2048x1152 --pos 0x0 --rotate normal")
 
     ;; Set the wallpaper after changing the resolution

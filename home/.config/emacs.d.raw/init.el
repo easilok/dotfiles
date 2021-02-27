@@ -89,7 +89,7 @@
 
 (setq indent-tabs-mode nil) ; for converting tabs to spaces on identation
 (setq-default evil-shift-width tab-width)
-(setq tab-width 4) ; or any other preferred value
+(setq tab-width 2) ; or any other preferred value
 (setq org-src--tab-width tab-width)
 
 
