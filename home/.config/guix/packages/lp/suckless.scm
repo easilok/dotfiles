@@ -60,21 +60,22 @@
        "1a7a5jmv2v2lfd56kd281g4dj9slsh8n10yf8j2lkqk6qgkasl12"))))
    (build-system gnu-build-system)
    (arguments
-    `(#:tests? #f  ; no tests
-      #:make-flags
-      (list (string-append "CC=" ,(cc-for-target))
-	    (string-append "PREFIX=" %output)
-	    (string-append "FREETYPEINC="
-			   (assoc-ref %build-inputs "freetype")
-			   "/include/freetype2"))
-      #:phases
-      (modify-phases %standard-phases (delete 'configure))))
+    `(#:tests? #f                      ; no tests
+	       #:make-flags
+	       (list (string-append "CC=" ,(cc-for-target))
+		     (string-append "PREFIX=" %output)
+		     (string-append "FREETYPEINC="
+				    (assoc-ref %build-inputs "freetype")
+				    "/include/freetype2"))
+	       #:phases
+	       (modify-phases %standard-phases (delete 'configure))))
    (inputs
     `(("freetype" ,freetype)
       ("libxft" ,libxft)
       ("libx11" ,libx11)
       ("libxinerama" ,libxinerama)))
-   (home-page "https://gitlab.com/easilok/dwmblocks")
-   (synopsis "dwm status bar with blocks")
-   (description "dwm status bar with blocks")
-   (licence licence:x11)))
+   (home-page "https://git.suckless.org/dwmstatus")
+   (synopsis "DWM status bar with blocks")
+   (description
+    "dwm status bar with blocks")
+   (license license:x11)))
