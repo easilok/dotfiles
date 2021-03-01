@@ -4,9 +4,11 @@ picom &
 
 wmname compiz
 
+lxsession &
+
 # Enable screen locking on suspend
 # xss-lock -- slock &
-#xss-lock -- betterlockscreen -l dim &
+# xss-lock -- betterlockscreen -l dim &
 
 # Fire it up
-exec dbus-launch --exit-with-session emacs -mm --debug-init -l /home/luis/.emacs.d/desktop.el
+exec dbus-launch --exit-with-session emacs -mm --debug-init -l ~/.emacs.d/desktop.el

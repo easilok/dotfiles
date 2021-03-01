@@ -31,11 +31,11 @@ We use the excellent [[https://github.com/ch11ng/exwm][EXWM]] module as the basi
     ;;(eshell)
 
     ;; Launch apps that will run in the background
-    (efs/run-in-background "nm-applet")
-    (efs/run-in-background "pasystray")
+    ;; (efs/run-in-background "pasystray")
     (efs/run-in-background "clipit")
     (efs/run-in-background "dunst")
-    (efs/run-in-background "blueman-applet"))
+    (efs/run-in-background "blueman-applet")
+    (efs/run-in-background "nm-applet"))
 
     (defun efs/exwm-update-class ()
       (exwm-workspace-rename-buffer exwm-class-name))
@@ -182,7 +182,7 @@ This launcher script is invoked by =EXWM.desktop= to start Emacs and load our de
 
     # Enable screen locking on suspend
     # xss-lock -- slock &
-    xss-lock -- betterlockscreen -l dim &
+    # xss-lock -- betterlockscreen -l dim &
 
     # Fire it up
     exec dbus-launch --exit-with-session emacs -mm --debug-init -l ~/.emacs.d/desktop.el

@@ -16,11 +16,11 @@
   ;;(eshell)
 
   ;; Launch apps that will run in the background
-  (efs/run-in-background "nm-applet")
-  (efs/run-in-background "pasystray")
+  ;; (efs/run-in-background "pasystray")
   (efs/run-in-background "clipit")
   (efs/run-in-background "dunst")
-  (efs/run-in-background "blueman-applet"))
+  (efs/run-in-background "blueman-applet")
+  (efs/run-in-background "nm-applet"))
 
   (defun efs/exwm-update-class ()
     (exwm-workspace-rename-buffer exwm-class-name))

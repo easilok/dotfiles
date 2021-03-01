@@ -10,8 +10,24 @@
    "fontconfig"
    "lxappearance"
 
-   ;; themes
+   ;; fonts
+   "font-adobe-source-code-pro"
+   "font-dejavu"
+   "font-fira-code"
+   ;;"font-google-noto"
+   "font-hack"
+   "font-abattis-cantarell"
+   "font-awesome"
+
+   ;; icons
    "hicolor-icon-theme"
+   "delft-icon-theme"
+   "adwaita-icon-theme"
+   "arc-icon-theme"
+   
+   ;; themes
+   "arc-theme"
+   "gnome-themes-standard"
 
    "libnotify"
    "wmctrl"

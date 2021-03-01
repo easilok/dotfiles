@@ -90,6 +90,8 @@ elif [ "$WM" = "openbox" ] ; then
 	exec openbox-session
 elif [ "$WM" = "cinnamon" ] ; then
 	exec cinnamon-session
+elif [ "$WM" = "exwm" ] ; then
+    exec /home/luis/.emacs.d/exwm/start-exwm.sh
 else
 	exec awesome
 fi
