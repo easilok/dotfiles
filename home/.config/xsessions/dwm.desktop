@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=dwm
+Comment=suckless X11 tiled window manager written in c
+#Exec=dwm
+Exec=start-dwm
+TryExec=start-dwm
+Icon=dwm
+Terminal=false
+StartupNotify=false
+Categories=Application;
