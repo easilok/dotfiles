@@ -60,7 +60,7 @@
    "go"
    "guile"
    ;;   "leiningen"
-   "maven"
+   ;; "maven"
    "openjdk@11."
    "tidy"
    ;; TODO enable docker
@@ -70,7 +70,7 @@
    "qutebrowser"
    "w3m"
    "lynx"
-   "ungoogled-chromium"
+   ;; "ungoogled-chromium"
    "icecat"
    ;;   "firefox"
    

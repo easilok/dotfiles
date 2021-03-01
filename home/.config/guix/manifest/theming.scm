@@ -12,6 +12,8 @@
      "hicolor-icon-theme"
      "delft-icon-theme"
      "adwaita-icon-theme"
+     "gnome-themes-standard"
+     "gnome-themes-extra"
      "arc-theme"
      "arc-icon-theme"
    ))

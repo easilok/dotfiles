@@ -4,6 +4,12 @@
  '(
    "coreutils"
    "gnupg"
+
+   ;; These should be global?
+   "gcc-toolchain"
+   "make"
+   "cmake"
+   "pkg-config"
    
    ;; network tools
    "borg"
