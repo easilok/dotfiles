@@ -41,9 +41,9 @@
       (base32
        "1dp8gwqbyq4bn4szx4b61sz12dil8z7k124dc6qknc047k8hq587"))))))
 
+;; A copy from benoitj package definition to dwmstatus
 (define-public my-dwmblocks
   (package
-   (inherit dmenu)
    (name "my-dwmblocks")
    (version "latest")
    (source
@@ -57,4 +57,24 @@
       (git-file-name name version))
      (sha256
       (base32
-       "1a7a5jmv2v2lfd56kd281g4dj9slsh8n10yf8j2lkqk6qgkasl12"))))))
+       "1a7a5jmv2v2lfd56kd281g4dj9slsh8n10yf8j2lkqk6qgkasl12"))))
+   (build-system gnu-build-system)
+   (arguments
+    `(#:tests? #f  ; no tests
+      #:make-flags
+      (list (string-append "CC=" ,(cc-for-target))
+	    (string-append "PREFIX=" %output)
+	    (string-append "FREETYPEINC="
+			   (assoc-ref %build-inputs "freetype")
+			   "/include/freetype2"))
+      #:phases
+      (modify-phases %standard-phases (delete 'configure))))
+   (inputs
+    `(("freetype" ,freetype)
+      ("libxft" ,libxft)
+      ("libx11" ,libx11)
+      ("libxinerama" ,libxinerama)))
+   (home-page "https://gitlab.com/easilok/dwmblocks")
+   (synopsis "dwm status bar with blocks")
+   (description "dwm status bar with blocks")
+   (licence licence:x11)))

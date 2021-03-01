@@ -10,6 +10,9 @@
    "fontconfig"
    "lxappearance"
 
+   ;; themes
+   "hicolor-icon-theme"
+
    "libnotify"
    "wmctrl"
    "xclip"
