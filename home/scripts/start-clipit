@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+clipit &> ~/Documents/clipit-errors

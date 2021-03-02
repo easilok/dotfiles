@@ -3,13 +3,21 @@
 (define-module (lp suckless)
  #:use-module (guix packages)
  #:use-module (guix git-download)
- #:use-module (gnu packages suckless))
+ #:use-module (gnu packages suckless)
+ #:use-module (guix build-system gnu)
+ #:use-module ((guix licenses) #:prefix license:)
+ #:use-module (gnu packages fonts)
+ #:use-module (gnu packages fontutils)
+ #:use-module (gnu packages xorg)
+ #:use-module (gnu packages pkg-config)
+ #:use-module (guix utils)
+ )
 
 (define-public my-dmenu
   (package
    (inherit dmenu)
    (name "my-dmenu")
-   (version "latest")
+   (version "6.2-1")
    (source
     (origin
      (method git-fetch)
@@ -27,7 +35,7 @@
   (package
    (inherit dmenu)
    (name "my-dwm")
-   (version "latest")
+   (version "4.9-1")
    (source
     (origin
      (method git-fetch)
@@ -45,7 +53,7 @@
 (define-public my-dwmblocks
   (package
    (name "my-dwmblocks")
-   (version "latest")
+   (version "1.0-1")
    (source
     (origin
      (method git-fetch)
@@ -70,7 +78,8 @@
 	       #:phases
 	       (modify-phases %standard-phases (delete 'configure))))
    (inputs
-    `(("freetype" ,freetype)
+    `(("pkg-config" ,pkg-config)
+      ("freetype" ,freetype)
       ("libxft" ,libxft)
       ("libx11" ,libx11)
       ("libxinerama" ,libxinerama)))
