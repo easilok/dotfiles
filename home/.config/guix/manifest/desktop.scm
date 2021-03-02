@@ -99,6 +99,8 @@
 
    ;; apps from systray
    "clipit"
+   "clipmenu"
+   "clipnotify"
    "network-manager-applet"
    "system-config-printer"
 

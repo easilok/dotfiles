@@ -8,7 +8,7 @@
  '(
    "my-dmenu"
    "my-dwm"
-   ;; "my-dwmblocks"
+   "my-dwmblocks"
    ))
 ;; (packages->manifest
 ;;  `((,my-dmenu "out"))
