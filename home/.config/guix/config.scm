@@ -5,6 +5,10 @@
 	     (srfi srfi-1)
 	     (gnu services desktop)
 	     (gnu services base)
+	     (gnu services cups)
+	     (gnu services pm)
+	     (gnu services docker)
+	     (gnu services virtualization)
 	     (gnu packages version-control)
 	     (gnu packages linux)
 	     (gnu packages mtools)
@@ -13,6 +17,7 @@
 	     (gnu packages bash)
 	     (gnu packages xorg)
 	     (gnu packages gnome)
+	     (gnu packages cups)
 	     (gnu packages vim))
 (use-service-modules desktop networking ssh xorg)
 ;; Import nonfree linux module.
@@ -80,23 +85,43 @@
  ;; 	  `(("/bin/sh" ,(file-append bash "/bin/sh")) %base-services))
     
  ;; (services %my-desktop-services)
- (services
-  (append
-   (list (service openssh-service-type)
-	 ;; (service slim-service-type)
-	 ;; (remove (lambda (service)
-	 ;; 	   (eq? (service-kind service) gdm-service-type))))
-	 (set-xorg-configuration
-	  (xorg-configuration
-	   (keyboard-layout keyboard-layout))))
-   %desktop-services
-   (list (extra-special-file "/bin/bash" (file-append bash "/bin/bash")))
-   ))
  ;; (services
- ;;  (cons*
- ;;   (extra-special-file "/bin/sh"
- ;; 	 (file-append bash "/bin/sh"))
- ;;   %base-services))
+ ;;  (append
+ ;;   (list (service openssh-service-type)
+ ;; 	 ;; (service slim-service-type)
+ ;; 	 ;; (remove (lambda (service)
+ ;; 	 ;; 	   (eq? (service-kind service) gdm-service-type))))
+ ;; 	 (set-xorg-configuration
+ ;; 	  (xorg-configuration
+ ;; 	   (keyboard-layout keyboard-layout))))
+ ;;   %desktop-services
+ ;;   (list (extra-special-file "/bin/bash" (file-append bash "/bin/bash")))
+ ;;   ))
+(services (cons* (service slim-service-type
+                              (slim-configuration
+                                (xorg-configuration
+                                  (xorg-configuration
+                                    (keyboard-layout keyboard-layout)
+                                    ))))
+                    (service tlp-service-type
+                             (tlp-configuration
+                                (cpu-boost-on-ac? #t)
+                                (wifi-pwr-on-bat? #t)))
+                    (service thermald-service-type)
+                    (service docker-service-type)
+                    (service libvirt-service-type
+                             (libvirt-configuration
+                              (unix-sock-group "libvirt")
+                              (tls-port "16555")))
+                    (service cups-service-type
+                             (cups-configuration
+                               (web-interface? #t)
+                               (extensions
+                                 (list cups-filters))))
+                    (bluetooth-service #:auto-enable? #t)
+                    (remove (lambda (service)
+                                (eq? (service-kind service) gdm-service-type))
+                            %my-desktop-services)))
  (bootloader
   (bootloader-configuration
    (bootloader grub-bootloader)

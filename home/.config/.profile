@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 # Profile file. Runs on login.
 
-export PATH="$PATH:$HOME/scripts/:$HOME/.local/bin"
+export PATH="$PATH:$HOME/scripts/:$HOME/.local/bin:$HOME/.local/share/flatpak/exports/bin"
 export EDITOR="vim"
 export TERMINAL="termite"
 # export TERMINAL="kitty"
@@ -47,6 +47,7 @@ export GUIX_PROFILE="$HOME/.guix-profile"
 [ -d "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"
 
 [ -f "$HOME/.config/local_profile" ] && source "$HOME/.config/local_profile"
+export XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share/
 
 
 setxkbmap pt &> /dev/null

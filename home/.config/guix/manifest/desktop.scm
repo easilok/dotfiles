@@ -1,126 +1,151 @@
 ;; -*- mode: guix-scheme -*-
 
-(specifications->manifest
- '(
-   ;; wm / xtools
-   "arandr"
-   "autorandr"
-   "picom"
-   "dunst"
-   "fontconfig"
-   "lxappearance"
+(use-modules
+ (lp experimental)
+ (lp suckless))
 
-   ;; fonts
-   "font-adobe-source-code-pro"
-   "font-dejavu"
-   "font-fira-code"
-   ;;"font-google-noto"
-   "font-hack"
-   "font-abattis-cantarell"
-   "font-awesome"
+(concatenate-manifests
+ (list
+  (packages->manifest
+   `(
+     (,my-clipmenu "out")
+     (,my-dmenu "out")
+     ))
+  (specifications->manifest
+   '(
+     ;; sound tools
+     "alsa-plugins:out" ;; required by qutebrowser to play audio
+     "alsa-plugins:pulseaudio" ;; required by qutebrowser to play audio. missing LD_LIBRARY_PATH
+     "alsa-utils"
+     "pulsemixer"
+     "pamixer"
+     "gst-plugins-base"
+     "gst-plugins-good"
+     "gst-plugins-bad"
+     "gst-plugins-ugly"
+     "gstreamer"
 
-   ;; icons
-   "hicolor-icon-theme"
-   "delft-icon-theme"
-   "adwaita-icon-theme"
-   "arc-icon-theme"
-   
-   ;; themes
-   "arc-theme"
-   "gnome-themes-standard"
+     ;; wm / xtools
+     "arandr"
+     "xrandr"
+     "autorandr"
+     "picom"
+     "dunst"
+     "fontconfig"
+     "lxappearance"
 
-   "libnotify"
-   "wmctrl"
-   "xclip"
-   "xdotool"
-   "xsel"
-   "xev"
-   "xset"
-   "xrdb"
-   "xmodmap"
-   "setxkbmap"
-   "xss-lock"
+     ;; fonts
+     "font-adobe-source-code-pro"
+     "font-dejavu"
+     "font-fira-code"
+     ;;"font-google-noto"
+     "font-hack"
+     "font-abattis-cantarell"
+     "font-awesome"
 
-   "flatpak"
-   
-   "scrot"
-   "lxsession"
-   "polkit"
-   ;;"mate-polkit"
-   "mpv"
-   "mpv-mpris"
-   "playerctl"
-   "libmediainfo"
-   "feh"
-   "nitrogen"
-   "ristretto"
-   "viewnior"
-   "xwallpaper"
-   "flameshot"
-   ;;"mupdf"
-   ;;"poppler"
-   ;;   "libreoffice"
-   "zathura"
-   "zathura-pdf-mupdf"
-   "zathura-djvu"
-   "sxiv"
-   "gimp"
-   "evince"
-   ;; need a replacement. brings the whole gnome desktop: "cheese"
-   
-   ;; editor
-   "emacs"
-   
-   ;; devtools
-   ;;   "clojure"
-   ;;   "clojure-lsp-bin"
-   "cmake"
-   "git"
-   "go"
-   "guile"
-   ;;   "leiningen"
-   ;; "maven"
-   "openjdk@11."
-   "tidy"
-   ;; TODO enable docker
-   ;;   "docker"
-   
-   ;; browsers
-   "qutebrowser"
-   "w3m"
-   "lynx"
-   ;; "ungoogled-chromium"
-   "icecat"
-   ;;   "firefox"
-   
-   ;; network tools
-   "transmission" ;; out and gui
-   "youtube-dl"
+     ;; icons
+     "hicolor-icon-theme"
+     "delft-icon-theme"
+     "adwaita-icon-theme"
+     "arc-icon-theme"
+     
+     ;; themes
+     "arc-theme"
+     "gnome-themes-standard"
 
-   ;; apps from systray
-   "clipit"
-   "clipmenu"
-   "clipnotify"
-   "network-manager-applet"
-   "system-config-printer"
+     "libnotify"
+     "wmctrl"
+     "xclip"
+     "xdotool"
+     "xsel"
+     "xev"
+     "xset"
+     "xrdb"
+     "xmodmap"
+     "setxkbmap"
+     "xss-lock"
 
-   ;; tools
-   "redshift"
-   ;;"gucharmap"
-   ;;"fontmanager"
-   "brightnessctl"
-   "xdg-utils"      ;; For xdg-open, etc
-   "xdg-dbus-proxy" ;; For Flatpak
-   "gtk+:bin"       ;; For gtk-launch
-   "glib:bin"       ;; For gio-launch-desktop
-   "shared-mime-info"
+     "flatpak"
+     
+     "scrot"
+     "lxsession"
+     "polkit"
+     ;;"mate-polkit"
+     "mpv"
+     "mpv-mpris"
+     "playerctl"
+     "libmediainfo"
+     "feh"
+     "nitrogen"
+     "ristretto"
+     "viewnior"
+     "xwallpaper"
+     "flameshot"
+     ;;"mupdf"
+     ;;"poppler"
+     ;;   "libreoffice"
+     "zathura"
+     "zathura-pdf-mupdf"
+     "zathura-djvu"
+     "sxiv"
+     "gimp"
+     "evince"
+     ;; need a replacement. brings the whole gnome desktop: "cheese"
+     
+     ;; editor
+     "emacs"
+     
+     ;; devtools
+     ;;   "clojure"
+     ;;   "clojure-lsp-bin"
+     "cmake"
+     "make"
+     "git"
+     "go"
+     "guile"
+     ;;   "leiningen"
+     ;; "maven"
+     "openjdk@11."
+     "tidy"
+     ;; TODO enable docker
+     ;;   "docker"
+     
+     ;; browsers
+     "qutebrowser"
+     "w3m"
+     "lynx"
+     ;; "ungoogled-chromium"
+     "icecat"
+     ;;   "firefox"
+     
+     ;; network tools
+     "transmission" ;; out and gui
+     "youtube-dl"
+     "youtube-viewer"
 
-   ;; remote access
-   "freerdp"
-   "rdesktop"
-   "vinagre" ;; remmina not present
-   
-   ))
+     ;; apps from systray
+     "clipmenu"
+     "clipnotify"
+     "network-manager-applet"
+     "system-config-printer"
+
+     ;; tools
+     "redshift"
+     ;;"gucharmap"
+     ;;"fontmanager"
+     "brightnessctl"
+     "xdg-utils"      ;; For xdg-open, etc
+     "xdg-dbus-proxy" ;; For Flatpak
+     "gtk+:bin"       ;; For gtk-launch
+     "glib:bin"       ;; For gio-launch-desktop
+     "shared-mime-info"
+
+     ;; remote access
+     "freerdp"
+     "rdesktop"
+     "vinagre" ;; remmina not present
+     
+     ))))
 
 ;; others
 ;; 
