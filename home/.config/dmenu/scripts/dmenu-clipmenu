@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 THEME='-nb #292d3e -nf #bbc5ff -sb #82AAFF -sf #292d3e ' 
 
-clipmenu -i $THEME
+/usr/bin/clipmenu -i $THEME

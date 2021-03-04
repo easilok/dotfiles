@@ -162,3 +162,5 @@ config.bind(',sd', 'config-cycle content.user_stylesheets ~/git/solarized-everyt
 config.bind(',sl', 'config-cycle content.user_stylesheets ~/git/solarized-everything-css/css/solarized-light/solarized-light-all-sites.css ""')
 config.bind('<Ctrl-s>', 'spawn --userscript qute-pass')
 config.bind('<Ctrl-z>', 'open file:///home/luis/.config/qutebrowser/startup.html')
+config.bind('M', 'hint links spawn mpv {hint-url}')
+config.bind('Z', 'hint links spawn termite -e youtube-dl {hint-url}')
