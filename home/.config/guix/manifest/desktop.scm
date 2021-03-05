@@ -118,7 +118,6 @@
      "lynx"
      ;; "ungoogled-chromium"
      "icecat"
-     ;;   "firefox"
      
      ;; network tools
      "transmission" ;; out and gui
@@ -126,7 +125,8 @@
      "youtube-viewer"
 
      ;; apps from systray
-     "clipmenu"
+     "xfce4-clipman-plugin"
+     ;; "clipmenu" ;; using my updated build
      "clipnotify"
      "network-manager-applet"
      "system-config-printer"
@@ -134,7 +134,7 @@
      ;; tools
      "redshift"
      ;;"gucharmap"
-     ;;"fontmanager"
+     "fontmanager"
      "brightnessctl"
      "xdg-utils"      ;; For xdg-open, etc
      "xdg-dbus-proxy" ;; For Flatpak
