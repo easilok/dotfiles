@@ -15,6 +15,7 @@
 	     (gnu packages audio)
 	     (gnu packages pulseaudio)
 	     (gnu packages bash)
+	     (gnu packages shells)
 	     (gnu packages xorg)
 	     (gnu packages gnome)
 	     (gnu packages cups)
@@ -65,6 +66,7 @@
   (append
    (list (specification->package "openbox")
 	 (specification->package "nss-certs")
+	 zsh
 	 git
 	 ntfs-3g
 	 exfat-utils
@@ -119,6 +121,8 @@
                                (extensions
                                  (list cups-filters))))
                     (bluetooth-service #:auto-enable? #t)
+		    (extra-special-file "/bin/bash" (file-append bash "/bin/bash"))
+		    (extra-special-file "/bin/zsh" (file-append zsh "/bin/zsh"))
                     (remove (lambda (service)
                                 (eq? (service-kind service) gdm-service-type))
                             %my-desktop-services)))

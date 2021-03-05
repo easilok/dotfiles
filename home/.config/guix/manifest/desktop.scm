@@ -64,6 +64,7 @@
      "xmodmap"
      "setxkbmap"
      "xss-lock"
+     "xsetroot"
 
      "flatpak"
      

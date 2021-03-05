@@ -22,6 +22,7 @@
 
    ;; devices
    "dosfstools" ;; create, check and label file systems of the FAT family.
+   "numlockx"
 
    ;; audio / video / media
    "ffmpeg"
@@ -43,7 +44,7 @@
    "jq"
    "mediainfo"
    "pv" ;; pipe progress monitor
-   "ripgrep"
+   ;; "ripgrep"
 
    ;; spell checker
    "aspell"

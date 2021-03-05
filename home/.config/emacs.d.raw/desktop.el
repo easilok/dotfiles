@@ -17,10 +17,11 @@
 
   ;; Launch apps that will run in the background
   ;; (efs/run-in-background "pasystray")
-  (efs/run-in-background "clipit")
+  ;; (efs/run-in-background "clipit")
   (efs/run-in-background "dunst")
-  (efs/run-in-background "blueman-applet")
-  (efs/run-in-background "nm-applet"))
+  ;; (efs/run-in-background "blueman-applet")
+  (efs/run-in-background "nm-applet")
+  )
 
   (defun efs/exwm-update-class ()
     (exwm-workspace-rename-buffer exwm-class-name))
@@ -42,15 +43,15 @@
     ;; Set the screen resolution (update this to be the correct resolution for your screen!)
     (require 'exwm-randr)
     (exwm-randr-enable)
-    (start-process-shell-command "xrandr" nil "~/.screenlayout/internal_monitor")
+    (start-process-shell-command "xrandr" nil "~/.screenlayout/default.sh")
     ;; (start-process-shell-command "xrandr" nil "xrandr --output Virtual-1 --primary --mode 2048x1152 --pos 0x0 --rotate normal")
 
     ;; Set the wallpaper after changing the resolution
-    (efs/set-wallpaper)
+    ;; (efs/set-wallpaper)
 
     ;; Load the system tray before exwm-init
     (require 'exwm-systemtray)
-    (setq exwm-systemtray-height 26)
+    (setq exwm-systemtray-height 22)
     (exwm-systemtray-enable)
 
     ;; These keys should always pass through to Emacs
@@ -102,11 +103,11 @@
 
     (exwm-enable))
 
-(use-package desktop-environment
-  :after exwm
-  :config (desktop-environment-mode)
-  :custom
-  (desktop-environment-brightness-small-increment "2%+")
-  (desktop-environment-brightness-small-decrement "2%-")
-  (desktop-environment-brightness-normal-increment "5%+")
-  (desktop-environment-brightness-normal-decrement "5%-"))
+;; (use-package desktop-environment
+;;   :after exwm
+;;   :config (desktop-environment-mode)
+;;   :custom
+;;   (desktop-environment-brightness-small-increment "2%+")
+;;   (desktop-environment-brightness-small-decrement "2%-")
+;;   (desktop-environment-brightness-normal-increment "5%+")
+;;   (desktop-environment-brightness-normal-decrement "5%-"))
