@@ -88,3 +88,46 @@
    (description
     "dwm status bar with blocks")
    (license license:x11)))
+
+(define-public my-wmname
+  (package
+   (name "wmname")
+   (version "0.1")
+   (source
+    (origin
+     (method git-fetch)
+     (uri
+      (git-reference
+       (url "git://git.suckless.org/wmname")
+       (commit "1114a8345a83b776d12e7721af45342b7f2f5174")))
+     (file-name
+      (git-file-name name version))
+     (sha256
+      (base32
+       "0d05cmfmn785v27q13wm9m0qbycm5j5g1mc1rpmk782k722wwpb3"))))
+   (build-system gnu-build-system)
+   (arguments
+    `(#:tests? #f                      ; no tests
+	       #:make-flags
+	       (list (string-append "CC=" ,(cc-for-target))
+		     (string-append "PREFIX=" %output)
+		     ;; (string-append "FREETYPEINC="
+		     ;; 		    (assoc-ref %build-inputs "freetype")
+		     ;; 		    "/include/freetype2")
+		     )
+	       #:phases
+	       (modify-phases %standard-phases (delete 'configure))))
+   (inputs
+    `(("pkg-config" ,pkg-config)
+      ;; ("freetype" ,freetype)
+      ("libxft" ,libxft)
+      ("libx11" ,libx11)
+      ;; ("libxinerama" ,libxinerama)
+      ))
+   (home-page "https://git.suckless.org/x/wmname")
+   (synopsis "wmname prints/sets the window manager name property")
+   (description
+    "wmname prints/sets the window manager name property of the root window similar to how hostname(1) behaves.
+wmname is a utility to fix problems with JDK versions and other broken programs assuming a reparenting window manager for instance.
+    ")
+   (license "MIT/X")))

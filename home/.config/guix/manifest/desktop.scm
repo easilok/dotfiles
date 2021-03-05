@@ -10,6 +10,7 @@
    `(
      (,my-clipmenu "out")
      (,my-dmenu "out")
+     (,wmname "out")
      ))
   (specifications->manifest
    '(
