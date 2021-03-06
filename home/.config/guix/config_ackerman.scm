@@ -105,6 +105,10 @@
                                   (xorg-configuration
                                     (keyboard-layout keyboard-layout)
                                     ))))
+		 (service openssh-service-type
+			  (openssh-configuration
+			   (x11-forwarding? #t)
+			   ))
                     (service tlp-service-type
                              (tlp-configuration
                                 (cpu-boost-on-ac? #t)
