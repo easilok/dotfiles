@@ -10,7 +10,7 @@
    `(
      (,my-clipmenu "out")
      (,my-dmenu "out")
-     (,wmname "out")
+     (,my-wmname "out")
      ))
   (specifications->manifest
    '(
@@ -142,6 +142,7 @@
      "glib:bin"       ;; For gio-launch-desktop
      "shared-mime-info"
      "rofi"
+     "pcmanfm"
 
      ;; remote access
      "freerdp"

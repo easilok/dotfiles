@@ -774,7 +774,7 @@
   :mode "\\.php$"
   :hook (php-mode . lsp-deferred))
 
-(require 'lp-mail)
+;; (require 'lp-mail)
 
 (use-package mu4e
   ;; :commands (mu4e efs/mu4e-org-setup mu4e-compose-new)
@@ -919,3 +919,16 @@
     "H" 'dired-hide-dotfiles-mode))
 
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(desktop-environment yaml-mode which-key web-mode vterm visual-fill-column use-package undo-tree typescript-mode rainbow-delimiters pyvenv prettier-js platformio-mode php-mode perspective org-mime org-bullets nvm no-littering magit lsp-ui lsp-treemacs lsp-tailwindcss lsp-pyright lsp-ivy js2-mode ivy-rich ivy-prescient helpful general flycheck exwm evil-surround evil-commentary evil-collection eshell-git-prompt doom-themes doom-modeline dired-hide-dotfiles counsel-projectile company-irony company-box command-log-mode)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
