@@ -68,13 +68,23 @@ else
     echo "systemd/user exists in system...ok"
 fi
 
-ln -sf $DEFAULT_DOTFILES/home/.config/.profile $HOME/.bash_profile
-ln -sf $DEFAULT_DOTFILES/home/.bashrc $HOME
+# check if folder guix exists
+if [[ ! -d "$HOME/.config/guix" ]]; then 
+    echo "guix don't exist. creating..."
+    mkdir -p $HOME/.config/guix
+else
+    echo "guix exists in system...ok"
+fi
+
+MY_CONFIGS=$HOME/.config/lcp_configs
+mkdir -p $MY_CONFIGS
+
+ln -sf $DEFAULT_DOTFILES/home/.config/.profile $MY_CONFIGS
+ln -sf $DEFAULT_DOTFILES/home/.bashrc $MY_CONFIGS
 ln -sf $DEFAULT_DOTFILES/home/.config/ctags $HOME/.ctags
 ln -sf $DEFAULT_DOTFILES/home/.config/git/.gitconfig $HOME
 ln -sf $DEFAULT_DOTFILES/home/.config/git/.gitignore $HOME
 ln -sf $DEFAULT_DOTFILES/home/.config/.ncmpcpp $HOME
-ln -sf $DEFAULT_DOTFILES/home/.config/.profile $HOME
 ln -sf $DEFAULT_DOTFILES/home/.config/.stalonetrayrc $HOME
 ln -sf $DEFAULT_DOTFILES/home/scripts/git/* $HOME/.local/bin
 ln -sf $DEFAULT_DOTFILES/home/.config/ctags $HOME/.ctags
@@ -86,11 +96,12 @@ ln -sf $DEFAULT_DOTFILES/home/.vimrc $HOME/.config/nvim/init.vim
 ln -sf $DEFAULT_DOTFILES/home/.xinitrc $HOME
 ln -sf $DEFAULT_DOTFILES/home/.config/.xmonad $HOME
 ln -sf $DEFAULT_DOTFILES/home/.config/zsh $HOME/.config
-ln -sf $DEFAULT_DOTFILES/home/.config/.profile $HOME/.zprofile
-ln -sf $DEFAULT_DOTFILES/home/.zshrc $HOME
+ln -sf $DEFAULT_DOTFILES/home/.zshrc $MY_CONFIGS
 ln -sf $DEFAULT_DOTFILES/home/.Xmonad $HOME
-ln -sf $DEFAULT_DOTFILES/home/.config/* $HOME/.config
+# ln -sf $DEFAULT_DOTFILES/home/.config/* $HOME/.config
 ln -sf $DEFAULT_DOTFILES/home/.config/neomutt/* $HOME/.config/neomutt/
 ln -sf $DEFAULT_DOTFILES/home/.config/systemd/user/* $HOME/.config/systemd/user/
 ln -sf $DEFAULT_DOTFILES/home/app/* $HOME/app
 ln -sf $DEFAULT_DOTFILES/home/.config/.doom.d $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/xsettingsd $HOME/.config
+ln -sf $DEFAULT_DOTFILES/home/.config/guix/* $HOME/.config/guix/

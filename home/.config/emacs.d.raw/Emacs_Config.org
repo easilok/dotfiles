@@ -89,6 +89,8 @@ Setup for use of the /use-package/ for package installs:
   (require 'use-package)
   (setq use-package-always-ensure t)
   ;; (setq use-package-verbose t)
+  (use-package quelpa)
+  (use-package quelpa-use-package)
 #+end_src
 
 * Include own libraries
@@ -219,10 +221,10 @@ This was taken from [[https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-i
 
 #+begin_src emacs-lisp
 
-  ;; (font-lock-add-keywords
-  ;;  'org-mode
-  ;;  `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
-  ;;  'append)
+  (font-lock-add-keywords
+   'org-mode
+   `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+   'append)
 
 #+end_src
 
@@ -1174,6 +1176,13 @@ Another package, is the [[https://github.com/jeremy-compostella/org-msg][org-msg
     (evil-collection-define-key 'normal 'dired-mode-map
       "H" 'dired-hide-dotfiles-mode))
 
+#+end_src
+* Chat
+
+#+begin_src emacs-lisp
+  ;; (use-package matrix-client
+  ;;   :quelpa (matrix-client :fetcher github :repo "alphapapa/matrix-client.el"
+  ;;                          :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
 #+end_src
 
 * Other Configurations

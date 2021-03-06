@@ -65,6 +65,8 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 ;; (setq use-package-verbose t)
+(use-package quelpa)
+(use-package quelpa-use-package)
 
 ;; Add my library path to load-path
 (push "~/.emacs.d/myLibs" load-path)
@@ -158,10 +160,10 @@
 (with-eval-after-load 'org-faces
   (efs/org-font-setup))
 
-;; (font-lock-add-keywords
-;;  'org-mode
-;;  `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
-;;  'append)
+(font-lock-add-keywords
+ 'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+ 'append)
 
 (defun efs/org-mode-setup ()
   (org-indent-mode)
@@ -918,7 +920,6 @@
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode))
 
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -931,4 +932,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(org-checkbox ((t (:foreground nil :inherit org-todo)))))
