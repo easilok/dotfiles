@@ -148,6 +148,7 @@
      "freerdp"
      "rdesktop"
      "vinagre" ;; remmina not present
+     "tigervnc-server"
      
      ))))
 
