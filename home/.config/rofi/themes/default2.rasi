@@ -11,31 +11,26 @@ configuration {
     background-color: @xbg;
     border-color: #00000000;
     text-color: @xfg;
-    font: "SF Pro Display 12";
+    font: "Hack 12";
 }
 
 #window {
-/*    fullscreen:true;
-	location:	 west;
-    anchor: west;*/
     border: 0;
     border-radius: 4px;
-    padding: 40;
-    width: 70%;
-    height: 70%;
+    padding: 10;
+    width: 50%;
+    height: 50%;
 }
 
 #mainbox {
     background-color: #e9e9e900;
     children: [inputbar, listview];
     spacing: 10px;
-    /*margin: 20%;*/
-    padding: 20px 20px;
+    padding: 10px 10px;
     border-radius: 5px;
     border: 1px;
     border-color: @base0D;
 }
-
 
 #listview {
     background-color: #e9e9e900;
@@ -50,14 +45,13 @@ configuration {
     background-color: #e9e9e900;
     border: 0;
     border-radius: 4px;
-    padding: 3 0  3 4 ;
+    padding: 3 0 3 4 ;
 }
 
 #element selected {
     background-color: @xbs;
     text-color: @xfs;
 }
-
 
 #inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];

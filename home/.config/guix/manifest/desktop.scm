@@ -141,6 +141,7 @@
      "gtk+:bin"       ;; For gtk-launch
      "glib:bin"       ;; For gio-launch-desktop
      "shared-mime-info"
+     "rofi"
 
      ;; remote access
      "freerdp"

@@ -6,5 +6,7 @@ else
   DMENU_RUN='dmenu_run -i'
 fi
 
-# dmenu_run -i -nb '#292d3e' -nf '#bbc5ff' -sb '#82AAFF' -sf '#292d3e' -fn 'UbuntuMono Nerd Font:bold:pixelsize=14'
-$DMENU_RUN 
+### dmenu_run -i -nb '#292d3e' -nf '#bbc5ff' -sb '#82AAFF' -sf '#292d3e' -fn 'UbuntuMono Nerd Font:bold:pixelsize=14'
+#$DMENU_RUN 
+rofi -show "drun"
+
