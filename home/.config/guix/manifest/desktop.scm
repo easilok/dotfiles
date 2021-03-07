@@ -148,11 +148,16 @@
      "leafpad"
      "mousepad"
 
+     ;; terminals
+     "xterm"
+     "termite"
+
      ;; remote access
      "freerdp"
      "rdesktop"
      "vinagre" ;; remmina not present
      "tigervnc-server"
+     "tigervnc-client"
      
      ))))
 

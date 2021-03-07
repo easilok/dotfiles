@@ -78,6 +78,8 @@
 	 tlp
 	 xf86-input-libinput
 	 (specification->package "gcc-toolchain")
+	 (specification->package "ncurses")
+	 (specification->package "wget")
 	 (specification->package "make")
 	 (specification->package "cmake")
 	 (specification->package "pkg-config")
