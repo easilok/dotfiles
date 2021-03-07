@@ -81,6 +81,7 @@
 	 (specification->package "make")
 	 (specification->package "cmake")
 	 (specification->package "pkg-config")
+	 (specification->package "udiskie")
 	 gvfs)
    %base-packages))
  ;; (service special-files-service-type 
@@ -99,33 +100,37 @@
  ;;   %desktop-services
  ;;   (list (extra-special-file "/bin/bash" (file-append bash "/bin/bash")))
  ;;   ))
-(services (cons* (service slim-service-type
-                              (slim-configuration
-                                (xorg-configuration
-                                  (xorg-configuration
-                                    (keyboard-layout keyboard-layout)
-                                    ))))
-                    (service tlp-service-type
-                             (tlp-configuration
-                                (cpu-boost-on-ac? #t)
-                                (wifi-pwr-on-bat? #t)))
-                    (service thermald-service-type)
-                    (service docker-service-type)
-                    (service libvirt-service-type
-                             (libvirt-configuration
-                              (unix-sock-group "libvirt")
-                              (tls-port "16555")))
-                    (service cups-service-type
-                             (cups-configuration
-                               (web-interface? #t)
-                               (extensions
-                                 (list cups-filters))))
-                    (bluetooth-service #:auto-enable? #t)
-		    (extra-special-file "/bin/bash" (file-append bash "/bin/bash"))
-		    (extra-special-file "/bin/zsh" (file-append zsh "/bin/zsh"))
-                    (remove (lambda (service)
-                                (eq? (service-kind service) gdm-service-type))
-                            %my-desktop-services)))
+ (services (cons* (service slim-service-type
+			   (slim-configuration
+			    (xorg-configuration
+			     (xorg-configuration
+			      (keyboard-layout keyboard-layout)
+			      ))))
+		  (service openssh-service-type
+			   (openssh-configuration
+			    (x11-forwarding? #t)
+			    ))
+		  (service tlp-service-type
+			   (tlp-configuration
+			    (cpu-boost-on-ac? #t)
+			    (wifi-pwr-on-bat? #t)))
+		  (service thermald-service-type)
+		  (service docker-service-type)
+		  (service libvirt-service-type
+			   (libvirt-configuration
+			    (unix-sock-group "libvirt")
+			    (tls-port "16555")))
+		  (service cups-service-type
+			   (cups-configuration
+			    (web-interface? #t)
+			    (extensions
+			     (list cups-filters))))
+		  (bluetooth-service #:auto-enable? #t)
+		  (extra-special-file "/bin/bash" (file-append bash "/bin/bash"))
+		  (extra-special-file "/bin/zsh" (file-append zsh "/bin/zsh"))
+		  (remove (lambda (service)
+			    (eq? (service-kind service) gdm-service-type))
+			  %my-desktop-services)))
  (bootloader
   (bootloader-configuration
    (bootloader grub-bootloader)

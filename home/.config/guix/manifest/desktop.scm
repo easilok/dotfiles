@@ -34,6 +34,8 @@
      "dunst"
      "fontconfig"
      "lxappearance"
+     "xsettingsd"
+     "gdk-pixbuf"
 
      ;; fonts
      "font-adobe-source-code-pro"
@@ -143,6 +145,8 @@
      "shared-mime-info"
      "rofi"
      "pcmanfm"
+     "leafpad"
+     "mousepad"
 
      ;; remote access
      "freerdp"

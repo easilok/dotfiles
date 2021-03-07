@@ -109,27 +109,27 @@
 			  (openssh-configuration
 			   (x11-forwarding? #t)
 			   ))
-                    (service tlp-service-type
-                             (tlp-configuration
-                                (cpu-boost-on-ac? #t)
-                                (wifi-pwr-on-bat? #t)))
-                    (service thermald-service-type)
-                    (service docker-service-type)
-                    (service libvirt-service-type
-                             (libvirt-configuration
-                              (unix-sock-group "libvirt")
-                              (tls-port "16555")))
-                    (service cups-service-type
-                             (cups-configuration
-                               (web-interface? #t)
-                               (extensions
-                                 (list cups-filters))))
-                    (bluetooth-service #:auto-enable? #t)
-		    (extra-special-file "/bin/bash" (file-append bash "/bin/bash"))
-		    (extra-special-file "/bin/zsh" (file-append zsh "/bin/zsh"))
-                    (remove (lambda (service)
-                                (eq? (service-kind service) gdm-service-type))
-                            %my-desktop-services)))
+		 (service tlp-service-type
+			  (tlp-configuration
+			   (cpu-boost-on-ac? #t)
+			   (wifi-pwr-on-bat? #t)))
+		 (service thermald-service-type)
+		 (service docker-service-type)
+		 (service libvirt-service-type
+			  (libvirt-configuration
+			   (unix-sock-group "libvirt")
+			   (tls-port "16555")))
+		 (service cups-service-type
+			  (cups-configuration
+			   (web-interface? #t)
+			   (extensions
+			    (list cups-filters))))
+		 (bluetooth-service #:auto-enable? #t)
+		 (extra-special-file "/bin/bash" (file-append bash "/bin/bash"))
+		 (extra-special-file "/bin/zsh" (file-append zsh "/bin/zsh"))
+		 (remove (lambda (service)
+			   (eq? (service-kind service) gdm-service-type))
+			 %my-desktop-services)))
  (bootloader
     (bootloader-configuration
       (bootloader grub-efi-bootloader)
