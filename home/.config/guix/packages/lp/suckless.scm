@@ -35,19 +35,19 @@
   (package
    (inherit dmenu)
    (name "my-dwm")
-   (version "4.9-1")
+   (version "4.9-2")
    (source
     (origin
      (method git-fetch)
      (uri
       (git-reference
        (url "https://gitlab.com/easilok/dwm")
-       (commit "c77b3854f9d71750c9663ad2e10649944eea633f")))
+       (commit "caa05fd1b848978a73be51058d4db6716d6b6bcc")))
      (file-name
       (git-file-name name version))
      (sha256
       (base32
-       "1dp8gwqbyq4bn4szx4b61sz12dil8z7k124dc6qknc047k8hq587"))))))
+       "079cj9bfmc9jsrwnzbnjnym7b9axj4xzmr84par4fjcccyd8d1bb"))))))
 
 ;; A copy from benoitj package definition to dwmstatus
 (define-public my-dwmblocks
