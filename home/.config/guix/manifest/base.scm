@@ -4,6 +4,7 @@
  '(
    "coreutils"
    "gnupg"
+   "pinentry"
 
    ;; These should be global?
    "gcc-toolchain"

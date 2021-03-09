@@ -98,6 +98,7 @@
      
      ;; editor
      "emacs"
+     "mu"
      
      ;; devtools
      ;;   "clojure"
