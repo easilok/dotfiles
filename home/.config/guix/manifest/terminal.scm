@@ -19,6 +19,7 @@
    "isync"
    "mu"
    "neomutt"
+   "owncloud-client"
 
    ;; devices
    "dosfstools" ;; create, check and label file systems of the FAT family.
