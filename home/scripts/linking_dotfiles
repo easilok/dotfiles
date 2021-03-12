@@ -103,5 +103,7 @@ ln -sf $DEFAULT_DOTFILES/home/.config/neomutt/* $HOME/.config/neomutt/
 ln -sf $DEFAULT_DOTFILES/home/.config/systemd/user/* $HOME/.config/systemd/user/
 ln -sf $DEFAULT_DOTFILES/home/app/* $HOME/app
 ln -sf $DEFAULT_DOTFILES/home/.config/.doom.d $HOME
+ln -sf $DEFAULT_DOTFILES/home/.config/emacs.d.raw $HOME/.emacs.d
 ln -sf $DEFAULT_DOTFILES/home/.config/xsettingsd $HOME/.config
 ln -sf $DEFAULT_DOTFILES/home/.config/guix/* $HOME/.config/guix/
+ln -sf $DEFAULT_DOTFILES/home/.config/dmenu/scripts/* $HOME/.local/bin/

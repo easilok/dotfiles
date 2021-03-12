@@ -90,8 +90,8 @@
   :init (load-theme 'doom-one t))
 
 (setq indent-tabs-mode nil) ; for converting tabs to spaces on identation
-(setq-default evil-shift-width tab-width)
 (setq tab-width 2) ; or any other preferred value
+(setq-default evil-shift-width tab-width)
 (setq org-src--tab-width tab-width)
 
 
@@ -211,7 +211,7 @@
     :config
     (setq-default org-adapt-indentation t)
     (setq org-ellipsis " ▾")
-    (setq org-directory "~/nextcloud/org/")
+    (setq org-directory "~/Nextcloud/org/")
     (setq lp/org-capture-refile (concat org-directory "Refile.org"))
     (setq lp/org-capture-mail (concat org-directory "Mail.org"))
     (setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
@@ -219,7 +219,7 @@
     (setq org-agenda-start-with-log-mode t)
     (setq org-log-into-drawer t)
     (setq org-log-done 'time
-          org-journal-dir "~/nextcloud/org/journal/"
+          org-journal-dir "~/Nextcloud/org/journal/"
           org-journal-date-format "%B %d, %Y (%A) "
           org-journal-file-format "%Y-%m-%d.org"
           org-agenda-skip-scheduled-if-done 1
@@ -375,6 +375,11 @@
 
 (setq tab-always-indent nil)
 
+(defun lp/switch-to-previous-buffer()
+  "Switch to previous focused buffer"
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
 (use-package general
   :after evil
   :config
@@ -402,6 +407,7 @@
     "bk"  '(kill-current-buffer :which-key "kill buffer")
     "bd"  '(kill-buffer :which-key "kill a buffer")
     "bi"  '(ibuffer :which-key "ibuffer")
+    "bp"  '(lp/switch-to-previous-buffer :which-key "previous buffer")
     "p"  '(:ignore t :which-key "project")
     ;; "pm"  '(:keymap projectile-command-map :which-key "projectile")
     "pp"  '(projectile-switch-project :which-key "open project")
@@ -419,6 +425,9 @@
        (evil-mode 1)
        (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
        (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+	   ;; change :q to close windows instead of emacs
+       (evil-ex-define-cmd "q[uit]" 'evil-window-delete)      
 
        ;; Use visual line motions even outside of visual-line-mode buffers
        (evil-global-set-key 'motion "j" 'evil-next-visual-line)

@@ -129,8 +129,8 @@ Setup for use of the /use-package/ for package installs:
 #+begin_src emacs-lisp
 
 (setq indent-tabs-mode nil) ; for converting tabs to spaces on identation
-(setq-default evil-shift-width tab-width)
 (setq tab-width 2) ; or any other preferred value
+(setq-default evil-shift-width tab-width)
 (setq org-src--tab-width tab-width)
 
 
@@ -278,7 +278,7 @@ This was taken from [[https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-i
       :config
       (setq-default org-adapt-indentation t)
       (setq org-ellipsis " ▾")
-      (setq org-directory "~/nextcloud/org/")
+      (setq org-directory "~/Nextcloud/org/")
       (setq lp/org-capture-refile (concat org-directory "Refile.org"))
       (setq lp/org-capture-mail (concat org-directory "Mail.org"))
       (setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
@@ -286,7 +286,7 @@ This was taken from [[https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-i
       (setq org-agenda-start-with-log-mode t)
       (setq org-log-into-drawer t)
       (setq org-log-done 'time
-            org-journal-dir "~/nextcloud/org/journal/"
+            org-journal-dir "~/Nextcloud/org/journal/"
             org-journal-date-format "%B %d, %Y (%A) "
             org-journal-file-format "%Y-%m-%d.org"
             org-agenda-skip-scheduled-if-done 1
@@ -452,6 +452,11 @@ This was taken from [[https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-i
 
   (setq tab-always-indent nil)
 
+  (defun lp/switch-to-previous-buffer()
+    "Switch to previous focused buffer"
+    (interactive)
+    (switch-to-buffer (other-buffer (current-buffer) 1)))
+
   (use-package general
     :after evil
     :config
@@ -479,6 +484,7 @@ This was taken from [[https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-i
       "bk"  '(kill-current-buffer :which-key "kill buffer")
       "bd"  '(kill-buffer :which-key "kill a buffer")
       "bi"  '(ibuffer :which-key "ibuffer")
+      "bp"  '(lp/switch-to-previous-buffer :which-key "previous buffer")
       "p"  '(:ignore t :which-key "project")
       ;; "pm"  '(:keymap projectile-command-map :which-key "projectile")
       "pp"  '(projectile-switch-project :which-key "open project")
@@ -489,85 +495,88 @@ This was taken from [[https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-i
 ** Evil Mode
 #+begin_src emacs-lisp
 
-           (use-package evil
-             :init
-             (setq evil-want-integration t)
-             (setq evil-want-keybinding nil)
-             (setq evil-want-C-u-scroll t)
-             (setq evil-want-fine-undo t)
-             (setq evil-want-C-i-jump nil)
-             (setq evil-undo-system 'undo-tree)
-             :config
-             (evil-mode 1)
-             (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-             (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+       (use-package evil
+         :init
+         (setq evil-want-integration t)
+         (setq evil-want-keybinding nil)
+         (setq evil-want-C-u-scroll t)
+         (setq evil-want-fine-undo t)
+         (setq evil-want-C-i-jump nil)
+         (setq evil-undo-system 'undo-tree)
+         :config
+         (evil-mode 1)
+         (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+         (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
-             ;; Use visual line motions even outside of visual-line-mode buffers
-             (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-             (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+	     ;; change :q to close windows instead of emacs
+         (evil-ex-define-cmd "q[uit]" 'evil-window-delete)      
 
-             (evil-set-initial-state 'messages-buffer-mode 'normal)
-             (evil-set-initial-state 'dashboard-mode 'normal))
+         ;; Use visual line motions even outside of visual-line-mode buffers
+         (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+         (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-           (use-package undo-tree
-             :after evil
-             :config
-             (global-undo-tree-mode 1))
+         (evil-set-initial-state 'messages-buffer-mode 'normal)
+         (evil-set-initial-state 'dashboard-mode 'normal))
 
-           (use-package evil-collection
-             :after evil
-             :config
-             (evil-collection-init))
+       (use-package undo-tree
+         :after evil
+         :config
+         (global-undo-tree-mode 1))
 
-           (use-package evil-commentary
-             :after evil
-             :config
-             (evil-commentary-mode))
+       (use-package evil-collection
+         :after evil
+         :config
+         (evil-collection-init))
 
-           (use-package evil-surround
-             :after evil
-             :config
-             (global-evil-surround-mode 1))
+       (use-package evil-commentary
+         :after evil
+         :config
+         (evil-commentary-mode))
 
-         ;; (with-eval-after-load 'org
-         ;;   (evil-define-key* 'insert org-mode-map
-         ;;     [tab] #'indent-for-tab-command
-         ;;     [backtab] (lambda ()
-         ;;                 (interactive)
-         ;;                 (indent-rigidly (line-beginning-position)
-         ;;                                 (line-end-position)
-         ;;                                 (- tab-width)))))
-       (defun +org-indent-maybe-h ()
-         "Indent the current item (header or item), if possible.
-       Made for `org-tab-first-hook' in evil-mode."
-         (interactive)
-         (cond ((not (and (bound-and-true-p evil-local-mode)
-                          (or (evil-insert-state-p)
-                              (evil-emacs-state-p))))
-                nil)
-               ((org-at-item-p)
-                (if (eq this-command 'org-shifttab)
-                    (org-outdent-item-tree)
-                  (org-indent-item-tree))
-                t)
-               ((org-at-heading-p)
-                (ignore-errors
-                  (if (eq this-command 'org-shifttab)
-                      (org-promote)
-                    (org-demote)))
-                t)
-               ((org-in-src-block-p t)
-                (org-babel-do-in-edit-buffer
-                 (call-interactively #'indent-for-tab-command))
-                t)
-               ((and (save-excursion
-                       (skip-chars-backward " \t")
-                       (bolp))
-                     (org-in-subtree-not-table-p))
-                (call-interactively #'tab-to-tab-stop)
-                t)))
+       (use-package evil-surround
+         :after evil
+         :config
+         (global-evil-surround-mode 1))
 
-      (add-hook 'org-tab-first-hook #'+org-indent-maybe-h)
+     ;; (with-eval-after-load 'org
+     ;;   (evil-define-key* 'insert org-mode-map
+     ;;     [tab] #'indent-for-tab-command
+     ;;     [backtab] (lambda ()
+     ;;                 (interactive)
+     ;;                 (indent-rigidly (line-beginning-position)
+     ;;                                 (line-end-position)
+     ;;                                 (- tab-width)))))
+   (defun +org-indent-maybe-h ()
+     "Indent the current item (header or item), if possible.
+   Made for `org-tab-first-hook' in evil-mode."
+     (interactive)
+     (cond ((not (and (bound-and-true-p evil-local-mode)
+                      (or (evil-insert-state-p)
+                          (evil-emacs-state-p))))
+            nil)
+           ((org-at-item-p)
+            (if (eq this-command 'org-shifttab)
+                (org-outdent-item-tree)
+              (org-indent-item-tree))
+            t)
+           ((org-at-heading-p)
+            (ignore-errors
+              (if (eq this-command 'org-shifttab)
+                  (org-promote)
+                (org-demote)))
+            t)
+           ((org-in-src-block-p t)
+            (org-babel-do-in-edit-buffer
+             (call-interactively #'indent-for-tab-command))
+            t)
+           ((and (save-excursion
+                   (skip-chars-backward " \t")
+                   (bolp))
+                 (org-in-subtree-not-table-p))
+            (call-interactively #'tab-to-tab-stop)
+            t)))
+
+  (add-hook 'org-tab-first-hook #'+org-indent-maybe-h)
 
 #+end_src
                                  
