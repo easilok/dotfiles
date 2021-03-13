@@ -46,7 +46,8 @@
  (firmware (list linux-firmware))
  (locale "en_US.utf8")
  (timezone "Europe/Lisbon")
- (keyboard-layout (keyboard-layout "pt"))
+ (keyboard-layout 
+    (keyboard-layout "pt" "nodeadkeys"))
  (host-name "ackerman")
  (groups
   (append
@@ -83,6 +84,7 @@
 	 (specification->package "make")
 	 (specification->package "cmake")
 	 (specification->package "pkg-config")
+         udiskie
 	 gvfs)
    %base-packages))
  ;; (service special-files-service-type 
@@ -132,20 +134,29 @@
 		 (remove (lambda (service)
 			   (eq? (service-kind service) gdm-service-type))
 			 %my-desktop-services)))
- (bootloader
+  (bootloader
     (bootloader-configuration
-      (bootloader grub-efi-bootloader)
-      (target "/boot/efi")
+      (bootloader grub-bootloader)
+      (target "/dev/sdb")
       (keyboard-layout keyboard-layout)))
+  (swap-devices
+    (list (uuid "8bc9e4e2-1ecd-4066-8213-7e27d6e9830f")))
+  (mapped-devices
+    (list (mapped-device
+            (source
+              (uuid "f420c1a2-53f0-44be-b036-8673e0c3582a"))
+            (target "crypthome")
+            (type luks-device-mapping))))
   (file-systems
     (cons* (file-system
+             (mount-point "/home")
+             (device "/dev/mapper/crypthome")
+             (type "ext4")
+             (dependencies mapped-devices))
+           (file-system
              (mount-point "/")
              (device
-               (uuid "66f32832-d2e1-4085-b95c-f7155e99f35b"
+               (uuid "34514156-718b-4168-af45-9f4ba00f6461"
                      'ext4))
              (type "ext4"))
-           (file-system
-             (mount-point "/boot/efi")
-             (device (uuid "807C-CE39" 'fat32))
-             (type "vfat"))
            %base-file-systems)))
