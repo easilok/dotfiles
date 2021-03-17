@@ -32,6 +32,9 @@
    "imagemagick"
    "sox"
 
+   "fortune-mod"
+   "zsh-autosuggestions"
+
    ;; text manipulation / processing
    "highlight"
    "pandoc"

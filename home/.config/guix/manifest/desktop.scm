@@ -98,6 +98,8 @@
      
      ;; editor
      "emacs"
+     "libtool"
+     "libvterm"
      "mu"
      
      ;; devtools
@@ -141,6 +143,7 @@
      "brightnessctl"
      "xdg-utils"      ;; For xdg-open, etc
      "xdg-dbus-proxy" ;; For Flatpak
+     "xdg-user-dirs"
      "gtk+:bin"       ;; For gtk-launch
      "glib:bin"       ;; For gio-launch-desktop
      "shared-mime-info"

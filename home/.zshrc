@@ -78,7 +78,6 @@ plugins=(
     git 
     npm 
     archlinux 
-    chucknorris 
     vi-mode 
     pip 
     git-prompt 
@@ -160,9 +159,11 @@ done
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 ## termite process to open in directory
-if [[ $TERM == xterm-termite ]]; then
-  . /etc/profile.d/vte.sh
-  __vte_osc7
+if [ -d "/etc/profile.d/vte.sh" ]; then
+    if [[ $TERM == xterm-termite ]]; then
+        . /etc/profile.d/vte.sh
+        __vte_osc7
+    fi
 fi
 if [ -f "/usr/local/bin/starship" ]; then
     eval "$(starship init zsh)"

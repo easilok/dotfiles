@@ -3,4 +3,4 @@
 #xterm
 #exec /home/luis/.emacs.d/exwm/start-exwm.sh
 bash ~/git/dwm/dwm_autorun.sh
-exec dwm
+exec dbus-launch dwm

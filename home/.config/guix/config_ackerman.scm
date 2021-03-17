@@ -17,6 +17,8 @@
 	     (gnu packages bash)
 	     (gnu packages shells)
 	     (gnu packages xorg)
+	     (gnu packages video)
+	     (gnu packages freedesktop)
 	     (gnu packages gnome)
 	     (gnu packages cups)
 	     (gnu packages vim))
@@ -78,6 +80,8 @@
 	 pulseaudio
 	 tlp
 	 xf86-input-libinput
+	 xf86-video-intel
+	 intel-vaapi-driver
 	 (specification->package "gcc-toolchain")
 	 (specification->package "ncurses")
 	 (specification->package "wget")
