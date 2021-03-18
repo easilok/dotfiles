@@ -36,6 +36,7 @@
      "lxappearance"
      "xsettingsd"
      "gdk-pixbuf"
+     "slock"
 
      ;; fonts
      "font-adobe-source-code-pro"
