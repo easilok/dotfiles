@@ -63,7 +63,7 @@
 		(group "users")
 		(home-directory "/home/luis")
 		(supplementary-groups
-		 '("wheel" "netdev" "audio" "video" "plugdev" "input")))
+		 '("wheel" "netdev" "audio" "video" "plugdev" "input" "docker")))
 	       %base-user-accounts))
  (packages
   (append
@@ -109,6 +109,7 @@
  ;;   ))
 (services (cons* (service slim-service-type
                               (slim-configuration
+			        (default-user "luis")
                                 (xorg-configuration
                                   (xorg-configuration
                                     (keyboard-layout keyboard-layout)

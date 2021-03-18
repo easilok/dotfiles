@@ -151,10 +151,12 @@
      "pcmanfm"
      "leafpad"
      "mousepad"
+     "xarchiver"
 
      ;; terminals
      "xterm"
      "termite"
+     "vte"
 
      ;; remote access
      "freerdp"

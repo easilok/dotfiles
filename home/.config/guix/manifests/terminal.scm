@@ -20,6 +20,7 @@
    "mu"
    "neomutt"
    "owncloud-client"
+   "wireguard-tools"
 
    ;; devices
    "dosfstools" ;; create, check and label file systems of the FAT family.
@@ -33,6 +34,7 @@
    "sox"
 
    "fortune-mod"
+   "fish"
    "zsh-autosuggestions"
 
    ;; text manipulation / processing

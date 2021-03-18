@@ -4,14 +4,14 @@ ping -q -c 1 1.1.1.1 > /dev/null || exit
 
 maildirs=("personal" "professional" "nibble" "luispereira" "uab")
 
-if [ -f /usr/bin/mbsync ]; then
-    /usr/bin/mbsync -a 
-    if [ -d "/mnt/coisas/.mail" ]; then
+if test -x "$(which mbsync)"; then
+    mbsync -a 
+    if [ -d "$HOME/Mail" ]; then
 	hasNewMail=false
 	notifyMessage=""
 	for maildir in "${maildirs[@]}"
 	do
-	    unread=$(find /mnt/coisas/.*mail/$maildir/[Ii][Nn][Bb][Oo][Xx]/new/* -type f 2>/dev/null | wc -l )
+	    unread=$(find $HOME/Mail/.*mail/$maildir/[Ii][Nn][Bb][Oo][Xx]/new/* -type f 2>/dev/null | wc -l )
 
 	    if [ $unread -gt 0 ]; then
 		hasNewMail=true
@@ -24,6 +24,6 @@ if [ -f /usr/bin/mbsync ]; then
     fi
 fi
 
-if [ -f /usr/bin/mu ]; then
-  /usr/bin/mu index 
+if test -x "$(which mu)"; then
+  mu index 
 fi
