@@ -186,163 +186,164 @@
 
 ;; add :immediate-finish t at the end of each entry to void confirmation
 (defun efs/mu4e-org-setup()
-  (require 'mu4e-org)
-  (setq org-capture-templates
-        (append org-capture-templates
-                `(("m" "Email Workflow")
-                  ("mf" "Follow Up" entry (file+olp lp/org-capture-mail "Follow Up")
-                   "* TODO Follow up with %:fromname on %a\n%i")
-                  ("mr" "Read Later" entry (file+olp lp/org-capture-mail "Read Later")
-                   "* TODO Read %:subject\n\n%a\n\n%i" ))))
-        ;; Add custom actions for our capture templates
-        (add-to-list 'mu4e-headers-actions
-                     '("follow up" . efs/capture-mail-follow-up) t)
-        (add-to-list 'mu4e-view-actions
-                     '("follow up" . efs/capture-mail-follow-up) t)
-        (add-to-list 'mu4e-headers-actions
-                     '("read later" . efs/capture-mail-read-later) t)
-        (add-to-list 'mu4e-view-actions
-                     '("read later" . efs/capture-mail-read-later) t)
-)
-
-  (use-package org
-    :pin org
-    :hook (org-mode . efs/org-mode-setup)
-    :config
-    (setq-default org-adapt-indentation t)
-    (setq org-ellipsis " ▾")
-    (setq org-directory "~/Nextcloud/org/")
-    (setq lp/org-capture-refile (concat org-directory "Refile.org"))
-    (setq lp/org-capture-mail (concat org-directory "Mail.org"))
-    (setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
-
-    (setq org-agenda-start-with-log-mode t)
-    (setq org-log-into-drawer t)
-    (setq org-log-done 'time
-          org-journal-dir "~/Nextcloud/org/journal/"
-          org-journal-date-format "%B %d, %Y (%A) "
-          org-journal-file-format "%Y-%m-%d.org"
-          org-agenda-skip-scheduled-if-done 1
-          ;; ex. of org-link-abbrev-alist in action
-          ;; [[arch-wiki:Name_of_Page][Description]]
-          org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
-          '(("google" . "http://www.google.com/search?q=")
-            ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
-            ("wiki" . "https://en.wikipedia.org/wiki/"))
-          org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
-          '((sequence
-             "TODO(t)"           ; A task that is ready to be tackled
-             "NEXT(n)"           ; Task to be considered next
-             "WAIT(w)"           ; Something is holding up this task
-             "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-             "DONE(d)"           ; Task has been completed
-             "CANCELLED(c)" )    ; Task has been cancelled
-            ("INACTIVE(i)"       ; Some lost task waiting free time to be picked
-             "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-             "MEETING(m)" )      ; Meeting
-            (sequence
-             "[ ](T)"   ; A task that needs doing
-             "[-](S)"   ; Task is in progress
-             "[?](W)"   ; Task is being held up or paused
-             "|"
-             "[X](D)")) ; Task was completed
-          )
-    ;; Set default column view headings: Task Total-Time Time-Stamp
-    (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
-    (setq org-startup-folded 'content)
-    ;; Capture templates for: TODO tasks, Notes, meetings, etc
+  (with-eval-after-load 'mu4e
+    (require 'mu4e-org)
     (setq org-capture-templates
-          (quote (("t" "todo" entry (file lp/org-capture-refile)
-                   "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                  ("r" "respond" entry (file lp/org-capture-refile)
-                   "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-                  ("i" "idea" entry (file lp/org-capture-refile)
-                   "* %? :IDEA:\n%t\n" :clock-in t :clock-resume t)
-                  ("n" "note" entry (file lp/org-capture-refile)
-                   "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                  ("g" "Meeting" entry (file lp/org-capture-refile)
-                   "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                  ("p" "Phone call" entry (file lp/org-capture-refile)
-                   "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t))))
-    (setq org-tag-alist
-          '((:startgroup)
+          (append org-capture-templates
+                  `(("m" "Email Workflow")
+                    ("mf" "Follow Up" entry (file+olp lp/org-capture-mail "Follow Up")
+                     "* TODO Follow up with %:fromname on %a\n%i")
+                    ("mr" "Read Later" entry (file+olp lp/org-capture-mail "Read Later")
+                     "* TODO Read %:subject\n\n%a\n\n%i" ))))
+    ;; Add custom actions for our capture templates
+    (add-to-list 'mu4e-headers-actions
+                 '("follow up" . efs/capture-mail-follow-up) t)
+    (add-to-list 'mu4e-view-actions
+                 '("follow up" . efs/capture-mail-follow-up) t)
+    (add-to-list 'mu4e-headers-actions
+                 '("read later" . efs/capture-mail-read-later) t)
+    (add-to-list 'mu4e-view-actions
+                 '("read later" . efs/capture-mail-read-later) t)
+    ))
+
+(use-package org
+  :pin org
+  :hook (org-mode . efs/org-mode-setup)
+  :config
+  (setq-default org-adapt-indentation t)
+  (setq org-ellipsis " ▾")
+  (setq org-directory "~/Nextcloud/org/")
+  (setq lp/org-capture-refile (concat org-directory "Refile.org"))
+  (setq lp/org-capture-mail (concat org-directory "Mail.org"))
+  (setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
+
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-into-drawer t)
+  (setq org-log-done 'time
+        org-journal-dir "~/Nextcloud/org/journal/"
+        org-journal-date-format "%B %d, %Y (%A) "
+        org-journal-file-format "%Y-%m-%d.org"
+        org-agenda-skip-scheduled-if-done 1
+        ;; ex. of org-link-abbrev-alist in action
+        ;; [[arch-wiki:Name_of_Page][Description]]
+        org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
+        '(("google" . "http://www.google.com/search?q=")
+          ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
+          ("wiki" . "https://en.wikipedia.org/wiki/"))
+        org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
+        '((sequence
+           "TODO(t)"           ; A task that is ready to be tackled
+           "NEXT(n)"           ; Task to be considered next
+           "WAIT(w)"           ; Something is holding up this task
+           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+           "DONE(d)"           ; Task has been completed
+           "CANCELLED(c)" )    ; Task has been cancelled
+          ("INACTIVE(i)"       ; Some lost task waiting free time to be picked
+           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+           "MEETING(m)" )      ; Meeting
+          (sequence
+           "[ ](T)"   ; A task that needs doing
+           "[-](S)"   ; Task is in progress
+           "[?](W)"   ; Task is being held up or paused
+           "|"
+           "[X](D)")) ; Task was completed
+        )
+  ;; Set default column view headings: Task Total-Time Time-Stamp
+  (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
+  (setq org-startup-folded 'content)
+  ;; Capture templates for: TODO tasks, Notes, meetings, etc
+  (setq org-capture-templates
+        (quote (("t" "todo" entry (file lp/org-capture-refile)
+                 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+                ("r" "respond" entry (file lp/org-capture-refile)
+                 "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+                ("i" "idea" entry (file lp/org-capture-refile)
+                 "* %? :IDEA:\n%t\n" :clock-in t :clock-resume t)
+                ("n" "note" entry (file lp/org-capture-refile)
+                 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+                ("g" "Meeting" entry (file lp/org-capture-refile)
+                 "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+                ("p" "Phone call" entry (file lp/org-capture-refile)
+                 "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t))))
+  (setq org-tag-alist
+        '((:startgroup)
                                         ; Put mutually exclusive tags here
-            (:endgroup)
-            ("@errand" . ?E)
-            ("@home" . ?H)
-            ("@work" . ?W)
-            ("agenda" . ?a)
-            ("planning" . ?p)
-            ("publish" . ?P)
-            ("batch" . ?b)
-            ("note" . ?n)
-            ("idea" . ?i)))
+          (:endgroup)
+          ("@errand" . ?E)
+          ("@home" . ?H)
+          ("@work" . ?W)
+          ("agenda" . ?a)
+          ("planning" . ?p)
+          ("publish" . ?P)
+          ("batch" . ?b)
+          ("note" . ?n)
+          ("idea" . ?i)))
 
-    ;; Configure custom agenda views
-    (setq org-agenda-custom-commands
-          '(("d" "Dashboard"
-             ((agenda "" ((org-deadline-warning-days 7)))
-              (todo "NEXT"
-                    ((org-agenda-overriding-header "Next Tasks")))
-              (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+  ;; Configure custom agenda views
+  (setq org-agenda-custom-commands
+        '(("d" "Dashboard"
+           ((agenda "" ((org-deadline-warning-days 7)))
+            (todo "NEXT"
+                  ((org-agenda-overriding-header "Next Tasks")))
+            (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
 
-            ("n" "Next Tasks"
-             ((todo "NEXT"
-                    ((org-agenda-overriding-header "Next Tasks")))))
+          ("n" "Next Tasks"
+           ((todo "NEXT"
+                  ((org-agenda-overriding-header "Next Tasks")))))
 
-            ("W" "Work Tasks" tags-todo "+work-email")
+          ("W" "Work Tasks" tags-todo "+work-email")
 
-            ;; Low-effort next actions
-            ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
-             ((org-agenda-overriding-header "Low Effort Tasks")
-              (org-agenda-max-todos 20)
-              (org-agenda-files org-agenda-files)))
+          ;; Low-effort next actions
+          ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+           ((org-agenda-overriding-header "Low Effort Tasks")
+            (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
 
-            ("w" "Workflow Status"
-             ((todo "WAIT"
-                    ((org-agenda-overriding-header "Waiting on External")
-                     (org-agenda-files org-agenda-files)))
-              (todo "REVIEW"
-                    ((org-agenda-overriding-header "In Review")
-                     (org-agenda-files org-agenda-files)))
-              (todo "PLAN"
-                    ((org-agenda-overriding-header "In Planning")
-                     (org-agenda-todo-list-sublevels nil)
-                     (org-agenda-files org-agenda-files)))
-              (todo "BACKLOG"
-                    ((org-agenda-overriding-header "Project Backlog")
-                     (org-agenda-todo-list-sublevels nil)
-                     (org-agenda-files org-agenda-files)))
-              (todo "READY"
-                    ((org-agenda-overriding-header "Ready for Work")
-                     (org-agenda-files org-agenda-files)))
-              (todo "ACTIVE"
-                    ((org-agenda-overriding-header "Active Projects")
-                     (org-agenda-files org-agenda-files)))
-              (todo "COMPLETED"
-                    ((org-agenda-overriding-header "Completed Projects")
-                     (org-agenda-files org-agenda-files)))
-              (todo "CANC"
-                    ((org-agenda-overriding-header "Cancelled Projects")
-                     (org-agenda-files org-agenda-files)))))))
-    ;; (setq org-startup-indented t)
-    (efs/mu4e-org-setup)
-    )
+          ("w" "Workflow Status"
+           ((todo "WAIT"
+                  ((org-agenda-overriding-header "Waiting on External")
+                   (org-agenda-files org-agenda-files)))
+            (todo "REVIEW"
+                  ((org-agenda-overriding-header "In Review")
+                   (org-agenda-files org-agenda-files)))
+            (todo "PLAN"
+                  ((org-agenda-overriding-header "In Planning")
+                   (org-agenda-todo-list-sublevels nil)
+                   (org-agenda-files org-agenda-files)))
+            (todo "BACKLOG"
+                  ((org-agenda-overriding-header "Project Backlog")
+                   (org-agenda-todo-list-sublevels nil)
+                   (org-agenda-files org-agenda-files)))
+            (todo "READY"
+                  ((org-agenda-overriding-header "Ready for Work")
+                   (org-agenda-files org-agenda-files)))
+            (todo "ACTIVE"
+                  ((org-agenda-overriding-header "Active Projects")
+                   (org-agenda-files org-agenda-files)))
+            (todo "COMPLETED"
+                  ((org-agenda-overriding-header "Completed Projects")
+                   (org-agenda-files org-agenda-files)))
+            (todo "CANC"
+                  ((org-agenda-overriding-header "Cancelled Projects")
+                   (org-agenda-files org-agenda-files)))))))
+  ;; (setq org-startup-indented t)
+  (efs/mu4e-org-setup)
+  )
 
-  (use-package org-bullets
-    :after org
-    :hook (org-mode . org-bullets-mode)
-    ;;:custom
-    ;;(org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
-    )
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  ;;:custom
+  ;;(org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
+  )
 
-  (defun efs/org-mode-visual-fill ()
-    (setq visual-fill-column-width 120
-          visual-fill-column-center-text t)
-    (visual-fill-column-mode 1))
+(defun efs/org-mode-visual-fill ()
+  (setq visual-fill-column-width 120
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
 
-  (use-package visual-fill-column
-    :hook (org-mode . efs/org-mode-visual-fill))
+(use-package visual-fill-column
+  :hook (org-mode . efs/org-mode-visual-fill))
 
 (with-eval-after-load 'org
   (require 'org-tempo)
@@ -791,7 +792,7 @@
   (clojurescript-mode . lsp)
   (clojurec-mode . lsp)
   :config
-  (setq lsp-lens-enable t)
+  ;; (setq lsp-lens-enable t) ; enable function reference usage counter
   )
 
 (use-package cider
@@ -958,16 +959,3 @@
   "GP" '(guix-pull :which-key "pull"))
 
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(dired-hide-dotfiles eshell-git-prompt vterm org-mime yaml-mode which-key web-mode visual-fill-column undo-tree typescript-mode rainbow-delimiters quelpa-use-package pyvenv prettier-js platformio-mode php-mode perspective org-bullets nvm no-littering magit lsp-ui lsp-treemacs lsp-tailwindcss lsp-pyright lsp-ivy js2-mode ivy-rich ivy-prescient helpful general flycheck evil-surround evil-commentary evil-collection doom-themes doom-modeline counsel-projectile company-irony company-box command-log-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-checkbox ((t (:foreground nil :inherit org-todo)))))
