@@ -785,6 +785,18 @@
   :mode "\\.php$"
   :hook (php-mode . lsp-deferred))
 
+(use-package clojure-mode
+  :hook
+  (clojure-mode . lsp)
+  (clojurescript-mode . lsp)
+  (clojurec-mode . lsp)
+  :config
+  (setq lsp-lens-enable t)
+  )
+
+(use-package cider
+  :after clojure-mode)
+
 (require 'lp-mail)
 
 (use-package mu4e
@@ -929,9 +941,21 @@
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode))
 
-;; (use-package matrix-client
-;;   :quelpa (matrix-client :fetcher github :repo "alphapapa/matrix-client.el"
-;;                          :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
+(use-package matrix-client
+  :ensure nil
+  :quelpa (matrix-client :fetcher github :repo "alphapapa/matrix-client.el"
+                         :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
+
+(use-package guix
+  :defer t)
+
+(efs/leader-keys
+  "G"  '(:ignore t :which-key "Guix")
+  "Gg" '(guix :which-key "Guix")
+  "Gi" '(guix-installed-user-packages :which-key "user packages")
+  "GI" '(guix-installed-system-packages :which-key "system packages")
+  "Gp" '(guix-packages-by-name :which-key "search packages")
+  "GP" '(guix-pull :which-key "pull"))
 
 
 (custom-set-variables

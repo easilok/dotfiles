@@ -983,6 +983,24 @@ For installing the language server
       :hook (php-mode . lsp-deferred))
 #+end_src
 
+*** Clojure
+
+For clojure and maybe clojurescript I use =lsp-mode= and =cider= with setups taken from [[https://emacs-lsp.github.io/lsp-mode/tutorials/clojure-guide][Emacs LSP clojure guide]] 
+
+#+begin_src emacs-lisp
+  (use-package clojure-mode
+    :hook
+    (clojure-mode . lsp)
+    (clojurescript-mode . lsp)
+    (clojurec-mode . lsp)
+    :config
+    ;; (setq lsp-lens-enable t) ; enable function reference usage counter
+    )
+
+  (use-package cider
+    :after clojure-mode)
+#+end_src
+
 * Email
 
 ** Mu4e Configuration
@@ -1188,10 +1206,27 @@ Another package, is the [[https://github.com/jeremy-compostella/org-msg][org-msg
 #+end_src
 * Chat
 
+
 #+begin_src emacs-lisp
-  ;; (use-package matrix-client
-  ;;   :quelpa (matrix-client :fetcher github :repo "alphapapa/matrix-client.el"
-  ;;                          :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
+  (use-package matrix-client
+    :ensure nil
+    :quelpa (matrix-client :fetcher github :repo "alphapapa/matrix-client.el"
+                           :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
+#+end_src
+
+* GUIX
+
+#+begin_src emacs-lisp
+  (use-package guix
+    :defer t)
+
+  (efs/leader-keys
+    "G"  '(:ignore t :which-key "Guix")
+    "Gg" '(guix :which-key "Guix")
+    "Gi" '(guix-installed-user-packages :which-key "user packages")
+    "GI" '(guix-installed-system-packages :which-key "system packages")
+    "Gp" '(guix-packages-by-name :which-key "search packages")
+    "GP" '(guix-pull :which-key "pull"))
 #+end_src
 
 * Other Configurations
