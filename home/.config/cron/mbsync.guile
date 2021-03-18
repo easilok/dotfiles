@@ -1,0 +1,4 @@
+(job
+   '(next-hour (range 0 24 4))
+   "~/.config/systemd/user/mbsync_and_notify")
+
