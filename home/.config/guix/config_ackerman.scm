@@ -108,7 +108,7 @@
  ;;   (list (extra-special-file "/bin/bash" (file-append bash "/bin/bash")))
  ;;   ))
 (services (cons* (service slim-service-type
-                              (slim-configuration
+                          (slim-configuration
 			        (default-user "luis")
                                 (xorg-configuration
                                   (xorg-configuration
@@ -162,6 +162,12 @@
              (mount-point "/")
              (device
                (uuid "34514156-718b-4168-af45-9f4ba00f6461"
+                     'ext4))
+             (type "ext4"))
+           (file-system
+             (mount-point "/mnt/coisas")
+             (device
+               (uuid "8c0acdb9-7fe5-4e76-8380-cd3014958f30"
                      'ext4))
              (type "ext4"))
            %base-file-systems)))

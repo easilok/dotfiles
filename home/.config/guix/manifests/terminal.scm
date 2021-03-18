@@ -20,6 +20,7 @@
    "mu"
    "neomutt"
    "owncloud-client"
+   "sshpass"
    "wireguard-tools"
 
    ;; devices
