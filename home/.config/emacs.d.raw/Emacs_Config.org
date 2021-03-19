@@ -128,23 +128,25 @@ Setup for use of the /use-package/ for package installs:
 
 #+begin_src emacs-lisp
 
-(setq indent-tabs-mode nil) ; for converting tabs to spaces on identation
-(setq tab-width 2) ; or any other preferred value
-(setq-default evil-shift-width tab-width)
-(setq org-src--tab-width tab-width)
+  (setq indent-tabs-mode nil) ; for converting tabs to spaces on identation
+  (setq tab-width 2) ; or any other preferred value
+  (setq-default evil-shift-width tab-width)
+  (setq org-src--tab-width tab-width)
 
 
-(use-package command-log-mode
-  :commands global-console-log-mode)
+  (use-package command-log-mode
+    :commands global-console-log-mode)
 
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
 
-(setq undo-limit 80000                         ; Raise undo-limit to 80KB
-      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
-      truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
-(setq max-list-eval-depth 400) ; trying to fix c stack overflow error. Was 800
-(setq max-specpdl-size 800) ; trying to fix c stack overflow error. Was 1600
+  (setq undo-limit 80000                         ; Raise undo-limit to 80KB
+        auto-save-default t                         ; Nobody likes to loose work, I certainly don't
+        truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
+  (setq max-list-eval-depth 400) ; trying to fix c stack overflow error. Was 800
+  (setq max-specpdl-size 800) ; trying to fix c stack overflow error. Was 1600
+  ;; change all prompts to y or n
+  (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 ** Workspaces
 #+begin_src emacs-lisp
@@ -996,6 +998,7 @@ For clojure and maybe clojurescript I use =lsp-mode= and =cider= with setups tak
     (clojurec-mode . lsp)
     :config
     ;; (setq lsp-lens-enable t) ; enable function reference usage counter
+    ;; (setq lsp-clojure-custom-server-command '("bash" "-c" "~/git/clojure-lsp/target/clojure-lsp"))
     )
 
   (use-package cider

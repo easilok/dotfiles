@@ -106,6 +106,8 @@
       truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
 (setq max-list-eval-depth 400) ; trying to fix c stack overflow error. Was 800
 (setq max-specpdl-size 800) ; trying to fix c stack overflow error. Was 1600
+;; change all prompts to y or n
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (use-package perspective
   :config
@@ -793,6 +795,7 @@
   (clojurec-mode . lsp)
   :config
   ;; (setq lsp-lens-enable t) ; enable function reference usage counter
+  ;; (setq lsp-clojure-custom-server-command '("bash" "-c" "~/git/clojure-lsp/target/clojure-lsp"))
   )
 
 (use-package cider
