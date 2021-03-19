@@ -113,7 +113,9 @@
      "guile"
      ;;   "leiningen"
      ;; "maven"
-     "openjdk@11."
+     ; "openjdk@11."
+     "openjdk@11.:jdk"
+     ; "openjdk@11.:doc"
      "tidy"
      ;; TODO enable docker
      ;;   "docker"

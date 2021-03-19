@@ -38,6 +38,9 @@ if [ -d "$GUIX_EXTRA_PROFILES" ]; then
 	    GUIX_PROFILE="$profile"
 	    . "$GUIX_PROFILE"/etc/profile
 	fi
+	if [ -d "$profile"/share/man ]; then
+        export MANPATH=$GUIX_PROFILE/share/man${MANPATH:+:}$MANPATH
+    fi
 	unset profile
     done
 fi

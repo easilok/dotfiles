@@ -1,0 +1,4 @@
+(job
+   '(next-minute (range 0 59 15))
+   "~/.config/systemd/user/weather-sync")
+

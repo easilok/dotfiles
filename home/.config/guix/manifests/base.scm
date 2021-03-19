@@ -20,6 +20,8 @@
    "bind:utils" ;; nslookup and dig
    "le-certs"   ;; lets encrypt certs
    "nss-certs"  ;; lets encrypt certs
+   "sshpass"
+   "wireguard-tools"
 
    ;; file mgmt
    "unzip"
