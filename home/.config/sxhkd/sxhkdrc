@@ -1,0 +1,54 @@
+# Basic binds
+super + Return
+	termite
+super + d
+    dmenu-simple
+shift + super + d
+    dmenu-full
+shift + super + Escape
+    dmenu-power
+
+# lockscreen
+shift + control + x
+    slock
+
+XF86ScreenSaver
+    slock
+
+# screen change
+XF86Display
+    dmenu-screen
+
+# Multimedia
+
+#TODO add microphone mute
+XF86AudioMicMute
+    pulsemixer --id source-1 --toggle-mute
+
+# mixer super + m
+super + m
+	pavucontrol
+
+#; super + plus
+XF86AudioRaiseVolume
+	pamixer --allow-boost -i 5
+#; super + shift + plus
+shift + XF86AudioRaiseVolume
+	pamixer --allow-boost -i 15
+
+#; super + minus
+XF86AudioLowerVolume
+	pamixer --allow-boost -d 5
+#; super + shift + minus
+shift + XF86AudioLowerVolume
+	pamixer --allow-boost -d 15
+
+#; super + shift + m
+XF86AudioMute
+	pamixer --allow-boost -t
+
+XF86AudioPlay
+	playerctl play-pause
+
+XF86Audio{Prev,Next}
+	playerctl {previous,next}

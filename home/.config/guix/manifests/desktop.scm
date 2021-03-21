@@ -19,6 +19,7 @@
      "alsa-plugins:pulseaudio" ;; required by qutebrowser to play audio. missing LD_LIBRARY_PATH
      "alsa-utils"
      "pulsemixer"
+     "pavucontrol"
      "pamixer"
      "gst-plugins-base"
      "gst-plugins-good"
@@ -37,6 +38,7 @@
      "xsettingsd"
      "gdk-pixbuf"
      "slock"
+     "sxhkd"
 
      ;; fonts
      "font-adobe-source-code-pro"
@@ -113,9 +115,9 @@
      "guile"
      ;;   "leiningen"
      ;; "maven"
-     ; "openjdk@11."
+     ;; "openjdk"
      "openjdk@11.:jdk"
-     ; "openjdk@11.:doc"
+     ;; "openjdk:doc"
      "tidy"
      ;; TODO enable docker
      ;;   "docker"
@@ -128,9 +130,11 @@
      "icecat"
      
      ;; network tools
-     "transmission" ;; out and gui
+     "transmission"	;; out and gui
+     "transmission:gui" ;; out and gui
      "youtube-dl"
      "youtube-viewer"
+     "blueman"
 
      ;; apps from systray
      "xfce4-clipman-plugin"
@@ -147,8 +151,11 @@
      "xdg-utils"      ;; For xdg-open, etc
      "xdg-dbus-proxy" ;; For Flatpak
      "xdg-user-dirs"
-     "gtk+:bin"       ;; For gtk-launch
-     "glib:bin"       ;; For gio-launch-desktop
+     "xdg-desktop-portal"
+     "xdg-desktop-portal-gtk"
+     ;; "libportal"
+     "gtk+:bin"	;; For gtk-launch
+     "glib:bin"	;; For gio-launch-desktop
      "shared-mime-info"
      "rofi"
      "pcmanfm"

@@ -795,7 +795,7 @@
   (clojurec-mode . lsp)
   :config
   ;; (setq lsp-lens-enable t) ; enable function reference usage counter
-  ;; (setq lsp-clojure-custom-server-command '("bash" "-c" "~/git/clojure-lsp/target/clojure-lsp"))
+  (setq lsp-clojure-custom-server-command '("bash" "-c" "~/git/clojure-lsp/target/clojure-lsp"))
   )
 
 (use-package cider

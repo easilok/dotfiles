@@ -1,17 +1,29 @@
 ;; -*- mode: guix-scheme-*-
 
-(define-module (lp suckless)
- #:use-module (guix packages)
- #:use-module (guix git-download)
- #:use-module (gnu packages suckless)
- #:use-module (guix build-system gnu)
- #:use-module ((guix licenses) #:prefix license:)
- #:use-module (gnu packages fonts)
- #:use-module (gnu packages fontutils)
- #:use-module (gnu packages xorg)
- #:use-module (gnu packages pkg-config)
- #:use-module (guix utils)
- )
+(define-module
+  (lp suckless)
+  #:use-module
+  (guix packages)
+  #:use-module
+  (guix git-download)
+  #:use-module
+  (gnu packages suckless)
+  #:use-module
+  (guix build-system gnu)
+  #:use-module
+  ((guix licenses)
+   #:prefix license:)
+  #:use-module
+  (gnu packages fonts)
+  #:use-module
+  (gnu packages fontutils)
+  #:use-module
+  (gnu packages xorg)
+  #:use-module
+  (gnu packages pkg-config)
+  #:use-module
+  (guix utils)
+  )
 
 (define-public my-dmenu
   (package
@@ -35,19 +47,19 @@
   (package
    (inherit dmenu)
    (name "my-dwm")
-   (version "4.9-2")
+   (version "4.9-4")
    (source
     (origin
      (method git-fetch)
      (uri
       (git-reference
        (url "https://gitlab.com/easilok/dwm")
-       (commit "caa05fd1b848978a73be51058d4db6716d6b6bcc")))
+       (commit "fd4631b270a424d23d84d8a6a5c4cfd07cfcf6dc")))
      (file-name
       (git-file-name name version))
      (sha256
       (base32
-       "079cj9bfmc9jsrwnzbnjnym7b9axj4xzmr84par4fjcccyd8d1bb"))))))
+       "14i58f2q0mfbk4wmbryagrxg7lingbk7f640bgacmc7bdikwwq4c"))))))
 
 ;; A copy from benoitj package definition to dwmstatus
 (define-public my-dwmblocks
@@ -68,15 +80,17 @@
        "1a7a5jmv2v2lfd56kd281g4dj9slsh8n10yf8j2lkqk6qgkasl12"))))
    (build-system gnu-build-system)
    (arguments
-    `(#:tests? #f                      ; no tests
-	       #:make-flags
-	       (list (string-append "CC=" ,(cc-for-target))
-		     (string-append "PREFIX=" %output)
-		     (string-append "FREETYPEINC="
-				    (assoc-ref %build-inputs "freetype")
-				    "/include/freetype2"))
-	       #:phases
-	       (modify-phases %standard-phases (delete 'configure))))
+    `(#:tests? #f			; no tests
+      #:make-flags
+      (list
+       (string-append "CC=" ,(cc-for-target))
+       (string-append "PREFIX=" %output)
+       (string-append "FREETYPEINC="
+		      (assoc-ref %build-inputs "freetype")
+		      "/include/freetype2"))
+      #:phases
+      (modify-phases %standard-phases
+		     (delete 'configure))))
    (inputs
     `(("pkg-config" ,pkg-config)
       ("freetype" ,freetype)
@@ -107,16 +121,18 @@
        "0d05cmfmn785v27q13wm9m0qbycm5j5g1mc1rpmk782k722wwpb3"))))
    (build-system gnu-build-system)
    (arguments
-    `(#:tests? #f                      ; no tests
-	       #:make-flags
-	       (list (string-append "CC=" ,(cc-for-target))
-		     (string-append "PREFIX=" %output)
-		     ;; (string-append "FREETYPEINC="
-		     ;; 		    (assoc-ref %build-inputs "freetype")
-		     ;; 		    "/include/freetype2")
-		     )
-	       #:phases
-	       (modify-phases %standard-phases (delete 'configure))))
+    `(#:tests? #f			; no tests
+      #:make-flags
+      (list
+       (string-append "CC=" ,(cc-for-target))
+       (string-append "PREFIX=" %output)
+       ;; (string-append "FREETYPEINC="
+       ;; 		    (assoc-ref %build-inputs "freetype")
+       ;; 		    "/include/freetype2")
+       )
+      #:phases
+      (modify-phases %standard-phases
+		     (delete 'configure))))
    (inputs
     `(("pkg-config" ,pkg-config)
       ;; ("freetype" ,freetype)
