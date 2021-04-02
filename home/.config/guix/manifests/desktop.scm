@@ -37,7 +37,7 @@
      "lxappearance"
      "xsettingsd"
      "gdk-pixbuf"
-     "slock"
+     ;; "slock"
      "sxhkd"
 
      ;; fonts

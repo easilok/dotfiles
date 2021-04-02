@@ -20,6 +20,7 @@
  (gnu packages xorg)
  (gnu packages video)
  (gnu packages freedesktop)
+ (gnu packages suckless)
  (gnu packages gnome)
  (gnu packages cups)
  (gnu packages vim))
@@ -97,6 +98,7 @@ EndSection
     ntfs-3g
     exfat-utils
     fuse-exfat
+    fuse
     vim
     bluez
     bluez-alsa
@@ -125,13 +127,14 @@ EndSection
 	       (extra-config
 		(list %xorg-libinput-config))
 	       ))))
+   (screen-locker-service slock)
    (service openssh-service-type
 	    (openssh-configuration
 	     (x11-forwarding? #t)
 	     ))
    (service tlp-service-type
 	    (tlp-configuration
-	     (cpu-boost-on-ac? #t)
+	     ;;(cpu-boost-on-ac? #t)
 	     (wifi-pwr-on-bat? #t)))
    (service thermald-service-type)
    (service docker-service-type)
@@ -188,6 +191,12 @@ EndSection
     (mount-point "/mnt/coisas")
     (device
      (uuid "8c0acdb9-7fe5-4e76-8380-cd3014958f30"
+           'ext4))
+    (type "ext4"))
+   (file-system
+    (mount-point "/mnt/arch")
+    (device
+     (uuid "d6b68706-90cb-4b8d-aaa2-437ba569c690"
            'ext4))
     (type "ext4"))
    %base-file-systems)))

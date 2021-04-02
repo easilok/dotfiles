@@ -985,4 +985,8 @@
 (use-package elpher
   :commands elpher elpher-go)
 
+(use-package transmission
+   :commands transmission
+)
+
 

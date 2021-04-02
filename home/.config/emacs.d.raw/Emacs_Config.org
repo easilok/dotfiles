@@ -1246,7 +1246,8 @@ Another package, is the [[https://github.com/jeremy-compostella/org-msg][org-msg
                            :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
 #+end_src
 
-* GUIX
+* System application interface
+** GUIX
 
 #+begin_src emacs-lisp
   (use-package guix
@@ -1259,6 +1260,12 @@ Another package, is the [[https://github.com/jeremy-compostella/org-msg][org-msg
     "GI" '(guix-installed-system-packages :which-key "system packages")
     "Gp" '(guix-packages-by-name :which-key "search packages")
     "GP" '(guix-pull :which-key "pull"))
+#+end_src
+** Transmission
+#+begin_src emacs-lisp
+(use-package transmission
+   :commands transmission
+)
 #+end_src
 
 * WEB
