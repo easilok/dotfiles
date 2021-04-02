@@ -2,7 +2,7 @@
 
 ping -q -c 1 1.1.1.1 > /dev/null || exit
 
-maildirs=("personal" "professional" "nibble" "luispereira" "uab")
+maildirs=("personal" "professional" "nibble" "luispereira" "uab" "nibble-smtp")
 
 if test -x "$(which mbsync)"; then
     mbsync -a 

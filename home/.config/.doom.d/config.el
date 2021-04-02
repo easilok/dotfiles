@@ -51,7 +51,7 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(setq org-directory "~/nextcloud/org/")
+(setq org-directory "~/Nextcloud/org/")
 (after! org
   (require 'org-bullets)  ; Nicer bullets in org-mode
   (add-hook 'org-mode-hook (lambda ()
@@ -75,7 +75,7 @@
 (after! org
   (setq org-agenda-files (directory-files-recursively org-directory "\\.org$")
         org-log-done 'time
-        org-journal-dir "~/nextcloud/org/journal/"
+        org-journal-dir "~/Nextcloud/org/journal/"
         org-journal-date-format "%B %d, %Y (%A) "
         org-journal-file-format "%Y-%m-%d.org"
         org-agenda-skip-scheduled-if-done 1

@@ -3,13 +3,17 @@ super + Return
 	termite
 super + d
     dmenu-simple
+super + p
+    dmenu-simple
 shift + super + d
+    dmenu-full
+shift + super + p
     dmenu-full
 shift + super + Escape
     dmenu-power
 
 # lockscreen
-shift + control + x
+shift + super + x
     slock
 
 XF86ScreenSaver

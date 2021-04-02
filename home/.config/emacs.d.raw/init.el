@@ -24,6 +24,7 @@
 (set-fringe-mode 10)        ; Give some breathing room
 
 (menu-bar-mode -1)            ; Disable the menu bar
+(setq hl-line-mode t)
 
 ;; Set up the visible bell
 (setq visible-bell t)
@@ -87,9 +88,29 @@
   (display-battery-mode 1)) ; On laptops it's nice to know how much power you have
 
 (use-package doom-themes
-  :init (load-theme 'doom-one t))
+    :init (load-theme 'doom-one t))
+(use-package modus-themes
+  ;; :ensure                         ; omit this to use the built-in themes
+  :init
+  ;; Add all your customizations prior to loading the themes
+  (setq modus-themes-slanted-constructs t
+        modus-themes-bold-constructs nil
+          modus-themes-hl-line 'underline-only-neutral
+          ;; modus-themes-hl-line 'accented-background
+        modus-themes-region 'no-extend)
 
-(setq indent-tabs-mode nil) ; for converting tabs to spaces on identation
+  ;; Load the theme files before enabling a theme (else you get an error).
+  (modus-themes-load-themes)
+  ;; (setq modus-themes-vivendi-color-overrides
+  ;;     '((bg-main . "#282c34")))
+  :config
+  ;; Load the theme of your choice:
+  (modus-themes-load-vivendi) ;; OR (modus-themes-load-vivendi)
+  :bind ("<f5>" . modus-themes-toggle))
+
+(setq-default indent-tabs-mode nil) ; for converting tabs to spaces on identation
+
+(setq-default tab-width 2)
 (setq tab-width 2) ; or any other preferred value
 (setq-default evil-shift-width tab-width)
 (setq org-src--tab-width tab-width)
@@ -804,8 +825,8 @@
 (require 'lp-mail)
 
 (use-package mu4e
-  ;; :commands (mu4e efs/mu4e-org-setup mu4e-compose-new)
-  :defer 2
+  :commands (mu4e efs/mu4e-org-setup mu4e-compose-new)
+  ;; :defer 2
   :ensure nil
   :config
   ;; This is set to 't' to avoid mail syncing issues when using mbsync
@@ -832,8 +853,8 @@
 
   (lp/mail-set-mu4e-contexts)
 
-  (add-to-list 'mu4e-bookmarks '("(m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox) and flag:unread" "Unread inbox" ?n))
-  (add-to-list 'mu4e-bookmarks '("m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox" "All Inboxes" ?i))
+  (add-to-list 'mu4e-bookmarks '("(m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox) and flag:unread" "Unread inbox" ?n))
+  (add-to-list 'mu4e-bookmarks '("m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox" "All Inboxes" ?i))
 
 
   (setq mu4e-headers-time-format "%H:%M")
@@ -960,5 +981,8 @@
   "GI" '(guix-installed-system-packages :which-key "system packages")
   "Gp" '(guix-packages-by-name :which-key "search packages")
   "GP" '(guix-pull :which-key "pull"))
+
+(use-package elpher
+  :commands elpher elpher-go)
 
 

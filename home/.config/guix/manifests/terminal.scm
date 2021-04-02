@@ -58,6 +58,8 @@
    "aspell-dict-en"
    "aspell-dict-pt-pt"
 
+   ;; containers
+   "docker-compose"
 
    ))
 
