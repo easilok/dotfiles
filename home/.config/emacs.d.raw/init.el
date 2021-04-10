@@ -815,9 +815,13 @@
   (clojure-mode . lsp)
   (clojurescript-mode . lsp)
   (clojurec-mode . lsp)
-  :config
+  ;; :config
   ;; (setq lsp-lens-enable t) ; enable function reference usage counter
-  (setq lsp-clojure-custom-server-command '("bash" "-c" "~/git/clojure-lsp/target/clojure-lsp"))
+  ;; :custom
+  ;; (
+  ;;  (lsp-clojure-server-command '("bash" "-c" "/home/luis/.emacs.d/var/lsp/server/clojure/clojure-lsp"))
+  ;;  ;; (lsp-clojure-server-command '("~/app/clojure-lsp/closure-lsp"))
+  ;;  )
   )
 
 (use-package cider
@@ -990,4 +994,16 @@
 (use-package elpher
   :commands elpher elpher-go)
 
-
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(guix matrix-client frame-purpose rainbow-identifiers esxml tracking ov request anaphora cider clojure-mode yaml-mode which-key web-mode vterm visual-fill-column undo-tree typescript-mode rainbow-delimiters quelpa-use-package pyvenv prettier-js platformio-mode php-mode perspective org-mime org-bullets nvm no-littering magit lsp-ui lsp-treemacs lsp-tailwindcss lsp-pyright lsp-ivy js2-mode ivy-rich ivy-prescient helpful general flycheck evil-surround evil-commentary evil-collection eshell-git-prompt doom-themes doom-modeline dired-hide-dotfiles counsel-projectile company-irony company-box command-log-mode)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-checkbox ((t (:foreground nil :inherit org-todo)))))
