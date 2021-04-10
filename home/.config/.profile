@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 # Profile file. Runs on login.
 
-export PATH="$PATH:$HOME/scripts/:$HOME/.local/bin:$HOME/.local/share/flatpak/exports/bin"
+export PATH="$PATH:$HOME/scripts/:$HOME/.local/bin:$HOME/.local/share/flatpak/exports/bin:$HOME/.nix-profile/bin"
 export EDITOR="vim"
 export TERMINAL="termite"
 # export TERMINAL="kitty"
@@ -52,6 +52,15 @@ export GUIX_PROFILE="$HOME/.guix-profile"
 [ -f "$HOME/.config/local_profile" ] && source "$HOME/.config/local_profile"
 export XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share/
 
+# [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ] && source $HOME/.nix-profile/etc/profile.d/nix.sh
+export NIX_PATH="nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
+# these are fixes for discord. somehow it's missing libdrm, opt/Discord and something in mesa
+# make sure you run nix-env -i mesa libdrm
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(nix-store -qR $(which drmdevice)  | grep drm | grep -v bin)/lib/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.nix-profile/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.nix-profile/opt/Discord
 
-setxkbmap pt &> /dev/null
+export $(dbus-launch)
+
+# setxkbmap pt &> /dev/null
 

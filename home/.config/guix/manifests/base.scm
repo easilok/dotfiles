@@ -43,7 +43,7 @@
    ;; console tools
    "bc" ;; calculator
    "password-store"
-   "nix"
+   ; "nix"
 
    ))
 

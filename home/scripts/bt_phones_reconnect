@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+bluetoothctl remove E8:EC:A3:12:42:B1
+bluetoothctl --timeout 20 scan on 
+bluetoothctl connect E8:EC:A3:12:42:B1
+bluetoothctl trust E8:EC:A3:12:42:B1
+

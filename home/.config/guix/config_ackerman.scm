@@ -24,7 +24,7 @@
  (gnu packages gnome)
  (gnu packages cups)
  (gnu packages vim))
-(use-service-modules desktop networking ssh xorg)
+(use-service-modules desktop networking ssh xorg nix)
 ;; Import nonfree linux module.
 (use-modules
  (nongnu packages linux)
@@ -67,7 +67,7 @@ EndSection
  (locale "en_US.utf8")
  (timezone "Europe/Lisbon")
  (keyboard-layout
-  (keyboard-layout "pt" "nodeadkeys" #:model "thinkpad"))
+  (keyboard-layout "pt" #:model "thinkpad"))
  (host-name "ackerman")
  (kernel-arguments
   '("modprobe.blacklist=pcspkr"))
@@ -128,6 +128,7 @@ EndSection
 		(list %xorg-libinput-config))
 	       ))))
    (screen-locker-service slock)
+   (service nix-service-type)
    (service openssh-service-type
 	    (openssh-configuration
 	     (x11-forwarding? #t)

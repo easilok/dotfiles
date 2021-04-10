@@ -89,24 +89,25 @@
 
 (use-package doom-themes
     :init (load-theme 'doom-one t))
-(use-package modus-themes
-  ;; :ensure                         ; omit this to use the built-in themes
-  :init
-  ;; Add all your customizations prior to loading the themes
-  (setq modus-themes-slanted-constructs t
-        modus-themes-bold-constructs nil
-          modus-themes-hl-line 'underline-only-neutral
-          ;; modus-themes-hl-line 'accented-background
-        modus-themes-region 'no-extend)
 
-  ;; Load the theme files before enabling a theme (else you get an error).
-  (modus-themes-load-themes)
-  ;; (setq modus-themes-vivendi-color-overrides
-  ;;     '((bg-main . "#282c34")))
-  :config
-  ;; Load the theme of your choice:
-  (modus-themes-load-vivendi) ;; OR (modus-themes-load-vivendi)
-  :bind ("<f5>" . modus-themes-toggle))
+;; (use-package modus-themes
+;;   ;; :ensure                         ; omit this to use the built-in themes
+;;   :init
+;;   ;; Add all your customizations prior to loading the themes
+;;   (setq modus-themes-slanted-constructs t
+;;         modus-themes-bold-constructs nil
+;;           modus-themes-hl-line 'underline-only-neutral
+;;           ;; modus-themes-hl-line 'accented-background
+;;         modus-themes-region 'no-extend)
+
+;;   ;; Load the theme files before enabling a theme (else you get an error).
+;;   (modus-themes-load-themes)
+;;   ;; (setq modus-themes-vivendi-color-overrides
+;;   ;;     '((bg-main . "#282c34")))
+;;   :config
+;;   ;; Load the theme of your choice:
+;;   (modus-themes-load-vivendi) ;; OR (modus-themes-load-vivendi)
+;;   :bind ("<f5>" . modus-themes-toggle))
 
 (setq-default indent-tabs-mode nil) ; for converting tabs to spaces on identation
 
@@ -982,11 +983,11 @@
   "Gp" '(guix-packages-by-name :which-key "search packages")
   "GP" '(guix-pull :which-key "pull"))
 
-(use-package elpher
-  :commands elpher elpher-go)
-
 (use-package transmission
    :commands transmission
 )
+
+(use-package elpher
+  :commands elpher elpher-go)
 
 

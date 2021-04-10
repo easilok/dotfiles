@@ -126,9 +126,19 @@ if [ -f /usr/bin/todo.sh ]; then todo.sh ls; fi
 alias opdev='. opendev'
 if [ -f /usr/bin/exa ]; then alias ls='exa -l'; fi
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+[ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+[ -f "$HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
+    source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+[ -f "$HOME/.guix-extra-profiles/terminal/terminal/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
+    source $HOME/.guix-extra-profiles/terminal/terminal/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+
 source /usr/share/autojump/autojump.zsh 2>/dev/null
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+
 
 if [ -f "$HOME/.config/aliasrc" ]; then source "$HOME/.config/aliasrc"; fi
 

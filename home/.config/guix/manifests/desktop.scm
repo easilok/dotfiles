@@ -90,7 +90,8 @@
      "flameshot"
      ;;"mupdf"
      ;;"poppler"
-     ;;   "libreoffice"
+     "libreoffice"
+     "gnumeric"
      "zathura"
      "zathura-pdf-mupdf"
      "zathura-djvu"
@@ -119,8 +120,9 @@
      "openjdk@11.:jdk"
      ;; "openjdk:doc"
      "tidy"
-     ;; TODO enable docker
-     ;;   "docker"
+     "python"
+     "python-pip"
+     "python-virtualenv"
      
      ;; browsers
      "qutebrowser"
@@ -130,7 +132,7 @@
      "icecat"
      
      ;; network tools
-     "transmission"	;; out and gui
+     "transmission"     ;; out and gui
      "transmission:gui" ;; out and gui
      "youtube-dl"
      "youtube-viewer"
@@ -155,6 +157,7 @@
      "xdg-desktop-portal-gtk"
      ;; "libportal"
      "gtk+:bin"	;; For gtk-launch
+     "gtk+:out"	
      "glib:bin"	;; For gio-launch-desktop
      "shared-mime-info"
      "rofi"
@@ -166,7 +169,7 @@
      ;; terminals
      "xterm"
      "termite"
-     "vte"
+                                        ; "vte"
 
      ;; remote access
      "freerdp"
