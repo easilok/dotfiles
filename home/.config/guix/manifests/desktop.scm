@@ -102,10 +102,12 @@
      
      ;; editor
      "emacs"
+     "emacs-guix"
+     "emacs-geiser"
      "libtool"
      "libvterm"
      "mu"
-     
+
      ;; devtools
      ;;   "clojure"
      ;;   "clojure-lsp-bin"

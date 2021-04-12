@@ -37,6 +37,7 @@
    "fortune-mod"
    "fish"
    "zsh-autosuggestions"
+   "autojump"
 
    ;; text manipulation / processing
    "highlight"
