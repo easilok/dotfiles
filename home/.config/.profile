@@ -31,6 +31,7 @@ export PATH="$HOME/.cargo/bin:$HOME/.emacs.d/bin:$PATH"
 ## Extra Guix profiles section
 unset GUIX_PROFILE
 GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
+export MANPATH=/usr/share/man/:$MANPATH
 if [ -d "$GUIX_EXTRA_PROFILES" ]; then
     for i in $GUIX_EXTRA_PROFILES/*; do
 	profile=$i/$(basename "$i")

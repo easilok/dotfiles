@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if [ "$#" -eq 0 ]; then
+    mpv $(xsel -ob)
+else 
+    mpv $1
+fi

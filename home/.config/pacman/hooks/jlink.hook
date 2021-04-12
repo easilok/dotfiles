@@ -10,4 +10,4 @@ Description = Update JLink NIBBLE devices
 # Depends is optional if this should depend on another package
 # Depends =
 When = PostTransaction
-Exec = /home/luis/scripts/update_jlink_files
+Exec = /home/luis/local_scripts/hook_jlink_files

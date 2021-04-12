@@ -40,6 +40,15 @@ Avoid constant errors on Windows about the coding system by setting the default 
   (tooltip-mode -1)           ; Disable tooltips
   (set-fringe-mode 10)        ; Give some breathing room
 
+  (setq-default
+      delete-by-moving-to-trash t)
+
+  (global-subword-mode 1)                           ; Iterate through CamelCase words
+
+  (setq-default custom-file (expand-file-name ".custom.el" user-emacs-directory))
+  (when (file-exists-p custom-file)
+      (load custom-file))
+
   (menu-bar-mode -1)            ; Disable the menu bar
   (setq hl-line-mode t)
 
@@ -184,6 +193,11 @@ Setup for use of the /use-package/ for package installs:
   (persp-mode))
 #+End_src
 
+** Windows
+
+#+begin_src emacs-lisp
+(use-package rotate)
+#+end_src
 * Keep Folders Clean
 
 We use the [[https://github.com/emacscollective/no-littering/blob/master/no-littering.el][no-littering]] package to keep folders where we edit files and the Emacs configuration folder clean!  It knows about a wide variety of variables for built in Emacs features as well as those from community packages so it can be much easier than finding and setting these variables yourself.
@@ -256,6 +270,16 @@ This was taken from [[https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-i
    'org-mode
    `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
    'append)
+
+#+end_src
+
+** UI Settings
+#+begin_src emacs-lisp
+
+      (use-package org-appear
+        :hook (org-mode . org-appear-mode)
+        :custom
+        (org-hide-emphasis-markers t))
 
 #+end_src
 
@@ -1047,6 +1071,8 @@ For clojure and maybe clojurescript I use =lsp-mode= and =cider= with setups tak
     ;; :defer 2
     :ensure nil
     :config
+    ;; for new message view on next update
+    (setq mu4e-view-use-gnus t)
     ;; This is set to 't' to avoid mail syncing issues when using mbsync
     (setq mu4e-change-filenames-when-moving t)
 
@@ -1274,6 +1300,7 @@ Another package, is the [[https://github.com/jeremy-compostella/org-msg][org-msg
   (use-package elpher
     :commands elpher elpher-go)
 #+end_src
+
 * Other Configurations
 
 #+begin_src emacs-lisp

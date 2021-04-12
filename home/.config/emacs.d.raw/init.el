@@ -23,6 +23,15 @@
 (tooltip-mode -1)           ; Disable tooltips
 (set-fringe-mode 10)        ; Give some breathing room
 
+(setq-default
+    delete-by-moving-to-trash t)
+
+(global-subword-mode 1)                           ; Iterate through CamelCase words
+
+(setq-default custom-file (expand-file-name ".custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+    (load custom-file))
+
 (menu-bar-mode -1)            ; Disable the menu bar
 (setq hl-line-mode t)
 
@@ -135,6 +144,8 @@
   :config
   (persp-mode))
 
+(use-package rotate)
+
 ;; NOTE: If you want to move everything out of the ~/.emacs.d folder
 ;; reliably, set `user-emacs-directory` before loading no-littering!
 ;(setq user-emacs-directory "~/.cache/emacs")
@@ -188,6 +199,11 @@
  'org-mode
  `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
  'append)
+
+(use-package org-appear
+  :hook (org-mode . org-appear-mode)
+  :custom
+  (org-hide-emphasis-markers t))
 
 (defun efs/org-mode-setup ()
   (org-indent-mode)
@@ -834,6 +850,8 @@
   ;; :defer 2
   :ensure nil
   :config
+  ;; for new message view on next update
+  (setq mu4e-view-use-gnus t)
   ;; This is set to 't' to avoid mail syncing issues when using mbsync
   (setq mu4e-change-filenames-when-moving t)
 

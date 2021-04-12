@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if [ "$#" -eq 0 ]; then
+    mpv --no-video $(xsel -ob)
+else 
+    mpv --no-video $1
+fi
