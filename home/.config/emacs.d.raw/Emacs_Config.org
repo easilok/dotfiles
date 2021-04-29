@@ -455,8 +455,8 @@ This was taken from [[https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-i
   (use-package org-bullets
     :after org
     :hook (org-mode . org-bullets-mode)
-    ;;:custom
-    ;;(org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
+    :custom
+    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
     )
 
   (defun efs/org-mode-visual-fill ()
@@ -939,10 +939,10 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
 *** C/C++
 
 #+begin_src emacs-lisp
-  ;; (use-package ccls
-  ;;   :after lsp-mode
-  ;;   :hook ((c-mode c++-mode objc-mode cuda-mode) .
-  ;;          (lambda () (require 'ccls) (lsp))))
+  (use-package ccls
+    :after lsp-mode
+    :hook ((c-mode c++-mode objc-mode cuda-mode) .
+           (lambda () (require 'ccls) (lsp))))
 #+end_src
 
 For installing the language server
@@ -1056,6 +1056,63 @@ For clojure and maybe clojurescript I use =lsp-mode= and =cider= with setups tak
 
   (use-package cider
     :after clojure-mode)
+#+end_src
+
+*** Lua
+
+#+begin_src emacs-lisp
+
+  ;; (use-package lsp-lua-emmy
+  ;;   :demand
+  ;;   :ensure nil
+  ;;   ;; :load-path "~/github/lsp-lua-emmy"
+  ;;   :hook (lua-mode . lsp)
+  ;;   ;; :config
+  ;;   ;; (setq lsp-lua-emmy-jar-path (expand-file-name "EmmyLua-LS-all.jar" user-emacs-directory))
+  ;;   )
+
+  (defun set-company-backends-for-lua()
+    "Set lua company backend."
+    (setq-local company-backends '(
+                                   (
+                                    company-lsp
+                                    company-lua
+                                    company-keywords
+                                    company-gtags
+                                    company-yasnippet
+                                    )
+                                   company-capf
+                                   company-dabbrev-code
+                                   company-files
+                                   )))
+
+  (use-package lua-mode
+    :ensure t
+    :mode "\\.lua$"
+    :interpreter "lua"
+    :hook (lua-mode . set-company-backends-for-lua)
+    :config
+    (setq lua-indent-level 4)
+    (setq lua-indent-string-contents t)
+    (setq lua-prefix-key nil)
+    )
+#+end_src
+
+*** Scheme
+
+#+begin_src emacs-lisp
+  (use-package scheme-mode
+    :ensure nil
+    :mode "\\.sld\\'")
+
+(use-package geiser
+  :config
+  ;; (setq geiser-default-implementation 'gambit)
+  (setq geiser-default-implementation 'guile)
+  (setq geiser-active-implementations '(guile))
+  (setq geiser-repl-default-port 44555) ; For Gambit Scheme
+  (setq geiser-implementations-alist '(((regexp "\\.scm$") scheme)
+                                       ((regexp "\\.sld") scheme))))
 #+end_src
 
 * Email

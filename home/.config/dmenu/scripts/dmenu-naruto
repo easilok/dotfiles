@@ -1,0 +1,19 @@
+#!/bin/bash
+
+EPISODE_PATH="/mnt/nfs/mnt/coisas/series/[Erai-raws] Naruto - 01 ~ 220 [480p][Multiple Subtitle]"
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+choice=$(\ls "$EPISODE_PATH" | sed -n -e "/mkv$/p" | $DMENU -l 30)
+
+if [ -z "$choice" ]; then
+	echo "Exit Esc"
+	exit
+fi
+
+# mpv "$EPISODE_PATH/$choice" --speed=1.30 --start=00:02:10
+mpv "$EPISODE_PATH/$choice" --start=00:01:30

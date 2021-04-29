@@ -373,8 +373,8 @@
 (use-package org-bullets
   :after org
   :hook (org-mode . org-bullets-mode)
-  ;;:custom
-  ;;(org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
   )
 
 (defun efs/org-mode-visual-fill ()
@@ -753,10 +753,10 @@
 (add-hook 'scss-mode-hook 'lsp)
 (add-hook 'css-mode-hook 'lsp)
 
-;; (use-package ccls
-;;   :after lsp-mode
-;;   :hook ((c-mode c++-mode objc-mode cuda-mode) .
-;;          (lambda () (require 'ccls) (lsp))))
+(use-package ccls
+  :after lsp-mode
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda () (require 'ccls) (lsp))))
 
 (use-package irony
       :commands (irony-mode)
@@ -831,17 +831,61 @@
   (clojure-mode . lsp)
   (clojurescript-mode . lsp)
   (clojurec-mode . lsp)
-  ;; :config
+  :config
   ;; (setq lsp-lens-enable t) ; enable function reference usage counter
-  ;; :custom
-  ;; (
-  ;;  (lsp-clojure-server-command '("bash" "-c" "/home/luis/.emacs.d/var/lsp/server/clojure/clojure-lsp"))
-  ;;  ;; (lsp-clojure-server-command '("~/app/clojure-lsp/closure-lsp"))
-  ;;  )
+  (setq lsp-clojure-custom-server-command '("bash" "-c" "~/git/clojure-lsp/target/clojure-lsp"))
   )
 
 (use-package cider
   :after clojure-mode)
+
+;; (use-package lsp-lua-emmy
+;;   :demand
+;;   :ensure nil
+;;   ;; :load-path "~/github/lsp-lua-emmy"
+;;   :hook (lua-mode . lsp)
+;;   ;; :config
+;;   ;; (setq lsp-lua-emmy-jar-path (expand-file-name "EmmyLua-LS-all.jar" user-emacs-directory))
+;;   )
+
+(defun set-company-backends-for-lua()
+  "Set lua company backend."
+  (setq-local company-backends '(
+                                 (
+                                  company-lsp
+                                  company-lua
+                                  company-keywords
+                                  company-gtags
+                                  company-yasnippet
+                                  )
+                                 company-capf
+                                 company-dabbrev-code
+                                 company-files
+                                 )))
+
+(use-package lua-mode
+  :ensure t
+  :mode "\\.lua$"
+  :interpreter "lua"
+  :hook (lua-mode . set-company-backends-for-lua)
+  :config
+  (setq lua-indent-level 4)
+  (setq lua-indent-string-contents t)
+  (setq lua-prefix-key nil)
+  )
+
+(use-package scheme-mode
+    :ensure nil
+    :mode "\\.sld\\'")
+
+(use-package geiser
+  :config
+  ;; (setq geiser-default-implementation 'gambit)
+  (setq geiser-default-implementation 'guile)
+  (setq geiser-active-implementations '(guile))
+  (setq geiser-repl-default-port 44555) ; For Gambit Scheme
+  (setq geiser-implementations-alist '(((regexp "\\.scm$") scheme)
+                                       ((regexp "\\.sld") scheme))))
 
 (require 'lp-mail)
 
@@ -1012,16 +1056,4 @@
 (use-package elpher
   :commands elpher elpher-go)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(guix matrix-client frame-purpose rainbow-identifiers esxml tracking ov request anaphora cider clojure-mode yaml-mode which-key web-mode vterm visual-fill-column undo-tree typescript-mode rainbow-delimiters quelpa-use-package pyvenv prettier-js platformio-mode php-mode perspective org-mime org-bullets nvm no-littering magit lsp-ui lsp-treemacs lsp-tailwindcss lsp-pyright lsp-ivy js2-mode ivy-rich ivy-prescient helpful general flycheck evil-surround evil-commentary evil-collection eshell-git-prompt doom-themes doom-modeline dired-hide-dotfiles counsel-projectile company-irony company-box command-log-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-checkbox ((t (:foreground nil :inherit org-todo)))))
+
