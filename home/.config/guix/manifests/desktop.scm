@@ -180,6 +180,10 @@
      "tigervnc-server"
      "tigervnc-client"
      
+     "gparted"
+
+     "gsettings-desktop-schemas"
+     
      ))))
 
 ;; others

@@ -45,52 +45,52 @@
 
 (define-public my-dwm
   (package
-   (inherit dmenu)
+   (inherit dwm)
    (name "my-dwm")
-   (version "4.9-5")
+   (version "4.9-6")
    (source
     (origin
      (method git-fetch)
      (uri
       (git-reference
        (url "https://gitlab.com/easilok/dwm")
-       (commit "86e60cf5fe88a44f3e9baf9ed40fc00853f6aadf")))
+       (commit "a924bca8bef7a838bfe541ea5bfebd817c12fc0e")))
      (file-name
       (git-file-name name version))
      (sha256
       (base32
-       "1gnv92fj8n9n1if1x5ns6kac4yy4h9icr7mkjv2wswcmwg5a8qfy"))))))
+       "032llr4mhgy1f5xmrrlh87hvlmgahfrgrvxpcm2nfzz98bdvlyyk"))))))
 
 ;; A copy from benoitj package definition to dwmstatus
 (define-public my-dwmblocks
   (package
    (name "my-dwmblocks")
-   (version "1.0-1")
+   (version "1.0-2")
    (source
     (origin
      (method git-fetch)
      (uri
       (git-reference
        (url "https://gitlab.com/easilok/dwmblocks")
-       (commit "0fdc485e2313b0f9949b2553d199262d76d10c86")))
+       (commit "ff1120e9bc395bf845a6f590287da0f47a7809d0")))
      (file-name
       (git-file-name name version))
      (sha256
       (base32
-       "1a7a5jmv2v2lfd56kd281g4dj9slsh8n10yf8j2lkqk6qgkasl12"))))
+       "057kv3mrz3vrnzbx48cl3fnbys75allilkb74890x577m39gfxvp"))))
    (build-system gnu-build-system)
    (arguments
-    `(#:tests? #f			; no tests
+    `(#:tests? #f                       ; no tests
       #:make-flags
       (list
        (string-append "CC=" ,(cc-for-target))
        (string-append "PREFIX=" %output)
        (string-append "FREETYPEINC="
-		      (assoc-ref %build-inputs "freetype")
-		      "/include/freetype2"))
+                      (assoc-ref %build-inputs "freetype")
+                      "/include/freetype2"))
       #:phases
       (modify-phases %standard-phases
-		     (delete 'configure))))
+                     (delete 'configure))))
    (inputs
     `(("pkg-config" ,pkg-config)
       ("freetype" ,freetype)
@@ -121,7 +121,7 @@
        "0d05cmfmn785v27q13wm9m0qbycm5j5g1mc1rpmk782k722wwpb3"))))
    (build-system gnu-build-system)
    (arguments
-    `(#:tests? #f			; no tests
+    `(#:tests? #f                       ; no tests
       #:make-flags
       (list
        (string-append "CC=" ,(cc-for-target))
@@ -132,7 +132,7 @@
        )
       #:phases
       (modify-phases %standard-phases
-		     (delete 'configure))))
+                     (delete 'configure))))
    (inputs
     `(("pkg-config" ,pkg-config)
       ;; ("freetype" ,freetype)

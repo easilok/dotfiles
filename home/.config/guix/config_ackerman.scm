@@ -23,6 +23,7 @@
  (gnu packages suckless)
  (gnu packages gnome)
  (gnu packages cups)
+ (gnu packages nfs)
  (gnu packages vim))
 (use-service-modules desktop networking ssh xorg nix)
 ;; Import nonfree linux module.
@@ -96,6 +97,7 @@ EndSection
     zsh
     git
     ntfs-3g
+    nfs-utils
     exfat-utils
     fuse-exfat
     fuse

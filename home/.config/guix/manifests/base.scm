@@ -11,6 +11,10 @@
    "make"
    "cmake"
    "pkg-config"
+   "autoconf"
+   "automake"
+   "libtool"
+   "binutils"
    
    ;; network tools
    "borg"
@@ -33,6 +37,7 @@
    "gzip"
    "pbzip2" ;; multi core replacement for bzip2/bunzip2
    "diffutils"
+   "nfs-utils"
 
    ;; system monitoring
    "htop"
@@ -43,7 +48,7 @@
    ;; console tools
    "bc" ;; calculator
    "password-store"
-   ; "nix"
+                                        ; "nix"
 
    ))
 
