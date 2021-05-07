@@ -1,9 +1,14 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 SYMBOL1="DOGE"
 QUANT1="38.43501"
-SYMBOL2="BAT"
-QUANT2="10.12134"
+# SYMBOL2="BAT"
+# QUANT2="10.12134"
+SYMBOL3="WBTC"
+QUANT3="0.00016"
+SYMBOL2="SOL"
+QUANT2="0.21725"
 
 echo $SYMBOL1": "$(curl -s "https://eur.rate.sx/$QUANT1$SYMBOL1")
 echo $SYMBOL2": "$(curl -s "https://eur.rate.sx/$QUANT2$SYMBOL2")
+echo $SYMBOL3": "$(curl -s "https://eur.rate.sx/$QUANT3$SYMBOL3")

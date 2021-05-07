@@ -1358,6 +1358,17 @@ Another package, is the [[https://github.com/jeremy-compostella/org-msg][org-msg
     :commands elpher elpher-go)
 #+end_src
 
+* Multimedia
+
+#+begin_src emacs-lisp
+    (use-package emms
+    :config
+    (emms-all)
+    (emms-default-players)
+    (setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music")
+    )
+#+end_src
+
 * Other Configurations
 
 #+begin_src emacs-lisp
