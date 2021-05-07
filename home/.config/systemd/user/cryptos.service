@@ -1,0 +1,7 @@
+[Unit]
+Description=Crypto currency value checker service
+
+[Service]
+Type=oneshot
+# ExecStart=/usr/bin/mbsync -Va && notify-send "Mail Synced \n Unreaded: $(find /mnt/coisas/.mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+ExecStart=/bin/bash /home/luis/scripts/cryptos_notify

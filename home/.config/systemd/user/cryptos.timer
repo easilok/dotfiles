@@ -1,0 +1,10 @@
+[Unit]
+Description=Crypto currency value checker timer
+
+[Timer]
+OnBootSec=10m
+OnUnitActiveSec=10m
+Unit=cryptos.service
+
+[Install]
+WantedBy=timers.target

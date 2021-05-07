@@ -17,22 +17,36 @@ sudo pacman -S vim && git clone https://github.com/VundleVim/Vundle.vim.git ~/.v
 vim +PluginInstall
 
 echo "Install some shell comands"
-sudo pacman -S htop python termite exa ranger vifm x11vnc openssh fzf
+sudo pacman -S htop python termite exa ranger vifm x11vnc openssh \
+    fzf isync pass wget mpd ncmpcpp mlocate pam-u2f nfs-utils sshpass \
+    upower
 sudo systemctl enable --now sshd
 
 echo "Install fonts"
-sudo pacman -S adobe-source-code-pro-fonts cantarell-fonts fontconfig gnu-free-fonts noto-fonts noto-fonts-emoji ttf-font-awesome ttf-dejavu ttf-fira-code ttf-droid ttf-inconsolata ttf-liberation ttf-linux-libertine ttf-roboto ttf-ubuntu-font-family ttf-hack
+sudo pacman -S adobe-source-code-pro-fonts cantarell-fonts fontconfig \
+    gnu-free-fonts noto-fonts noto-fonts-emoji ttf-font-awesome \
+    ttf-dejavu ttf-fira-code ttf-droid ttf-inconsolata ttf-liberation \
+    ttf-linux-libertine ttf-roboto ttf-ubuntu-font-family ttf-hack
 
 echo "Installing Xorg and DE"
-sudo pacman -S xorg xf86-video-intel mesa xfce4 xfce4-goodies xmonad xmonad-contrib xmobar lightdm lightdm-gtk-greeter arandr picom stalonetray trayer
+sudo pacman -S xorg xf86-video-intel mesa xmonad xmonad-contrib xmobar lightdm \
+    lightdm-gtk-greeter arandr picom stalonetray trayer xorg-xinput libinput \
+    xf86-input-libinput
 xmonad --recompile
 sudo systemctl enable lightdm
 
 echo "Installing Themes"
 sudo pacman -S arc-gtk-theme faenza-icon-theme
 
+echo "Installing some dependencies"
+sudo pacman -S python-tldextract polkit 
+
 echo "Installing apps"
-sudo pacman -S parcellite nm-connection-editor network-manager-applet firefox tor-browser transmission-gtk transmission-cli element-desktop speedcrunch pcmanfm lxappearance-gtk3 thunderbird filezilla flameshot gajim gparted playonlinux dunst
+sudo pacman -S xfce4-clipman-plugin nm-connection-editor network-manager-applet \
+    firefox transmission-gtk transmission-cli element-desktop \
+    speedcrunch pcmanfm lxappearance-gtk3 thunderbird filezilla flameshot \
+    gajim gparted playonlinux dunst emacs rofi pamixer xwallpaper dbeaver gnumeric \
+    subversion
 
 echo "Installing multimedia"
 sudo pacman -S vlc deadbeef mpv ristretto tumbler xarchiver zathura evince
@@ -44,7 +58,7 @@ echo "Installing editor"
 sudo pacman -S libreoffice leafpad nextcloud-client texlive-most
 
 echo "Installing Audio"
-sudo pacman -S pulseaudio-alsa pulseaudio-bluetooth pulsemixer pulsemixer bluez bluez-utils blueman playerctl
+sudo pacman -S alsa-utils pulseaudio-alsa pulseaudio-bluetooth pulsemixer pulsemixer bluez bluez-utils blueman playerctl
 sudo systemctl enable --now bluetooth.service
 
 echo "Installing yay"
@@ -52,11 +66,11 @@ sudo pacman -S --needed base-devel
 cd ~ && mkdir aur && cd aur
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
-echo "AUR Fonts"
-yay -S ttf-ms-fonts ttf-font-awesome-4
+echo "AUR Fonts and themes"
+yay -S ttf-ms-fonts ttf-font-awesome-4 delft-icon-theme
 
 echo "AUR Apps"
-yay -S teams rocketchat-client-bin clockify-desktop skypeforlinux-stable-bin tidal-hifi-git birdtray bitwarden-bin bitwarden-cli lf
+yay -S teams clockify-desktop skypeforlinux-stable-bin tidal-hifi-git birdtray bitwarden-bin lf
 
 echo "Dev Apps"
 sudo pacman -S arduino arduino-builder arduino-cli arduino-ctags dbeaver
@@ -66,7 +80,6 @@ gpg --keyserver keys.gnupg.net --recv-keys 702353E0F7E48EDB
 yay -S inkscape pinta remmina truestudio jlink-software-and-documentation
 
 echo "Compiled Apps"
-cd ~ && mkdir app && cd app
-ln -sf ~/git/dotfiles/home/app/* ~/app/
-cd dmenu-4.9 && sudo make install
-cd ~/app/dwm-6.2/ && sudo make install
+cd ~/git/dwm && sudo make install
+cd ~/git/dwmblocks && sudo make install
+cd ~/git/dmenu && sudo make install
