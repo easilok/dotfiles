@@ -13,6 +13,7 @@ export MUSIC="ncmpcpp"
 # export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 export WM="xmonad"
 export _JAVA_AWT_WM_NONREPARENTING=1
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # export WORKON_HOME=$HOME/.virtualenvs
 # export PROJECT_HOME=$HOME/Devel
@@ -51,7 +52,7 @@ export GUIX_PROFILE="$HOME/.guix-profile"
 [ -d "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"
 
 [ -f "$HOME/.config/local_profile" ] && source "$HOME/.config/local_profile"
-export XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share/
+# export XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share/
 
 # # [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ] && source $HOME/.nix-profile/etc/profile.d/nix.sh
 # export NIX_PATH="nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"

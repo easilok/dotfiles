@@ -129,6 +129,42 @@ tray-transparent = true
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[bar/openbox]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 18
+;offset-x = 1%
+;offset-y = 1%
+;radius = 6.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+;border-size = 2
+;border-color = #00000000
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = FontAwesome:style=Regular:size=9;1
+font-1 = roboto:pixelsize=9;1
+font-2 = unifont:fontformat=truetype:size=8:antialias=false;0
+
+modules-left = ewmg sep mpd sep
+modules-center = xwindow 
+modules-right =  pulseaudio cpu memory filesystem battery temperature date
+
+tray-position = right
+tray-padding = 2
+tray-transparent = true
+
 
 [module/xwindow]
 type = internal/xwindow
@@ -564,3 +600,22 @@ type = custom/script
 exec = ~/scripts/arch_updates.sh
 interval = 1800
 click-left = exec termite -e "yay -Syu" 
+
+[module/ewmh]
+type = internal/xworkspaces
+
+; Only show workspaces defined on the same output as the bar
+;
+; Useful if you want to show monitor specific workspaces
+; on different bars
+;
+; Default: false
+pin-workspaces = true
+
+; Create click handler used to focus desktop
+; Default: true
+enable-click = false
+
+; Create scroll handlers used to cycle desktops
+; Default: true
+enable-scroll = false

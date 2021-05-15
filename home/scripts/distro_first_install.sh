@@ -39,14 +39,14 @@ echo "Installing Themes"
 sudo pacman -S arc-gtk-theme faenza-icon-theme
 
 echo "Installing some dependencies"
-sudo pacman -S python-tldextract polkit 
+sudo pacman -S python-tldextract polkit ctags rdesktop youtube-dl xsel
 
 echo "Installing apps"
 sudo pacman -S xfce4-clipman-plugin nm-connection-editor network-manager-applet \
     firefox transmission-gtk transmission-cli element-desktop \
     speedcrunch pcmanfm lxappearance-gtk3 thunderbird filezilla flameshot \
     gajim gparted playonlinux dunst emacs rofi pamixer xwallpaper dbeaver gnumeric \
-    subversion
+    subversion gimp inkscape
 
 echo "Installing multimedia"
 sudo pacman -S vlc deadbeef mpv ristretto tumbler xarchiver zathura evince
@@ -77,7 +77,7 @@ sudo pacman -S arduino arduino-builder arduino-cli arduino-ctags dbeaver
 
 echo "Work Apps"
 gpg --keyserver keys.gnupg.net --recv-keys 702353E0F7E48EDB
-yay -S inkscape pinta remmina truestudio jlink-software-and-documentation
+yay -S pinta remmina truestudio jlink-software-and-documentation remmina-plugin-rdesktop
 
 echo "Compiled Apps"
 cd ~/git/dwm && sudo make install

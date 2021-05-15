@@ -1,6 +1,7 @@
 #!/bin/bash
 
-EPISODE_PATH="/mnt/nfs/mnt/coisas/series/[Erai-raws] Naruto - 01 ~ 220 [480p][Multiple Subtitle]"
+# EPISODE_PATH="/mnt/nfs/mnt/coisas/series/[Erai-raws] Naruto - 01 ~ 220 [480p][Multiple Subtitle]"
+EPISODE_PATH="/mnt/nfs/mnt/coisas/series/[AnimeRG] Naruto Shippuden (Complete Series 001-500) Naruto Shippuuden [720p] [HEVC] [x265] [Batch] [pseudo]/Season 01 (Episodes 001-032)"
 
 if [ -f $HOME/.config/dmenu/dmenurc ]; then
   . $HOME/.config/dmenu/dmenurc
@@ -15,5 +16,5 @@ if [ -z "$choice" ]; then
 	exit
 fi
 
-# mpv "$EPISODE_PATH/$choice" --speed=1.30 --start=00:02:10
-mpv "$EPISODE_PATH/$choice" --start=00:01:30
+# mpv "$EPISODE_PATH/$choice" --start=00:01:30
+mpv "$EPISODE_PATH/$choice" 
