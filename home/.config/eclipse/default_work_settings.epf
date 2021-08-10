@@ -1,4 +1,4 @@
-#Fri Apr 23 11:29:06 WEST 2021
+#Thu Aug 05 15:55:27 WEST 2021
 \!/=
 /configuration/com.genuitec.eclipse.codetogether.ui/check.profile.iu=true
 /configuration/com.genuitec.eclipse.codetogether.ui/codetogether.main.view.displayed=true
@@ -14,6 +14,7 @@
 /configuration/com.genuitec.eclipse.theming.ui/applyBackground=false
 /configuration/com.genuitec.eclipse.theming.ui/codemix.announce.notice.displayed=1603382799728
 /configuration/com.genuitec.eclipse.theming.ui/codetogether.announce.displayed=true
+/configuration/com.genuitec.eclipse.theming.ui/ct.reengagement.display.after=1632732120718
 /configuration/com.genuitec.eclipse.theming.ui/elearning.dont.show.until=1604423188307
 /configuration/com.genuitec.eclipse.theming.ui/iconcolormode=primary
 /configuration/com.genuitec.eclipse.theming.ui/iconreplacement=true
@@ -378,6 +379,7 @@
 /instance/com.dubture.twig.ui/editorStmtColorBoundarymaker=\#D8D8D8 | null | null | null | null | null
 /instance/com.dubture.twig.ui/overriddenByCSS=,editorColorHeredoc,editorColorPhpdoc,codeStyleNormal,editorColorComment,editorColorTask,editorColorVariable,editorBlocknameColor,editorColorBoundarymaker,editorColorPHPDocComment,editorColorString,editorStmtColorBoundarymaker,editorColorKeyword,editorColorLineComment,editorColorNumber,
 /instance/com.genuitec.eclipse.codetogether.ui/codetogether.main.view.displayed=true
+/instance/com.genuitec.eclipse.codetogether.ui/uuid=TpweRLPpi0NkjpYZm7xoc8
 /instance/com.genuitec.eclipse.monitor/last.upload.time=1619168211862
 /instance/com.genuitec.eclipse.sqlexplorer/overriddenByCSS=,sql_columns,sql_default,sql_keyword,sql_multi_line_comment,sql_single_line_comment,sql_string,sql_table,
 /instance/com.genuitec.eclipse.sqlexplorer/sql_columns=171,115,255
@@ -1943,7 +1945,7 @@
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source=1.8
-/instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_VM_XML=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<vmSettings defaultVM\="57,org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType13,1610529228580">\n<vmType id\="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType">\n<vm id\="1610529228580" name\="ide" path\="/opt/truestudio/ide"/>\n</vmType>\n</vmSettings>\n
+/instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_VM_XML=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<vmSettings defaultVM\="57,org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType13,1610529228580" defaultVMConnector\="">\n<vmType id\="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType">\n<vm id\="1610529228580" name\="ide" path\="/opt/truestudio/ide"/>\n</vmType>\n</vmSettings>\n
 /instance/org.eclipse.jdt.ui/content_assist_completion_replacement_background=200,200,0
 /instance/org.eclipse.jdt.ui/content_assist_completion_replacement_foreground=194,0,0
 /instance/org.eclipse.jdt.ui/content_assist_number_of_computers=12
@@ -2257,13 +2259,14 @@
 /instance/org.eclipse.team.cvs.ui/pref_console_message_color=216,216,216
 /instance/org.eclipse.team.svn.core/externalMigrateFromAuthorizationDatabase/isMigrated=true
 /instance/org.eclipse.team.svn.core/migrateFromAuthorizationDatabase/isMigrated=true
-/instance/org.eclipse.team.svn.core/repositories/f01518b08014001b13a9df678fdea063=f01518b08014001b13a9df678fdea063;svn\://127.0.0.1/P17040075_CentralEnderecavel/Firmware/Motherboard/Application;svn\://127.0.0.1/P17040075_CentralEnderecavel/Firmware/Motherboard/Application;branches;tags;trunk;true;e67521cc-d510-46e8-933b-e1ffd613fa17;svn\://127.0.0.1/P17040075_CentralEnderecavel;;false;<svn\://127.0.0.1\:3690> e67521cc-d510-46e8-933b-e1ffd613fa17;;0
+/instance/org.eclipse.team.svn.core/repositories/00c98ac6fcf5001b126490fc02fe58e1=00c98ac6fcf5001b126490fc02fe58e1;svn\://server/P17040075_CentralEnderecavel/Firmware/Motherboard/Application;svn\://server/P17040075_CentralEnderecavel/Firmware/Motherboard/Application;branches;tags;trunk;true;e67521cc-d510-46e8-933b-e1ffd613fa17;svn\://server/P17040075_CentralEnderecavel;;false;;;0
+/instance/org.eclipse.team.svn.core/repositories/f01518b08014001b13a9df678fdea063=f01518b08014001b13a9df678fdea063;svn\://127.0.0.1/P17040075_CentralEnderecavel/Firmware/Motherboard/Application;svn\://127.0.0.1/P17040075_CentralEnderecavel/Firmware/Motherboard/Application;branches;tags;trunk;true;e67521cc-d510-46e8-933b-e1ffd613fa17;svn\://127.0.0.1/P17040075_CentralEnderecavel;;false;;;0
 /instance/org.eclipse.team.svn.ui/firstStartup=false
 /instance/org.eclipse.team.svn.ui/history.comment=TW9yZSBBcG9sbG8gZml4ZXM6Ci0gRml4ZWQgQW5hbG9nIEdyYXBoIGJ1dHRvbiBvbiBEZXZpY2VzQ29uZmlndXJhdGlvbgotIEFkZGVkIEhhc1NlbGZUZXN0RmxhZzsgQXBwbGllZCBleGNlcHRpb25zIGZvciBkZXZpY2VzIHRoYXQgaGF2ZSBubyBzZWxmIHRlc3QKLSBBZGRlZCBwcm9jZXNzIGZvciBsZWdhY3kgdHlwZXMgKFhQOTU9MCku;QWRkZWQgR2xvYmFsIGNvbW1hbmRzIG9wdGlvbiB0byBhYm9ydCBhbmQgaW5mbyBvZiBjdXJyZW50IGRldmljZQ\=\=;Rml4ZWQgYnVnIGluIEFwb2xsbyBBcHByb3ZhbCBDb2RlIGZvciBkZXZpY2VzIE5WTSBpbXBsZW1lbnRhdGlvbg\=\=;LSBDaGFuZ2VkIFJlc291bmQgYWxhcm0gYnV0dG9uIGNvbG9y;Um9sbGJhY2sgQ29kZQ\=\=;TmV3IEVuYWJsaW5nL0Rpc2FibGluZyBMb29wcywgZSBFbmFibGluZy9EaXNhYmxpbmcgWm9uZXM\=;Rml4ZWQgYnVnIG9uIEVuYWJsZSBidXR0b24gdGV4dCBub3QgY2hhbmdpbmcgZm9yIGxvb3AgZGV2aWNlcw\=\=;Q2hhbmdlZCBYTUwgdGFnIG9mIG1hc3RlciBuZXR3b3JrIGNvbmZpZ3VyYXRpb24gdG8gc3dpdGNo;LSBGaXhlZCBDb25maWd1cmF0aW9uIHdpZHRoIGZvciBpbmZvIGZpZWxkcw\=\=;LSBGaXhlZCBtaXNzaW5nIHNwYWNlIG9uIE1haW5TY3JlZW4gaW5mbyBiYXIgZm9yIE5ldHdvcmsgSW5mbyBab25lIHRlc3Q\=
 /instance/org.eclipse.team.svn.ui/history.compareUrl=c3ZuOi8vMTI3LjAuMC4xL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24vdHJ1bmsvTUNVQm9hcmQ\=;c3ZuOi8vMTI3LjAuMC4xL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24vdHJ1bmsvTUNVQm9hcmQvLmNwcm9qZWN0;c3ZuOi8vMTI3LjAuMC4xL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24vdHJ1bmsvTUNVQm9hcmQvTklCQkxFL2luYy9uRGVmaW5lcy5o
-/instance/org.eclipse.team.svn.ui/history.repositoryURL=c3ZuOi8vMTI3LjAuMC4xL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24vdHJ1bms\=
+/instance/org.eclipse.team.svn.ui/history.repositoryURL=c3ZuOi8vc2VydmVyL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24\=;c3ZuOi8vMTI3LjAuMC4xL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24vdHJ1bms\=
 /instance/org.eclipse.team.svn.ui/history.repositoryUser=bGNw
-/instance/org.eclipse.team.svn.ui/history.selectCheckoutUrl=c3ZuOi8vMTI3LjAuMC4xL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24vYnJhbmNoZXMvREFGT19GaXJlQnJpZ2FkZVBhbmVs;c3ZuOi8vMTI3LjAuMC4xL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24\=
+/instance/org.eclipse.team.svn.ui/history.selectCheckoutUrl=c3ZuOi8vc2VydmVyL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24vdHJ1bms\=;c3ZuOi8vc2VydmVyL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24\=;c3ZuOi8vMTI3LjAuMC4xL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24\=;c3ZuOi8vMTI3LjAuMC4xL1AxNzA0MDA3NV9DZW50cmFsRW5kZXJlY2F2ZWwvRmlybXdhcmUvTW90aGVyYm9hcmQvQXBwbGljYXRpb24vYnJhbmNoZXMvREFGT19GaXJlQnJpZ2FkZVBhbmVs
 /instance/org.eclipse.team.svn.ui/org.eclipse.team.svn.ui.lock.LockResourcesPanel.height=414
 /instance/org.eclipse.team.svn.ui/org.eclipse.team.svn.ui.lock.LockResourcesPanel.width=470
 /instance/org.eclipse.team.svn.ui/org.eclipse.team.svn.ui.panel.callback.PromptCredentialsPanel.height=247
@@ -2350,7 +2353,7 @@
 /instance/org.eclipse.ui.workbench/ColorsAndFontsPreferencePage.expandedCategories=Torg.eclipse.ui.workbenchMisc\tTorg.eclipse.cdt.ui.presentation
 /instance/org.eclipse.ui.workbench/ColorsAndFontsPreferencePage.selectedElement=Forg.eclipse.jface.textfont
 /instance/org.eclipse.ui.workbench/DECORATIONS_COLOR=181,152,86
-/instance/org.eclipse.ui.workbench/ENABLED_DECORATORS=com.arm.cmsis.pack.project.decorators.RteProjectDecorator\:true,com.atollic.truestudio.integration.processorexpert.decorator\:true,org.eclipse.cdt.ui.indexedFiles\:false,org.eclipse.cdt.managedbuilder.ui.excludedFile\:true,org.eclipse.cdt.managedbuilder.ui.includeFolder\:true,org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator\:true,org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator\:true,org.eclipse.jdt.ui.override.decorator\:true,org.eclipse.jdt.ui.interface.decorator\:true,org.eclipse.jdt.ui.buildpath.decorator\:true,org.eclipse.mylyn.context.ui.decorator.interest\:true,org.eclipse.mylyn.tasks.ui.decorators.task\:true,org.eclipse.mylyn.team.ui.changeset.decorator\:true,org.eclipse.team.cvs.ui.decorator\:false,org.eclipse.team.svn.ui.decorator.SVNLightweightDecorator\:true,org.eclipse.ui.LinkedResourceDecorator\:true,org.eclipse.ui.SymlinkDecorator\:true,org.eclipse.ui.VirtualResourceDecorator\:true,org.eclipse.ui.ContentTypeDecorator\:true,org.eclipse.ui.ResourceFilterDecorator\:false,eclox.core.decorator\:true,saros.ui.decorators.SharedProjectDecorator\:true,saros.ui.decorators.SharedProjectFileDecorator\:true,
+/instance/org.eclipse.ui.workbench/ENABLED_DECORATORS=com.arm.cmsis.pack.project.decorators.RteProjectDecorator\:true,com.atollic.truestudio.integration.processorexpert.decorator\:true,org.eclipse.cdt.ui.indexedFiles\:false,org.eclipse.cdt.managedbuilder.ui.excludedFile\:true,org.eclipse.cdt.managedbuilder.ui.includeFolder\:true,org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator\:true,org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator\:true,org.eclipse.jdt.ui.override.decorator\:true,org.eclipse.jdt.ui.interface.decorator\:true,org.eclipse.jdt.ui.buildpath.decorator\:true,org.eclipse.mylyn.context.ui.decorator.interest\:true,org.eclipse.mylyn.tasks.ui.decorators.task\:true,org.eclipse.mylyn.team.ui.changeset.decorator\:true,org.eclipse.team.cvs.ui.decorator\:false,org.eclipse.team.svn.ui.decorator.SVNLightweightDecorator\:true,org.eclipse.ui.LinkedResourceDecorator\:true,org.eclipse.ui.SymlinkDecorator\:true,org.eclipse.ui.VirtualResourceDecorator\:true,org.eclipse.ui.ContentTypeDecorator\:true,org.eclipse.ui.ResourceFilterDecorator\:false,eclox.core.decorator\:true,
 /instance/org.eclipse.ui.workbench/ERROR_COLOR=247,68,117
 /instance/org.eclipse.ui.workbench/HYPERLINK_COLOR=111,197,238
 /instance/org.eclipse.ui.workbench/INCOMING_COLOR=31,179,235
@@ -2923,11 +2926,10 @@
 /instance/winterwell.markdown/Pref_Link=217,229,119
 /instance/winterwell.markdown/overriddenByCSS=,Pref_Default,Pref_Header,Pref_Comment,Pref_Link,
 @com.atollic.hardwaredebug.jlink=1.0.0.20190212-0734
-@com.genuitec.eclipse.codetogether.ui=2.1.1.202008201228
-@com.genuitec.eclipse.monitor=13.0.0.202103191838
-@com.genuitec.eclipse.theming.ui=1.11.0.202103191838
+@com.genuitec.eclipse.codetogether.ui=4.0.1.202104081007
+@com.genuitec.eclipse.monitor=13.0.0.202105260439
+@com.genuitec.eclipse.theming.ui=1.11.0.202105260439
 @com.github.eclipsecolortheme=1.0.0.201410260308
-@com.googlecode.cppcheclipse.core=1.1.1
 @net.sourceforge.vrapper.eclipse=0.74.0
 @org.eclipse.cdt.core=6.1.0.20190212-0734
 @org.eclipse.cdt.debug.core=8.0.0.201609121658
@@ -2965,5 +2967,4 @@
 @org.eclipse.ui.ide=3.12.2.20190212-0734
 @org.eclipse.ui.workbench=3.108.1.v20160819-2118
 @org.eclipse.ui.workbench.texteditor=3.10.1.v20160818-1626
-@saros.eclipse=16.0.1
 file_export_version=3.0

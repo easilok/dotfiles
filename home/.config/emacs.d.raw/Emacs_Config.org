@@ -544,6 +544,9 @@ This was taken from [[https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-i
       "p"  '(:ignore t :which-key "project")
       ;; "pm"  '(:keymap projectile-command-map :which-key "projectile")
       "pp"  '(projectile-switch-project :which-key "open project")
+      "w"  '(:ignore t :which-key "workspaces")
+      "ws" '(persp-switch :which-key "switch workspace")
+      "wq" '(persp-kill :which-key "kill workspace")
       ))
 
 #+end_src
@@ -1154,8 +1157,8 @@ For clojure and maybe clojurescript I use =lsp-mode= and =cider= with setups tak
 
     (lp/mail-set-mu4e-contexts)
 
-    (add-to-list 'mu4e-bookmarks '("(m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox) and flag:unread" "Unread inbox" ?n))
-    (add-to-list 'mu4e-bookmarks '("m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox" "All Inboxes" ?i))
+    (add-to-list 'mu4e-bookmarks '("(m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox or m:/xyz/Inbox) and flag:unread" "Unread inbox" ?n))
+    (add-to-list 'mu4e-bookmarks '("m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox or m:/xyz/Inbox" "All Inboxes" ?i))
 
 
     (setq mu4e-headers-time-format "%H:%M")
@@ -1322,12 +1325,32 @@ Another package, is the [[https://github.com/jeremy-compostella/org-msg][org-msg
 #+end_src
 * Chat
 
-
+** Matrix
 #+begin_src emacs-lisp
   (use-package matrix-client
     :ensure nil
     :quelpa (matrix-client :fetcher github :repo "alphapapa/matrix-client.el"
                            :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
+#+end_src
+
+** ERC (IRC)
+
+#+begin_src emacs-lisp
+  ;; Set our nickname & real-name as constant variables
+  (setq
+   erc-nick "easilok"     ; Our IRC nick
+   erc-user-full-name "Luis Pereira") ; Our /whois name
+
+  ;; Or assign it to a keybinding
+  ;; This example is also using erc's TLS capabilities:
+  (defun erc-liberachat()
+    (interactive)
+    (erc-tls :server "irc.libera.chat"
+             :port   "6697"))
+
+    (setq erc-autojoin-channels-alist
+          '(("libera.chat" "#systemcrafters")))
+
 #+end_src
 
 * System application interface
@@ -1361,12 +1384,12 @@ Another package, is the [[https://github.com/jeremy-compostella/org-msg][org-msg
 * Multimedia
 
 #+begin_src emacs-lisp
-    (use-package emms
-    :config
-    (emms-all)
-    (emms-default-players)
-    (setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music")
-    )
+  (use-package emms
+  :config
+  (emms-all)
+  (emms-default-players)
+  (setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music")
+  )
 #+end_src
 
 * Other Configurations

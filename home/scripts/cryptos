@@ -2,12 +2,12 @@
 
 SYMBOL1="DOGE"
 QUANT1="21.22913"
-# SYMBOL2="BAT"
-# QUANT2="10.12134"
+SYMBOL2="BAT"
+QUANT2="12.28631"
 SYMBOL3="WBTC"
 QUANT3="0.00016"
-SYMBOL2="SOL"
-QUANT2="0.21725"
+# SYMBOL2="SOL"
+# QUANT2="0.21725"
 
 echo $SYMBOL1": "$(curl -s "https://eur.rate.sx/$QUANT1$SYMBOL1")
 echo $SYMBOL2": "$(curl -s "https://eur.rate.sx/$QUANT2$SYMBOL2")

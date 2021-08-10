@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+
+# Returs if no tmux has no sessions running
+! tmux list-sessions 2> /dev/null && echo "No sessions" && exit
+
+# Get current tmux sessions as array
+CHOICES=($(tmux list-sessions | sed 's/:.*//'))
+
+# Print current tmux sessions
+ITER=0
+for CHOICE in "${CHOICES[@]}"; do 
+    echo "$ITER - $CHOICE"
+    ITER=$(expr $ITER + 1)
+done
+
+echo "Your choice"
+read USER_CHOICE
+
+if [[ ! -n $USER_CHOICE ]]; then
+    USER_CHOICE=0
+fi
+
+# Removes all numeric chars 
+# and checks if length is 0 to find non numeric input
+if [[ -n ${USER_CHOICE//[0-9]/} ]]; then
+    echo "Invalid session choice"
+    exit 
+fi
+
+# Attach tmux session
+if [ $USER_CHOICE -lt ${#CHOICES[@]} ]; then
+    tmux attach -t ${CHOICES[$USER_CHOICE]}
+else
+    echo "Invalid session choice"
+fi
+
+

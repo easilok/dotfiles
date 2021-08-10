@@ -63,6 +63,8 @@ export GUIX_PROFILE="$HOME/.guix-profile"
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.nix-profile/lib
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.nix-profile/opt/Discord
 
+[ -d "$HOME/git/cpputest" ] && export CPPUTEST_HOME=$HOME/git/cpputest
+
 export $(dbus-launch)
 
 # setxkbmap pt &> /dev/null

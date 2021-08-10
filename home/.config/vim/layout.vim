@@ -23,3 +23,8 @@ set cursorline                  " hightligh current line
 set modelines=1
 
 highlight ColorColumn ctermbg=0 guibg=#1b1b1b
+
+" Used this for st-terminal
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"

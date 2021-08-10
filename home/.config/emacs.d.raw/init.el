@@ -920,8 +920,8 @@
 
   (lp/mail-set-mu4e-contexts)
 
-  (add-to-list 'mu4e-bookmarks '("(m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox) and flag:unread" "Unread inbox" ?n))
-  (add-to-list 'mu4e-bookmarks '("m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox" "All Inboxes" ?i))
+  (add-to-list 'mu4e-bookmarks '("(m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox or m:/xyz/Inbox) and flag:unread" "Unread inbox" ?n))
+  (add-to-list 'mu4e-bookmarks '("m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox or m:/xyz/Inbox" "All Inboxes" ?i))
 
 
   (setq mu4e-headers-time-format "%H:%M")
@@ -1038,6 +1038,21 @@
   :quelpa (matrix-client :fetcher github :repo "alphapapa/matrix-client.el"
                          :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
 
+;; Set our nickname & real-name as constant variables
+(setq
+ erc-nick "easilok"     ; Our IRC nick
+ erc-user-full-name "Luis Pereira") ; Our /whois name
+
+;; Or assign it to a keybinding
+;; This example is also using erc's TLS capabilities:
+(defun erc-liberachat()
+  (interactive)
+  (erc-tls :server "irc.libera.chat"
+           :port   "6697"))
+
+  (setq erc-autojoin-channels-alist
+        '(("libera.chat" "#systemcrafters")))
+
 (use-package guix
   :defer t)
 
@@ -1055,5 +1070,12 @@
 
 (use-package elpher
   :commands elpher elpher-go)
+
+(use-package emms
+:config
+(emms-all)
+(emms-default-players)
+(setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music")
+)
 
 

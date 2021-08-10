@@ -164,3 +164,9 @@ config.bind('<Ctrl-s>', 'spawn --userscript qute-pass')
 config.bind('<Ctrl-z>', 'open file:///home/luis/.config/qutebrowser/startup.html')
 config.bind('M', 'hint links spawn mpv {hint-url}')
 config.bind('Z', 'hint links spawn termite -e youtube-dl {hint-url}')
+## qute-gemini
+# https://git.sr.ht/~sotirisp/qute-gemini
+# Open in the current tab
+config.bind(';g', 'hint links userscript qute-gemini')
+# Open in a new tab
+config.bind(';G', 'hint links userscript qute-gemini-tab')

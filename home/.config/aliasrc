@@ -47,6 +47,9 @@ alias ..="cd .."
 alias dragdrop='dragon-drag-and-drop -t -k'
 alias dragfile='dragon-drag-and-drop'
 alias vifm=vifmrun
+alias cbat='bat --paging=never --style=plain'
+alias gbat='bat --paging=never --style=changes -d'
+alias mvp=mpv
 unalias st 2> /dev/null
 unalias g 2> /dev/null
 
