@@ -89,10 +89,18 @@ Plugin 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
 
 let g:LanguageClient_serverCommands = {
     \ 'python': ['~/.local/bin/pyls'],
+    \ 'javascript': ['/usr/bin/typescript-language-server', '--stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
     \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " Use release branch (recommend)
 " Plugin 'neoclide/coc.nvim', {'branch': 'release'}

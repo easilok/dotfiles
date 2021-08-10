@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Returs if no tmux has no sessions running
 ! tmux list-sessions 2> /dev/null && echo "No sessions" && exit
