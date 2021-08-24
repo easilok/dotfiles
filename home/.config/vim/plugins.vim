@@ -31,6 +31,8 @@ Plugin 'tpope/vim-repeat'
 " Shell Commands
 Plugin 'tpope/vim-eunuch'
 
+Plugin 'tpope/vim-abolish'
+
 " Adds objects and N objects
 Plugin 'wellle/targets.vim'
 " NerdTree
@@ -72,6 +74,20 @@ Plugin 'sheerun/vim-polyglot'
 
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'ajh17/VimCompletesMe' 
+
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+" `my_snippets` is the directory we created before
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger='<tab>'
+
+" shortcut to go to next position
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+
+" shortcut to go to previous position
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
 Plugin 'airblade/vim-gitgutter'
 
