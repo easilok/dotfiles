@@ -70,10 +70,7 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
-Plugin 'sheerun/vim-polyglot'
-
 Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'ajh17/VimCompletesMe' 
 
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -104,7 +101,11 @@ Plugin 'christoomey/vim-tmux-navigator'
 if has('nvim') 
     Plugin 'neovim/nvim-lspconfig'
     Plugin 'hrsh7th/nvim-compe'
+    Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
 else
+    Plugin 'ajh17/VimCompletesMe' 
+    Plugin 'sheerun/vim-polyglot'
     Plugin 'autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
         \ 'do': 'bash install.sh',
