@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+pkill ulauncher 
+ulauncher --no-window-shadow &
