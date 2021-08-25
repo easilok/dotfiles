@@ -1,6 +1,6 @@
 # Basic binds
 super + Return
-	termite
+    default-terminal
 super + d
     dmenu-simple
 super + p

@@ -47,6 +47,12 @@ set autoread
 "   silent source ./workspace.vim
 " endif
 
+if has('nvim') 
+  luafile ~/.config/nvim/lsp/compe-config.lua
+  " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+  source ~/.config/nvim/lsp/lsp-config.vim
+  luafile ~/.config/nvim/lsp/javascript-ls.lua
+endif
 if has('nvim') || has('termguicolors')
   set termguicolors
 endif

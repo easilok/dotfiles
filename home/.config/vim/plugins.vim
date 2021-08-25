@@ -101,22 +101,28 @@ nmap <F8> :TagbarToggle<CR>
 
 Plugin 'christoomey/vim-tmux-navigator'
 
-Plugin 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+if has('nvim') 
+    Plugin 'neovim/nvim-lspconfig'
+    Plugin 'hrsh7th/nvim-compe'
+else
+    Plugin 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \ }
+    " Automatically start language servers.
+    let g:LanguageClient_autoStart = 1
 
-let g:LanguageClient_serverCommands = {
-    \ 'python': ['~/.local/bin/pyls'],
-    \ 'javascript': ['/usr/bin/typescript-language-server', '--stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ }
+    let g:LanguageClient_serverCommands = {
+        \ 'python': ['~/.local/bin/pyls'],
+        \ 'javascript': ['/usr/bin/typescript-language-server', '--stdio'],
+        \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+        \ }
 
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+endif
 
 " Use release branch (recommend)
 " Plugin 'neoclide/coc.nvim', {'branch': 'release'}
@@ -124,6 +130,7 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 Plugin 'vimwiki/vimwiki'
 let g:vimwiki_list = [{'path': '/mnt/coisas/nextcloud/vimwiki',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
