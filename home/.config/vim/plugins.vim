@@ -13,6 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
 Plugin 'junegunn/gv.vim'
+Plugin 'junegunn/vim-peekaboo'
 
 "colorscheme
 " Plugin 'flazz/vim-colorschemes'
@@ -21,6 +22,7 @@ Plugin 'junegunn/gv.vim'
 " Plugin 'Mcmartelle/vim-monokai-bold'
 " Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
 Plugin 'rakr/vim-one'
+Plugin 'dracula/vim'
 
 "Commentary
 Plugin 'tpope/vim-commentary'
