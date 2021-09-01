@@ -6,9 +6,12 @@ SYMBOL2="BAT"
 QUANT2="12.28631"
 SYMBOL3="WBTC"
 QUANT3="0.00016"
+SYMBOL4="ATOM"
+QUANT4="0.27819"
 # SYMBOL2="SOL"
 # QUANT2="0.21725"
 
 echo $SYMBOL1": "$(curl -s "https://eur.rate.sx/$QUANT1$SYMBOL1")
 echo $SYMBOL2": "$(curl -s "https://eur.rate.sx/$QUANT2$SYMBOL2")
 echo $SYMBOL3": "$(curl -s "https://eur.rate.sx/$QUANT3$SYMBOL3")
+echo $SYMBOL4": "$(curl -s "https://eur.rate.sx/$QUANT4$SYMBOL4")

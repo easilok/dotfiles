@@ -53,6 +53,7 @@ if has('nvim')
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   source ~/.config/nvim/lsp/lsp-config.vim
   luafile ~/.config/nvim/lsp/javascript-ls.lua
+  luafile ~/.config/nvim/lsp/php-ls.lua
 endif
 if has('nvim') || has('termguicolors')
   set termguicolors
