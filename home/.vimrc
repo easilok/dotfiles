@@ -49,6 +49,7 @@ set autoread
 
 if has('nvim') 
   luafile ~/.config/nvim/plugin-config/treesitter-config.lua
+  luafile ~/.config/nvim/plugin-config/which-key-config.lua
   luafile ~/.config/nvim/lsp/compe-config.lua
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   source ~/.config/nvim/lsp/lsp-config.vim
