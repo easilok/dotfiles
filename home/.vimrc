@@ -51,10 +51,14 @@ if has('nvim')
   luafile ~/.config/nvim/plugin-config/treesitter-config.lua
   luafile ~/.config/nvim/plugin-config/which-key-config.lua
   luafile ~/.config/nvim/lsp/compe-config.lua
+  luafile ~/.config/nvim/lsp/lspsaga-config.lua
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   source ~/.config/nvim/lsp/lsp-config.vim
+  " Override lsp keymap
+  source ~/.config/nvim/lsp/lspsaga-config.vim
   luafile ~/.config/nvim/lsp/javascript-ls.lua
   luafile ~/.config/nvim/lsp/php-ls.lua
+  luafile ~/.config/nvim/lsp/python-ls.lua
 endif
 if has('nvim') || has('termguicolors')
   set termguicolors

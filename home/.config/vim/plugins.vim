@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-dispatch'
 Plugin 'junegunn/gv.vim'
 Plugin 'junegunn/vim-peekaboo'
 
@@ -23,6 +24,8 @@ Plugin 'junegunn/vim-peekaboo'
 " Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
 Plugin 'rakr/vim-one'
 Plugin 'dracula/vim'
+Plugin 'taniarascia/new-moon.vim'
+Plugin 'tomasiser/vim-code-dark'
 
 "Commentary
 Plugin 'tpope/vim-commentary'
@@ -40,7 +43,7 @@ Plugin 'wellle/targets.vim'
 " NerdTree
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-map <C-n> :NERDTreeToggle<CR>
+map <F6> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeShowLineNumbers = 1
@@ -52,7 +55,7 @@ let g:netrw_menu  = 0
 Plugin 'ryanoasis/vim-devicons'
 
 "Coloresque
-Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'ap/vim-css-color'
 "Surround
 Plugin 'tpope/vim-surround'
 " Bottom bar
@@ -104,28 +107,38 @@ if has('nvim')
     Plugin 'neovim/nvim-lspconfig'
     Plugin 'hrsh7th/nvim-compe'
     " Plugin 'glepnir/lspsaga.nvim'
+    Plugin 'rinx/lspsaga.nvim'
+    Plugin 'ray-x/lsp_signature.nvim'
     Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
     " Plugin 'nvim-treesitter/playground'
     Plugin 'folke/which-key.nvim'
 else
     Plugin 'ajh17/VimCompletesMe' 
     Plugin 'sheerun/vim-polyglot'
-    Plugin 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
-    " Automatically start language servers.
-    let g:LanguageClient_autoStart = 1
+    Plugin 'natebosch/vim-lsc'
 
-    let g:LanguageClient_serverCommands = {
+    let g:lsc_server_commands = {
         \ 'python': ['~/.local/bin/pyls'],
         \ 'javascript': ['/usr/bin/typescript-language-server', '--stdio'],
         \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
         \ }
 
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+    " Complete default mappings are:
+    let g:lsc_auto_map = {
+        \ 'GoToDefinition': 'gd',
+        \ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
+        \ 'FindReferences': 'gr',
+        \ 'NextReference': '<C-n>',
+        \ 'PreviousReference': '<C-p>',
+        \ 'FindImplementations': 'gI',
+        \ 'FindCodeActions': 'ga',
+        \ 'Rename': 'gR',
+        \ 'ShowHover': v:true,
+        \ 'DocumentSymbol': 'go',
+        \ 'WorkspaceSymbol': 'gS',
+        \ 'SignatureHelp': 'gm',
+        \ 'Completion': 'completefunc',
+        \}
 
 endif
 

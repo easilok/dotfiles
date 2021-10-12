@@ -62,3 +62,6 @@ map <leader><space> :nohl<cr>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 nnoremap <Leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
 
+" Custom buffer switcher
+nnoremap <C-e> :set nomore <Bar> :ls <Bar> :set more <CR>:b<Space>
+

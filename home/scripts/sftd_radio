@@ -1,0 +1,3 @@
+ #!/usr/env/bin sh
+
+ mpv http://hyades.shoutca.st:8270/stream

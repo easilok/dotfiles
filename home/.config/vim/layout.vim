@@ -4,7 +4,8 @@
 " colorscheme minimalist
 " colorscheme badwolf
 " colorscheme challenger_deep
-colorscheme one
+" colorscheme one
+colorscheme codedark
 
 " set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 " Always show statusline
@@ -23,7 +24,8 @@ set cursorline                  " hightligh current line
 set modelines=1
 set listchars=trail:-
 
-highlight ColorColumn ctermbg=0 guibg=#1b1b1b
+" highlight ColorColumn ctermbg=0 guibg=#1b1b1b
+highlight ColorColumn ctermbg=0 guibg=grey
 
 " Used this for st-terminal
 " set Vim-specific sequences for RGB colors
