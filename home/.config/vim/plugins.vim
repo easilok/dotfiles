@@ -22,9 +22,9 @@ Plugin 'junegunn/vim-peekaboo'
 " Plugin 'arzg/vim-colors-xcode'
 " Plugin 'Mcmartelle/vim-monokai-bold'
 " Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
-Plugin 'rakr/vim-one'
-Plugin 'dracula/vim'
-Plugin 'taniarascia/new-moon.vim'
+" Plugin 'rakr/vim-one'
+" Plugin 'dracula/vim'
+" Plugin 'taniarascia/new-moon.vim'
 Plugin 'tomasiser/vim-code-dark'
 
 "Commentary
