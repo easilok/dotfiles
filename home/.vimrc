@@ -58,8 +58,9 @@ if has('nvim')
   source ~/.config/nvim/lsp/lspsaga-config.vim
   luafile ~/.config/nvim/lsp/javascript-ls.lua
   luafile ~/.config/nvim/lsp/php-ls.lua
-  luafile ~/.config/nvim/lsp/python-ls.lua
+  " luafile ~/.config/nvim/lsp/python-ls.lua
   luafile ~/.config/nvim/lsp/latex-ls.lua
+  luafile ~/.config/nvim/lsp/go-ls.lua
 endif
 if has('nvim') || has('termguicolors')
   set termguicolors

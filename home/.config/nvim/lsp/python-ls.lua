@@ -1,2 +1,1 @@
 require'lspconfig'.pyright.setup{}
-
