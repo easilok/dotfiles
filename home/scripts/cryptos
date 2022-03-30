@@ -2,10 +2,10 @@
 
 COINS=(
   "DOGE 21.22913"
-  "XRP 8.6481"
-  "WBTC 0.00016"
-  "ATOM 0.27819"
+  "BAT 4.81799"
+  "REN 6.79109"
   "EOS 1.4642"
+  "BTC 0.00001"
 )
 
 for coin in "${COINS[@]}"; do

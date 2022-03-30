@@ -50,6 +50,7 @@ set autoread
 if has('nvim') 
   luafile ~/.config/nvim/plugin-config/treesitter-config.lua
   luafile ~/.config/nvim/plugin-config/which-key-config.lua
+  luafile ~/.config/nvim/plugin-config/config.lua
   luafile ~/.config/nvim/lsp/compe-config.lua
   luafile ~/.config/nvim/lsp/lspsaga-config.lua
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
@@ -61,6 +62,9 @@ if has('nvim')
   " luafile ~/.config/nvim/lsp/python-ls.lua
   luafile ~/.config/nvim/lsp/latex-ls.lua
   luafile ~/.config/nvim/lsp/go-ls.lua
+  luafile ~/.config/nvim/lsp/css-ls.lua
+  luafile ~/.config/nvim/lsp/svelte-ls.lua
+  luafile ~/.config/nvim/lsp/ccls-ls.lua
 endif
 if has('nvim') || has('termguicolors')
   set termguicolors

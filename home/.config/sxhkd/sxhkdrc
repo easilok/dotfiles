@@ -11,6 +11,8 @@ shift + super + p
     dmenu-full
 shift + super + Escape
     dmenu-power
+shift + super + w
+    rofi -show window
 
 # lockscreen
 shift + super + x
@@ -30,8 +32,11 @@ XF86AudioMicMute
     pulsemixer --id source-1 --toggle-mute
 
 # mixer super + m
-super + m
+super + shift + control + m
 	pavucontrol
+
+super + shift + m
+	open_neomutt
 
 #; super + plus
 XF86AudioRaiseVolume

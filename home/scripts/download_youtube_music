@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd ~/Downloads/Youtube
+mkdir -p ~/Downloads/Youtube && cd ~/Downloads/Youtube
 youtube-dl -x $1 --audio-format mp3 --audio-quality 320K

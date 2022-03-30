@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd ~/Downloads/Youtube
+mkdir -p ~/Downloads/Youtube && cd ~/Downloads/Youtube
 youtube-dl -f best -ciwx --audio-format mp3 --audio-quality 320K -o "%(title)s.%(ext)s" -v $1 

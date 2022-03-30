@@ -6,20 +6,27 @@ source ~/.config/neomutt/mappings
 source ~/.config/neomutt/alias
 
 ## Acounts Shortcuts
-macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/nibble_imap<enter><change-folder>!<enter>'
-macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/uab<enter><change-folder>!<enter>'
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/xyz_imap<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/luispereira_imap<enter><change-folder>!<enter>'
 macro index,pager <f4> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/personal_imap<enter><change-folder>!<enter>'
 macro index,pager <f5> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/professional_imap<enter><change-folder>!<enter>'
+macro index,pager <f6> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/nibble_imap<enter><change-folder>!<enter>'
 
 # Accounts
 source ~/.config/neomutt/accounts/personal_imap
 folder-hook $folder 'source ~/.config/neomutt/accounts/personal_imap'
 
+# source ~/.config/neomutt/accounts/uab
+# folder-hook $folder 'source ~/.config/neomutt/accounts/uab'
+
+source ~/.config/neomutt/accounts/luispereira_imap
+folder-hook $folder 'source ~/.config/neomutt/accounts/luispereira_imap'
+
+source ~/.config/neomutt/accounts/xyz_imap
+folder-hook $folder 'source ~/.config/neomutt/accounts/xyz_imap'
+
 source ~/.config/neomutt/accounts/professional_imap
 folder-hook $folder 'source ~/.config/neomutt/accounts/professional_imap'
-
-source ~/.config/neomutt/accounts/uab
-folder-hook $folder 'source ~/.config/neomutt/accounts/uab'
 
 source ~/.config/neomutt/accounts/nibble_imap
 folder-hook $folder 'source ~/.config/neomutt/accounts/nibble_imap'

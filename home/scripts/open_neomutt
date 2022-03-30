@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+default-terminal -e "neomutt" -d 2

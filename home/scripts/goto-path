@@ -1,0 +1,9 @@
+#!/bin/sh
+
+changePath() {
+  cd $1 
+  #$(xclip -o -selection clipboard)
+}
+
+# cd $(xclip -o -selection clipboard)
+changePath "$(xclip -o -selection clipboard)"

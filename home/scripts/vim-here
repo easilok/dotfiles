@@ -1,0 +1,9 @@
+#!/bin/sh
+
+WORKING_DIR=$HOME
+
+if [ "$#" -gt "0" ]; then
+  WORKING_DIR=$1
+fi
+
+default-terminal --working-directory $WORKING_DIR &

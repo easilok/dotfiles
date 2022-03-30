@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# -model thinkpad
+# -layout gb
+# -variangs intl
+# -option caps:escape
+
+xmodmap -e "clear lock"
+xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+
+setxkbmap -layout gb -variants intl -model thinkpad -option caps:escape
+
+xcape -e 'Control_L=Escape' -t 175

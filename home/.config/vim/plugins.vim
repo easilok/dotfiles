@@ -61,15 +61,33 @@ Plugin 'tpope/vim-surround'
 " Bottom bar
 Plugin 'itchyny/lightline.vim'
 " let g:lightline = {'colorscheme': 'wombat',}
-let g:lightline = {'colorscheme': 'challenger_deep',}
+let g:lightline = {'colorscheme': 'one',}
 
 Plugin 'mengelbrecht/lightline-bufferline'
+let g:lightline#bufferline#show_number = 1
+let g:lightline#bufferline#number_separator = '#'
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#icon_position = 'first'
+let g:lightline#bufferline#shorten_path = 0
 set showtabline=2
-let g:lightline                  = {}
+" let g:lightline                  = {}
 " let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
 let g:lightline.tabline          = {'left': [['buffers']]}
+let g:lightline.active           = {'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
+let g:lightline.component_function = { 'gitbranch': 'FugitiveHead', 'filename':  'LightlineFilename'} " needs vim vim-fugitive
+
+function! LightlineFilename()
+  return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
+        \ &filetype ==# 'unite' ? unite#get_status_string() :
+        \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
+        \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
 
 " fzf
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -107,11 +125,14 @@ if has('nvim')
     Plugin 'neovim/nvim-lspconfig'
     Plugin 'hrsh7th/nvim-compe'
     " Plugin 'glepnir/lspsaga.nvim'
-    Plugin 'rinx/lspsaga.nvim'
+    " Plugin 'rinx/lspsaga.nvim'
+    Plugin 'tami5/lspsaga.nvim'
     Plugin 'ray-x/lsp_signature.nvim'
     Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
     " Plugin 'nvim-treesitter/playground'
     Plugin 'folke/which-key.nvim'
+    Plugin 'akinsho/toggleterm.nvim'
+    Plugin 'lukas-reineke/indent-blankline.nvim'
 else
     Plugin 'ajh17/VimCompletesMe' 
     Plugin 'sheerun/vim-polyglot'
@@ -146,9 +167,14 @@ endif
 " Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 " Wiki
 Plugin 'vimwiki/vimwiki'
-let g:vimwiki_list = [{'path': '/mnt/coisas/nextcloud/vimwiki',
+let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
+" Live markdown preview
+Plugin 'shime/vim-livedown'
+
+" Pattern based text background colorizer
+Plugin 'solyarisoftware/Highlight.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
