@@ -7,15 +7,28 @@ function run {
   fi
 }
 
-
-run lxsession
-run compton
-run picom
-run nm-applet
-run parcellite
-betterlockscreen -w dim
+sleep 5
+numlockx &
 xmodmap -e "clear lock" &
 xmodmap -e "keycode 66 = Escape NoSymbol Escape" &
 setxkbmap -option caps:escape &
 setxkbmap -layout pt &
-run nitrogen --restore
+xsetroot -cursor_name left_ptr &
+xss-lock -- i3lock &
+# xscreensaver -no-splash &
+wmname compiz
+
+# run lxsession
+run lxpolkit
+run picom
+run nm-applet
+# run nitrogen --restore
+run ~/scripts/set_wallpaper
+# run parcellite
+# run clipmenud
+run xfce4-clipman
+# run dunst # awesome has own notify system
+run xsettingsd
+run sxhkd
+run nextcloud
+xmodmap ~/.Xmodmap

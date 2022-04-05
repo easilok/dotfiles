@@ -6,7 +6,7 @@ local variables = require("variables")
 
 local cpu_perc = wibox.widget.textbox(' 00% ')
 local cpu_t = awful.tooltip { }
-local cpu_icon = ''
+local cpu_icon = 'P: '
 
 cpu_t:add_to_object(cpu_perc)
 

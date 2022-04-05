@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ -d "/mnt/coisas/.mail" ]; then
+    unread="$(find /mnt/coisas/.*mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+
+    echo "$unread"
+else
+    echo ""
+fi
+
+
+

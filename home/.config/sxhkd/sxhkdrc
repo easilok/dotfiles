@@ -13,13 +13,15 @@ shift + super + Escape
     dmenu-power
 shift + super + w
     rofi -show window
+shift + super + s
+    dmenu-surfraw
 
 # lockscreen
 shift + super + x
-    slock
+    i3lock
 
 XF86ScreenSaver
-    slock
+    i3lock
 
 # screen change
 XF86Display

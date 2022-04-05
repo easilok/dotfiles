@@ -14,6 +14,6 @@ awful.widget.watch(disk_script, 1000, function(widget, stdout)
   disk_perc.markup = stdout
 end)
 
-disk = build_widget:new(disk_perc, '', beautiful.xcolor7)
+disk = build_widget:new(disk_perc, '/: ', beautiful.xcolor7)
 
 return disk.widget

@@ -3,7 +3,7 @@ local wibox = require("wibox")
 local build_widget = require("widgets.build_widget")
 
 local temp_perc = wibox.widget.textbox('00°C')
-local temp_icon = ''
+local temp_icon = 'T: '
 
 awesome.connect_signal("evil::temperature", function(value)
   temp_perc.markup = string.format('%0d°C', value)

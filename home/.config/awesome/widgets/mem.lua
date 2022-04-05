@@ -6,7 +6,7 @@ local variables = require("variables")
 
 local mem_perc = wibox.widget.textbox('00%')
 local mem_t = awful.tooltip { }
-local mem_icon = ''
+local mem_icon = 'M: '
 
 mem_t:add_to_object(mem_perc)
 
