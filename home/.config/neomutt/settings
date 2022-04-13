@@ -72,3 +72,5 @@ set alias_file = ~/.config/neomutt/alias
 
 #set query_command = "khard email --parsable --search-in-source-files '%s'"
 
+# shutdown-hook 'exec mbsync -a'
+shutdown-hook 'exec mbsync_and_notify'

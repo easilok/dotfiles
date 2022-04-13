@@ -14,10 +14,12 @@ widgets.vol = require('widgets.vol')
 -- widgets.bat = require('widgets.bat')
 widgets.mpd = require('widgets.mpd')
 widgets.kblayout = require('widgets.kblayout')
-widgets.archupdates = require('widgets.archupdates')
+-- widgets.archupdates = require('widgets.archupdates')
 widgets.clientcount = require('widgets.clientcount')
 -- widgets.icontasklist = require('widgets.icontasklist')
 widgets.mail = require('widgets.mail')
+local battery_widget = require('widgets.battery-widget')
+widgets.battery = battery_widget { adapter = "BAT0", ac = "AC" }
 
 -- Separators
 widgets.space = wibox.widget.textbox('<span>  </span>')

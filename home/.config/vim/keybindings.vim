@@ -18,13 +18,24 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
 
-"Fzf
-nmap <Leader>f :GFiles<CR>
-nmap <Leader>F :Files<CR>
-nmap <Leader>b :Buffers<CR>
-nmap <Leader>h :History<CR>
-nmap <Leader>t :BTags<CR>
-nmap <Leader>T :Tags<CR>
+
+if has('nvim') 
+  nnoremap <leader>f <cmd>lua require('telescope.builtin').git_files()<cr>
+  nnoremap <leader>F <cmd>lua require('telescope.builtin').find_files()<cr>
+  " nnoremap <leader>g <cmd>lua require('telescope.builtin').live_grep()<cr>
+  nnoremap <leader>gs <cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<cr>
+  nnoremap <leader>gw <cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<cr>
+  nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+  nnoremap <leader>h <cmd>lua require('telescope.builtin').help_tags()<cr>
+else 
+  "Fzf
+  nmap <Leader>f :GFiles<CR>
+  nmap <Leader>F :Files<CR>
+  nmap <Leader>b :Buffers<CR>
+  nmap <Leader>h :History<CR>
+  nmap <Leader>t :BTags<CR>
+  nmap <Leader>T :Tags<CR>
+endif
 
 
 set splitbelow splitright
@@ -125,3 +136,5 @@ inoremap <C-k> <esc>:m .-2<CR>==
 " nnoremap <leader>j :m .+1<CR>==
 " nnoremap <leader>k :m .-1<CR>==
 " End of Primeagen TOP 5 maps
+
+map <F7> :Explore<CR>

@@ -20,7 +20,9 @@ local function update_layout()
   for _, v in ipairs(layouts_raw) do
     layouts[v.group_idx] = v.file
   end
-  kblayout_text.markup = layouts[cur_layout+1]:upper()
+  if #layouts > cur_layout then
+    kblayout_text.markup = layouts[cur_layout+1]:upper()
+  end
 end
 
 awesome.connect_signal("xkb::map_changed",

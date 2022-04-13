@@ -22,7 +22,7 @@ local keys = {}
 root.buttons(gears.table.join(
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev),
-    awful.button({ }, 3, function () mymainmenu:toggle() end)
+    -- awful.button({ }, 3, function () mymainmenu:toggle() end)
 ))
 -- }}}
 
@@ -59,9 +59,9 @@ globalkeys = gears.table.join(
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey, "Control" }, ".", function () awful.screen.focus_relative( 1) end,
+    awful.key({ modkey,  }, ".", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Control" }, ",", function () awful.screen.focus_relative(-1) end,
+    awful.key({ modkey,  }, ",", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
@@ -146,7 +146,9 @@ clientkeys = gears.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ altkey }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey, "Shift"   }, ".",      function (c) c:move_to_screen()               end,
+              {description = "move to screen", group = "client"}),
+    awful.key({ modkey, "Shift"   }, ",",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "s",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),

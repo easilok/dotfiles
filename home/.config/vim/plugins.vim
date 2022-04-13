@@ -89,10 +89,6 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
-" fzf
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-
 Plugin 'ludovicchabant/vim-gutentags'
 
 Plugin 'SirVer/ultisnips'
@@ -133,6 +129,8 @@ if has('nvim')
     Plugin 'folke/which-key.nvim'
     Plugin 'akinsho/toggleterm.nvim'
     Plugin 'lukas-reineke/indent-blankline.nvim'
+    Plugin 'nvim-lua/plenary.nvim'
+    Plugin 'nvim-telescope/telescope.nvim'
 else
     Plugin 'ajh17/VimCompletesMe' 
     Plugin 'sheerun/vim-polyglot'
@@ -160,6 +158,10 @@ else
         \ 'SignatureHelp': 'gm',
         \ 'Completion': 'completefunc',
         \}
+
+    " fzf
+    Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plugin 'junegunn/fzf.vim'
 
 endif
 

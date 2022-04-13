@@ -90,11 +90,11 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
-mykeyboardlayout.widget:buttons(awful.util.table.join(
-	awful.button({}, 3, function()
-			awful.spawn("ptKeyboard");
-	end)
-))
+-- mykeyboardlayout.widget:buttons(awful.util.table.join(
+-- 	awful.button({}, 3, function()
+-- 			awful.spawn("ptKeyboard");
+-- 	end)
+-- ))
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -120,9 +120,7 @@ local taglist_buttons = gears.table.join(
 
 local tasklist_buttons = gears.table.join(
                      awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
+                                              if c ~= client.focus then
                                                   c:emit_signal(
                                                       "request::activate",
                                                       "tasklist",
@@ -221,6 +219,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
           layout = wibox.layout.fixed.horizontal,
           -- widgets.bat,
+          widgets.battery,
           widgets.seperator,
           widgets.vol,
           widgets.seperator,
