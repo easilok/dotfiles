@@ -16,6 +16,10 @@ shift + super + w
 shift + super + s
     dmenu-surfraw
 
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
 # lockscreen
 shift + super + x
     i3lock
@@ -63,3 +67,4 @@ XF86AudioPlay
 
 XF86Audio{Prev,Next}
 	playerctl {previous,next}
+
