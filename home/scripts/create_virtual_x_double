@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+RES=800x600
+
+# Xephyr -br -ac -noreset -screen $RES :1 &
+# Xephyr -br -ac -noreset -screen $RES :2 &
+
+Xephyr -ac -screen $RES :1 &
+Xephyr -ac -screen $RES :2 &
+
+# Xdmx +xinerama -xinput local -display :1 -display :2 -ac :4 &
+
+

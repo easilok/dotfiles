@@ -22,17 +22,18 @@ xss-lock -- i3lock &
 wmname compiz
 
 # run lxsession
-# run lxpolkit
-run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+run lxpolkit
+# run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 run picom
 run nm-applet
-run nitrogen --restore
-# run ~/scripts/set_wallpaper
+# run nitrogen --restore
+run ~/scripts/set_wallpaper
 # run parcellite
 # run clipmenud
 run xfce4-clipman
 run dunst
 run xsettingsd
+~/.config/bspwm/scripts/bspwm_arrange_monitors &
 # run sxhkd
 ~/.config/bspwm/scripts/launch_sxhkd.sh
 xmodmap ~/.Xmodmap

@@ -84,18 +84,18 @@ awful.rules.rules = {
 			rule_any = { 
 				class = {"pcmanfm", "Pcmanfm"},
 			},
-			properties = { screen = 1, tag = "6." } 
+			properties = { screen = 1, tag = "6." } 
 		},
     { 
 			rule_any = { 
 				class = {"remmina", "Remmina"},
 			},
-			properties = { screen = 1, tag = "8." } 
+			properties = { screen = 1, tag = "8." } 
 		},
     { 
 			rule_any = { 
 				class = {"Microsoft Teams - Preview"},
 			},
-			properties = { screen = 1, tag = "7." } 
+			properties = { screen = 1, tag = "5." } 
 		},
 }

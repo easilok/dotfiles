@@ -2,17 +2,22 @@
 
 # pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+# bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor LVDS1 -d 1 2 3 4 5 6 7 8 9 10
+# bspc monitor DP1 -d 9 10
+# bspc wm -O LVDS1 DP1
 
 bspc config border_width        2
 bspc config window_gap          5
-# bspc config top_padding         20
-# bspc config bottom_padding         0
+# bspc config top_padding         15
+# bspc config bottom_padding      -5
+# bspc config left_padding        -5
+# bspc config right_padding       -5
 
-bspc config split_ratio          0.52
+bspc config split_ratio          0.50
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
-bspc config pointer_follows_focus true
+bspc config pointer_follows_focus false
 bspc config focus_follows_pointer false
 # bspc config click_to_focus none
 
@@ -26,8 +31,17 @@ bspc config remove_unplugged_monitors true
 bspc config merge_overlapping_monitors true
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^3'
-bspc rule -a Firefox desktop='^4'
+bspc rule -a mpv state=floating follow=on
+bspc rule -a vlc state=floating follow=on
+bspc rule -a Skype state=floating follow=on
+bspc rule -a speedcrunch state=floating follow=on
+bspc rule -a "Tor Browser" desktop=4 state=floating follow=on
+bspc rule -a "Microsoft Teams - Preview" desktop=5 
+bspc rule -a Chromium desktop=4
+bspc rule -a firefox desktop=4
+bspc rule -a qutebrowser desktop='^4'
+bspc rule -a Librewolf desktop=4
+bspc rule -a brave-browser desktop=4
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off

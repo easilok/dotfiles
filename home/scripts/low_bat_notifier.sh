@@ -1,0 +1,1 @@
+../.config/bspwm/scripts/low_bat_notifier.sh

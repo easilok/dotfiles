@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+RES=800x600
+SCREEN=:1
+
+Xephyr -br -ac -noreset -screen $RES $SCREEN &
+

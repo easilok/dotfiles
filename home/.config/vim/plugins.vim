@@ -131,6 +131,7 @@ if has('nvim')
     Plugin 'lukas-reineke/indent-blankline.nvim'
     Plugin 'nvim-lua/plenary.nvim'
     Plugin 'nvim-telescope/telescope.nvim'
+    Plugin 'synaptiko/xit.nvim'
 else
     Plugin 'ajh17/VimCompletesMe' 
     Plugin 'sheerun/vim-polyglot'
@@ -162,6 +163,7 @@ else
     " fzf
     Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plugin 'junegunn/fzf.vim'
+    Plugin 'ryanolsonx/vim-xit'
 
 endif
 
@@ -174,6 +176,8 @@ let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki',
 
 " Live markdown preview
 Plugin 'shime/vim-livedown'
+Plugin 'godlygeek/tabular'
+Plugin 'preservim/vim-markdown'
 
 " Pattern based text background colorizer
 Plugin 'solyarisoftware/Highlight.vim'

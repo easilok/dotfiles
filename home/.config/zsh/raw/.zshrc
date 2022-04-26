@@ -17,6 +17,40 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.cache/zsh/history
 
+if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*) ]]
+then
+    precmd()
+    {
+        # output on which level (%L) this shell is running on.
+        # append the current directory (%~), substitute home directories with a tilde.
+        # "\a" bell (man 1 echo)
+        # "print" must be used here; echo cannot handle prompt expansions (%L)
+        print -Pn "\e]0;$(id --user --name)@$(hostnamectl hostname): zsh[%L] %~\a"
+    }
+
+    preexec()
+    {
+        # output current executed command with parameters
+        echo -en "\e]0;$(id --user --name)@$(hostnamectl hostname): ${1}\a"
+    }
+fi
+
+# autoload -Uz add-zsh-hook
+
+# function xterm_title_precmd () {
+#   print -Pn -- '\\e\]2;%n@%m %\~\\a' \[\[ "$TERM" == 'screen'\* \]\] && print -Pn -- '\\e\_\\005{g}%n\\005{-}@\\005{m}%m\\005{-} \\005{B}%\~\\005{-}\\e\\\\'
+# }
+
+# function xterm_title_preexec () {
+#   print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a" \[\[ "$TERM" == 'screen'\* \]\] && { print -Pn -- '\\e\_\\005{g}%n\\005{-}@\\005{m}%m\\005{-} \\005{B}%\~\\005{-} %# ' && print -n -- "${(q)1}\\e\\\\"; }
+# }
+
+# if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*) ]]; then
+
+#   add-zsh-hook -Uz precmd xterm\_title\_precmd
+
+#   add-zsh-hook -Uz preexec xterm\_title\_preexec
+# fi
 
 autoload -U compinit && compinit -u
 zstyle ':completion:*' menu select
@@ -145,4 +179,3 @@ done
 if [ -f "$(which starship)" ]; then
     eval "$(starship init zsh)"
 fi
-
