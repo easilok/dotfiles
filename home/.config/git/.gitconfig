@@ -41,6 +41,7 @@
   editor =vim
 [merge]
   ff = only
+  tool = vimdiff
 [push]
   default = upstream
 [fetch]
