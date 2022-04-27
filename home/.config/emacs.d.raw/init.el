@@ -13,8 +13,8 @@
 (set-default-coding-systems 'utf-8)
 
 ;;; variable for global font size
-(defvar efs/default-font-size 100)
-(defvar efs/default-variable-font-size 115)
+(defvar lp/default-font-size 100)
+(defvar lp/default-variable-font-size 115)
 
 (setq inhibit-startup-message t)
 
@@ -48,14 +48,14 @@
 
 (setq vc-follow-symlinks t)
 
-(set-face-attribute 'default nil :font "Source Code Pro" :height efs/default-font-size)
+(set-face-attribute 'default nil :font "Source Code Pro" :height lp/default-font-size)
 (setq frame-resize-pixelwise t)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height efs/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height lp/default-font-size)
 
 ;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Cantarell" :height efs/default-variable-font-size :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height lp/default-variable-font-size :weight 'regular)
 
 ;; Revert Dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
@@ -213,8 +213,10 @@
 
 ;; Org Mode Configuration ------------------------------------------------------
 
-(defun efs/org-font-setup ()
+(defun lp/org-font-setup ()
   (with-eval-after-load 'org
+    ;; Increase the size of various headings
+    (set-face-attribute 'org-document-title nil :font "Iosevka Aile" :weight 'bold :height 1.3)
     ;; Set faces for heading levels
     (dolist (face '((org-level-1 . 1.2)
                     (org-level-2 . 1.1)
@@ -224,7 +226,7 @@
                     (org-level-6 . 1.1)
                     (org-level-7 . 1.1)
                     (org-level-8 . 1.1)))
-      (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'regular :height (cdr face)))
     ;; Ensure that anything that should be fixed-pitch in Org files appears that way
     (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
     (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
@@ -241,13 +243,14 @@
     (setq org-fontify-done-headline t)
     (setq org-fontify-quote-and-verse-blocks t)
     (setq org-fontify-whole-heading-line t)
+    (setq org-src-fontify-natively t)
     (setq org-imenu-depth 8)
     ;; Sub-lists should have different bullets
     (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a.")))
     ))
 
 (with-eval-after-load 'org-faces
-  (efs/org-font-setup))
+  (lp/org-font-setup))
 
 (font-lock-add-keywords
  'org-mode
@@ -260,7 +263,7 @@
   :custom
   (org-hide-emphasis-markers t))
 
-(defun efs/org-mode-setup ()
+(defun lp/org-mode-setup ()
   (org-indent-mode)
   ;; (variable-pitch-mode)
   ;; (auto-fill-mode 0)
@@ -269,18 +272,18 @@
   )
 
 
-(defun efs/capture-mail-follow-up (msg)
+(defun lp/capture-mail-follow-up (msg)
   (interactive)
   (call-interactively 'org-store-link)
   (org-capture nil "mf"))
 
-(defun efs/capture-mail-read-later (msg)
+(defun lp/capture-mail-read-later (msg)
   (interactive)
   (call-interactively 'org-store-link)
   (org-capture nil "mr"))
 
 ;; add :immediate-finish t at the end of each entry to void confirmation
-(defun efs/mu4e-org-setup()
+(defun lp/mu4e-org-setup()
   (with-eval-after-load 'mu4e
     (require 'mu4e-org)
     (setq org-capture-templates
@@ -292,19 +295,19 @@
                      "* TODO Read %:subject\n\n%a\n\n%i" ))))
     ;; Add custom actions for our capture templates
     (add-to-list 'mu4e-headers-actions
-                 '("follow up" . efs/capture-mail-follow-up) t)
+                 '("follow up" . lp/capture-mail-follow-up) t)
     (add-to-list 'mu4e-view-actions
-                 '("follow up" . efs/capture-mail-follow-up) t)
+                 '("follow up" . lp/capture-mail-follow-up) t)
     (add-to-list 'mu4e-headers-actions
-                 '("read later" . efs/capture-mail-read-later) t)
+                 '("read later" . lp/capture-mail-read-later) t)
     (add-to-list 'mu4e-view-actions
-                 '("read later" . efs/capture-mail-read-later) t)
+                 '("read later" . lp/capture-mail-read-later) t)
     ))
 
 (use-package org
   :straight t
   ;; :pin org
-  :hook (org-mode . efs/org-mode-setup)
+  :hook (org-mode . lp/org-mode-setup)
   :config
   (setq-default org-adapt-indentation t)
   (setq org-ellipsis " ▾"
@@ -438,7 +441,7 @@
                   ((org-agenda-overriding-header "Cancelled Projects")
                    (org-agenda-files org-agenda-files)))))))
   ;; (setq org-startup-indented t)
-  (efs/mu4e-org-setup)
+  (lp/mu4e-org-setup)
   )
 
 (use-package org-bullets
@@ -449,14 +452,14 @@
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
   )
 
-(defun efs/org-mode-visual-fill ()
+(defun lp/org-mode-visual-fill ()
   (setq visual-fill-column-width 120
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
 (use-package visual-fill-column
   :straight t
-  :hook (org-mode . efs/org-mode-visual-fill))
+  :hook (org-mode . lp/org-mode-visual-fill))
 
 (with-eval-after-load 'org
   (require 'org-tempo)
@@ -473,14 +476,14 @@
 
 
 ;; Automatically tangle our Emacs.org config file when we save it
-(defun efs/org-babel-tangle-config ()
+(defun lp/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/dotfiles/home/.config/emacs.d.raw/Emacs_Conf.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'lp/org-babel-tangle-config)))
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -498,12 +501,12 @@
   :straight t
   :after evil
   :config
-  (general-create-definer efs/leader-keys
+  (general-create-definer lp/leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
     :global-prefix "M-SPC")
 
-  (efs/leader-keys
+  (lp/leader-keys
     "SPC"  '(counsel-projectile-find-file :which-key "Projectile find file")
     "t"  '(:ignore t :which-key "toggles")
     "tw" 'whitespace-mode
@@ -719,14 +722,14 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-(defun efs/lsp-mode-setup ()
+(defun lp/lsp-mode-setup ()
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
     (lsp-headerline-breadcrumb-mode))
 
   (use-package lsp-mode
     :straight t
     :commands (lsp lsp-deferred)
-    :hook (lsp-mode . efs/lsp-mode-setup)
+    :hook (lsp-mode . lp/lsp-mode-setup)
     :init
     (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
     :config
@@ -734,7 +737,7 @@
     (setq lsp-enable-snippet nil)
     (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
 
-(efs/leader-keys
+(lp/leader-keys
   "l"  '(:ignore t :which-key "lsp")
   "ld" 'xref-find-definitions
   "lr" 'xref-find-references
@@ -799,7 +802,7 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :general
-  (efs/leader-keys
+  (lp/leader-keys
     "pm"  '(:keymap projectile-command-map :which-key "projectile")
   )
   ;;:init
@@ -1023,7 +1026,7 @@
 
 (use-package mu4e
   ;; :straight t
-  :commands (mu4e efs/mu4e-org-setup mu4e-compose-new)
+  :commands (mu4e lp/mu4e-org-setup mu4e-compose-new)
   ;; :defer 2
   :ensure nil
   :config
@@ -1119,7 +1122,7 @@
   ;;(setq vterm-shell "zsh")                       ;; Set this to customize the shell to launch
   (setq vterm-max-scrollback 10000))
 
-(defun efs/configure-eshell ()
+(defun lp/configure-eshell ()
   ;; Save command history when commands are entered
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
 
@@ -1142,7 +1145,7 @@
 
 (use-package eshell
   :straight t
-  :hook (eshell-first-time-mode . efs/configure-eshell)
+  :hook (eshell-first-time-mode . lp/configure-eshell)
   :config
 
   (with-eval-after-load 'esh-opt
@@ -1197,7 +1200,7 @@
   :straight t
   :defer t)
 
-(efs/leader-keys
+(lp/leader-keys
   "G"  '(:ignore t :which-key "Guix")
   "Gg" '(guix :which-key "Guix")
   "Gi" '(guix-installed-user-packages :which-key "user packages")
