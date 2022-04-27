@@ -28,10 +28,6 @@
 
 (global-subword-mode 1)                           ; Iterate through CamelCase words
 
-(setq-default custom-file (expand-file-name ".custom.el" user-emacs-directory))
-(when (file-exists-p custom-file)
-    (load custom-file))
-
 (menu-bar-mode -1)            ; Disable the menu bar
 (setq hl-line-mode t)
 
@@ -48,6 +44,10 @@
 
 (column-number-mode)
 
+(setq large-file-warning-threshold nil)
+
+(setq vc-follow-symlinks t)
+
 (set-face-attribute 'default nil :font "Source Code Pro" :height efs/default-font-size)
 (setq frame-resize-pixelwise t)
 
@@ -57,38 +57,65 @@
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Cantarell" :height efs/default-variable-font-size :weight 'regular)
 
-;; Initialize package sources
-(require 'package)
+;; Revert Dired and other buffers
+(setq global-auto-revert-non-file-buffers t)
 
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
+;; Revert buffers when the underlying file has changed
+(global-auto-revert-mode 1)
 
-(package-initialize)
-(unless package-archive-contents
- (package-refresh-contents))
+(setq display-time-world-list
+  '(("Etc/UTC" "UTC")
+    ("America/Los_Angeles" "Seattle")
+    ("America/New_York" "New York")
+    ("Europe/Athens" "Athens")
+    ("Pacific/Auckland" "Auckland")
+    ("Asia/Shanghai" "Shanghai")
+    ("Asia/Kolkata" "Hyderabad")))
+(setq display-time-world-time-format "%a, %d %b %I:%M %p %Z"  )
 
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-   (package-install 'use-package))
+;; (setq epa-pinentry-mode 'loopback)
+;; (pinentry-start)
 
-(require 'use-package)
-(setq use-package-always-ensure t)
-;; (setq use-package-verbose t)
-(use-package quelpa)
-(use-package quelpa-use-package)
+(setq package-enable-at-startup nil)
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+      (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+        "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+        'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Use straight.el for use-package expressions
+(straight-use-package 'use-package)
 
 ;; Add my library path to load-path
 (push "~/.emacs.d/myLibs" load-path)
 
+;; (use-package ws-butler
+;;   :straight t
+;;   :hook (text-mode prog-mode))
+
 ;; M-x all-the-icons-install-fonts
-(use-package all-the-icons)
+(use-package all-the-icons :straight t)
 
 (use-package doom-modeline
+  :straight t
   :init (doom-modeline-mode 1)
   :custom (
   (doom-modeline-height 15)
+  (doom-modeline-persp-name t)
+  (doom-modeline-m4ue t)
+  (doom-modeline-lsp t)
   (doom-modeline-modal-icon nil) ;; vim modes
+  (doom-modeline-buffer-file-name-style 'truncate-except-project)
+  (custom-set-faces '(mode-line ((t (:height 0.85))))
+                    '(mode-line-inactive ((t (:height 0.85)))))
   ))
 
 ;; (display-time-mode 1) ;; Enable time in the mode-line
@@ -96,10 +123,17 @@
                (battery))
   (display-battery-mode 1)) ; On laptops it's nice to know how much power you have
 
+(setq display-time-format "%l:%M %p %b %y"
+    display-time-default-load-average nil)
+
 (use-package doom-themes
-    :init (load-theme 'doom-one t))
+    :straight t
+    :init
+    (load-theme 'doom-one t)
+    (doom-themes-visual-bell-config))
 
 ;; (use-package modus-themes
+;;   :straight t
 ;;   ;; :ensure                         ; omit this to use the built-in themes
 ;;   :init
 ;;   ;; Add all your customizations prior to loading the themes
@@ -127,9 +161,11 @@
 
 
 (use-package command-log-mode
+  :straight t
   :commands global-console-log-mode)
 
 (use-package rainbow-delimiters
+  :straight t
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (setq undo-limit 80000                         ; Raise undo-limit to 80KB
@@ -141,21 +177,39 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (use-package perspective
-  :config
+  :straight t
+  :bind
+  ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
+  :custom
+  (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
+  (persp-initial-frame-name "Main")
+  :init
   (persp-mode))
 
-(use-package rotate)
+(use-package rotate :straight t)
 
 ;; NOTE: If you want to move everything out of the ~/.emacs.d folder
-;; reliably, set `user-emacs-directory` before loading no-littering!
-;(setq user-emacs-directory "~/.cache/emacs")
+  ;; reliably, set `user-emacs-directory` before loading no-littering!
+  ;(setq user-emacs-directory "~/.cache/emacs")
 
-(use-package no-littering)
+  (use-package no-littering :straight t)
 
-;; no-littering doesn't set this by default so we must place
-;; auto save files in the same path as it uses for sessions
-(setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+  ;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
+  (setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
+      url-history-file (expand-file-name "url/history" user-emacs-directory))
+
+  ;; no-littering doesn't set this by default so we must place
+  ;; auto save files in the same path as it uses for sessions
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+
+
+  ;; Keep customization settings in a temporary file (thanks Ambrevar!)
+  (setq custom-file
+      (if (boundp 'server-socket-dir)
+          (expand-file-name "custom.el" server-socket-dir)
+        (expand-file-name (format "emacs-custom-%s.el" (user-uid)) temporary-file-directory)))
+(load custom-file t)
 
 ;; Org Mode Configuration ------------------------------------------------------
 
@@ -201,6 +255,7 @@
  'append)
 
 (use-package org-appear
+  :straight t
   :hook (org-mode . org-appear-mode)
   :custom
   (org-hide-emphasis-markers t))
@@ -247,11 +302,28 @@
     ))
 
 (use-package org
-  :pin org
+  :straight t
+  ;; :pin org
   :hook (org-mode . efs/org-mode-setup)
   :config
   (setq-default org-adapt-indentation t)
-  (setq org-ellipsis " ▾")
+  (setq org-ellipsis " ▾"
+        org-hide-emphasis-markers t
+        org-src-fontify-natively t
+        org-fontify-quote-and-verse-blocks t
+        org-src-tab-acts-natively t
+        org-edit-src-content-indentation 2
+        org-hide-block-startup nil
+        org-src-preserve-indentation nil
+        org-startup-folded 'content
+        org-cycle-separator-lines 2
+        org-capture-bookmark nil)
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "C-j") 'org-next-visible-heading)
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "C-k") 'org-previous-visible-heading)
+
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "M-j") 'org-metadown)
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "M-k") 'org-metaup)
+
   (setq org-directory "~/Nextcloud/org/")
   (setq lp/org-capture-refile (concat org-directory "Refile.org"))
   (setq lp/org-capture-mail (concat org-directory "Mail.org"))
@@ -290,7 +362,6 @@
         )
   ;; Set default column view headings: Task Total-Time Time-Stamp
   (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
-  (setq org-startup-folded 'content)
   ;; Capture templates for: TODO tasks, Notes, meetings, etc
   (setq org-capture-templates
         (quote (("t" "todo" entry (file lp/org-capture-refile)
@@ -371,6 +442,7 @@
   )
 
 (use-package org-bullets
+  :straight t
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
@@ -383,6 +455,7 @@
   (visual-fill-column-mode 1))
 
 (use-package visual-fill-column
+  :straight t
   :hook (org-mode . efs/org-mode-visual-fill))
 
 (with-eval-after-load 'org
@@ -422,6 +495,7 @@
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 (use-package general
+  :straight t
   :after evil
   :config
   (general-create-definer efs/leader-keys
@@ -432,6 +506,7 @@
   (efs/leader-keys
     "SPC"  '(counsel-projectile-find-file :which-key "Projectile find file")
     "t"  '(:ignore t :which-key "toggles")
+    "tw" 'whitespace-mode
     "tt" '(counsel-load-theme :which-key "choose theme")
     "o"  '(:ignore t :which-key "open")
     "om"  '(mu4e :which-key "mail")
@@ -452,22 +527,27 @@
     "p"  '(:ignore t :which-key "project")
     ;; "pm"  '(:keymap projectile-command-map :which-key "projectile")
     "pp"  '(projectile-switch-project :which-key "open project")
+    "w"  '(:ignore t :which-key "workspaces")
+    "ws" '(persp-switch :which-key "switch workspace")
+    "wq" '(persp-kill :which-key "kill workspace")
     ))
 
 (use-package evil
+      :straight t
        :init
        (setq evil-want-integration t)
        (setq evil-want-keybinding nil)
        (setq evil-want-C-u-scroll t)
        (setq evil-want-fine-undo t)
        (setq evil-want-C-i-jump nil)
+       (setq evil-respect-visual-line-mode t)
        (setq evil-undo-system 'undo-tree)
        :config
        (evil-mode 1)
        (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
        (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
-	   ;; change :q to close windows instead of emacs
+      ;; change :q to close windows instead of emacs
        (evil-ex-define-cmd "q[uit]" 'evil-window-delete)      
 
        ;; Use visual line motions even outside of visual-line-mode buffers
@@ -478,21 +558,25 @@
        (evil-set-initial-state 'dashboard-mode 'normal))
 
      (use-package undo-tree
+       :straight t
        :after evil
        :config
        (global-undo-tree-mode 1))
 
      (use-package evil-collection
+       :straight t
        :after evil
        :config
        (evil-collection-init))
 
      (use-package evil-commentary
+       :straight t
        :after evil
        :config
        (evil-commentary-mode))
 
      (use-package evil-surround
+      :straight t
        :after evil
        :config
        (global-evil-surround-mode 1))
@@ -535,9 +619,10 @@
           (call-interactively #'tab-to-tab-stop)
           t)))
 
-(add-hook 'org-tab-first-hook #'+org-indent-maybe-h)
+(add-hook 'org-cycle-tab-first-hook #'+org-indent-maybe-h)
 
 (use-package which-key
+  :straight t
   :after ivy 
   :diminish which-key-mode
   :config
@@ -545,6 +630,7 @@
   (which-key-mode))
 
 (use-package ivy
+  :straight t
   :defer 0.1
   :diminish
   :bind (("C-s" . swiper)
@@ -564,6 +650,7 @@
   (ivy-mode))
 
 ;; (use-package counsel
+;;    :straight t
 ;;   :after ivy
 ;;   :bind (("M-x" . counsel-M-x)
 ;;          ("C-x b" . counsel-ibuffer)
@@ -572,6 +659,7 @@
 ;;          ("C-r" . 'counsel-minibuffer-history)))
 
 (use-package counsel
+  :straight t
   :after ivy
   :bind (("M-x" . counsel-M-x)
          ("C-M-j" . 'counsel-switch-buffer)
@@ -589,6 +677,7 @@
   )
 
 (use-package ivy-prescient
+  :straight t
   :after counsel
   :custom
   (ivy-prescient-enable-filtering nil)
@@ -598,6 +687,7 @@
   (ivy-prescient-mode 1))
 
 (use-package ivy-rich
+  :straight t
   :after ivy
   :init
   (ivy-rich-mode 1))
@@ -606,9 +696,19 @@
   ;                             'ivy-rich-switch-buffer-transformer))
 
 (use-package swiper
+  :straight t
   :after ivy)
 
+(use-package orderless
+  :straight t
+  :init
+  (setq completion-styles '(orderless)
+      completion-category-defaults nil
+      completion-category-overrides '((file (styles . (partial-completion)))))
+  )
+
 (use-package helpful
+  :straight t
   :commands (helpful-callable helpful-variable helpful-command helpful-key)
   :custom
   (counsel-describe-function-function #'helpful-callable)
@@ -624,6 +724,7 @@
     (lsp-headerline-breadcrumb-mode))
 
   (use-package lsp-mode
+    :straight t
     :commands (lsp lsp-deferred)
     :hook (lsp-mode . efs/lsp-mode-setup)
     :init
@@ -645,21 +746,26 @@
   "lX" 'lsp-execute-code-action)
 
 (use-package lsp-ui
+      :straight t
       :hook (lsp-mode . lsp-ui-mode)
       :custom
       (lsp-ui-doc-position 'bottom))
 
     (use-package lsp-ivy
+      :straight t
       :commands (lsp lsp-deferred))
 
 (use-package flycheck
+        :straight t
         :defer t
         :hook (lsp-mode . flycheck-mode))
 
 (use-package lsp-treemacs
+  :straight t
   :after lsp)
 
 (use-package company
+  :straight t
   :after lsp-mode
   :hook (lsp-mode . company-mode)
   :bind (:map company-active-map
@@ -671,18 +777,22 @@
   (company-idle-delay 0.0))
 
 (use-package company-box
+  :straight t
   :after company
   :hook (company-mode . company-box-mode))
 
 (use-package magit
+  :straight t
   :commands magit-status
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 ;;(use-package evil-magit
+;;  :straight t
 ;;  :after magit)
 
 (use-package projectile
+  :straight t
   :diminish projectile-mode
   :config (projectile-mode)
   :custom ((projectile-completion-system 'ivy))
@@ -700,12 +810,15 @@
   )
 
 (use-package counsel-projectile
+  :straight t
   :after projectile
   :config (counsel-projectile-mode))
 
 (use-package nvm
+  :straight t
    :defer t)
 (use-package typescript-mode
+  :straight t
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
@@ -717,6 +830,7 @@
   (setq-default tab-width 2))
 
 (use-package js2-mode
+  :straight t
   :hook (js2-mode . lsp-deferred)
   :mode "\\.jsx?\\'"
   :config
@@ -731,12 +845,14 @@
   (add-hook 'json-mode-hook #'dw/set-js-indentation))
 
 (use-package prettier-js
+  :straight t
   :hook ((js2-mode . prettier-js-mode)
          (typescript-mode . prettier-js-mode))
   :config
   (setq prettier-js-show-errors nil))
 
 (use-package web-mode
+    :straight t
     :hook (web-mode . lsp)
     :mode "(\\.\\(html?\\|ejs\\|tsx\\|jsx\\|vue\\)\\'"
     :config
@@ -748,21 +864,25 @@
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
 (use-package lsp-tailwindcss
+  :straight t
    :after lsp)
 
 (add-hook 'scss-mode-hook 'lsp)
 (add-hook 'css-mode-hook 'lsp)
 
 (use-package ccls
+  :straight t
   :after lsp-mode
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
          (lambda () (require 'ccls) (lsp))))
 
 (use-package irony
+      :straight t
       :commands (irony-mode)
     )
 
   (use-package company-irony
+    :straight t
      :after irony
    )
 
@@ -779,6 +899,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
     (use-package platformio-mode
+      :straight t
       :hook (c++-mode .
              (lambda()
                (irony-mode)
@@ -788,6 +909,7 @@
 ;; (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
 
 (use-package python-mode
+  ;; :straight t
   :ensure nil
   :hook
   ;; (python-mode . lsp-deferred)
@@ -802,12 +924,15 @@
   ;; (require 'dap-python)
   )
 
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp-deferred))))  ; or lsp-deferred
+;; (use-package lsp-pyright
+;;   :straight t
+;;   :ensure t
+;;   :hook (python-mode . (lambda ()
+;;                          (require 'lsp-pyright)
+;;                          (lsp-deferred))))  ; or lsp-deferred
+
 (use-package pyvenv
+  :straight t
   :config
   (pyvenv-mode t)
 
@@ -820,13 +945,16 @@
                 (setq python-shell-interpreter "python")))))
 
 (use-package yaml-mode
+  :straight t
   :mode "\\.ya?ml\\'")
 
 (use-package php-mode
+  :straight t
   :mode "\\.php$"
   :hook (php-mode . lsp-deferred))
 
 (use-package clojure-mode
+  :straight t
   :hook
   (clojure-mode . lsp)
   (clojurescript-mode . lsp)
@@ -837,6 +965,7 @@
   )
 
 (use-package cider
+  :straight t
   :after clojure-mode)
 
 ;; (use-package lsp-lua-emmy
@@ -864,6 +993,7 @@
                                  )))
 
 (use-package lua-mode
+  :straight t
   :ensure t
   :mode "\\.lua$"
   :interpreter "lua"
@@ -875,10 +1005,12 @@
   )
 
 (use-package scheme-mode
+    ;; :straight t
     :ensure nil
     :mode "\\.sld\\'")
 
 (use-package geiser
+  :straight t
   :config
   ;; (setq geiser-default-implementation 'gambit)
   (setq geiser-default-implementation 'guile)
@@ -890,6 +1022,7 @@
 (require 'lp-mail)
 
 (use-package mu4e
+  ;; :straight t
   :commands (mu4e efs/mu4e-org-setup mu4e-compose-new)
   ;; :defer 2
   :ensure nil
@@ -948,6 +1081,7 @@
   )
 
 (use-package org-mime
+  :straight t
   :after mu4e)
 
 (setq org-mime-export-options '(:section-numbers nil
@@ -978,6 +1112,7 @@
 ;;   )
 
 (use-package vterm
+  :straight t
   :commands vterm
   :config
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")  ;; Set this to match your custom shell prompt
@@ -1002,9 +1137,11 @@
         eshell-scroll-to-bottom-on-input t))
 
 (use-package eshell-git-prompt
+  :straight t
   :after eshell)
 
 (use-package eshell
+  :straight t
   :hook (eshell-first-time-mode . efs/configure-eshell)
   :config
 
@@ -1018,6 +1155,7 @@
 (setq tramp-default-method "ssh")
 
 (use-package dired
+  ;; :straight t
   :ensure nil
   :commands (dired dired-jump)
   :bind (("C-x C-j" . dired-jump))
@@ -1028,15 +1166,17 @@
     "l" 'dired-find-file))
 
 (use-package dired-hide-dotfiles
+  :straight t
   :hook (dired-mode . dired-hide-dotfiles-mode)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode))
 
-(use-package matrix-client
-  :ensure nil
-  :quelpa (matrix-client :fetcher github :repo "alphapapa/matrix-client.el"
-                         :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
+;;(use-package matrix-client
+;;  :straight t
+;;  :ensure nil
+;;  :quelpa (matrix-client :fetcher github :repo "alphapapa/matrix-client.el"
+;;                         :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
 
 ;; Set our nickname & real-name as constant variables
 (setq
@@ -1054,6 +1194,7 @@
         '(("libera.chat" "#systemcrafters")))
 
 (use-package guix
+  :straight t
   :defer t)
 
 (efs/leader-keys
@@ -1065,17 +1206,20 @@
   "GP" '(guix-pull :which-key "pull"))
 
 (use-package transmission
+  :straight t
    :commands transmission
 )
 
 (use-package elpher
+  :straight t
   :commands elpher elpher-go)
 
 (use-package emms
-:config
-(emms-all)
-(emms-default-players)
-(setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music")
+  :straight t
+  :config
+  (emms-all)
+  (emms-default-players)
+  (setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music")
 )
 
 
