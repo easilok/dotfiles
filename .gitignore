@@ -18,6 +18,7 @@ home/.config/neomutt/accounts/
 .lsp-session-*
 auto-save-list
 elpa
+straight
 eshell
 lsp-cache
 projectile*
