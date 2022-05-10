@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Modes
+# monitor_left_align_left
+# monitor_left_align_right
+# internal_monitor
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+declare -a options=(" internal_monitor 
+ monitor_left_align_left 
+ monitor_left_align_right 
+ quit ")
+ 
+
+choice=$(echo -e "${options[@]}" | $DMENU -l 10 -p 'Choose BSPWM orientation: ')
+
+	if [ "$choice" == ' quit ' ]; then
+		echo "Program terminated."
+    exit
+	fi
+
+  if [ -z "$choice" ]; then
+		echo "Exit Esc"
+    exit
+  fi
+
+$HOME/.config/bspwm/scripts/bspwm_arrange_monitors $choice

@@ -66,6 +66,7 @@ if has('nvim')
   luafile ~/.config/nvim/lsp/css-ls.lua
   luafile ~/.config/nvim/lsp/svelte-ls.lua
   luafile ~/.config/nvim/lsp/ccls-ls.lua
+  luafile ~/.config/nvim/lsp/arduino-ls.lua
 endif
 if has('nvim') || has('termguicolors')
   set termguicolors

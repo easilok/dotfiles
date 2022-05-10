@@ -910,7 +910,7 @@
                ;; (irony-eldoc) 
                (platformio-conditionally-enable))))
 
-;; (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
+(add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
 
 (use-package python-mode
   ;; :straight t
@@ -1189,19 +1189,49 @@
 ;;                         :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
 
 ;; Set our nickname & real-name as constant variables
-(setq
- erc-nick "easilok"     ; Our IRC nick
- erc-user-full-name "Luis Pereira") ; Our /whois name
+  (setq
+   erc-nick "easilok"     ; Our IRC nick
+   erc-nick-uniquifier "_"
+   erc-user-full-name "Luis Pereira"
+   erc-prompt-for-password t
+   erc-auto-query 'bury
+   erc-join-buffer 'bury
+   erc-track-shorten-start 8
+   erc-interpret-mirc-color t
+   erc-rename-buffers t
+   erc-kill-buffer-on-part t
+   erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE" "AWAY")
+   erc-track-enable-keybindings nil
+   erc-track-visibility nil ; Only use the selected frame for visibility
+   erc-track-exclude-server-buffer t
+   erc-fill-column 120
+   erc-fill-function 'erc-fill-static
+   erc-fill-static-center 20
+   erc-image-inline-rescale 400
+   erc-server-reconnect-timeout 10
+   erc-server-reconnect-attempts 5
+   erc-autojoin-channels-alist '(("irc.libera.chat" "#systemcrafters"))
+   erc-quit-reason (lambda (s) (or s "Going to another multiverse"))
+   erc-modules
+    '(autoaway autojoin button completion fill irccontrols keep-place
+        list match menu move-to-prompt netsplit networks noncommands
+        readonly ring stamp track image hl-nicks notify notifications)
+   ) 
 
-;; Or assign it to a keybinding
-;; This example is also using erc's TLS capabilities:
-(defun erc-liberachat()
-  (interactive)
-  (erc-tls :server "irc.libera.chat"
-           :port   "6697"))
+(use-package erc-hl-nicks
+             :straight t
+             :after erc)
 
-  (setq erc-autojoin-channels-alist
-        '(("libera.chat" "#systemcrafters")))
+(use-package erc-image
+             :straight t
+             :after erc)
+
+  ;; Or assign it to a keybinding
+  ;; This example is also using erc's TLS capabilities:
+  (defun erc-liberachat()
+    (interactive)
+    (erc-tls :server "irc.libera.chat"
+             :port   "6697"))
 
 (use-package guix
   :straight t
@@ -1235,4 +1265,11 @@
   (setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music")
 )
 
-
+(defun lp/load-clockify-package()
+  (interactive)
+  (when (require 'clockify "~/git/clockify.el/clockify.el"  'noerror)
+    (message "clockify loaded")
+    (setq clockify-auth-token "X5/I9nEVphTPFvOk")
+    (clockify--user-info)
+    )
+  )

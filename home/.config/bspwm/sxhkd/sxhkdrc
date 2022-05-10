@@ -33,6 +33,8 @@ super + {t,shift + t,shift + space,f}
 # set the node flags
 super + shift  + {m}
 	bspc node -g {marked}
+
+# set the node flags (marked, locked, sticky, private)
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 

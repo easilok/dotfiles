@@ -19,7 +19,6 @@ servers = (
     port = "6697";
     use_tls = "yes";
     tls_verify = "yes";
-    autoconnect = "no";
   },
   {
     address = "irc.gamesurge.net";
@@ -63,16 +62,7 @@ servers = (
     address = "irc.undernet.org";
     chatnet = "Undernet";
     port = "6667";
-  },
-  {
-    address = "irc.libera.chat";
-    chatnet = "liberachat";
-    port = "6697";
-    use_tls = "yes";
-    tls_verify = "yes";
-    autoconnect = "no";
-
-  },  
+  }
 );
 
 chatnets = {
@@ -144,11 +134,6 @@ chatnets = {
     max_msgs = "1";
     max_whois = "1";
   };
-  liberachat = {
-    type = "IRC";
-    nick = "easilok";
-    autosendcmd = "/EXEC - -msg nickserv ./scripts/libera.sh";
-  };
 };
 
 channels = (
@@ -160,14 +145,12 @@ channels = (
   { name = "#ircsource"; chatnet = "IRCSource"; autojoin = "No"; },
   { name = "#netfuze"; chatnet = "NetFuze"; autojoin = "No"; },
   { name = "#oftc"; chatnet = "OFTC"; autojoin = "No"; },
-  { name = "silc"; chatnet = "SILC"; autojoin = "No"; },
-  { name = "#archlinux"; chatnet = "freenode"; autojoin = "yes"; }
-  { name = "#systemcrafters"; chatnet = "liberachat"; autojoin = "yes"; },
+  { name = "silc"; chatnet = "SILC"; autojoin = "No"; }
 );
 
 aliases = {
   ATAG = "WINDOW SERVER";
-  ADDALLCHANS = "SCRIPT EXEC foreach my \\$channel (Irssi::channels()) { Irssi::command(\"CHANNEL ADD -auto \\$channel->{name} \\$channel->{server}->{tag} \\$channel->{key}\")\\;}";
+  ADDALLCHANS = "SCRIPT EXEC foreach my \\$channel (Irssi::channels()) { Irssi::command(\"CHANNEL ADD -auto \\$channel->{visible_name} \\$channel->{server}->{tag} \\$channel->{key}\")\\;}";
   B = "BAN";
   BACK = "AWAY";
   BANS = "BAN";
@@ -219,9 +202,6 @@ aliases = {
   WN = "WINDOW NEW HIDDEN";
   WQUERY = "QUERY -window";
   WW = "WHOWAS";
-  znc = "msg *status";
-  ul = "EXEC iurl";
-  CU = "EXEC -out capture-upload";
 };
 
 statusbar = {
@@ -321,31 +301,6 @@ statusbar = {
   };
 };
 settings = {
-  core = { 
-    real_name = "Luís Pereira"; 
-    user_name = "easilok"; 
-    nick = "easilok"; 
-    settings_autosave = "no";
-  };
+  core = { real_name = "Unknown"; user_name = "luis"; nick = "luis"; };
   "fe-text" = { actlist_sort = "refnum"; };
-  "fe-common/core" = {
-    #theme = "pipeline";
-    beep_msg_level = "MSGS DCC DCCMSGS HILIGHT";
-    #beep_msg_level = "MSGS DCC DCCMSGS HILIGHT NOTICES";
-  };
-  "perl/core/scripts" = {
-    #awl_shared_sbar = "OFF";
-    #awl_viewer = "no";
-    nickcolor_colors = "2 3 4 5 6 7 9 10 11 12 13";
-    #beep_cmd = "aplay -q ~/.irssi/notify.wav";
-    #awl_block = "-18";
-  };
 };
-ignores = (
-  {
-    level = "JOINS PARTS QUITS NICKS";
-    channels = (
-      "#guix #emacs #org-mode #libreplanet #java #go-nuts #scala"
-    );
-  }
-);
