@@ -3,12 +3,13 @@
 # pgrep -x sxhkd > /dev/null || sxhkd &
 
 # bspc monitor -d I II III IV V VI VII VIII IX X
-bspc monitor LVDS1 -d 1 2 3 4 5 6 7 8 9 10
+# bspc monitor LVDS1 -d 1 2 3 4 5 6 7 8 9 10
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 # bspc monitor DP1 -d 9 10
 # bspc wm -O LVDS1 DP1
 
 bspc config border_width        2
-# bspc config window_gap          5
+bspc config window_gap          0
 # bspc config top_padding         15
 # bspc config bottom_padding      -5
 # bspc config left_padding        -5
@@ -21,7 +22,8 @@ bspc config pointer_follows_focus false
 bspc config focus_follows_pointer false
 # bspc config click_to_focus none
 
-bspc config pointer_modifier lock
+bspc config pointer_modifier mod4
+# bspc config pointer_modifier lock
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner

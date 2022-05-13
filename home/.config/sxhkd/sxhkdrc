@@ -22,10 +22,10 @@ super + Escape
 
 # lockscreen
 shift + super + x
-    i3lock
+    i3lock-fancy
 
 XF86ScreenSaver
-    i3lock
+    i3lock-fancy
 
 # screen change
 XF86Display
