@@ -14,6 +14,14 @@ super + shift + {_,alt + }c
 super + space
 	bspc desktop -l next
 
+# set monocle layout
+super + F3
+	bspc desktop -l monocle
+
+# set tiled layout
+super + F2
+	bspc desktop -l monocle
+
 # send the newest marked node to the newest preselected node
 super + y
 	bspc node newest.marked.local -n newest.!automatic.local
@@ -39,14 +47,14 @@ super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
 # FLAGS: Push and pop windows from the hidden stack
-# super + {_,shift} + b
-#   bspc node {-g hidden,$(bspc query -N -n .hidden | tail -n 1) -g hidden=off}
+super + {_,shift} + b
+  bspc node {-g hidden,$(bspc query -N -n .hidden | tail -n 1) -g hidden=off}
 
 #
 # focus/swap
 #
 
-# focus the node in the given direction
+# focus the node in the given direction {west,south,north,east}
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
@@ -54,13 +62,14 @@ super + {_,shift + }{h,j,k,l}
 # super + {p,b,comma,period}
 # 	bspc node -f @{parent,brother,first,second}
 
-# focus monitor history
+# focus monitor history {last, new}
 super + {comma,period}
   bspc monitor {last,newest} -f
 
 # focus the next/previous window in the current desktop
 super + {_,shift + }n
 	bspc node -f {next,prev}.local.!hidden.window
+# focus the next/previous window in the current desktop
 super + {_,shift + }Tab
 	bspc node -f {next,prev}.local.!hidden.window
 
