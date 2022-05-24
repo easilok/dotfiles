@@ -177,7 +177,9 @@ for function in $HOME/.config/zsh/functions/*.zsh; do
 done
 
 if [ -f "$(which starship)" ]; then
-    eval "$(starship init zsh)"
+  eval "$(starship init zsh)"
+else
+  source $HOME/.config/zsh/themes/awesomepanda.zsh-theme
 fi
 
 [[ -f "/usr/share/fzf/key-bindings.zsh" ]] && source "/usr/share/fzf/key-bindings.zsh"
