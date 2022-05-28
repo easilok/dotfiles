@@ -160,9 +160,12 @@ if [ -f "$HOME/.config/aliasrc" ]; then source "$HOME/.config/aliasrc"; fi
 
 # Load zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 # Load zsh-autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 # Suggest aliases for commands
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh 2>/dev/null
 # Search repos for programs that can't be found
@@ -182,5 +185,17 @@ else
   source $HOME/.config/zsh/themes/awesomepanda.zsh-theme
 fi
 
-[[ -f "/usr/share/fzf/key-bindings.zsh" ]] && source "/usr/share/fzf/key-bindings.zsh"
-[[ -f "/usr/share/fzf/completion.zsh" ]] && source "/usr/share/fzf/completion.zsh"
+if [ -f "/usr/share/fzf/key-bindings.zsh" ]; then
+  source "/usr/share/fzf/key-bindings.zsh"
+elif [ -f "/usr/share/doc/fzf/examples/key-bindings.zsh" ]; then
+  source "/usr/share/doc/fzf/examples/key-bindings.zsh"
+fi
+if [ -f "/usr/share/fzf/completion.zsh" ]; then
+  source "/usr/share/fzf/completion.zsh"
+elif [ -f "/usr/share/doc/fzf/examples/completion.zsh" ]; then
+  source "/usr/share/doc/fzf/examples/completion.zsh"
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
