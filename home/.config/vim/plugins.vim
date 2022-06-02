@@ -26,6 +26,8 @@ Plugin 'junegunn/vim-peekaboo'
 " Plugin 'dracula/vim'
 " Plugin 'taniarascia/new-moon.vim'
 Plugin 'tomasiser/vim-code-dark'
+Plugin 'gruvbox-community/gruvbox'
+Plugin 'luisiacc/gruvbox-baby'
 
 "Commentary
 Plugin 'tpope/vim-commentary'
@@ -184,7 +186,8 @@ let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " Live markdown preview
-Plugin 'shime/vim-livedown'
+" Plugin 'shime/vim-livedown'
+Plugin 'instant-markdown/vim-instant-markdown'
 Plugin 'godlygeek/tabular'
 Plugin 'preservim/vim-markdown'
 

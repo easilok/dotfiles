@@ -5,7 +5,8 @@
 " colorscheme badwolf
 " colorscheme challenger_deep
 " colorscheme one
-colorscheme codedark
+" colorscheme codedark
+colorscheme gruvbox
 
 " set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 " Always show statusline
