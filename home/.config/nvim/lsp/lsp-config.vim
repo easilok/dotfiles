@@ -18,10 +18,14 @@ nnoremap <silent> <space>q <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <silent> <space>f <cmd>lua vim.lsp.buf.formatting()<CR>
 
 " auto-format
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.tsx lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 100)
+" autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
+" autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
+" autocmd BufWritePre *.tsx lua vim.lsp.buf.formatting_sync(nil, 100)
+" autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 100)
+autocmd BufWritePre *.js Neoformat prettier
+autocmd BufWritePre *.jsx Neoformat prettier
+autocmd BufWritePre *.tsx Neoformat prettier
+autocmd BufWritePre *.ts Neoformat prettier
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.vue lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.css lua vim.lsp.buf.formatting_sync(nil, 100)

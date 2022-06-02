@@ -167,6 +167,15 @@ else
 
 endif
 
+" Prettier
+Plugin 'sbdchd/neoformat'
+let g:neoformat_try_node_exe = 1 " Use project installed prettier
+let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_enabled_typescript = ['prettier']
+" let g:neoformat_javascript_prettier = {
+"       \ 'args': ['--config .prettierrc.json'],
+"       \ }
+
 " Use release branch (recommend)
 " Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 " Wiki
