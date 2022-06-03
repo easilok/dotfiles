@@ -20,23 +20,26 @@ nmap <leader>bl :ls<CR>
 
 
 if has('nvim') 
-  nnoremap <leader>f <cmd>lua require('telescope.builtin').git_files()<cr>
-  nnoremap <leader>F <cmd>lua require('telescope.builtin').find_files()<cr>
+  nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
+  nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+  nnoremap <leader>fb <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({sorting_strategy="ascending"})<cr>
   nnoremap <leader>gl <cmd>lua require('telescope.builtin').live_grep()<cr>
   nnoremap <leader>gs <cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<cr>
   nnoremap <leader>gw <cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<cr>
   nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
   nnoremap <leader>h <cmd>lua require('telescope.builtin').help_tags()<cr>
-  nnoremap <leader>gge <cmd>lua require('telescope.builtin').diagnostics()<cr>
-  nnoremap <leader>ggr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+  nnoremap <leader>ge <cmd>lua require('telescope.builtin').diagnostics()<cr>
+  nnoremap <leader>gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+  nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
+  nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
 else 
   "Fzf
-  nmap <Leader>f :GFiles<CR>
-  nmap <Leader>F :Files<CR>
-  nmap <Leader>b :Buffers<CR>
-  nmap <Leader>h :History<CR>
-  nmap <Leader>t :BTags<CR>
-  nmap <Leader>T :Tags<CR>
+  nmap <Leader>fg :GFiles<CR>
+  nmap <Leader>Ff :Files<CR>
+  nmap <Leader>fb :Buffers<CR>
+  nmap <Leader>gh :History<CR>
+  nmap <Leader>gt :BTags<CR>
+  nmap <Leader>gT :Tags<CR>
 endif
 
 

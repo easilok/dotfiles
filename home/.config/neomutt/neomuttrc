@@ -6,7 +6,6 @@ source ~/.config/neomutt/mappings
 source ~/.config/neomutt/alias
 
 ## Acounts Shortcuts
-macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/nibble_imap<enter><change-folder>!<enter>'
 # macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/uab<enter><change-folder>!<enter>'
 macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/xyz<enter><change-folder>!<enter>'
 macro index,pager <f4> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/personal<enter><change-folder>!<enter>'
@@ -25,9 +24,6 @@ folder-hook $folder 'source ~/.config/neomutt/accounts/professional'
 
 source ~/.config/neomutt/accounts/luispereira	
 folder-hook $folder 'source ~/.config/neomutt/accounts/luispereira'
-
-source ~/.config/neomutt/accounts/nibble_imap
-folder-hook $folder 'source ~/.config/neomutt/accounts/nibble_imap'
 
 source ~/.config/neomutt/accounts/xyz	
 folder-hook $folder 'source ~/.config/neomutt/accounts/xyz'

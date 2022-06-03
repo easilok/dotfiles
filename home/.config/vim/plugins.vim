@@ -54,8 +54,6 @@ let NERDTreeMinimalUI = 1
 let g:netrw_menu  = 0
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-Plugin 'ryanoasis/vim-devicons'
-
 "Coloresque
 Plugin 'ap/vim-css-color'
 "Surround
@@ -133,7 +131,9 @@ if has('nvim')
     Plugin 'lukas-reineke/indent-blankline.nvim'
     Plugin 'nvim-lua/plenary.nvim'
     Plugin 'nvim-telescope/telescope.nvim'
+    Plugin 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plugin 'synaptiko/xit.nvim'
+    Plugin 'kyazdani42/nvim-web-devicons'
 else
     Plugin 'ajh17/VimCompletesMe' 
     Plugin 'sheerun/vim-polyglot'
@@ -166,6 +166,8 @@ else
     Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plugin 'junegunn/fzf.vim'
     Plugin 'ryanolsonx/vim-xit'
+    Plugin 'ryanoasis/vim-devicons'
+
 
 endif
 
