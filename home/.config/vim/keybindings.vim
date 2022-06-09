@@ -27,6 +27,7 @@ if has('nvim')
   nnoremap <leader>gs <cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<cr>
   nnoremap <leader>gw <cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<cr>
   nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+  nnoremap <leader>bl <cmd>lua require('telescope.builtin').buffers()<cr>
   nnoremap <leader>h <cmd>lua require('telescope.builtin').help_tags()<cr>
   nnoremap <leader>ge <cmd>lua require('telescope.builtin').diagnostics()<cr>
   nnoremap <leader>gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
