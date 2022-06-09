@@ -14,10 +14,15 @@ setxkbmap -option caps:escape &
 
 # wmname compiz
 
-run picom
+if [ -f "$(which compton)" ]; then
+  run compton
+else 
+  run picom
+fi
 
 # run sxhkd
 ~/.config/bspwm/scripts/launch_sxhkd.sh
+nofify-send "Keyboard shortcuts loaded and ready"
 
 xmodmap ~/.Xmodmap
 

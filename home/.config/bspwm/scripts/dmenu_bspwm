@@ -14,6 +14,7 @@ fi
 declare -a options=(" internal_monitor 
  monitor_left_align_left 
  monitor_left_align_right 
+ addvolt_monitor_top_align_top 
  quit ")
  
 

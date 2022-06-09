@@ -37,6 +37,19 @@ elif [ "$DIRECTION" == "monitor_left_align_right" ]; then
     fi
   fi
 
+elif [ "$DIRECTION" == "addvolt_monitor_top_align_top" ]; then
+
+  if [[ $(xrandr -q | grep 'HDMI-1 connected') ]]; then
+    # [[ -f "$HOME/.screenlayout/home_dual_left.sh" ]] && $HOME/.screenlayout/home_dual_left.sh
+    bspc wm -O eDP-1 HDMI-1
+    bspc monitor eDP-1 -d 1 2 3 4 5 6
+    bspc monitor HDMI-1 -d 7 8 9 10
+    if [ $(pgrep -f "polybar") ]; then
+      sleep 3
+      [[ -f "$HOME/.config/polybar/launch.sh" ]] && $HOME/.config/polybar/launch.sh
+    fi
+  fi
+
 else 
     [[ -f "$HOME/.screenlayout/internal_monitor" ]] && $HOME/.screenlayout/internal_monitor
     # bspc monitor LVDS1 -d 1 2 3 4 5 6 7 8 9 10
