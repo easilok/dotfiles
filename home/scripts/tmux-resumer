@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Returs if no tmux has no sessions running
+# ! tmux list-sessions 2> /dev/null && echo "No sessions" && exit
+
+[[ -z $(pgrep tmux) ]] && echo "tmux is not running so no sessions" && exit
+
+# Get current tmux sessions as array
+# CHOICES=($(tmux list-sessions | sed 's/:.*//'))
+
+selected=$(tmux list-sessions -F \#S | fzf)
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+
+if [[ -z $TMUX ]]; then
+  tmux attach -t $selected
+else
+  tmux switch-client -t $selected
+fi

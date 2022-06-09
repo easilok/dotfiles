@@ -128,10 +128,12 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # Control bindings for programs
-bindkey -s "^g" "lc\n"
-bindkey -s "^h" "history 1\n"
+# bindkey -s "^g" "lc\n"
+# bindkey -s "^h" "history 1\n"
 bindkey -s "^l" "clear\n"
-bindkey -s "^d" "dlfile\n"
+# bindkey -s "^d" "dlfile\n"
+bindkey -s "^f" "tmux-sessionizer\n"
+
 
 #Rebind HOME and END to do the decent thing:
 bindkey '\e[1~' beginning-of-line
@@ -155,8 +157,8 @@ bindkey '\e[2~' redisplay
 #Now bind pgup to paste the last word of the last command,
 bindkey '\e[5~' insert-last-word
 
-
 if [ -f "$HOME/.config/aliasrc" ]; then source "$HOME/.config/aliasrc"; fi
+if [ -f "$HOME/.config/local_aliasrc" ]; then source "$HOME/.config/local_aliasrc"; fi
 
 # Load zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
