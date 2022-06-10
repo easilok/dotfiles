@@ -134,6 +134,7 @@ if has('nvim')
     Plugin 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plugin 'synaptiko/xit.nvim'
     Plugin 'kyazdani42/nvim-web-devicons'
+    Plugin 'ThePrimeagen/harpoon'
 else
     Plugin 'ajh17/VimCompletesMe' 
     Plugin 'sheerun/vim-polyglot'

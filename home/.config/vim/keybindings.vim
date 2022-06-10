@@ -33,6 +33,7 @@ if has('nvim')
   nnoremap <leader>gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
   nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
   nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
+  nnoremap <leader>ga <cmd>Telescope harpoon marks<cr>
 else 
   "Fzf
   nmap <Leader>fg :GFiles<CR>
