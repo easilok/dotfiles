@@ -1,50 +1,48 @@
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-dispatch'
-Plugin 'junegunn/gv.vim'
-Plugin 'junegunn/vim-peekaboo'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-dispatch'
+Plug 'junegunn/gv.vim'
+Plug 'junegunn/vim-peekaboo'
 
 "colorscheme
-" Plugin 'flazz/vim-colorschemes'
-" Plugin 'doums/darcula'
-" Plugin 'arzg/vim-colors-xcode'
-" Plugin 'Mcmartelle/vim-monokai-bold'
-" Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
-" Plugin 'rakr/vim-one'
-" Plugin 'dracula/vim'
-" Plugin 'taniarascia/new-moon.vim'
-Plugin 'tomasiser/vim-code-dark'
-Plugin 'gruvbox-community/gruvbox'
-Plugin 'luisiacc/gruvbox-baby'
+" Plug 'flazz/vim-colorschemes'
+" Plug 'doums/darcula'
+" Plug 'arzg/vim-colors-xcode'
+" Plug 'Mcmartelle/vim-monokai-bold'
+" Plug 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
+" Plug 'rakr/vim-one'
+" Plug 'dracula/vim'
+" Plug 'taniarascia/new-moon.vim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'gruvbox-community/gruvbox'
+Plug 'luisiacc/gruvbox-baby'
 
 "Commentary
-Plugin 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " To able to SudoEdit
 " Shell Commands
-Plugin 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 
-Plugin 'tpope/vim-abolish'
+Plug 'tpope/vim-abolish'
 
 " Adds objects and N objects
-Plugin 'wellle/targets.vim'
+Plug 'wellle/targets.vim'
 " NerdTree
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 map <F6> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
@@ -55,15 +53,15 @@ let g:netrw_menu  = 0
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "Coloresque
-Plugin 'ap/vim-css-color'
+Plug 'ap/vim-css-color'
 "Surround
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " Bottom bar
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 " let g:lightline = {'colorscheme': 'wombat',}
 let g:lightline = {'colorscheme': 'one',}
 
-Plugin 'mengelbrecht/lightline-bufferline'
+Plug 'mengelbrecht/lightline-bufferline'
 let g:lightline#bufferline#show_number = 1
 let g:lightline#bufferline#number_separator = '#'
 let g:lightline#bufferline#enable_devicons = 1
@@ -89,10 +87,10 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
-Plugin 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 " `my_snippets` is the directory we created before
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
 " Trigger configuration. Do not use <tab> if you use
@@ -105,40 +103,40 @@ let g:UltiSnipsJumpForwardTrigger='<c-j>'
 " shortcut to go to previous position
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
-Plugin 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 " latex
-Plugin 'lervag/vimtex'
+Plug 'lervag/vimtex'
 let g:tex_flavor = 'latex'
 
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
 
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 if has('nvim') 
-    Plugin 'neovim/nvim-lspconfig'
-    Plugin 'hrsh7th/nvim-compe'
-    " Plugin 'glepnir/lspsaga.nvim'
-    " Plugin 'rinx/lspsaga.nvim'
-    Plugin 'tami5/lspsaga.nvim'
-    Plugin 'ray-x/lsp_signature.nvim'
-    Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-    " Plugin 'nvim-treesitter/playground'
-    Plugin 'folke/which-key.nvim'
-    Plugin 'akinsho/toggleterm.nvim'
-    Plugin 'lukas-reineke/indent-blankline.nvim'
-    Plugin 'nvim-lua/plenary.nvim'
-    Plugin 'nvim-telescope/telescope.nvim'
-    Plugin 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-    Plugin 'synaptiko/xit.nvim'
-    Plugin 'kyazdani42/nvim-web-devicons'
-    Plugin 'ThePrimeagen/harpoon'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/nvim-compe'
+    " Plug 'glepnir/lspsaga.nvim'
+    " Plug 'rinx/lspsaga.nvim'
+    Plug 'tami5/lspsaga.nvim'
+    Plug 'ray-x/lsp_signature.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    " Plug 'nvim-treesitter/playground'
+    Plug 'folke/which-key.nvim'
+    Plug 'akinsho/toggleterm.nvim'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+    Plug 'synaptiko/xit.nvim'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'ThePrimeagen/harpoon'
 else
-    Plugin 'ajh17/VimCompletesMe' 
-    Plugin 'sheerun/vim-polyglot'
-    Plugin 'natebosch/vim-lsc'
+    Plug 'ajh17/VimCompletesMe' 
+    Plug 'sheerun/vim-polyglot'
+    Plug 'natebosch/vim-lsc'
 
     let g:lsc_server_commands = {
         \ 'python': ['~/.local/bin/pyls'],
@@ -164,16 +162,16 @@ else
         \}
 
     " fzf
-    Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plugin 'junegunn/fzf.vim'
-    Plugin 'ryanolsonx/vim-xit'
-    Plugin 'ryanoasis/vim-devicons'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'ryanolsonx/vim-xit'
+    Plug 'ryanoasis/vim-devicons'
 
 
 endif
 
 " Prettier
-Plugin 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat'
 let g:neoformat_try_node_exe = 1 " Use project installed prettier
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_typescript = ['prettier']
@@ -182,15 +180,15 @@ let g:neoformat_enabled_typescript = ['prettier']
 "       \ }
 
 " Use release branch (recommend)
-" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Wiki
-Plugin 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+                      \ 'syntax': 'markdown', 'ext': '.wiki'}]
 
 " Live markdown preview
-" Plugin 'shime/vim-livedown'
-Plugin 'instant-markdown/vim-instant-markdown'
+" Plug 'shime/vim-livedown'
+Plug 'instant-markdown/vim-instant-markdown'
 "Uncomment to override defaults:
 "let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
@@ -204,23 +202,12 @@ let g:instant_markdown_autostart = 0
 "let g:instant_markdown_port = 8888
 "let g:instant_markdown_python = 1
 
-Plugin 'godlygeek/tabular'
-Plugin 'preservim/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 
 " Pattern based text background colorizer
-Plugin 'solyarisoftware/Highlight.vim'
+Plug 'solyarisoftware/Highlight.vim'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Initialize plugin system
+call plug#end()
+
