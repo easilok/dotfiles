@@ -127,8 +127,8 @@ nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
-nnoremap <C-j> :cnext<CR>zzzv
-nnoremap <C-k> :cprevious<CR>zzzv
+nnoremap <M-C-j> :cnext<CR>zzzv
+nnoremap <M-C-k> :cprevious<CR>zzzv
 " Add more undo break points
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
