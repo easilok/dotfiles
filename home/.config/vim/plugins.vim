@@ -133,6 +133,13 @@ if has('nvim')
     Plug 'synaptiko/xit.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'ThePrimeagen/harpoon'
+
+    " debugging
+    Plug 'mfussenegger/nvim-dap'
+    " Plug 'leoluz/nvim-dap-go'
+    Plug 'rcarriga/nvim-dap-ui'
+    Plug 'theHamsta/nvim-dap-virtual-text'
+    Plug 'nvim-telescope/telescope-dap.nvim'
 else
     Plug 'ajh17/VimCompletesMe' 
     Plug 'sheerun/vim-polyglot'
@@ -207,6 +214,8 @@ Plug 'preservim/vim-markdown'
 
 " Pattern based text background colorizer
 Plug 'solyarisoftware/Highlight.vim'
+
+Plug 'eliba2/vim-node-inspect'
 
 " Initialize plugin system
 call plug#end()

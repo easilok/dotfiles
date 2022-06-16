@@ -56,6 +56,7 @@ if has('nvim')
   luafile ~/.config/nvim/lsp/lspsaga-config.lua
   luafile ~/.config/nvim/plugin-config/telescope.lua
   source ~/.config/nvim/plugin-config/harpoon.vim
+  luafile ~/.config/nvim/plugin-config/dap.lua
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   source ~/.config/nvim/lsp/lsp-config.vim
   " Override lsp keymap
