@@ -87,8 +87,6 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
-Plug 'ludovicchabant/vim-gutentags'
-
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " `my_snippets` is the directory we created before
@@ -174,6 +172,7 @@ else
     Plug 'ryanolsonx/vim-xit'
     Plug 'ryanoasis/vim-devicons'
 
+    Plug 'ludovicchabant/vim-gutentags'
 
 endif
 

@@ -58,6 +58,71 @@ dap.configurations.javascript = {
     request = 'attach',
     processId = require'dap.utils'.pick_process,
   },
+  {
+    type = 'node2',
+    name = 'Run tests',
+    request = 'launch',
+    program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
+    env = {
+      NODE_ENV = "test",
+      ADDVOLT_DATABASE_HOST = "localhost",
+      ADDVOLT_DATABASE_PORT = "5444",
+    },
+    args = {
+      "inspect",
+      "--config",
+      "${workspaceFolder}/test/.mocharc.json",
+      -- "--reporter",
+      -- "dot",
+      "--exit",
+      "--colors",
+      "${workspaceFolder}/test/**/*.test.js"
+    },
+    cwd = '${workspaceFolder}',
+    sourceMaps = true,
+    restart = true,
+    protocol = 'inspector',
+    console = 'integratedTerminal',
+	  skipFiles = {
+	    '<node_internals>/**',
+	    '**/node_modules/**',
+	  };
+  },
+  {
+    type = 'node2',
+    name = 'Run test on file',
+    request = 'launch',
+    mode = 'test',
+    program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
+    env = {
+      NODE_ENV = "test",
+      ADDVOLT_DATABASE_HOST = "localhost",
+      ADDVOLT_DATABASE_PORT = "5444",
+    },
+    args = {
+      "inspect",
+      "--config",
+      "${workspaceFolder}/test/.mocharc.json",
+      "--file",
+      "${workspaceFolder}/test/bootstrap.test.js",
+      -- "--reporter",
+      -- "dot",
+      -- "--slow",
+      -- "5000",
+      "--exit",
+      "--colors",
+      "${file}"
+    },
+    cwd = '${workspaceFolder}',
+    sourceMaps = true,
+    restart = true,
+    protocol = 'inspector',
+    console = 'integratedTerminal',
+	  skipFiles = {
+	    '<node_internals>/**',
+	    '**/node_modules/**',
+	  };
+  },
 }
 
 dap.configurations.typescript = {

@@ -12,5 +12,9 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 polybar bspwm -c $CONFIG_FILE &
 
 if [[ $(xrandr -q | grep 'DP1 connected') ]]; then
-  polybar bspwm-dp1 -c $CONFIG_FILE
+  polybar bspwm-dp1 -c $CONFIG_FILE &
+fi
+
+if [[ $(xrandr -q | grep 'HDMI-1 connected') ]]; then
+  polybar bspwm-hdmi1 -c $CONFIG_FILE &
 fi
