@@ -13,6 +13,8 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-dispatch'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-peekaboo'
+" plugin for jumping to conflicts
+Plug 'tpope/vim-unimpaired'
 
 "colorscheme
 " Plug 'flazz/vim-colorschemes'
@@ -138,6 +140,8 @@ if has('nvim')
     Plug 'rcarriga/nvim-dap-ui'
     Plug 'theHamsta/nvim-dap-virtual-text'
     Plug 'nvim-telescope/telescope-dap.nvim'
+    Plug 'folke/todo-comments.nvim'
+
 else
     Plug 'ajh17/VimCompletesMe' 
     Plug 'sheerun/vim-polyglot'

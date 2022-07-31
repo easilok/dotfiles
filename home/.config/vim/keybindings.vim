@@ -149,3 +149,10 @@ inoremap <C-k> <esc>:m .-2<CR>==
 " End of Primeagen TOP 5 maps
 
 map <F7> :Explore<CR>
+
+" define line highlight color
+highlight LineHighlight ctermbg=darkgray guibg=darkgray
+" highlight the current line
+nnoremap <silent> <Leader>ah :call matchadd('LineHighlight', '\%'.line('.').'l')<CR>
+" clear all the highlighted lines
+nnoremap <silent> <Leader>ch :call clearmatches()<CR>
