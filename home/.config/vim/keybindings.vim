@@ -156,3 +156,4 @@ highlight LineHighlight ctermbg=darkgray guibg=darkgray
 nnoremap <silent> <Leader>ah :call matchadd('LineHighlight', '\%'.line('.').'l')<CR>
 " clear all the highlighted lines
 nnoremap <silent> <Leader>ch :call clearmatches()<CR>
+nmap <Leader>yfp :let @" = expand("%")<cr>

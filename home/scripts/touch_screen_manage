@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# run xinput to check the id of the touch_screen
+# TOUCH_SCREEN_XINPUT_ID=11
+[[ -z $TOUCH_SCREEN_XINPUT_ID ]] && xinput | grep "Touch System" && echo "Set the TOUCH_SCREEN_XINPUT_ID env variable" && exit 1
+
+if [ "$#" -gt 0 ]; then
+
+  case $1 in
+    "-e")
+      xinput enable $TOUCH_SCREEN_XINPUT_ID
+      ;;
+    *)
+      xinput disable $TOUCH_SCREEN_XINPUT_ID
+      ;;
+  esac
+
+else
+
+  xinput disable $TOUCH_SCREEN_XINPUT_ID
+
+fi

@@ -1,6 +1,6 @@
 # Basic binds
 super + Return
-    default-terminal
+    default_terminal
 super + d
     dmenu-simple
 super + p
@@ -22,10 +22,10 @@ super + Escape
 
 # lockscreen
 shift + super + x
-    i3lock-fancy
+  $HOME/.config/sxhkd/scripts/lock_screen.sh
 
 XF86ScreenSaver
-    i3lock-fancy
+  $HOME/.config/sxhkd/scripts/lock_screen.sh
 
 # screen change
 XF86Display
@@ -44,19 +44,19 @@ super + shift + control + m
 super + shift + m
 	open_neomutt
 
-#; super + plus
-XF86AudioRaiseVolume
-	pamixer --allow-boost -i 5
-#; super + shift + plus
-shift + XF86AudioRaiseVolume
-	pamixer --allow-boost -i 15
+##; super + plus
+#XF86AudioRaiseVolume
+#	pamixer --allow-boost -i 5
+##; super + shift + plus
+#shift + XF86AudioRaiseVolume
+#	pamixer --allow-boost -i 15
 
-#; super + minus
-XF86AudioLowerVolume
-	pamixer --allow-boost -d 5
-#; super + shift + minus
-shift + XF86AudioLowerVolume
-	pamixer --allow-boost -d 15
+##; super + minus
+#XF86AudioLowerVolume
+#	pamixer --allow-boost -d 5
+##; super + shift + minus
+#shift + XF86AudioLowerVolume
+#	pamixer --allow-boost -d 15
 
 #; super + shift + m
 XF86AudioMute
@@ -67,4 +67,7 @@ XF86AudioPlay
 
 XF86Audio{Prev,Next}
 	playerctl {previous,next}
+
+super + {F12, F10, F11}
+	playerctl {play-pause,previous,next}
 

@@ -10,9 +10,9 @@ set showcmd                     " display incomplete commands
 
 "" Whitespace
 set nowrap                      " don't wrap lines
-set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
+set tabstop=4 shiftwidth=4      " a tab is two spaces (or set this to 4)
 set shiftround
-set softtabstop=2               " number of spaces in tab when editing
+set softtabstop=4               " number of spaces in tab when editing
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
@@ -57,13 +57,14 @@ if has('nvim')
   luafile ~/.config/nvim/plugin-config/telescope.lua
   source ~/.config/nvim/plugin-config/harpoon.vim
   luafile ~/.config/nvim/plugin-config/dap.lua
+  luafile ~/.config/nvim/plugin-config/todo-comments.lua
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   source ~/.config/nvim/lsp/lsp-config.vim
   " Override lsp keymap
   source ~/.config/nvim/lsp/lspsaga-config.vim
   luafile ~/.config/nvim/lsp/javascript-ls.lua
   luafile ~/.config/nvim/lsp/php-ls.lua
-  " luafile ~/.config/nvim/lsp/python-ls.lua
+  luafile ~/.config/nvim/lsp/python-ls.lua
   luafile ~/.config/nvim/lsp/latex-ls.lua
   luafile ~/.config/nvim/lsp/go-ls.lua
   luafile ~/.config/nvim/lsp/css-ls.lua
