@@ -1,0 +1,72 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 5
+}
+
+order += "battery all"
+order += "volume master"
+order += "cpu_usage"
+order += "memory"
+order += "disk /"
+order += "cpu_temperature 0"
+# order += "wireless _first_"
+order += "tztime local"
+
+wireless _first_ {
+        format_up = " WiFi: (%quality at %essid) "
+        format_down = " WiFi: down "
+}
+
+battery all {
+        format = " %status %percentage %remaining "
+        format_down = "No battery"
+        status_chr = "⚡ CHR"
+        status_bat = "🔋 BAT"
+        status_unk = "? UNK"
+        status_full = "☻ FULL"
+        # path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+tztime local {
+        format = " %H:%M - %d/%m (W%V) "
+}
+
+load {
+        format = " Load: %1min "
+}
+
+disk "/" {
+        format = " /: %percentage_used "
+}
+
+volume master {
+        format = " ♪: %volume "
+        format_muted = " ♪: muted (%volume) "
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+cpu_usage {
+  format = " P: %usage "
+}
+
+cpu_temperature 0 {
+        format = "T: %degrees °C"
+        path = "/sys/devices/platform/coretemp.0/temp1_input"
+}
+
+memory {
+        format = "M: %percentage_used"
+        threshold_degraded = "10%"
+        #format_degraded = "M: %free"
+}
