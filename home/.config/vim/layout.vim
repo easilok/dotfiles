@@ -23,6 +23,7 @@ set number
 set relativenumber
 set cursorline                  " hightligh current line
 set modelines=1
+set list
 set listchars=trail:-
 
 " highlight ColorColumn ctermbg=0 guibg=#1b1b1b

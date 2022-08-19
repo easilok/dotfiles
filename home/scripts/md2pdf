@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+MAIN_FONT="DejaVu Serif"
+MONO_FONT="DejaVu Sans Mono"
+
+pandoc "$1" \
+    -f gfm \
+    -V geometry:a4paper \
+    -V geometry:margin=2cm \
+    -V mainfont="$MAIN_FONT" \
+    -V monofont="$MONO_FONT" \
+    -o "$2"
