@@ -89,20 +89,6 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" `my_snippets` is the directory we created before
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger='<tab>'
-
-" shortcut to go to next position
-let g:UltiSnipsJumpForwardTrigger='<c-j>'
-
-" shortcut to go to previous position
-let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-
 Plug 'airblade/vim-gitgutter'
 
 Plug 'mhinz/vim-startify'
@@ -123,6 +109,7 @@ if has('nvim')
     Plug 'tami5/lspsaga.nvim'
     Plug 'ray-x/lsp_signature.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    Plug 'nvim-treesitter/nvim-treesitter-context'
     " Plug 'nvim-treesitter/playground'
     Plug 'folke/which-key.nvim'
     Plug 'akinsho/toggleterm.nvim'
@@ -141,6 +128,7 @@ if has('nvim')
     Plug 'theHamsta/nvim-dap-virtual-text'
     Plug 'nvim-telescope/telescope-dap.nvim'
     Plug 'folke/todo-comments.nvim'
+    Plug 'L3MON4D3/LuaSnip'
 
 else
     Plug 'ajh17/VimCompletesMe' 
@@ -177,6 +165,21 @@ else
     Plug 'ryanoasis/vim-devicons'
 
     Plug 'ludovicchabant/vim-gutentags'
+
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    " `my_snippets` is the directory we created before
+    let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
+    " Trigger configuration. Do not use <tab> if you use
+    " https://github.com/Valloric/YouCompleteMe.
+    let g:UltiSnipsExpandTrigger='<tab>'
+
+    " shortcut to go to next position
+    let g:UltiSnipsJumpForwardTrigger='<c-j>'
+
+    " shortcut to go to previous position
+    let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+
 
 endif
 
