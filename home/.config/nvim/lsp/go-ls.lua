@@ -1,2 +1,12 @@
-require'lspconfig'.gopls.setup{}
+require'lspconfig'.gopls.setup{
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+        },
+    }
+}
 
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
