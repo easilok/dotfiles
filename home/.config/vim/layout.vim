@@ -11,7 +11,7 @@ colorscheme gruvbox
 " set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 " Always show statusline
 set laststatus=2
-set statusline+=%{gutentags#statusline()}
+" set statusline+=%{gutentags#statusline()}
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
 set background=dark
@@ -24,7 +24,7 @@ set relativenumber
 set cursorline                  " hightligh current line
 set modelines=1
 set list
-set listchars=trail:-
+set listchars=trail:-,tab:>\>
 
 " highlight ColorColumn ctermbg=0 guibg=#1b1b1b
 highlight ColorColumn ctermbg=0 guibg=grey

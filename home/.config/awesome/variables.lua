@@ -27,28 +27,28 @@ awful.layout.layouts = {
 }
 -- ws-icon-0 = "1:"
 awful.util.tagnames = {
-	{
-		{name = "1.", sel = true},
-		{name = "2."},
-		{name = "3."},
-		{name = "4.", lay = awful.layout.suit.max},
-		{name = "5."},
-		{name = "6."},
-		{name = "7."},
-		{name = "8."},
-		{name = "9."},
-		-- {name = "9"},
-	},
-	{
-		{name = "1", sel = true},
-		{name = "2"},
-		{name = "3"},
-		{name = "4"},
-		{name = "5"},
-		{name = "6"},
-		{name = "7"},
-		{name = "8"},
-		{name = "9"},
-	}
+    {
+        {name = "1.", sel = true},
+        {name = "2."},
+        {name = "3."},
+        {name = "4.", lay = awful.layout.suit.max},
+        {name = "5."},
+        {name = "6."},
+        {name = "7."},
+        {name = "8."},
+        {name = "9."},
+        -- {name = "9"},
+    },
+    {
+        {name = "1", sel = true},
+        {name = "2"},
+        {name = "3"},
+        {name = "4"},
+        {name = "5"},
+        {name = "6"},
+        {name = "7"},
+        {name = "8"},
+        {name = "9"},
+    }
 }
 

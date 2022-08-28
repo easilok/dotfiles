@@ -35,17 +35,17 @@ awful.rules.rules = {
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
-					"telegram-desktop",
-					"TelegramDesktop",
+          "telegram-desktop",
+          "TelegramDesktop",
           "xtightvncviewer",
-					"speedcrunch",
-					"SpeedCrunch",
-					"skype",
-					"Skype",
+          "speedcrunch",
+          "SpeedCrunch",
+          "skype",
+          "Skype",
           "Xfce-appfinder",
           "mpv",
           "vlc",
-				},
+      },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
@@ -74,28 +74,28 @@ awful.rules.rules = {
 
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
+    {
+        rule_any = { 
+            class = {"Firefox", "firefox", "qutebrowser", "Qutebrowser", "brave-browser", "Brave-browser", "Librewolf" },
+        },
+        properties = { screen = 1, tag = "4." } 
+    },
+    {
+        rule_any = { 
+            class = {"pcmanfm", "Pcmanfm"},
+        },
+        properties = { screen = 1, tag = "6." } 
+    },
+    {
+        rule_any = { 
+            class = {"remmina", "Remmina"},
+        },
+        properties = { screen = 1, tag = "8." } 
+    },
     { 
-			rule_any = { 
-				class = {"Firefox", "firefox", "qutebrowser", "Qutebrowser", "brave-browser", "Brave-browser", "Librewolf" },
-			},
-			properties = { screen = 1, tag = "4." } 
-		},
-    { 
-			rule_any = { 
-				class = {"pcmanfm", "Pcmanfm"},
-			},
-			properties = { screen = 1, tag = "6." } 
-		},
-    { 
-			rule_any = { 
-				class = {"remmina", "Remmina"},
-			},
-			properties = { screen = 1, tag = "8." } 
-		},
-    { 
-			rule_any = { 
-				class = {"Microsoft Teams - Preview"},
-			},
-			properties = { screen = 1, tag = "5." } 
-		},
+        rule_any = { 
+            class = {"Microsoft Teams - Preview"},
+        },
+        properties = { screen = 1, tag = "5." } 
+    },
 }
