@@ -10,3 +10,7 @@ lspconfig.ccls.setup {
     };
   }
 }
+
+-- vim.cmd [
+-- [ autocmd BufWritePre *.css lua vim.lsp.buf.formatting_sync(nil, 100) ] , 
+-- [ autocmd BufWritePre *.scss lua vim.lsp.buf.formatting_sync(nil, 100) ]]

@@ -1,0 +1,6 @@
+[Unit]
+Description=Spotify Status synchronization service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash %h/.local/bin/get-spotify-status

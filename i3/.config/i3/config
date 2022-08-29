@@ -47,12 +47,20 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+Tab focus next
+bindsym $mod+Shift+Tab focus prev
+
+# change output focus
+bindsym $mod+Alt+h focus output left
+bindsym $mod+Alt+j focus output down
+bindsym $mod+Alt+k focus output up
+bindsym $mod+Alt+l focus output right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Left focus output left
+bindsym $mod+Down focus output down
+bindsym $mod+Up focus output up
+bindsym $mod+Right focus output right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -60,11 +68,12 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# move the workspace to monitor
+bindsym $mod+Shift+Left move workspace to output left
+bindsym $mod+Shift+Down move workspace to output down
+bindsym $mod+Shift+Up move workspace to output up
+bindsym $mod+Shift+Right move workspace to output right
+
 
 # split in horizontal orientation
 bindsym $mod+minus split h;exec notify-send 'tile horizontally'
@@ -78,9 +87,9 @@ bindsym $mod+Shift+t split toggle
 bindsym $mod+Shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+F1 layout stacking
-bindsym $mod+F3 layout tabbed
+bindsym $mod+F1 layout toggle split
 bindsym $mod+F2 layout toggle split
+bindsym $mod+F3 layout tabbed
 bindsym $mod+F4 layout toggle stacking tabbed splith
 
 # toggle tiling / floating
@@ -145,6 +154,14 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+
+# move to screen
+bindsym $mod+Control+comma move container to output next
+bindsym $mod+Control+period move container to output next
+bindsym $mod+Shift+comma move workspace to output next
+bindsym $mod+Shift+period move workspace to output next
+bindsym $mod+comma focus output left 
+bindsym $mod+period focus output right
 
 for_window [class="SpeedCrunch"] floating enable
 for_window [class="firefox"] layout tabbed
@@ -261,6 +278,7 @@ bindsym $mod+m focus floating; mode "moveit"
 default_border pixel 2
 hide_edge_borders smart
 focus_follows_mouse no
+focus_wrapping workspace
 
 workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth

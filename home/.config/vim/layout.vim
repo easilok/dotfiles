@@ -14,7 +14,7 @@ set laststatus=2
 " set statusline+=%{gutentags#statusline()}
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
-set background=dark
+" set background=dark
 " Uncomment to prevent non-normal modes showing in powerline and below powerline.
 set noshowmode
 
@@ -27,7 +27,9 @@ set list
 set listchars=trail:-,tab:>\>
 
 " highlight ColorColumn ctermbg=0 guibg=#1b1b1b
-highlight ColorColumn ctermbg=0 guibg=grey
+" highlight ColorColumn ctermbg=0 guibg=grey
+" For transparency
+highlight Normal ctermbg=None guibg=None
 
 " Used this for st-terminal
 " set Vim-specific sequences for RGB colors

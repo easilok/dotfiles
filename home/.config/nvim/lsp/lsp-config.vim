@@ -15,7 +15,7 @@ nnoremap <silent> <space>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <space>ca <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <space>e <cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap <silent> <space>q <cmd>lua vim.diagnostic.set_loclist()<CR>
-nnoremap <silent> <space>f <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <space>f <cmd>lua vim.lsp.buf.format({async = true})<CR>
 
 " auto-format
 " autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
@@ -26,11 +26,8 @@ autocmd BufWritePre *.js Neoformat prettier
 autocmd BufWritePre *.jsx Neoformat prettier
 autocmd BufWritePre *.tsx Neoformat prettier
 autocmd BufWritePre *.ts Neoformat prettier
-autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.vue lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.css lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.scss lua vim.lsp.buf.formatting_sync(nil, 100)
-" autocmd BufWritePre *.go !gofmt -w %
 
 " Add lsp diagnostic messages to quickfix list
 " By Primeagen

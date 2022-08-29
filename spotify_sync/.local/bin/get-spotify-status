@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+PROCESS_NAME="spotify"
+PROCESS_INFO=$(pgrep "$PROCESS_NAME")
+STATUS_FILE="/tmp/spotify_status"
+[[ -z $PROCESS_INFO ]] && echo "" > $STATUS_FILE && exit
+[[ ! -f $(which playerctl) ]] && echo "" > $STATUS_FILE && exit
+
+PLAYER_NAME="spotify"
+MUSIC_PLAYING="$(playerctl -p $PLAYER_NAME metadata title) \
+  ($(playerctl -p $PLAYER_NAME metadata artist) - $(playerctl -p $PLAYER_NAME metadata album))"
+MUSIC_STATUS="$(playerctl -p $PLAYER_NAME status)"
+
+if [ "$MUSIC_STATUS" == "Playing" ]; then
+  PLAYING_INFO="▶ $MUSIC_PLAYING"
+else
+  PLAYING_INFO="⏸ $MUSIC_PLAYING"
+fi
+
+
+echo $PLAYING_INFO > $STATUS_FILE

@@ -1,0 +1,10 @@
+[Unit]
+Description=Spotify Status synchronization timer
+
+[Timer]
+OnBootSec=5m
+OnUnitActiveSec=5s
+Unit=spotify-sync.service
+
+[Install]
+WantedBy=timers.target

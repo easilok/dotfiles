@@ -27,7 +27,7 @@ Plug 'tpope/vim-unimpaired'
 " Plug 'taniarascia/new-moon.vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'gruvbox-community/gruvbox'
-Plug 'luisiacc/gruvbox-baby'
+Plug 'rafi/awesome-vim-colorschemes'
 
 "Commentary
 Plug 'tpope/vim-commentary'
