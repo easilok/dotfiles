@@ -14,6 +14,7 @@ local theme = {}
 
 -- *background:    #5d729f
 -- *foreground:    #34405a
+-- theme.xcolor7     = "#7EC485"
 theme.xcolor7     = "#8581a0"
 
 -- Fonts
@@ -38,8 +39,8 @@ theme.useless_gap   = dpi(1)
 theme.border_width  = dpi(2)
 theme.border_normal = "#000000"
 -- theme.border_normal = theme.fg_normal
--- theme.border_focus  = "#535d6c"
-theme.border_focus  = theme.xcolor7
+theme.border_focus  = "#7EC485"
+-- theme.border_focus  = theme.xcolor7
 theme.border_marked = "#91231c"
 
 -- *color7:        #8581a0
@@ -56,7 +57,7 @@ theme.border_marked = "#91231c"
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
 theme.tasklist_bg_focus = theme.bg_normal .. "00"
-theme.tasklist_fg_focus = theme.border_focus
+theme.tasklist_fg_focus = theme.fg_normal
 theme.taglist_bg_urgent = "#ff0000"
 
 -- Generate taglist squares:

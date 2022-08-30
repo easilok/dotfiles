@@ -152,6 +152,19 @@ end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
+--
+-- No borders when rearranging only 1 non-floating or maximized client
+screen.connect_signal("arrange", function (s)
+    local only_one = #s.tiled_clients == 1
+    for _, c in pairs(s.clients) do
+        if only_one and not c.floating or c.maximized then
+            c.border_width = 0
+        else
+            c.border_width = beautiful.border_width -- your border width
+        end
+    end
+end)
+
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
@@ -195,7 +208,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         -- filter  = awful.widget.tasklist.filter.currenttags,
-				filter = awful.widget.tasklist.filter.focused,
+        filter = awful.widget.tasklist.filter.focused,
         buttons = tasklist_buttons
     }
 
@@ -315,7 +328,8 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-awful.spawn.with_shell(os.getenv( "HOME" ) .. "/.config/awesome/autorun.sh")
+-- awful.spawn.with_shell(os.getenv( "HOME" ) .. "/.config/awesome/autorun.sh")
+awful.spawn.with_shell(os.getenv( "HOME" ) .. "/.config/awesome/autorun-test.sh")
 
 
 
