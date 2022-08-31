@@ -6,6 +6,8 @@ editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 lockscreen = "betterlockscreen -l dim"
 
+tagnames = {"1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9."}
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -28,27 +30,26 @@ awful.layout.layouts = {
 -- ws-icon-0 = "1:"
 awful.util.tagnames = {
     {
-        {name = "1.", sel = true},
-        {name = "2."},
-        {name = "3."},
-        {name = "4.", lay = awful.layout.suit.max},
-        {name = "5."},
-        {name = "6."},
-        {name = "7."},
-        {name = "8."},
-        {name = "9."},
-        -- {name = "9"},
+        {name = tagnames[1], sel = true},
+        {name = tagnames[2]},
+        {name = tagnames[3]},
+        {name = tagnames[4], lay = awful.layout.suit.max},
+        {name = tagnames[5]},
+        {name = tagnames[6]},
+        {name = tagnames[7]},
+        {name = tagnames[8]},
+        {name = tagnames[9]},
     },
     {
-        {name = "1", sel = true},
-        {name = "2"},
-        {name = "3"},
-        {name = "4"},
-        {name = "5"},
-        {name = "6"},
-        {name = "7"},
-        {name = "8"},
-        {name = "9"},
+        {name = tagnames[1]},
+        {name = tagnames[2]},
+        {name = tagnames[3]},
+        {name = tagnames[4]},
+        {name = tagnames[5]},
+        {name = tagnames[6]},
+        {name = tagnames[7]},
+        {name = tagnames[8]},
+        {name = tagnames[9]},
     }
 }
 

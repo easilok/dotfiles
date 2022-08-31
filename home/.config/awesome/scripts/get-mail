@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-if [ -d "/mnt/coisas/.mail" ]; then
-    unread="$(find /mnt/coisas/.*mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+MAIL_DIR=$HOME/Mail
+
+if [ -d "$MAIL_DIR" ]; then
+    unread="$(find $MAIL_DIR/.*mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
 
     echo "$unread"
 else

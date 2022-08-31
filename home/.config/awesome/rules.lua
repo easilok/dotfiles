@@ -3,6 +3,8 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 beautiful.init(string.format("%s/.config/awesome/themes/theme.lua", os.getenv("HOME")))
 
+local variables = require("variables")
+
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -78,24 +80,24 @@ awful.rules.rules = {
         rule_any = { 
             class = {"Firefox", "firefox", "qutebrowser", "Qutebrowser", "brave-browser", "Brave-browser", "Librewolf" },
         },
-        properties = { screen = 1, tag = "4." } 
+        properties = { screen = 1, tag = tagnames[4] } 
     },
     {
         rule_any = { 
             class = {"pcmanfm", "Pcmanfm"},
         },
-        properties = { screen = 1, tag = "6." } 
+        properties = { screen = 1, tag = tagnames[6] } 
     },
     {
         rule_any = { 
             class = {"remmina", "Remmina"},
         },
-        properties = { screen = 1, tag = "8." } 
+        properties = { screen = 1, tag = tagnames[7] } 
     },
     { 
         rule_any = { 
             class = {"Microsoft Teams - Preview"},
         },
-        properties = { screen = 1, tag = "5." } 
+        properties = { screen = 1, tag = tagnames[5] } 
     },
 }

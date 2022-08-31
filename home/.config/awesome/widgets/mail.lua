@@ -14,6 +14,6 @@ awful.widget.watch(mail_script, 100, function(widget, stdout)
   mail_count.markup = stdout
 end)
 
-mail = build_widget:new(mail_count, '✉', beautiful.xcolor7)
+mail = build_widget:new(mail_count, '✉', beautiful.fg_normal)
 
 return mail.widget
