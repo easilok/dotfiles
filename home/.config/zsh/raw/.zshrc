@@ -1,7 +1,7 @@
 # Some startup applications
 # if [ -f /usr/bin/neofetch ]; then neofetch; fi
 if [ -f /tmp/weather_today ]; then cat /tmp/weather_today; fi
-if [ -f /usr/bin/todo.sh ]; then todo.sh ls; fi
+if [ -f $(which todo.txt) ]; then $HOME/scripts/todo; fi
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 

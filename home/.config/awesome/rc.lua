@@ -98,7 +98,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%d/%b - %H:%M")
+mytextclock = wibox.widget.textclock("%d/%b (W%V) - %H:%M")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -158,7 +158,7 @@ screen.connect_signal("arrange", function (s)
     local only_one = #s.tiled_clients == 1
     for _, c in pairs(s.clients) do
         if only_one and not c.floating or c.maximized then
-            c.border_width = 0
+            c.border_width = 1
         else
             c.border_width = beautiful.border_width -- your border width
         end
@@ -329,7 +329,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- awful.spawn.with_shell(os.getenv( "HOME" ) .. "/.config/awesome/autorun.sh")
-awful.spawn.with_shell(os.getenv( "HOME" ) .. "/.config/awesome/autorun-test.sh")
+awful.spawn.with_shell(os.getenv( "HOME" ) .. "/.config/awesome/autorun-xfce-base.sh")
 
 
 
