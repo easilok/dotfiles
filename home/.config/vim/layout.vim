@@ -6,7 +6,12 @@
 " colorscheme challenger_deep
 " colorscheme one
 " colorscheme codedark
-colorscheme gruvbox
+" colorscheme gruvbox
+if has('nvim') 
+    colorscheme catppuccin
+else
+    colorscheme catppuccin_mocha
+endif
 
 " set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 " Always show statusline
@@ -29,7 +34,7 @@ set listchars=trail:-,tab:>\>
 " highlight ColorColumn ctermbg=0 guibg=#1b1b1b
 " highlight ColorColumn ctermbg=0 guibg=grey
 " For transparency
-highlight Normal ctermbg=None guibg=None
+highlight Normal ctermbg=NONE guibg=NONE
 
 " Used this for st-terminal
 " set Vim-specific sequences for RGB colors

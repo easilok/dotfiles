@@ -130,6 +130,7 @@ if has('nvim')
     Plug 'folke/todo-comments.nvim'
     Plug 'L3MON4D3/LuaSnip'
 
+    Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 else
     Plug 'ajh17/VimCompletesMe' 
     Plug 'sheerun/vim-polyglot'
@@ -180,6 +181,7 @@ else
     " shortcut to go to previous position
     let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
+    Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 endif
 
