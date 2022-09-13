@@ -41,7 +41,7 @@ awful.util.tagnames = {
         {name = tagnames[9]},
     },
     {
-        {name = tagnames[1]},
+        {name = tagnames[1], sel = true},
         {name = tagnames[2]},
         {name = tagnames[3]},
         {name = tagnames[4]},

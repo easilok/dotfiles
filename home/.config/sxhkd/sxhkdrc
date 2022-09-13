@@ -71,3 +71,5 @@ XF86Audio{Prev,Next}
 super + {F12, F10, F11}
 	playerctl {play-pause,previous,next}
 
+super + F7
+    $HOME/.screenlayout/internal_monitor

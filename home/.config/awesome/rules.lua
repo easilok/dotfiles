@@ -80,13 +80,13 @@ awful.rules.rules = {
         rule_any = { 
             class = {"Firefox", "firefox", "qutebrowser", "Qutebrowser", "brave-browser", "Brave-browser", "Librewolf" },
         },
-        properties = { screen = 1, tag = tagnames[4] } 
+        properties = { tag = tagnames[4] } 
     },
     {
         rule_any = { 
             class = {"pcmanfm", "Pcmanfm"},
         },
-        properties = { screen = 1, tag = tagnames[6] } 
+        properties = { tag = tagnames[6] } 
     },
     {
         rule_any = { 
