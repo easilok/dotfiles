@@ -1,0 +1,1 @@
+../vim/file_opt.vim
