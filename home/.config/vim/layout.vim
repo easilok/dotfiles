@@ -8,9 +8,9 @@
 " colorscheme codedark
 " colorscheme gruvbox
 if has('nvim') 
-    " luafile ~/.config/nvim/plugin-config/catppuccin.lua
-    " colorscheme catppuccin
-    colorscheme onedark
+    luafile ~/.config/nvim/plugin-config/catppuccin.lua
+    colorscheme catppuccin
+    " colorscheme onedark
 else
     colorscheme catppuccin_mocha
 endif
