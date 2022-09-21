@@ -131,6 +131,7 @@ if has('nvim')
     Plug 'L3MON4D3/LuaSnip'
 
     Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+    Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 else
     Plug 'ajh17/VimCompletesMe' 
     Plug 'sheerun/vim-polyglot'

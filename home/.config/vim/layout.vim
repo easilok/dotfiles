@@ -6,13 +6,13 @@
 " colorscheme challenger_deep
 " colorscheme one
 " colorscheme codedark
-" colorscheme gruvbox
+colorscheme onedark
 if has('nvim') 
-    luafile ~/.config/nvim/plugin-config/catppuccin.lua
-    colorscheme catppuccin
+    " Theme is now set on this file
+    luafile ~/.config/nvim/plugin-config/theme.lua
+    " colorscheme catppuccin
     " colorscheme onedark
-else
-    colorscheme catppuccin_mocha
+    " colorscheme tokyonight
 endif
 
 " set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
