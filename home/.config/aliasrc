@@ -28,9 +28,9 @@ alias dotfiles='cd ~/git/dotfiles'
 
 # Changing "ls" to "exa"
 if [ -f $(which exa) ]; then 
-	alias ls='exa -l --header --color=always --git --group-directories-first' # my preferred listing
+	alias ls='exa -l --header --color=always --group-directories-first' # my preferred listing
 	alias la='exa -a --color=always --group-directories-first'  # all files and dirs
-	alias ll='exa -al --header --color=always --git --group-directories-first'  # long format
+	alias ll='exa -al --header --color=always --group-directories-first'  # long format
 	alias lt='exa -aT --color=always --group-directories-first' # tree listing
 fi
 
