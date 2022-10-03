@@ -53,6 +53,7 @@ alias mvp=mpv
 unalias st 2> /dev/null
 unalias g 2> /dev/null
 alias tprj=tmux-sessionizer
+alias asdf=$HOME/scripts/DefaultKeyboardConfigs.sh
 
 vf() { $EDITOR $(fzf --reverse --height=50% ) ;}
 vef() { $EDITOR $(du -a ~/.config/* ~/scripts/* | awk '{print $2}' | fzf --reverse --height=50% ) ;}

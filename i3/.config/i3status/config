@@ -11,6 +11,7 @@ general {
         interval = 5
 }
 
+order += "read_file spotify"
 order += "battery all"
 order += "volume master"
 order += "cpu_usage"
@@ -69,4 +70,9 @@ memory {
         format = "M: %percentage_used"
         threshold_degraded = "10%"
         #format_degraded = "M: %free"
+}
+
+read_file spotify {
+    format = "%content"
+    path = "/tmp/spotify_status"
 }
