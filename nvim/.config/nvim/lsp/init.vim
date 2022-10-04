@@ -1,0 +1,17 @@
+  luafile ~/.config/nvim/lsp/compe-config.lua
+  luafile ~/.config/nvim/lsp/lspsaga-config.lua
+  " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+  source ~/.config/nvim/lsp/lsp-config.vim
+  " Override lsp keymap
+  source ~/.config/nvim/lsp/lspsaga-config.vim
+  luafile ~/.config/nvim/lsp/javascript-ls.lua
+  luafile ~/.config/nvim/lsp/php-ls.lua
+  luafile ~/.config/nvim/lsp/python-ls.lua
+  luafile ~/.config/nvim/lsp/latex-ls.lua
+  luafile ~/.config/nvim/lsp/go-ls.lua
+  luafile ~/.config/nvim/lsp/css-ls.lua
+  luafile ~/.config/nvim/lsp/svelte-ls.lua
+  luafile ~/.config/nvim/lsp/ccls-ls.lua
+  luafile ~/.config/nvim/lsp/arduino-ls.lua
+  luafile ~/.config/nvim/lsp/docker-ls.lua
+  luafile ~/.config/nvim/lsp/yaml-ls.lua
