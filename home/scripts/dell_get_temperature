@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+READING=$(sensors | grep "Package id 0" | awk '{print $4}' | sed -e 's/+//;s/°C//;s/\.//')
+
+echo $(($READING * 100))

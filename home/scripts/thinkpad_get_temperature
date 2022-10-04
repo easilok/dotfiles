@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+READING=$(cat /sys/class/thermal/thermal_zone0/temp)
+
+echo $READING

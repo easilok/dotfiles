@@ -6,7 +6,7 @@ local awful = require("awful")
 local update_interval = 15
 local temp_script = [[
   sh -c "
-  cat /sys/class/thermal/thermal_zone0/temp
+  $HOME/.local/bin/cpu_temperature
   "]]
 
 -- Periodically get temperature info
