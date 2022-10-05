@@ -1,9 +1,10 @@
 -- disable netrw at the very start of your init.lua (strongly advised)
-vim.g.loaded = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- empty setup using defaults
-require("nvim-tree").setup( {
+local nvim_tree = require("nvim-tree")
+nvim_tree.setup( {
   sort_by = "case_sensitive",
   view = {
     adaptive_size = true,
@@ -20,3 +21,6 @@ require("nvim-tree").setup( {
     dotfiles = true,
   },
 })
+
+-- vim.keymap.set('nivx', '<F6>', nvim_tree.toggle, {})
+vim.keymap.set('n', '<F6>', nvim_tree.toggle, {})

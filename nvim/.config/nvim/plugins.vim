@@ -57,17 +57,17 @@ Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-" Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-tree.lua'
 " NerdTree
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-map <F6> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeShowLineNumbers = 1
-let NERDTreeShowHidden = 1
-let NERDTreeMinimalUI = 1
-let g:netrw_menu  = 0
+" Plug 'scrooloose/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" map <F6> :NERDTreeToggle<CR>
+" let g:NERDTreeDirArrowExpandable = '▸'
+" let g:NERDTreeDirArrowCollapsible = '▾'
+" let NERDTreeShowLineNumbers = 1
+" let NERDTreeShowHidden = 1
+" let NERDTreeMinimalUI = 1
+" let g:netrw_menu  = 0
 
 " debugging
 Plug 'mfussenegger/nvim-dap'
@@ -99,18 +99,6 @@ let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki',
 " Live markdown preview
 " Plug 'shime/vim-livedown'
 Plug 'instant-markdown/vim-instant-markdown'
-"Uncomment to override defaults:
-"let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
-"let g:instant_markdown_open_to_the_world = 1
-"let g:instant_markdown_allow_unsafe_content = 1
-"let g:instant_markdown_allow_external_content = 0
-"let g:instant_markdown_mathjax = 1
-"let g:instant_markdown_mermaid = 1
-"let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
-"let g:instant_markdown_autoscroll = 0
-"let g:instant_markdown_port = 8888
-"let g:instant_markdown_python = 1
 
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
