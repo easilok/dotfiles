@@ -100,13 +100,14 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "z",     function () awful.tag.history.restore(awful.screen.focused()) end,
               {description = "Move to last tag", group = "layout"}),
     -- Resizing
-    awful.key({ modkey, altkey    }, "k",     function () awful.tag.incmwfact( 0.05)          end,
+    awful.key({ modkey, altkey    }, "h",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey, altkey    }, "j",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ modkey, altkey    }, "l",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
-    awful.key({ modkey, altkey    }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
+
+    awful.key({ modkey, "Control" }, "j",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ modkey, altkey    }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
+    awful.key({ modkey, "Control" }, "k",     function () awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
