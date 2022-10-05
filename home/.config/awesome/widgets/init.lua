@@ -23,13 +23,8 @@ widgets.battery = battery_widget { adapter = "BAT0", ac = "AC" }
 
 -- Separators
 widgets.space = wibox.widget.textbox('<span>  </span>')
-widgets.seperator = wibox.widget.textbox(string.format(' <span color="%s">|</span>  ', beautiful.fg_normal))
+widgets.separator = wibox.widget.textbox(string.format(' <span color="%s">|</span>  ', beautiful.fg_normal))
 
--- Textclock
-local textclock_text =wibox.widget.textclock(" %d %b %a %I:%M %p")
-widgets.textclock = build_widget:new(textclock_text, "", beautiful.xcolor13, true).widget
-
-local month_calendar = awful.widget.calendar_popup.month()
-month_calendar:attach( widgets.textclock, 'tc' )
+widgets.textclock = require('widgets.textclock')
 
 return widgets
