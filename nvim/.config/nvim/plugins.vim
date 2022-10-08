@@ -9,6 +9,7 @@ call plug#begin()
 
 " plugin on GitHub repo
 Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-dispatch'
 Plug 'junegunn/gv.vim'
 " Plug 'junegunn/vim-peekaboo'

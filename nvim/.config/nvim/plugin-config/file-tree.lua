@@ -18,9 +18,11 @@ nvim_tree.setup( {
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
 })
 
 -- vim.keymap.set('nivx', '<F6>', nvim_tree.toggle, {})
 vim.keymap.set('n', '<F6>', nvim_tree.toggle, {})
+vim.cmd [[hi NvimTreeNormal guibg=NONE]]
+vim.cmd [[hi NvimTreeNormalNC guibg=NONE]]
