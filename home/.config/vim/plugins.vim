@@ -12,7 +12,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-dispatch'
 Plug 'junegunn/gv.vim'
-Plug 'junegunn/vim-peekaboo'
 " plugin for jumping to conflicts
 Plug 'tpope/vim-unimpaired'
 

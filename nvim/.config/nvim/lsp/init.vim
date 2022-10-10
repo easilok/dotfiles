@@ -15,3 +15,5 @@
   luafile ~/.config/nvim/lsp/arduino-ls.lua
   luafile ~/.config/nvim/lsp/docker-ls.lua
   luafile ~/.config/nvim/lsp/yaml-ls.lua
+  luafile ~/.config/nvim/lsp/lua-ls.lua
+  luafile ~/.config/nvim/lsp/bash-ls.lua
