@@ -132,7 +132,8 @@ precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 # bindkey -s "^h" "history 1\n"
 bindkey -s "^l" "clear\n"
 # bindkey -s "^d" "dlfile\n"
-bindkey -s "^f" "tmux-sessionizer\n"
+# bindkey -s "^f" "tmux-sessionizer\n"
+bindkey -s "^f" "tmux-smug\n"
 
 
 #Rebind HOME and END to do the decent thing:
@@ -201,3 +202,4 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

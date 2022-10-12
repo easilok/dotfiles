@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+if [ ! -f "$(which smug)" ]; then
+    tmux-sessionizer
+    exit 0
+fi
+
+MODE="Start"
+
+if [[ $# -eq 1 && "$1" == "-q" ]]; then
+    MODE="Stop"
+    shift
+fi
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find ~/.config/smug/*.yml -type f | fzf)
+fi
+
+if [[ -z $selected && "$MODE" == "Start" ]]; then
+    tmux-sessionizer
+    exit 0
+fi
+
+# selected_name=$(basename "$selected" | tr . _)
+# tmux_running=$(pgrep tmux)
+
+if [[ "$MODE" == "Stop" ]]; then
+    smug stop -f $selected
+else
+
+    if [[ -z $TMUX ]]; then
+        smug start -f $selected
+    else
+        smug start -a -f $selected
+    fi
+
+fi
