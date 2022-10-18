@@ -27,13 +27,13 @@ done
 # Evaluate path to protection
 if [ -z "$GIT_CURRENT_BRANCH" ]; then
     # Not a git repository so propaget the arguments to get default git output
-    git "$@"
+    \git "$@"
 elif [ $# -eq 0 ]; then
     # calling with no arguments, make it a status command
-    git status
+    \git status
 elif [ ! -z $IS_SAFE_COMMAND ] ; then
     # provided a safe command so go on
-    git "$@"
+    \git "$@"
 else
     # commands that does not require confirmation
     for branch in "${GIT_PROTECTED_BRANCHES[@]}"; do
@@ -46,7 +46,7 @@ else
                 * ) exit;;
             esac
         fi
-        git "$@"
     done
+    \git "$@"
 fi
 
