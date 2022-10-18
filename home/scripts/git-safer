@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# Get git current branch
+GIT_CURRENT_BRANCH=$(git branch --show-current 2> /dev/null)
+# Set the git branches names that are protected
+GIT_PROTECTED_BRANCHES=(
+    "main"
+    "development"
+    "dev"
+)
+# Set git commands that should be safe on any branch
+GIT_SAFE_COMMANDS=(
+    "status"
+    "sla"
+    "slap"
+    "log"
+    "diff"
+)
+
+# Find if provided command is a safe command
+for safe_command in "${GIT_SAFE_COMMANDS[@]}"; do
+    if [[ "$1" == "$safe_command" ]]; then
+        IS_SAFE_COMMAND=True
+    fi
+done
+
+# Evaluate path to protection
+if [ -z "$GIT_CURRENT_BRANCH" ]; then
+    # Not a git repository so propaget the arguments to get default git output
+    git "$@"
+elif [ $# -eq 0 ]; then
+    # calling with no arguments, make it a status command
+    git status
+elif [ ! -z $IS_SAFE_COMMAND ] ; then
+    # provided a safe command so go on
+    git "$@"
+else
+    # commands that does not require confirmation
+    for branch in "${GIT_PROTECTED_BRANCHES[@]}"; do
+        if [[ "$GIT_CURRENT_BRANCH" == "$branch" ]]; then
+            echo "Are you sure you want to take actions on $GIT_CURRENT_BRANCH?"
+            read -p "[y]es/[a]bort: " confirmation
+            case $confirmation in
+                [Yy]* ) ;;
+                # "" ) ;; # works with enter and space
+                * ) exit;;
+            esac
+        fi
+        git "$@"
+    done
+fi
+
