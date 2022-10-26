@@ -5,6 +5,7 @@ GIT_CURRENT_BRANCH=$(git branch --show-current 2> /dev/null)
 # Set the git branches names that are protected
 GIT_PROTECTED_BRANCHES=(
     "main"
+    "master"
     "development"
     "dev"
 )

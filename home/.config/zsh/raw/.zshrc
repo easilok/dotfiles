@@ -199,6 +199,8 @@ elif [ -f "/usr/share/doc/fzf/examples/completion.zsh" ]; then
   source "/usr/share/doc/fzf/examples/completion.zsh"
 fi
 
+[[ -f "$(which git-safer)" ]] && compdef git-safer=git
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
