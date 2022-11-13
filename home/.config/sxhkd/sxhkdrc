@@ -35,7 +35,7 @@ XF86Display
 
 #TODO add microphone mute
 XF86AudioMicMute
-    pulsemixer --id source-1 --toggle-mute
+    pactl set-source-mute $(pactl get-default-source) toggle
 
 # mixer super + m
 super + shift + control + m
@@ -44,23 +44,23 @@ super + shift + control + m
 super + shift + m
 	open_neomutt
 
-##; super + plus
-#XF86AudioRaiseVolume
-#	pamixer --allow-boost -i 5
-##; super + shift + plus
-#shift + XF86AudioRaiseVolume
-#	pamixer --allow-boost -i 15
+#; super + plus
+XF86AudioRaiseVolume
+    pactl set-sink-volume $(pactl get-default-sink) +5%
+#; super + shift + plus
+shift + XF86AudioRaiseVolume
+    pactl set-sink-volume $(pactl get-default-sink) +15%
 
-##; super + minus
-#XF86AudioLowerVolume
-#	pamixer --allow-boost -d 5
-##; super + shift + minus
-#shift + XF86AudioLowerVolume
-#	pamixer --allow-boost -d 15
+#; super + minus
+XF86AudioLowerVolume
+    pactl set-sink-volume $(pactl get-default-sink) -5%
+#; super + shift + minus
+shift + XF86AudioLowerVolume
+    pactl set-sink-volume $(pactl get-default-sink) -15%
 
 #; super + shift + m
 XF86AudioMute
-	pamixer --allow-boost -t
+    pactl set-sink-mute $(pactl get-default-sink) toggle
 
 XF86AudioPlay
 	playerctl play-pause
@@ -73,3 +73,9 @@ super + {F12, F10, F11}
 
 super + F7
     $HOME/.screenlayout/internal_monitor
+
+XF86MonBrightnessDown
+    sudo brightnessctl set 10%-
+
+XF86MonBrightnessUp
+    sudo brightnessctl set 10%+

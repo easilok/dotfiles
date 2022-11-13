@@ -10,6 +10,9 @@ local vol_icon_color = beautiful.fg_normal
 
 awesome.connect_signal("evil::volume", function(volume, muted)
   local cur_vol = tonumber(volume)
+  if (cur_vol == nil) then
+      cur_vol = 0
+  end
   if vol_icon ~= "" and cur_vol >= 70 then
     vol_icon = ""
     vol:UpdateIcon(vol_icon, vol_icon_color)
