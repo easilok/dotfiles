@@ -9,3 +9,4 @@
   luafile ~/.config/nvim/plugin-config/todo-comments.lua
   source ~/.config/nvim/plugin-config/markdown-preview.vim
   luafile ~/.config/nvim/plugin-config/gitsigns.lua
+  source ~/.config/nvim/plugin-config/codi.vim

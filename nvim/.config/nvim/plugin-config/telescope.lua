@@ -1,11 +1,25 @@
+local action_layout = require('telescope.actions.layout')
+
 require("telescope").setup({
 	defaults = {
 		-- file_sorter = require("telescope.sorters").get_fzy_sorter,
 		prompt_prefix = " >",
 		color_devicons = true,
-
-		-- mappings = {
-		-- },
+        layout_strategy = 'vertical',
+        layout_config = {
+            vertical = {
+                width = 0.8,
+                -- prompt_position = "top",
+            }
+        },
+		mappings = {
+            i = {
+                ["<C-t>"] = action_layout.cycle_layout_next,
+            },
+            n = {
+                ["<C-t>"] = action_layout.cycle_layout_next,
+            }
+		},
 	},
 	-- extensions = { },
 })
