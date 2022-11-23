@@ -17,3 +17,4 @@
   luafile ~/.config/nvim/lsp/yaml-ls.lua
   luafile ~/.config/nvim/lsp/lua-ls.lua
   luafile ~/.config/nvim/lsp/bash-ls.lua
+  luafile ~/.config/nvim/lsp/rust-ls.lua
