@@ -1,4 +1,4 @@
-  luafile ~/.config/nvim/lsp/compe-config.lua
+  luafile ~/.config/nvim/lsp/cmp-config.lua
   luafile ~/.config/nvim/lsp/lspsaga-config.lua
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   source ~/.config/nvim/lsp/lsp-config.vim

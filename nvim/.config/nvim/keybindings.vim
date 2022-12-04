@@ -157,3 +157,5 @@ nnoremap <silent> <Space>ch :call clearmatches()<CR>
 nmap <Space>yfp :let @" = expand("%")<cr>
 
 nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>gg :Git<CR>
+nnoremap <leader>gf :Git fetch --all<CR>

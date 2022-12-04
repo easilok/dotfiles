@@ -41,7 +41,12 @@ let g:tex_flavor = 'latex'
 Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
 " Plug 'glepnir/lspsaga.nvim'
 " Plug 'rinx/lspsaga.nvim'
 Plug 'tami5/lspsaga.nvim'
@@ -78,6 +83,7 @@ Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'folke/todo-comments.nvim'
 Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
