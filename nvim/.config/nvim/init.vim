@@ -29,11 +29,14 @@ set wildmenu                    " visual autocomplete for command menu
 " This is almost a must if you wish to use buffers in this way.
 set hidden
 
+" enable permanent undotree
+if has("persistent_undo")
+    set undodir=$HOME/.cache/undodir
+    set undofile
+endif
+
 " This script contains windows layout settings
 source ~/.config/nvim/layout.vim
-
-" This script contains filetype settings
-source ~/.config/nvim/file_opt.vim
 
 " This script contains keybindings layout settings
 source ~/.config/nvim/keybindings.vim
@@ -43,6 +46,8 @@ set autoread
 source ~/.config/nvim/lsp/init.vim
 source ~/.config/nvim/plugin-config/init.vim
 
+" This script contains filetype settings
+source ~/.config/nvim/file_opt.vim
 
 if has('termguicolors')
   set termguicolors

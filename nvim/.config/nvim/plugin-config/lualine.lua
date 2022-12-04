@@ -6,7 +6,9 @@ require('lualine').setup({
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
             "NvimTree",
-            "packer"
+            "packer",
+            "undotree",
+            "diff"
         },
         -- ignore_focus = {},
         always_divide_middle = true,

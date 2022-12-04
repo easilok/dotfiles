@@ -135,6 +135,17 @@ inoremap <C-k> <esc>:m .-2<CR>==
 " nnoremap <leader>k :m .-1<CR>==
 " End of Primeagen TOP 5 maps
 
+" From prime. Don't realy know what to do
+" xnoremap <leader>p "_dP
+
+" copy to clipboard
+nnoremap <leader>y  "+y
+vnoremap <leader>y  "+y
+nmap <leader>Y      "+Y
+nnoremap <leader>p  "+p
+vnoremap <leader>p  "+p
+nmap <leader>P      "+P
+
 map <F7> :Explore<CR>
 
 " define line highlight color
@@ -144,3 +155,5 @@ nnoremap <silent> <Space>ah :call matchadd('LineHighlight', '\%'.line('.').'l')<
 " clear all the highlighted lines
 nnoremap <silent> <Space>ch :call clearmatches()<CR>
 nmap <Space>yfp :let @" = expand("%")<cr>
+
+nnoremap <leader>u :UndotreeToggle<CR>

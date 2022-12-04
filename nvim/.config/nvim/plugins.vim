@@ -111,6 +111,8 @@ Plug 'eliba2/vim-node-inspect'
 
 Plug 'metakirby5/codi.vim'
 
+Plug 'mbbill/undotree'
+
 " Initialize plugin system
 call plug#end()
 
