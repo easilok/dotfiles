@@ -1,7 +1,8 @@
-  luafile ~/.config/nvim/lsp/cmp-config.lua
-  luafile ~/.config/nvim/lsp/lspsaga-config.lua
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   source ~/.config/nvim/lsp/lsp-config.vim
+  luafile ~/.config/nvim/lsp/lsp-config.lua
+  luafile ~/.config/nvim/lsp/cmp-config.lua
+  luafile ~/.config/nvim/lsp/lspsaga-config.lua
   " Override lsp keymap
   source ~/.config/nvim/lsp/lspsaga-config.vim
   luafile ~/.config/nvim/lsp/javascript-ls.lua

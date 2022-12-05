@@ -26,8 +26,8 @@ autocmd BufWritePre *.js Neoformat prettier
 autocmd BufWritePre *.jsx Neoformat prettier
 autocmd BufWritePre *.tsx Neoformat prettier
 autocmd BufWritePre *.ts Neoformat prettier
-autocmd BufWritePre *.css lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.scss lua vim.lsp.buf.formatting_sync(nil, 100)
+autocmd BufWritePre *.css lua vim.lsp.buf.format({async = true})
+autocmd BufWritePre *.scss lua vim.lsp.buf.format({async = true})
 
 " Add lsp diagnostic messages to quickfix list
 " By Primeagen
