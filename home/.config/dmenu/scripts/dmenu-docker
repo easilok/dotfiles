@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+CONTAINERS=$(docker ps -a --format '{{ .ID }}\t{{.Image}}\t{{ .Names }}\t({{ .State }})')
+
+choice=$(echo "$CONTAINERS" | $DMENU -l 30)
+
+if [ -z "$choice" ]; then
+	echo "Exit Esc"
+	exit
+fi
+
+# SELECTED_CONTAINER=$(echo $choice | tr "\\t")
+
+SELECTED_CONTAINER=$(echo $choice | awk '{ print $1 }')
+EXISTING_CONTAINER=$(docker ps -a --filter id=$SELECTED_CONTAINER --format '{{ .State }}')
+EXISTING_CONTAINER_NAME=$(docker ps -a --filter id=$SELECTED_CONTAINER --format '{{ .Names }}')
+
+if [ "$#" -ge 1 ]; then
+    if [ "$1" == "--start" ]; then
+        docker restart $SELECTED_CONTAINER \
+            && notify-send "Restarted container success" "\n$EXISTING_CONTAINER_NAME - $SELECTED_CONTAINER" \
+            || notify-send "Restarted container failed" "\n$EXISTING_CONTAINER_NAME - $SELECTED_CONTAINER"
+
+    elif [ "$1" == "--stop" ]; then
+        docker stop $SELECTED_CONTAINER \
+            && notify-send "Stopped container success" "\n$EXISTING_CONTAINER_NAME - $SELECTED_CONTAINER" \
+            || notify-send "Stopped container failed" "\n$EXISTING_CONTAINER_NAME - $SELECTED_CONTAINER"
+
+    fi
+else
+    if [ "$EXISTING_CONTAINER" == "running" ]; then 
+        docker stop $SELECTED_CONTAINER \
+            && notify-send "Stopped container success" "\n$EXISTING_CONTAINER_NAME - $SELECTED_CONTAINER" \
+            || notify-send "Stopped container failed" "\n$EXISTING_CONTAINER_NAME - $SELECTED_CONTAINER"
+
+    else
+        docker restart $SELECTED_CONTAINER \
+            && notify-send "Restarted container success" "\n$EXISTING_CONTAINER_NAME - $SELECTED_CONTAINER" \
+            || notify-send "Restarted container failed" "\n$EXISTING_CONTAINER_NAME - $SELECTED_CONTAINER"
+
+    fi
+fi
