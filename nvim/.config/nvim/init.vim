@@ -29,6 +29,9 @@ set wildmenu                    " visual autocomplete for command menu
 " This is almost a must if you wish to use buffers in this way.
 set hidden
 
+set noswapfile
+set nobackup
+
 " enable permanent undotree
 if has("persistent_undo")
     set undodir=$HOME/.cache/undodir

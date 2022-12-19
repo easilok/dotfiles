@@ -15,11 +15,14 @@ set cursorline                  " hightligh current line
 set modelines=1
 set list
 set listchars=trail:-,tab:>\>
+set scrolloff=8
+" set updatetime=250
 
 " highlight ColorColumn ctermbg=0 guibg=#1b1b1b
 " highlight ColorColumn ctermbg=0 guibg=grey
 " For transparency
 highlight Normal ctermbg=NONE guibg=NONE
+highlight NormalFloat ctermbg=NONE guibg=NONE
 
 " Used this for st-terminal
 " set Vim-specific sequences for RGB colors

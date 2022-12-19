@@ -15,23 +15,6 @@ nmap <leader>bb :b #<CR>
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
 
-
-" nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
-" nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-" nnoremap <leader>fb <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({sorting_strategy="ascending"})<cr>
-" nnoremap <leader>gl <cmd>lua require('telescope.builtin').live_grep()<cr>
-" nnoremap <leader>gs <cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<cr>
-" nnoremap <leader>gw <cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<cr>
-" nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
-" nnoremap <leader>bl <cmd>lua require('telescope.builtin').buffers()<cr>
-" nnoremap <leader>h <cmd>lua require('telescope.builtin').help_tags()<cr>
-" nnoremap <leader>ge <cmd>lua require('telescope.builtin').diagnostics()<cr>
-" nnoremap <leader>gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-" nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
-" nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
-" nnoremap <leader>ga <cmd>Telescope harpoon marks<cr>
-
-
 set splitbelow splitright
 
 " Remap splits navigation to just CTRL + hjkl
@@ -65,6 +48,7 @@ nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
 
 map - <Nop>
+map Q <Nop>
 
 set pastetoggle=<F3>
 
@@ -128,15 +112,12 @@ inoremap ? ?<c-g>u
 inoremap _ _<c-g>u
 " Move lines
 vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '>-2<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 inoremap <C-j> <esc>:m .+1<CR>==
 inoremap <C-k> <esc>:m .-2<CR>==
 " nnoremap <leader>j :m .+1<CR>==
 " nnoremap <leader>k :m .-1<CR>==
 " End of Primeagen TOP 5 maps
-
-" From prime. Don't realy know what to do
-" xnoremap <leader>p "_dP
 
 " copy to clipboard
 nnoremap <leader>y  "+y
@@ -145,6 +126,9 @@ nmap <leader>Y      "+Y
 nnoremap <leader>p  "+p
 vnoremap <leader>p  "+p
 nmap <leader>P      "+P
+
+" From prime. Paste above selected text without replacing buffer
+xnoremap <leader>p "_dP
 
 map <F7> :Explore<CR>
 
@@ -156,6 +140,5 @@ nnoremap <silent> <Space>ah :call matchadd('LineHighlight', '\%'.line('.').'l')<
 nnoremap <silent> <Space>ch :call clearmatches()<CR>
 nmap <Space>yfp :let @" = expand("%")<cr>
 
-nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>gg :Git<CR>
 nnoremap <leader>gf :Git fetch --all<CR>
