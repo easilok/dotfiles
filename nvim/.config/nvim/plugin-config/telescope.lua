@@ -26,7 +26,7 @@ require("telescope").setup({
 
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("harpoon")
--- require('telescope').load_extension('file_browser')
+require('telescope').load_extension('file_browser')
 
 -- vim.api.nvim_set_keymap("n", "<leader>fb", telescope.builtin.current_buffer_fuzzy_find, { sorting_strategy=ascending, prompt_position=top})
 local builtin = require('telescope.builtin')
@@ -48,3 +48,86 @@ vim.keymap.set('n', '<space>lds', builtin.lsp_document_symbols, { desc = '[L]sp 
 vim.keymap.set('n', '<space>lws', builtin.lsp_dynamic_workspace_symbols, {desc = '[L]sp [W]orkspace [S]ymbols' })
 vim.keymap.set('n', '<space>tr', builtin.resume, { desc = '[T]elescope [r]esume' })
 vim.keymap.set('n', '<space>tk', builtin.keymaps, { desc = '[T]elescope [k]eymaps' })
+vim.keymap.set('n', '<space>bf', ":Telescope file_browser<cr>", { noremap = true, desc = '[T]elescope [k]eymaps' })
+
+local actions = require 'telescope.actions'
+local action_state = require "telescope.actions.state"
+
+local function files_wiki()
+  builtin.find_files({
+    prompt_title = "Wiki files",
+    cwd = vim.g.wiki_root,
+    disable_devicons = true, -- the icon is always the same
+    find_command = { "rg", "--files", "--sort", "path" },
+    file_ignore_patterns = {
+      "%.stversions/",
+      "%.git/",
+    },
+    path_display = function(_, path)
+      local name = path:match "(.+)%.[^.]+$"
+      return name or path
+    end,
+    attach_mappings = function(prompt_bufnr, _)
+      actions.select_default:replace_if(function()
+        return action_state.get_selected_entry() == nil
+      end, function()
+        actions.close(prompt_bufnr)
+
+        local new_name = action_state.get_current_line()
+        if new_name == nil or new_name == "" then
+          return
+        end
+
+        vim.fn["wiki#page#open"](new_name)
+      end)
+
+      return true
+    end,
+  })
+end
+
+local function files_nvim()
+  builtin.git_files({
+    prompt_title = "Find Neovim Files: ",
+    cwd = '~/.config/nvim',
+  })
+end
+
+local function wiki_content()
+  builtin.live_grep({
+    prompt_title = "Wiki content",
+    cwd = vim.g.wiki_root,
+    disable_devicons = true, -- the icon is always the same
+    -- find_command = { "rg", "--files", "--sort", "path" },
+    file_ignore_patterns = {
+      "%.stversions/",
+      "%.git/",
+    },
+    path_display = function(_, path)
+      local name = path:match "(.+)%.[^.]+$"
+      return name or path
+    end,
+    attach_mappings = function(prompt_bufnr, _)
+      actions.select_default:replace_if(function()
+        return action_state.get_selected_entry() == nil
+      end, function()
+        actions.close(prompt_bufnr)
+
+        local new_name = action_state.get_current_line()
+        if new_name == nil or new_name == "" then
+          return
+        end
+
+        vim.fn["wiki#page#open"](new_name)
+      end)
+
+      return true
+    end,
+  })
+end
+
+vim.keymap.set('n', '<leader>fw', files_wiki, {  desc = '[Find] [W]iki files' })
+vim.keymap.set('n', '<space>wc', wiki_content, {  desc = '[W]iki [C]ontent' })
+vim.keymap.set('n', '<leader>fc', files_wiki, {  desc = '[Find] Wiki [C]ontent' })
+vim.keymap.set('n', '<space>wf', files_wiki, {  desc = '[W]iki [F]iles' })
+vim.keymap.set('n', '<leader>fv', files_nvim, {  desc = '[F]ind Neo[v]im files' })

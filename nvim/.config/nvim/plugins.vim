@@ -60,6 +60,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -97,12 +98,16 @@ let g:neoformat_enabled_typescript = ['prettier']
 "       \ 'args': ['--config .prettierrc.json'],
 "       \ }
 
-" Use release branch (recommend)
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Wiki
-Plug 'vimwiki/vimwiki'
-let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki',
-                      \ 'syntax': 'markdown', 'ext': '.wiki'}]
+" Plug 'vimwiki/vimwiki'
+" let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki',
+"                       \ 'syntax': 'markdown', 'ext': '.wiki'}]
+Plug 'lervag/wiki.vim'
+let g:wiki_root = '~/Nextcloud/vimwiki'
+Plug 'lervag/wiki-ft.vim'
+Plug 'lervag/lists.vim'
+" fzf for searching
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Live markdown preview
 " Plug 'shime/vim-livedown'
