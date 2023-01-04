@@ -1,9 +1,21 @@
 #!/usr/bin/env bash
 
-if [[ $# -eq 1 ]]; then
+MODE_PATH_ONLY="--path-only"
+
+if [[ $# -ge 1 && "$1" == "$MODE_PATH_ONLY" ]]; then
+    MODE="$1"
+    shift
+fi
+
+if [[ $# -ge 1 ]]; then
     selected=$1
 else
     selected=$(find ~/projects/work/ ~/projects/playground/ ~/ $TMUX_SESSIONIZER_PATH -mindepth 1 -maxdepth 1 -type d | fzf)
+fi
+
+if [[ "$MODE" == "$MODE_PATH_ONLY" ]]; then
+    [[ -z $selected ]] && echo "." || echo "$selected"
+    exit 0
 fi
 
 if [[ -z $selected ]]; then

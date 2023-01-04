@@ -52,6 +52,7 @@ alias gbat='bat --paging=never --style=changes -d'
 alias mvp=mpv
 unalias st 2> /dev/null
 unalias g 2> /dev/null
+alias cdprj='cd $(tmux-sessionizer --path-only)'
 alias tprj=tmux-sessionizer
 alias asdf=$HOME/scripts/DefaultKeyboardConfigs.sh
 
