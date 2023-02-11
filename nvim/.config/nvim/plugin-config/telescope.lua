@@ -40,6 +40,9 @@ vim.keymap.set('n', '<leader>gs', function() builtin.grep_string( { search = vim
 vim.keymap.set('n', '<leader>gw', function() builtin.grep_string( { search = vim.fn.expand("<cword>") } ) end, { desc = '[G]rep current [w]ord' })
 vim.keymap.set('n', '<leader>bl', builtin.buffers, { desc = '[B]uffer [l]ist' })
 vim.keymap.set('n', '<leader>ge', builtin.diagnostics, { desc = '[G]rep diagnostics' })
+vim.keymap.set('n', '<space>we', builtin.diagnostics, { desc = '[G]rep diagnostics' })
+vim.keymap.set('n', '<leader>be', function() builtin.diagnostics({ bufnr=0}) end, { desc = '[B]uffer diagnostics' })
+vim.keymap.set('n', '<space>be', function() builtin.diagnostics({ bufnr=0}) end, { desc = '[B]uffer diagnostics' })
 vim.keymap.set('n', '<leader>gr', builtin.lsp_references, { desc = '[G]rep [r]eferences' })
 vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it [b]ranches' })
 vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = '[G]it [c]ommits' })
@@ -48,7 +51,7 @@ vim.keymap.set('n', '<space>lds', builtin.lsp_document_symbols, { desc = '[L]sp 
 vim.keymap.set('n', '<space>lws', builtin.lsp_dynamic_workspace_symbols, {desc = '[L]sp [W]orkspace [S]ymbols' })
 vim.keymap.set('n', '<space>tr', builtin.resume, { desc = '[T]elescope [r]esume' })
 vim.keymap.set('n', '<space>tk', builtin.keymaps, { desc = '[T]elescope [k]eymaps' })
-vim.keymap.set('n', '<space>bf', ":Telescope file_browser<cr>", { noremap = true, desc = '[T]elescope [k]eymaps' })
+vim.keymap.set('n', '<space>bf', ":Telescope file_browser<cr>", { noremap = true, desc = '[B]rowser [f]iles' })
 
 local actions = require 'telescope.actions'
 local action_state = require "telescope.actions.state"

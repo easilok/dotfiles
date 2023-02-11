@@ -55,6 +55,8 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'nvim-treesitter/nvim-treesitter-context'
 " Plug 'nvim-treesitter/playground'
+Plug 'liuchengxu/vista.vim'
+
 Plug 'folke/which-key.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -65,7 +67,9 @@ Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'MunifTanjim/nui.nvim' " required by neo-tree
 " NerdTree
 " Plug 'scrooloose/nerdtree'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -111,7 +115,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Live markdown preview
 " Plug 'shime/vim-livedown'
-Plug 'instant-markdown/vim-instant-markdown'
+" Plug 'instant-markdown/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install'}
+Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install', 'branch' : 'wiki-filetype'}
 
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
@@ -124,6 +129,8 @@ Plug 'eliba2/vim-node-inspect'
 Plug 'metakirby5/codi.vim'
 
 Plug 'mbbill/undotree'
+
+Plug 'notjedi/nvim-rooter.lua'
 
 " Initialize plugin system
 call plug#end()

@@ -11,3 +11,5 @@
   luafile ~/.config/nvim/plugin-config/gitsigns.lua
   source ~/.config/nvim/plugin-config/codi.vim
   source ~/.config/nvim/plugin-config/undotree.vim
+  luafile ~/.config/nvim/plugin-config/router.lua
+  source ~/.config/nvim/plugin-config/vista.vim
