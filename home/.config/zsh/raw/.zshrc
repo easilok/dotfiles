@@ -66,7 +66,7 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # Enable searching through history
-bindkey '^R' history-incremental-pattern-search-backward
+# bindkey '^R' history-incremental-pattern-search-backward
 
 # Edit line in vim buffer ctrl-v
 # autoload edit-command-line; zle -N edit-command-line
