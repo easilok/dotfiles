@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+choice=$(grep -i 'host ' .ssh/config | awk '{ print $2}' | $DMENU -l 30 -p "SSH connection: ")
+
+if [ -z "$choice" ]; then
+	echo "Exit Esc"
+	exit
+fi
+
+default_terminal -e ssh $choice

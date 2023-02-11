@@ -2,7 +2,8 @@
 
 NEXT_APP=""
 COMMON_FLAGS="--delay 2 --count --quality 100 --freeze"
-FILENAME="$HOME/Screenshots/%Y-%m-%d-%H%M%S_$wx$h_scrot.png"
+FOLDER="$HOME/Pictures"
+FILENAME="$FOLDER/%Y-%m-%d-%H%M%S_$wx$h_scrot.png"
 
 if [ -f $HOME/.config/dmenu/dmenurc ]; then
   . $HOME/.config/dmenu/dmenurc
@@ -26,6 +27,8 @@ if [ -z "$choice" ]; then
     echo "Exit Esc"
 exit
 fi
+
+mkdir -p $FOLDER
 
 if [ "$choice" == ' fullscreen ' ]; then
     command="scrot $COMMON_FLAGS $FILENAME $NEXT_APP"
