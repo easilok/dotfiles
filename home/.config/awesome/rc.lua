@@ -229,6 +229,8 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
           layout = wibox.layout.fixed.horizontal,
           -- widgets.bat,
+          widgets.outlook_event,
+          widgets.separator,
           widgets.battery,
           widgets.separator,
           widgets.vol,

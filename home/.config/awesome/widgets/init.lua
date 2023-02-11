@@ -27,4 +27,6 @@ widgets.separator = wibox.widget.textbox(string.format(' <span color="%s">|</spa
 
 widgets.textclock = require('widgets.textclock')
 
+widgets.outlook_event = require('widgets.outlook_event')
+
 return widgets
