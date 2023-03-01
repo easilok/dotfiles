@@ -24,6 +24,10 @@ require("telescope").setup({
 	-- extensions = { },
 })
 
+-- Set new commands to better name
+vim.cmd([[command! -nargs=0 GoToFile :Telescope find_files]])
+vim.cmd([[command! -nargs=0 GoToCommand :Telescope commands]])
+
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("harpoon")
 require('telescope').load_extension('file_browser')
@@ -134,3 +138,4 @@ vim.keymap.set('n', '<space>wc', wiki_content, {  desc = '[W]iki [C]ontent' })
 vim.keymap.set('n', '<leader>fc', files_wiki, {  desc = '[Find] Wiki [C]ontent' })
 vim.keymap.set('n', '<space>wf', files_wiki, {  desc = '[W]iki [F]iles' })
 vim.keymap.set('n', '<leader>fv', files_nvim, {  desc = '[F]ind Neo[v]im files' })
+
