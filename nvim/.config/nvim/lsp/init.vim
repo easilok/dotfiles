@@ -4,7 +4,6 @@
   luafile ~/.config/nvim/lsp/cmp-config.lua
   luafile ~/.config/nvim/lsp/lspsaga-config.lua
   " Override lsp keymap
-  source ~/.config/nvim/lsp/lspsaga-config.vim
   luafile ~/.config/nvim/lsp/javascript-ls.lua
   luafile ~/.config/nvim/lsp/php-ls.lua
   luafile ~/.config/nvim/lsp/python-ls.lua
@@ -19,3 +18,4 @@
   luafile ~/.config/nvim/lsp/lua-ls.lua
   luafile ~/.config/nvim/lsp/bash-ls.lua
   luafile ~/.config/nvim/lsp/rust-ls.lua
+  luafile ~/.config/nvim/lsp/eslint-ls.lua
