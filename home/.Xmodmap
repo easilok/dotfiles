@@ -1,6 +1,6 @@
 clear lock
 keycode  21 = less greater less greater guillemotleft guillemotright guillemotleft
-keycode  66 = Control_L Control_L Control_L Control_L
+keycode  66 = Escape Escape Escape Escape
 keysym XF86Back = Home
 keysym XF86Forward = End
 
