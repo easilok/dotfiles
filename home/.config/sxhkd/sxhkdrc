@@ -74,6 +74,9 @@ super + {F12, F10, F11}
 super + F7
     $HOME/.screenlayout/internal_monitor
 
+super + shift + F7
+    /home/luis/.config/dmenu/scripts/dmenu-screen
+
 XF86MonBrightnessDown
     sudo brightnessctl set 10%-
 

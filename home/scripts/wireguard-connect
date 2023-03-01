@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+DIRECTION="up"
+
+if [[ $# -ge 1 ]]; then
+    if [[ "$1" == "--down" ]] || [[ "$1" == "-d" ]]; then
+        DIRECTION="down"
+        shift
+    fi
+fi
+
+echo "Running as root is required, so asking permission"
+
+files=$(sudo find /etc/wireguard -type f)
+
+selected=$(echo "$files"| fzf)
+
+if [ -z $selected ]; then
+    exit 0
+fi
+
+sudo wg-quick $DIRECTION $selected
