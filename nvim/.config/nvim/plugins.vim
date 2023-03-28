@@ -52,6 +52,7 @@ Plug 'onsails/lspkind.nvim'
 " Plug 'rinx/lspsaga.nvim'
 Plug 'tami5/lspsaga.nvim'
 Plug 'ray-x/lsp_signature.nvim'
+Plug 'j-hui/fidget.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'nvim-treesitter/nvim-treesitter-context'
 " Plug 'nvim-treesitter/playground'
@@ -131,6 +132,16 @@ Plug 'metakirby5/codi.vim'
 Plug 'mbbill/undotree'
 
 Plug 'notjedi/nvim-rooter.lua'
+
+" Managing auto session creator
+Plug 'tpope/vim-obsession'
+
+" Database interface
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+
+Plug 'github/copilot.vim'
+Plug 'eandrju/cellular-automaton.nvim'
 
 " Initialize plugin system
 call plug#end()

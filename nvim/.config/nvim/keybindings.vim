@@ -10,6 +10,7 @@ nmap <leader>k :bprevious<CR>
 
 " Toggle between buffers
 nmap <leader>bb :b #<CR> 
+nmap <space>bb :b #<CR> 
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab

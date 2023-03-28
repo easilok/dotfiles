@@ -11,7 +11,7 @@ nnoremap <silent> <space>D <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <space>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <space>ca <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <space>e <cmd>lua vim.diagnostic.open_float()<CR>
-nnoremap <silent> <space>f <cmd>lua vim.lsp.buf.format({async = true})<CR>
+nnoremap <silent> -f <cmd>lua vim.lsp.buf.format({async = true})<CR>
 nnoremap <silent> <space>ws <cmd>lua vim.lsp.workspace_symbol()<CR>
 
 " auto-format

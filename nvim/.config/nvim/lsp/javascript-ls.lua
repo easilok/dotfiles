@@ -9,8 +9,17 @@ require'lspconfig'.tsserver.setup{
     end
 }
 -- npm install -g vls
-require'lspconfig'.vuels.setup{
-    capabilities = capabilities
+-- require'lspconfig'.vuels.setup{
+--     capabilities = capabilities
+-- }
+-- vim.cmd [[ autocmd BufWritePre *.vue lua vim.lsp.buf.format({async = true}) ]]
+
+-- npm install -g @volar/vue-language-server
+require'lspconfig'.volar.setup{
+    capabilities = capabilities,
+    filetypes = {'typescript', 'javascript', 'vue'},
+    on_attach = function(client, bufnr)
+        vim.keymap.set('n', '<space>f', function() vim.cmd('Neoformat prettier') end, { desc = '[F]ormat buffer' })
+    end
 }
-vim.cmd [[ autocmd BufWritePre *.vue lua vim.lsp.buf.format({async = true}) ]]
 

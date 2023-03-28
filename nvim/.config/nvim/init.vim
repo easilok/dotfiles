@@ -59,3 +59,4 @@ endif
 " For per folder vim-settings
 set exrc
 set secure
+let g:netrw_altfile = 1

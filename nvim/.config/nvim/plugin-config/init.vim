@@ -13,3 +13,4 @@
   source ~/.config/nvim/plugin-config/undotree.vim
   luafile ~/.config/nvim/plugin-config/router.lua
   source ~/.config/nvim/plugin-config/vista.vim
+  luafile ~/.config/nvim/plugin-config/fidget.lua

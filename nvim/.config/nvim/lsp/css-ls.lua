@@ -6,5 +6,4 @@ require'lspconfig'.cssls.setup {
   capabilities = capabilities,
 }
 
-require'lspconfig'.cssls.setup{}
-
+require'lspconfig'.tailwindcss.setup{}
