@@ -18,9 +18,9 @@ else
 fi
 
 declare -a options=(" lock 
- log out 
- suspend 
  hibernate 
+ suspend 
+ log out 
  reboot 
  shutdown 
  quit ")

@@ -26,6 +26,12 @@ cmd mkfile ${{
   $EDITOR $ans
 }}
 
+cmd mktouch ${{
+  printf "File Name: "
+  read ans
+  touch $ans
+}}
+
 cmd open_with ${{
   printf "Open with command: "
   read command

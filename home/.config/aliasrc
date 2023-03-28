@@ -52,9 +52,13 @@ alias gbat='bat --paging=never --style=changes -d'
 alias mvp=mpv
 unalias st 2> /dev/null
 unalias g 2> /dev/null
+alias cdp='cd $(tmux-sessionizer --path-only)'
 alias cdprj='cd $(tmux-sessionizer --path-only)'
+alias tp=tmux-sessionizer
 alias tprj=tmux-sessionizer
+alias trp=tmux-resumer
 alias asdf=$HOME/scripts/DefaultKeyboardConfigs.sh
+alias bat=batcat
 
 if [ -f "$(which git-safer)" ]; then
     alias g=git-safer
