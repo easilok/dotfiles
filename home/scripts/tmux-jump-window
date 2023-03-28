@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Set default JUMP_WINDOW name
+[[ -z $JUMP_WINDOW ]] && JUMP_WINDOW=test
+
+if [[ $# -ge 1 ]]; then
+    JUMP_WINDOW=$1
+    shift
+fi
+
+TMUX_WINDOWS=($(tmux list-windows | awk '{ print $2 }'))
+
+for window in "${TMUX_WINDOWS[@]}"
+do
+    if [[ "$window" =~ "$JUMP_WINDOW".* ]]; then
+        tmux select-window -t $JUMP_WINDOW
+        exit
+    fi
+done
+
+tmux new-window -n $JUMP_WINDOW

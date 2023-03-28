@@ -13,8 +13,8 @@ fpath=($HOME/.config/zsh/completion $fpath)
 autoload -U colors && colors
 
 # History in cache directory:
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 
 if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*) ]]
