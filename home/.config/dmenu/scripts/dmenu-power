@@ -17,9 +17,9 @@ else
   DMENU='dmenu -i'
 fi
 
-declare -a options=(" lock 
- hibernate 
+declare -a options=(" hibernate 
  suspend 
+ lock 
  log out 
  reboot 
  shutdown 
