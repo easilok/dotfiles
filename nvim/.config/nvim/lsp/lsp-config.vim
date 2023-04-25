@@ -23,6 +23,7 @@ autocmd BufWritePre *.js Neoformat prettier
 autocmd BufWritePre *.jsx Neoformat prettier
 autocmd BufWritePre *.tsx Neoformat prettier
 autocmd BufWritePre *.ts Neoformat prettier
+autocmd BufWritePre *.vue Neoformat prettier
 autocmd BufWritePre *.css lua vim.lsp.buf.format({async = true})
 autocmd BufWritePre *.scss lua vim.lsp.buf.format({async = true})
 

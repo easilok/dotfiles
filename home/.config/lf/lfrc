@@ -184,6 +184,7 @@ map x cut
 map y copy
 map <enter> open
 map mf mkfile
+map mt mktouch
 map mr sudomkfile
 map md mkdir
 map ms $mkscript

@@ -11,10 +11,13 @@ nmap <leader>k :bprevious<CR>
 " Toggle between buffers
 nmap <leader>bb :b #<CR> 
 nmap <space>bb :b #<CR> 
+" Remap alternate file
+nmap <M--> <C-^>
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <space>bq :bp <BAR> bd #<CR>
 
 set splitbelow splitright
 
@@ -142,4 +145,8 @@ nnoremap <silent> <Space>ch :call clearmatches()<CR>
 nmap <Space>yfp :let @" = expand("%")<cr>
 
 nnoremap <leader>gg :Git<CR>
-nnoremap <leader>gf :Git fetch --all<CR>
+nnoremap <leader>gf :Git <CR>:Git fetch --all<CR>
+nnoremap <leader>gp :Git <CR>:Git push<CR>
+nnoremap <space>gg :Git<CR>
+nnoremap <space>gf :Git <CR>:Git fetch --all<CR>
+nnoremap <space>gp :Git <CR>:Git push<CR>

@@ -5,7 +5,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 require'lspconfig'.tsserver.setup{
     capabilities = capabilities,
     on_attach = function(client, bufnr)
-        vim.keymap.set('n', '<space>f', function() vim.cmd('Neoformat prettier') end, { desc = '[F]ormat buffer' })
+        vim.keymap.set('n', '-f', function() vim.cmd('Neoformat prettier') end, { desc = '[F]ormat buffer' })
     end
 }
 -- npm install -g vls
@@ -19,7 +19,7 @@ require'lspconfig'.volar.setup{
     capabilities = capabilities,
     filetypes = {'typescript', 'javascript', 'vue'},
     on_attach = function(client, bufnr)
-        vim.keymap.set('n', '<space>f', function() vim.cmd('Neoformat prettier') end, { desc = '[F]ormat buffer' })
+        vim.keymap.set('n', '-f', function() vim.cmd('Neoformat prettier') end, { desc = '[F]ormat buffer' })
     end
 }
 
