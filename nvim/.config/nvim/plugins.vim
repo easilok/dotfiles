@@ -140,7 +140,8 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
+Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 Plug 'eandrju/cellular-automaton.nvim'
 
 " Initialize plugin system

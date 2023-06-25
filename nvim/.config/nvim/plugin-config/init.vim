@@ -14,3 +14,4 @@
   luafile ~/.config/nvim/plugin-config/router.lua
   source ~/.config/nvim/plugin-config/vista.vim
   luafile ~/.config/nvim/plugin-config/fidget.lua
+  luafile ~/.config/nvim/plugin-config/tabnine.lua

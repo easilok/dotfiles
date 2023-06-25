@@ -142,8 +142,22 @@ local function wiki_content()
     })
 end
 
+local function grep_visual_selection()
+    vim.cmd('noau normal! "vy"')
+	local text = vim.fn.getreg('v')
+	vim.fn.setreg('v', {})
+
+	text = string.gsub(text, "\n", "")
+
+    builtin.grep_string({
+        search = text,
+    })
+end
+
 vim.keymap.set('n', '<leader>fw', files_wiki, { desc = '[Find] [W]iki files' })
 vim.keymap.set('n', '<space>wc', wiki_content, { desc = '[W]iki [C]ontent' })
 vim.keymap.set('n', '<leader>fc', files_wiki, { desc = '[Find] Wiki [C]ontent' })
 vim.keymap.set('n', '<space>wf', files_wiki, { desc = '[W]iki [F]iles' })
 vim.keymap.set('n', '<leader>fv', files_nvim, { desc = '[F]ind Neo[v]im files' })
+vim.keymap.set('v', '<leader>gs', grep_visual_selection, { desc = '[G]rep visual [s]earch' })
+vim.keymap.set('v', '<space>gs', grep_visual_selection, { desc = '[G]rep visual [s]earch' })
