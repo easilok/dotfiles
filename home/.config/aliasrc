@@ -59,6 +59,7 @@ alias tprj=tmux-sessionizer
 alias trp=tmux-resumer
 alias asdf=$HOME/scripts/DefaultKeyboardConfigs.sh
 alias bat=batcat
+alias va='source venv/bin/activate'
 
 if [ -f "$(which git-safer)" ]; then
     alias g=git-safer

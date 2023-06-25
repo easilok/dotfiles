@@ -1,0 +1,51 @@
+#!/bin/bash
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+declare -a options=(" pt 
+ gb 
+ colemak 
+ colemak-dh 
+ quit ")
+
+if [[ $# -ge 1 ]]; then
+    KEYBOARD_LAYOUT=$1
+else
+    KEYBOARD_LAYOUT=$(echo -e "${options[@]}" | $DMENU -p 'Choose keyboard layout: ')
+fi
+
+if [ "$KEYBOARD_LAYOUT" == ' quit ' ]; then
+    echo "Program terminated."
+    exit
+fi
+
+if [ -z "$KEYBOARD_LAYOUT" ]; then
+    echo "Exit Esc"
+    exit
+fi
+
+xmodmap -e "clear lock"
+xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+setxkbmap -option caps:escape
+
+if [[ $KEYBOARD_LAYOUT == *"gb-colemak"* ]]; then
+    KEYBOARD_LAYOUT="gb -variant colemak"
+elif [[ "$KEYBOARD_LAYOUT" == *"colemak-dh"* ]]; then
+    KEYBOARD_LAYOUT="gb -variant colemak_dh"
+elif [[ "$KEYBOARD_LAYOUT" == *"gb"* ]]; then
+    KEYBOARD_LAYOUT="gb -variant intl"
+fi
+
+echo "Setting keyboard layout to $KEYBOARD_LAYOUT"
+setxkbmap $KEYBOARD_LAYOUT
+
+if [[ "$KEYBOARD_LAYOUT" == "pt" ]]; then
+    [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+fi
+
+xcape -e 'Control_L=Escape' -t 175
+
