@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Get git current branch
+GIT_CURRENT_BRANCH=$(git branch --show-current 2> /dev/null)
+
+# Set rebase source branch
+[[ -z $GIT_REBASE_BRANCH ]] && GIT_REBASE_BRANCH=development
+
+if [ $# -gt 0 ]; then
+    GIT_REBASE_BRANCH=$1
+    shift
+fi
+
+# Evaluate path to protection
+if [ -z "$GIT_CURRENT_BRANCH" ]; then
+    echo "Not on a git repository."
+else
+    git checkout $GIT_REBASE_BRANCH
+    if [[ ${?} -ne 0 ]]; then
+        echo "Could not checkout rebase source branch $GIT_REBASE_BRANCH."
+        git checkout $GIT_CURRENT_BRANCH
+    else
+        git pull
+        if [[ ${?} -ne 0 ]]; then
+            echo "Could not pull rebase source branch $GIT_REBASE_BRANCH."
+        else
+            git checkout $GIT_CURRENT_BRANCH && \
+                git rebase $GIT_REBASE_BRANCH
+        fi
+    fi
+fi
+
