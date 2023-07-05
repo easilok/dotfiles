@@ -67,7 +67,7 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'MunifTanjim/nui.nvim' " required by neo-tree
