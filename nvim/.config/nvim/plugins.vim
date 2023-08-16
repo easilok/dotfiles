@@ -102,13 +102,20 @@ let g:neoformat_enabled_typescript = ['prettier']
 " let g:neoformat_javascript_prettier = {
 "       \ 'args': ['--config .prettierrc.json'],
 "       \ }
+let g:neoformat_python_black = {
+    \ 'exe': 'black',
+    \ 'stdin': 1,
+    \ 'args': ['-l 120', '-q', '-'],
+    \ }
+
+" let g:neoformat_enable_python = ['black']
+" let g:neoformat_verbose = 1 " Enable neorformat debug
 
 " Wiki
 " Plug 'vimwiki/vimwiki'
 " let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki',
 "                       \ 'syntax': 'markdown', 'ext': '.wiki'}]
 Plug 'lervag/wiki.vim'
-let g:wiki_root = '~/Nextcloud/vimwiki'
 Plug 'lervag/wiki-ft.vim'
 Plug 'lervag/lists.vim'
 " fzf for searching
@@ -143,6 +150,8 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 " Plug 'github/copilot.vim'
 Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 Plug 'eandrju/cellular-automaton.nvim'
+
+Plug 'vlime/vlime', {'rtp': 'vim/'}
 
 " Initialize plugin system
 call plug#end()
