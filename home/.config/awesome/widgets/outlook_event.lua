@@ -9,7 +9,7 @@ outlook_event_tooltip:add_to_object(outlook_event_tb)
 
 local outlook_events_script = [[
   bash -c "
-    cat /tmp/next_event || echo No Outlook events
+    cat /tmp/outlookEvents/next_event || echo No Outlook events
   "
 ]]
 
