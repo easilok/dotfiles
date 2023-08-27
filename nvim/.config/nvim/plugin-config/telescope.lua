@@ -78,6 +78,7 @@ local function files_wiki()
         file_ignore_patterns = {
             "%.stversions/",
             "%.git/",
+            "%journal/",
         },
         path_display = function(_, path)
             local name = path:match "(.+)%.[^.]+$"
@@ -102,10 +103,48 @@ local function files_wiki()
     })
 end
 
+local function files_wiki_journal()
+    builtin.find_files({
+        prompt_title = "Wiki Journal files",
+        cwd = vim.g.wiki_root_journal,
+        disable_devicons = true, -- the icon is always the same
+        find_command = { "rg", "--files", "--sort", "path" },
+        file_ignore_patterns = {
+            "%.stversions/",
+            "%.git/",
+        },
+        -- path_display = function(_, path)
+        --     local name = path:match "(.+)%.[^.]+$"
+        --     return name or path
+        -- end,
+        attach_mappings = function(prompt_bufnr, _)
+            actions.select_default:replace_if(function()
+                return action_state.get_selected_entry() == nil
+            end, function()
+                actions.close(prompt_bufnr)
+
+                local new_name = action_state.get_current_line()
+                if new_name == nil or new_name == "" then
+                    return
+                end
+
+                vim.fn["wiki#page#open"](new_name)
+            end)
+
+            return true
+        end,
+    })
+end
+
 local function files_nvim()
     builtin.git_files({
         prompt_title = "Find Neovim Files: ",
-        cwd = '~/.config/nvim',
+        cwd = '~/.config/nvim/',
+        find_command = { "rg", "--files", "--sort", "path" },
+        file_ignore_patterns = {
+            "%.stversions/",
+            "%.git/",
+        },
     })
 end
 
@@ -159,5 +198,8 @@ vim.keymap.set('n', '<space>wc', wiki_content, { desc = '[W]iki [C]ontent' })
 vim.keymap.set('n', '<leader>fc', files_wiki, { desc = '[Find] Wiki [C]ontent' })
 vim.keymap.set('n', '<space>wf', files_wiki, { desc = '[W]iki [F]iles' })
 vim.keymap.set('n', '<leader>fv', files_nvim, { desc = '[F]ind Neo[v]im files' })
+vim.keymap.set('n', '<leader>fj', files_wiki_journal, { desc = '[Find] [J]ournal Wiki files' })
+vim.keymap.set('n', '<space>wj', files_wiki_journal, { desc = '[W]iki [J]ournal files' })
+
 vim.keymap.set('v', '<leader>gs', grep_visual_selection, { desc = '[G]rep visual [s]earch' })
 vim.keymap.set('v', '<space>gs', grep_visual_selection, { desc = '[G]rep visual [s]earch' })

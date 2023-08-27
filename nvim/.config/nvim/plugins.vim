@@ -33,7 +33,7 @@ Plug 'wellle/targets.vim'
 "Surround
 Plug 'tpope/vim-surround'
 
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 " latex
 Plug 'lervag/vimtex'
 let g:tex_flavor = 'latex'
@@ -69,8 +69,8 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " Plug 'kyazdani42/nvim-tree.lua'
-Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'MunifTanjim/nui.nvim' " required by neo-tree
+" Plug 'nvim-neo-tree/neo-tree.nvim'
+" Plug 'MunifTanjim/nui.nvim' " required by neo-tree
 " NerdTree
 " Plug 'scrooloose/nerdtree'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -96,28 +96,13 @@ Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " Prettier
 Plug 'sbdchd/neoformat'
-let g:neoformat_try_node_exe = 1 " Use project installed prettier
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_enabled_typescript = ['prettier']
-" let g:neoformat_javascript_prettier = {
-"       \ 'args': ['--config .prettierrc.json'],
-"       \ }
-let g:neoformat_python_black = {
-    \ 'exe': 'black',
-    \ 'stdin': 1,
-    \ 'args': ['-l 120', '-q', '-'],
-    \ }
-
-" let g:neoformat_enable_python = ['black']
-" let g:neoformat_verbose = 1 " Enable neorformat debug
 
 " Wiki
-" Plug 'vimwiki/vimwiki'
-" let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki',
-"                       \ 'syntax': 'markdown', 'ext': '.wiki'}]
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
 Plug 'lervag/lists.vim'
+" Wiki addons
+Plug 'itchyny/calendar.vim'
 " fzf for searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
@@ -151,7 +136,9 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 Plug 'eandrju/cellular-automaton.nvim'
 
-Plug 'vlime/vlime', {'rtp': 'vim/'}
+" Plug 'vlime/vlime', {'rtp': 'vim/'}
+
+Plug 'AndrewRadev/linediff.vim'
 
 " Initialize plugin system
 call plug#end()

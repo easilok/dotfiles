@@ -25,8 +25,9 @@
 -- vim.keymap.set('nivx', '<F6>', nvim_tree.toggle, {})
 -- vim.keymap.set('n', '<F6>', nvim_tree.toggle, {})
 
-require("neo-tree").setup()
-vim.keymap.set('n', '<F6>', ":Neotree toggle<cr>" , {})
+-- Uncomment follow lines when neo-tree is enabled
+-- require("neo-tree").setup()
+-- vim.keymap.set('n', '<F6>', ":Neotree toggle<cr>" , {})
 
-vim.cmd [[hi NvimTreeNormal guibg=NONE]]
-vim.cmd [[hi NvimTreeNormalNC guibg=NONE]]
+-- vim.cmd [[hi NvimTreeNormal guibg=NONE]]
+-- vim.cmd [[hi NvimTreeNormalNC guibg=NONE]]

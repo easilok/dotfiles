@@ -77,7 +77,7 @@ vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>",{ desc = 'Lsp 
 -- To disable it just use ":Lspsaga hover_doc ++quiet"
 -- Pressing the key twice will enter the hover window
 vim.keymap.set("n", "<space>gk", "<cmd>Lspsaga hover_doc<CR>", { desc = 'Lsp [S]aga hover doc' })
-vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = 'Lsp [S]aga hover doc' })
+vim.keymap.set("n", "-K", "<cmd>Lspsaga hover_doc<CR>", { desc = 'Lsp [S]aga hover doc' })
 
 vim.keymap.set("n", "<space>ss", "<cmd>Lspsaga signature_help<CR>", { desc = 'Lsp [S]aga [S]ignature Help'})
 

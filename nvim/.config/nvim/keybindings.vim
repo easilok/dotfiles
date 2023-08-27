@@ -20,6 +20,9 @@ nmap <M--> <C-^>
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <space>bq :bp <BAR> bd #<CR>
+" Close current buffer
+nmap <leader>:bd! #<CR>
+nmap <space>:bd! #<CR>
 
 set splitbelow splitright
 
@@ -152,3 +155,11 @@ nnoremap <leader>gp :Git <CR>:Git push<CR>
 nnoremap <space>gg :Git<CR>
 nnoremap <space>gf :Git <CR>:Git fetch --all<CR>
 nnoremap <space>gp :Git <CR>:Git push<CR>
+
+nnoremap <space>qlo :lopen<CR> "[L]ocation list [o]pen
+nnoremap <space>qlc :lclose<CR> "[L]ocation list [c]lose
+nnoremap <space>qo :copen<CR> "[Q]uickfix list [o]pen
+nnoremap <space>qc :cclose<CR> "[Q]uickfix list [c]lose
+
+nnoremap <silent> <leader>x :!chmod +x %<CR>
+" vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
