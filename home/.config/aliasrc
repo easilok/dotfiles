@@ -60,6 +60,9 @@ alias trp=tmux-resumer
 alias asdf=$HOME/scripts/DefaultKeyboardConfigs.sh
 alias bat=batcat
 alias va='source venv/bin/activate'
+alias wo="pomo 'work'"
+alias br="pomo 'break'"
+alias t=todo
 
 if [ -f "$(which git-safer)" ]; then
     alias g=git-safer

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Requires https://github.com/caarlos0/timer to be installed. 
+# spd-say should ship with your distro
+# install lolcat for a cull feedback
+
+declare -A pomo_options
+pomo_options["work"]="25"
+pomo_options["break"]="10"
+
+POMO_TAG=$1
+
+if [[ $# -lt 1 ]]; then
+    echo "Must provide at least one argument either with the pomodoro tag or the pomodoro time"
+fi
+
+if [ -n "$1" -a -n "${pomo_options["$1"]}" ]; then
+    # If provided tag exist in options get the tag default time
+    POMO_TIME="${pomo_options["$POMO_TAG"]}m"
+else
+    # If the tag does not exist in options, and only one argument is provided, use it as the time
+    if [[ $# -lt 2 ]]; then
+        POMO_TIME=$1
+        POMO_TAG="oneshot"
+    fi
+fi
+
+[[ -f "$(which lolcat)" ]] && echo $POMO_TAG | lolcat
+
+# If two arguments are provided, use second argument as the time
+if [[ $# -gt 1 ]]; then
+    POMO_TIME=$2
+fi
+
+timer -n $POMO_TAG $POMO_TIME
+
+MESSAGE="Pomodoro session '$POMO_TAG' done"
+[[ -f "$(which spd-say)" ]] && spd-say "$MESSAGE"
+notify-send "$MESSAGE" -t 30000 --urgency=critical

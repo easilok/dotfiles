@@ -10,7 +10,7 @@ fi
 if [[ $# -ge 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/projects/work/ ~/projects/playground/ ~/ $TMUX_SESSIONIZER_PATH -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find ~/projects/ ~/projects/work/ ~/projects/playground/ ~/ $TMUX_SESSIONIZER_PATH -mindepth 1 -maxdepth 1 -type d | fzf)
 fi
 
 if [[ "$MODE" == "$MODE_PATH_ONLY" ]]; then

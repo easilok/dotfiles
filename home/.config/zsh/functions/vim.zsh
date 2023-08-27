@@ -4,10 +4,14 @@ function v {
         if [[ $# -gt 0 ]]; then
             nvim "$@"
         else
-            nvim +Startify +GoToFile
+            nvim +GoToFile
         fi
     else
         compdef v=vim
-        vim "$@"
+        if [[ $# -gt 0 ]]; then
+            vim "$@"
+        else
+            vim .
+        fi
     fi
 }
