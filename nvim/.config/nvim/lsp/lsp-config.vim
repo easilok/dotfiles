@@ -37,7 +37,9 @@ fun! LspLocationList()
   lua vim.diagnostic.setloclist({open = false})
 endfun
 
-nnoremap <space>qll :call LspLocationList()<CR>
+" nnoremap <space>qll :call LspLocationList()<CR>
+nnoremap <space>qll :lua vim.diagnostic.setloclist()<CR>
+nnoremap <space>qql :lua vim.diagnostic.setqflist()<CR>
 
 " augroup LSP_AUTO_COMMANDS
 "   autocmd!

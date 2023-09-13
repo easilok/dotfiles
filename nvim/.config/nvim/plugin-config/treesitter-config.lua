@@ -7,7 +7,6 @@ require'nvim-treesitter.configs'.setup {
     "dockerfile",
     "go",
     "gomod",
-    "help",
     "html",
     "json",
     "json5",

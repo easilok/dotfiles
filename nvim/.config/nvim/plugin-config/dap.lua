@@ -37,7 +37,6 @@ dap.adapters.node2 = {
   type = 'executable',
   command = 'node',
   args = {os.getenv('HOME') .. '/git/vscode-node-debug2/out/src/nodeDebug.js'},
-  log_leve
 }
 
 dap.configurations.javascript = {
@@ -174,5 +173,36 @@ dap.configurations.typescript = {
 	    '**/node_modules/**',
 	  };
     outFiles = { '${workspaceFolder}/dist/**/*.js', '!**/node_modules/**' };
+  },
+}
+
+-- python
+dap.adapters.python = {
+  type = 'executable',
+  command = 'python',
+  -- args = {os.getenv('HOME') .. '/git/vscode-node-debug2/out/src/nodeDebug.js'},
+}
+dap.configurations.python = {
+  {
+    type = 'python',
+    name = 'Run test on file',
+    request = 'launch',
+    module = 'unittest',
+    mode = 'test',
+    env = {
+        FLASK_ENV= "test",
+        ADDVOLT_DATABASE_HOST= "localhost",
+        ADDVOLT_DATABASE_PORT= "5444"
+    },
+    args = {
+      "[${file}]",
+      },
+    cwd = '${workspaceFolder}',
+    justMyCode = true,
+    restart = true,
+    protocol = 'inspector',
+    console = 'integratedTerminal',
+	  skipFiles = {
+	  };
   },
 }
