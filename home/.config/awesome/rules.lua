@@ -40,8 +40,6 @@ awful.rules.rules = {
           "telegram-desktop",
           "TelegramDesktop",
           "xtightvncviewer",
-          "speedcrunch",
-          "SpeedCrunch",
           "skype",
           "Skype",
           "Xfce-appfinder",

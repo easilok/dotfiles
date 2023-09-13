@@ -63,6 +63,7 @@ alias va='source venv/bin/activate'
 alias wo="pomo 'work'"
 alias br="pomo 'break'"
 alias t=todo
+alias journal="nvim +WikiJournal"
 
 if [ -f "$(which git-safer)" ]; then
     alias g=git-safer

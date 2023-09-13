@@ -1,0 +1,71 @@
+#!/bin/bash
+
+EV_CONTAINER_ID=$(docker ps -a | grep -vi Exited | grep -i outlook | awk '{ print $1 }')
+MONITOR_COMMAND="restart"
+
+if [[ -z $EV_CONTAINER_ID ]]; then
+    echo "No container running"
+    exit 1
+fi
+
+echo "Monitoring container $EV_CONTAINER_ID"
+
+if [ $# -gt 0 ]; then
+
+    case $1 in
+
+        "stop")
+            MONITOR_COMMAND="stop"
+            ;;
+
+        "start")
+            MONITOR_COMMAND="start"
+            ;;
+
+        "up")
+            MONITOR_COMMAND="start"
+            ;;
+
+        "logs")
+            MONITOR_COMMAND="logs"
+            ;;
+
+        "-l")
+            MONITOR_COMMAND="logs"
+            ;;
+
+        "l")
+            MONITOR_COMMAND="logs"
+            ;;
+
+        *)
+            ;;
+    esac
+
+fi
+
+case $MONITOR_COMMAND in
+
+  "restart")
+    docker restart $EV_CONTAINER_ID
+    ;;
+
+  "logs")
+    echo "docker logs --tail 100 -f \"$EV_CONTAINER_ID\""
+    docker logs --tail 100 -f "$EV_CONTAINER_ID"
+    ;;
+
+  "stop")
+    docker stop $EV_CONTAINER_ID
+    ;;
+
+  "start")
+    docker start $EV_CONTAINER_ID
+    ;;
+
+  *)
+    docker restart $EV_CONTAINER_ID
+    ;;
+
+esac
+

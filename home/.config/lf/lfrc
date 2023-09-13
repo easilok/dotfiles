@@ -194,9 +194,10 @@ map oc open_config
 map ow open_with
 map br $vimv $fx
 map r rename
+map R rename
 map H top
 map L bottom
-map R reload
+map r reload
 map C clear
 map U unselect
 
