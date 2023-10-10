@@ -15,6 +15,7 @@ autoload -U colors && colors
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
+mkdir -p ~/.cache/zsh
 HISTFILE=~/.cache/zsh/history
 
 if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*) ]]

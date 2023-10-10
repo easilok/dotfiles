@@ -140,6 +140,8 @@ Plug 'eandrju/cellular-automaton.nvim'
 
 Plug 'AndrewRadev/linediff.vim'
 
+Plug 'skywind3000/asyncrun.vim'
+
 " Initialize plugin system
 call plug#end()
 

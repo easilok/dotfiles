@@ -64,6 +64,7 @@ alias wo="pomo 'work'"
 alias br="pomo 'break'"
 alias t=todo
 alias journal="nvim +WikiJournal"
+alias wiki="nvim +WikiIndex"
 
 if [ -f "$(which git-safer)" ]; then
     alias g=git-safer

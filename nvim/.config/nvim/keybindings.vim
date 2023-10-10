@@ -163,3 +163,7 @@ nnoremap <space>qc :cclose<CR> "[Q]uickfix list [c]lose
 
 nnoremap <silent> <leader>x :!chmod +x %<CR>
 " vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+nnoremap <space>os :source Session.vim<CR> "[O]pen [s]ession"
+nnoremap <space>oc i<C-r>= "[O]pen [c]alculator"
+nnoremap <space>wz ":resize +80<CR>:vertical size +80<CR> "[W]indow [z]oom"
+nnoremap <leader>jq ":%!jq<CR> "Apply [jq] command to format buffer"
