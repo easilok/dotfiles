@@ -167,3 +167,16 @@ nnoremap <space>os :source Session.vim<CR> "[O]pen [s]ession"
 nnoremap <space>oc i<C-r>= "[O]pen [c]alculator"
 nnoremap <space>wz ":resize +80<CR>:vertical size +80<CR> "[W]indow [z]oom"
 nnoremap <leader>jq ":%!jq<CR> "Apply [jq] command to format buffer"
+
+" Change spelling errors color
+let s:spellhienabled = 0
+function! ToggleSpellHi()
+  if s:spellhienabled
+    highlight SpellBad cterm=underline guifg=None guibg=None
+    let s:spellhienabled = 0
+  else
+    highlight SpellBad cterm=underline guifg=black guibg=red
+    let s:spellhienabled = 1
+  endif
+endfunction
+map <space>sh :call ToggleSpellHi()<CR> "[S]pell [H]ighlight toggle"

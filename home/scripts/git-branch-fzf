@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+BRANCH=$( \git --no-pager branch | sed '/^*/d' | awk '{ print $1 }' | fzf )
+
+if [[ -z $BRANCH ]]; then
+    exit 0
+fi
+
+git checkout $BRANCH

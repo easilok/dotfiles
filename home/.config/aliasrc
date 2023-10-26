@@ -82,3 +82,18 @@ gtc() {
 }
 
 export MANPAGER="/bin/sh -c \"col -b | vim --not-a-term -c 'set ft=man ts=8 nomod nolist noma' -\""
+
+export EDITOR="vim"
+export TERMINAL="default_terminal"
+# export TERMINAL="kitty"
+# export BROWSER="qutebrowser"
+# export BROWSER="brave-browser"
+export BROWSER="firefox"
+export READER="zathura"
+export FILE="lf"
+export VIDEO="mpv"
+export MUSIC="ncmpcpp"
+# export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
+# export WM="xmonad"
+export _JAVA_AWT_WM_NONREPARENTING=1
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"

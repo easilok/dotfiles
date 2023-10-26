@@ -16,6 +16,9 @@ GIT_SAFE_COMMANDS=(
     "slap"
     "log"
     "diff"
+    "branch"
+    "bselect"
+    "ba"
 )
 
 # Find if provided command is a safe command
