@@ -11,10 +11,20 @@ shift + super + p
     dmenu-full
 shift + super + Escape
     dmenu-power
+shift + super + h
+    dmenu-power
 shift + super + w
     rofi -show window
 shift + super + s
     dmenu-surfraw
+super + b
+    dmenu-bookmarks
+
+Print
+  $HOME/.config/sxhkd/scripts/print-screen.sh
+
+shift + Print
+  flameshot launcher
 
 # make sxhkd reload its configuration files:
 super + Escape

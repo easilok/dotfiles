@@ -65,6 +65,7 @@ alias br="pomo 'break'"
 alias t=todo
 alias journal="nvim +WikiJournal"
 alias wiki="nvim +WikiIndex"
+alias bka="vim $HOME/.config/bookmarks/bookmarks.txt"
 
 if [ -f "$(which git-safer)" ]; then
     alias g=git-safer

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+BOOKMARKS_FILE="$HOME/.config/bookmarks/bookmarks.txt"
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+if [ ! -f "$BOOKMARKS_FILE" ]; then 
+    nofity-send "No bookmarks added to 'bookmarks.txt' file".
+fi
+
+SELECTED_BOOKMARK=$(awk --field-separator ";" '{ if (NR!=1) { print $2 " @"$1 " ("$3")" } }' $BOOKMARKS_FILE \
+    | $DMENU -l 30 -p "Bookmark to open: ")
+
+if [ -z "$SELECTED_BOOKMARK" ]; then
+	echo "Exit Esc"
+	exit
+fi
+
+SELECTED_BOOKMARK_URL=$(echo $SELECTED_BOOKMARK | sed -e 's/.*(\(.*\)).*/\1/')
+SELECTED_BOOKMARK_NAME=$(echo $SELECTED_BOOKMARK | sed -e 's/\(.*\) @.*/\1/')
+
+notify-send "Opening '$SELECTED_BOOKMARK_NAME' on brower"
+xdg-open "$SELECTED_BOOKMARK_URL"

@@ -171,7 +171,7 @@ clientkeys = gears.table.join(
               {description = "move to screen", group = "client"}),
     awful.key({ modkey, "Shift"   }, ",",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
-    awful.key({ modkey,           }, "s",      function (c) c.ontop = not c.ontop            end,
+    awful.key({ modkey, "Shift"   }, "s",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey, altkey    }, "j",      function () awful.client.incwfact( 0.05)      end,
               {description = "Increase client height", group = "client"}),
