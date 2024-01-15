@@ -8,7 +8,8 @@ lspconfig.ccls.setup {
     clang = {
       excludeArgs = { "-frounding-math"} ;
     };
-  }
+  },
+  filetypes = {"c", "cpp", "ino", "arduino"}
 }
 
 -- vim.cmd [

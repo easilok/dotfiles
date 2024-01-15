@@ -21,9 +21,8 @@ Plug 'tpope/vim-commentary'
 
 Plug 'tpope/vim-repeat'
 
-" To able to SudoEdit
-" Shell Commands
-" Plug 'tpope/vim-eunuch'
+" To able to SudoEdit and use Shell Commands
+Plug 'tpope/vim-eunuch'
 
 Plug 'tpope/vim-abolish'
 
@@ -50,7 +49,7 @@ Plug 'onsails/lspkind.nvim'
 
 " Plug 'glepnir/lspsaga.nvim'
 " Plug 'rinx/lspsaga.nvim'
-Plug 'tami5/lspsaga.nvim'
+" Plug 'tami5/lspsaga.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -129,18 +128,28 @@ Plug 'notjedi/nvim-rooter.lua'
 Plug 'tpope/vim-obsession'
 
 " Database interface
-Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
+" Plug 'tpope/vim-dadbod'
+" Plug 'kristijanhusak/vim-dadbod-ui'
 
 " Plug 'github/copilot.vim'
 Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
-Plug 'eandrju/cellular-automaton.nvim'
+" Plug 'eandrju/cellular-automaton.nvim'
 
 " Plug 'vlime/vlime', {'rtp': 'vim/'}
 
 Plug 'AndrewRadev/linediff.vim'
 
 Plug 'skywind3000/asyncrun.vim'
+
+" Open bif files without crashing neovim
+Plug 'LunarVim/bigfile.nvim'
+
+" Plug 'freitass/todo.txt-vim'
+" Plug 'arnarg/todotxt.nvim'
+" " Required by todotxt.nvim
+" Plug 'MunifTanjim/nui.nvim'
+
+Plug '~/.config/nvim/easilok'
 
 " Initialize plugin system
 call plug#end()

@@ -2,7 +2,7 @@
   source ~/.config/nvim/lsp/lsp-config.vim
   luafile ~/.config/nvim/lsp/lsp-config.lua
   luafile ~/.config/nvim/lsp/cmp-config.lua
-  luafile ~/.config/nvim/lsp/lspsaga-config.lua
+  " luafile ~/.config/nvim/lsp/lspsaga-config.lua
   " Override lsp keymap
   luafile ~/.config/nvim/lsp/javascript-ls.lua
   luafile ~/.config/nvim/lsp/php-ls.lua

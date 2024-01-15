@@ -1,0 +1,7 @@
+================================================================================
+INTRODUCTION                                                  *easilok.nvim*
+
+My own configuration documentation to enable notes on plugins, shortcuts and
+other.
+
+ vim:tw=78:ts=8:ft=help:norl:

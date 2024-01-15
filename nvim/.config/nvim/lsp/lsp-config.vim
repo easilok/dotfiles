@@ -18,17 +18,13 @@ nnoremap <silent> -f <cmd>lua vim.lsp.buf.format({async = true})<CR>
 nnoremap <silent> <space>lws <cmd>lua vim.lsp.workspace_symbol()<CR>
 
 " auto-format
-" autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
-" autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
-" autocmd BufWritePre *.tsx lua vim.lsp.buf.formatting_sync(nil, 100)
-" autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.js Neoformat prettier
-autocmd BufWritePre *.jsx Neoformat prettier
-autocmd BufWritePre *.tsx Neoformat prettier
-autocmd BufWritePre *.ts Neoformat prettier
-autocmd BufWritePre *.vue Neoformat prettier
-autocmd BufWritePre *.css lua vim.lsp.buf.format({async = true})
-autocmd BufWritePre *.scss lua vim.lsp.buf.format({async = true})
+" autocmd BufWritePre *.js Neoformat prettier
+" autocmd BufWritePre *.jsx Neoformat prettier
+" autocmd BufWritePre *.tsx Neoformat prettier
+" autocmd BufWritePre *.ts Neoformat prettier
+" autocmd BufWritePre *.vue Neoformat prettier
+" autocmd BufWritePre *.css lua vim.lsp.buf.format({async = true})
+" autocmd BufWritePre *.scss lua vim.lsp.buf.format({async = true})
 
 " Add lsp diagnostic messages to quickfix list
 " By Primeagen
