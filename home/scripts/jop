@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Sync before open joplin
+joplin sync
+
+# Run joplin cli interface
+joplin
+
+# Sync after closing joplin
+joplin sync

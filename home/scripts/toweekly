@@ -1,0 +1,10 @@
+#!/bin/bash
+
+TODO_CONFIG=$HOME/.todo.weekly/config
+
+if [[ $# -gt 0 ]]; then
+  todo-txt -d "$TODO_CONFIG" "$@"
+else
+  todo-txt -d "$TODO_CONFIG" ls
+fi
+
