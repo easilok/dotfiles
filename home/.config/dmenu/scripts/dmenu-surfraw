@@ -14,13 +14,23 @@ else
   DMENU='dmenu -i'
 fi
 
+if [[ $# -ge 1 ]]; then
+    engine=$1
+fi
+
 while [ -z "$engine" ]; do
-engine=$(sr -elvi | gawk '{if (NR!=1) { print $1 }}' | $DMENU -p "Search engine?") || exit
+    engine=$(sr -elvi | gawk '{if (NR!=1) { print $1 }}' | $DMENU -p "Search engine?") || exit
 done
 
 while [ -z "$query" ]; do
-query=$(echo "" | $DMENU -p "Searching $engine") || exit
+    query=$(echo "" | $DMENU -p "Searching $engine") || exit
 done
 
 # termite -e "sr "$engine" "$query""&
-sr "$engine" "$query"
+if [ -f "$(which firefox)" ]; then
+    notify-send "Running sr query on $engine in firefox browser..."
+    sr -browser=firefox "$engine" "$query"
+else 
+    notify-send "Running default sr browser for query on $engine..."
+    sr "$engine" "$query"
+fi

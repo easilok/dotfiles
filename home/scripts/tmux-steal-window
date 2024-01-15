@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [[ -z $TMUX ]]; then
+    notify-send "First create a tmux session to use this script"
+    exit 1
+fi
+
+victim=$(tmux list-sessions | cut -d ':' -f 1 | fzf )
+
+if [ -z $victim ]; then
+    notify-send "A session from which to steal is needed for isolating window"
+    exit 1
+fi
+
+tmux move-window -s $victim

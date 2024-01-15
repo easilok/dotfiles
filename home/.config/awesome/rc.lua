@@ -243,6 +243,8 @@ awful.screen.connect_for_each_screen(function(s)
           widgets.space,
           widgets.disk,
           widgets.space,
+          widgets.home,
+          widgets.space,
           widgets.temp,
           widgets.separator,
           widgets.mail,

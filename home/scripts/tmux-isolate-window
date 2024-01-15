@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+if [[ -z $TMUX ]]; then
+    notify-send "First create a tmux session to use this script"
+    exit 1
+fi
+
+# TODO: List the current tmux session to choose destination
+existingSession=$(tmux list-sessions | cut -d ':' -f 1 | $DMENU -p "Use existing session?")
+
+if [ -z $existingSession ]; then
+    newSession=$(echo "" | $DMENU -p "Name for new isolated session:") || exit
+else
+    newSession=$existingSession
+fi
+
+if [ -z $newSession ]; then
+    notify-send "A destination session is needed for isolating window"
+    exit 1
+fi
+
+currentSession=$(tmux list-sessions | grep attached | cut -d ':' -f 1)
+
+if [ -z $currentSession ]; then
+    notify-send "A current session is needed for isolating window"
+    exit 1
+fi
+
+if [ -z $existingSession ]; then
+    tmux new-session -Ads $newSession
+fi
+
+tmux switch-client -t $newSession && tmux move-window -s $currentSession

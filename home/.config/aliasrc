@@ -66,6 +66,7 @@ alias t=todo
 alias journal="nvim +WikiJournal"
 alias wiki="nvim +WikiIndex"
 alias bka="vim $HOME/.config/bookmarks/bookmarks.txt"
+alias fssh=sshf
 
 if [ -f "$(which git-safer)" ]; then
     alias g=git-safer
@@ -80,6 +81,11 @@ gtp() {
 
 gtc() { 
     cd ${$(find ~/.config/ -type d | fzf):-.}
+}
+
+sshf() {
+    SSH_HOST=$( grep -i 'host ' .ssh/config | awk '{ print $2 }' | fzf )
+    if [ ! -z $SSH_HOST ]; then; ssh "$SSH_HOST"; fi
 }
 
 export MANPAGER="/bin/sh -c \"col -b | vim --not-a-term -c 'set ft=man ts=8 nomod nolist noma' -\""
@@ -97,4 +103,7 @@ export MUSIC="ncmpcpp"
 # export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 # export WM="xmonad"
 export _JAVA_AWT_WM_NONREPARENTING=1
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+if [ -z $SSH_AUTH_SOCK ] && [ -e "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    export SSH_AGENT_PID=$(ps -fC ssh-agent | grep $XDG_RUNTIME_DIR/ssh-agent.socket | head -n1 | awk '{ print $2 }')
+fi

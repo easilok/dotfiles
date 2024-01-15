@@ -17,6 +17,8 @@ shift + super + w
     rofi -show window
 shift + super + s
     dmenu-surfraw
+control + super + s
+    dmenu-surfraw google
 super + b
     dmenu-bookmarks
 
