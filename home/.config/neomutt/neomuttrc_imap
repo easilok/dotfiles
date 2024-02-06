@@ -15,9 +15,6 @@ macro index,pager <f5> '<sync-mailbox><enter-command>source ~/.config/neomutt/ac
 source ~/.config/neomutt/accounts/personal_imap
 folder-hook $folder 'source ~/.config/neomutt/accounts/personal_imap'
 
-# source ~/.config/neomutt/accounts/uab
-# folder-hook $folder 'source ~/.config/neomutt/accounts/uab'
-
 source ~/.config/neomutt/accounts/luispereira_imap
 folder-hook $folder 'source ~/.config/neomutt/accounts/luispereira_imap'
 

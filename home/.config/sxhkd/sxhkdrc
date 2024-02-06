@@ -21,6 +21,8 @@ control + super + s
     dmenu-surfraw google
 super + b
     dmenu-bookmarks
+super + e
+    pcmanfm
 
 Print
   $HOME/.config/sxhkd/scripts/print-screen.sh
