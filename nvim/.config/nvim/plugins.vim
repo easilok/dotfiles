@@ -46,6 +46,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind.nvim'
+Plug 'folke/trouble.nvim'
 
 " Plug 'glepnir/lspsaga.nvim'
 " Plug 'rinx/lspsaga.nvim'
@@ -80,6 +81,7 @@ Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " let NERDTreeShowHidden = 1
 " let NERDTreeMinimalUI = 1
 " let g:netrw_menu  = 0
+" Plug 'stevearc/oil.nvim'
 
 " debugging
 Plug 'mfussenegger/nvim-dap'
@@ -98,7 +100,7 @@ Plug 'sbdchd/neoformat'
 
 " Wiki
 Plug 'lervag/wiki.vim'
-Plug 'lervag/wiki-ft.vim'
+" Plug 'lervag/wiki-ft.vim'
 Plug 'lervag/lists.vim'
 " Wiki addons
 Plug 'itchyny/calendar.vim'
@@ -111,7 +113,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install', 'branch' : 'wiki-filetype'}
 
 Plug 'godlygeek/tabular'
-Plug 'preservim/vim-markdown'
+" Plug 'preservim/vim-markdown'
 
 " Pattern based text background colorizer
 Plug 'solyarisoftware/Highlight.vim'

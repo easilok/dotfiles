@@ -21,3 +21,10 @@ let g:wiki_journal = {
           \ },
           \}
 
+let g:lists_filetypes = ['markdown', 'wiki', 'md']
+
+augroup EnableLists
+  autocmd!
+  autocmd BufNew *.md echom "Enabling Lists"
+  autocmd BufEnter *.md ListsEnable
+augroup END
