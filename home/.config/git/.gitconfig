@@ -40,6 +40,8 @@
   excludesfile = ~/.gitignore
   autocrlf = input
   editor =vim
+[rebase]
+  autosquash = true
 [merge]
   ff = only
   tool = vimdiff
@@ -55,8 +57,8 @@
   nogreeting = true
   prompt = "\n%D %c(%b%#)%w ➜"
 [user]
-	email = luispereira.tkd@gmail.com
 	name = Luis Pereira
+    useConfigOnly = true
 [credential]
 	helper = store
 [filter "lfs"]
