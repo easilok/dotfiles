@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+if [[ $# -ge 1 ]]; then
+    WINDOW_NAME=$1
+    shift
+fi
+
+[[ -z $WINDOW_NAME ]] && echo 'Must provide window name' && exit 1
+
+# Find window name if exists
+TMUX_WINDOWS=($(tmux list-windows | awk '{ print $2 }'))
+WINDOW_NAME_EXISTS=false
+for window in "${TMUX_WINDOWS[@]}"
+do
+    if [[ "$window" =~ "$WINDOW_NAME".* ]]; then
+        WINDOW_NAME_EXISTS=true
+    fi
+done
+
+if [ "$WINDOW_NAME_EXISTS" = true ]; then
+    tmux select-window -t $WINDOW_NAME
+else
+    tmux new-window -n $WINDOW_NAME
+fi
+
+if [[ $# -ge 1 ]]; then
+    COMMAND_TO_RUN=$1
+    shift
+fi
+
+[[ -z $COMMAND_TO_RUN ]] && exit
+
+PANE_TOP_COMMAND_PID=$(tmux list-panes -t $WINDOW_NAME -F '#{pane_pid}')
+PANE_TOP_COMMAND_NAME=$(ps -p $PANE_TOP_COMMAND_PID -o comm=)
+# Maybe add tail here
+PANE_LAST_COMMAND_NAME=$(ps --ppid $PANE_TOP_COMMAND_PID -o comm=)
+
+if [ "$PANE_LAST_COMMAND_NAME" = "$COMMAND_TO_RUN" ]; then
+    # Working as expected
+    exit
+elif [ -z "$PANE_LAST_COMMAND_NAME" ] && [ "$PANE_TOP_COMMAND_NAME" = "zsh" ]; then
+    # If no command running on shell, and shell available, execute command
+    tmux send-keys -t $WINDOW_NAME "$COMMAND_TO_RUN" ENTER
+else
+    echo "Could not start $COMMAND_TO_RUN on tmux window" && exit 1
+fi
