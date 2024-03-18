@@ -191,6 +191,10 @@ source /usr/share/doc/pkgfile/command-not-found.zsh 2>/dev/null
 # Load autojump
 source /usr/share/autojump/autojump.zsh 2>/dev/null
 source $HOME/.autojump/etc/profile.d/autojump.sh 2>/dev/null
+# Load zoxide
+if [ -f "$(which zoxide)" ]; then
+  eval "$(zoxide init zsh)"
+fi
 
 # load custom executable functions
 for function in $HOME/.config/zsh/functions/*.zsh; do
