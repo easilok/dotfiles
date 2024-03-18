@@ -58,9 +58,11 @@ Plug 'nvim-treesitter/nvim-treesitter-context'
 " Plug 'nvim-treesitter/playground'
 Plug 'liuchengxu/vista.vim'
 
+let g:finder_plugin = 'fzflua'
 Plug 'folke/which-key.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
@@ -107,10 +109,15 @@ Plug 'itchyny/calendar.vim'
 " fzf for searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
+" Should be replaced by one of my own
+Plug 'backdround/global-note.nvim'
+
+
 " Live markdown preview
 " Plug 'shime/vim-livedown'
 " Plug 'instant-markdown/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install'}
 Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install', 'branch' : 'wiki-filetype'}
+Plug 'ellisonleao/glow.nvim'
 
 Plug 'godlygeek/tabular'
 " Plug 'preservim/vim-markdown'
@@ -139,6 +146,7 @@ Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 
 " Plug 'vlime/vlime', {'rtp': 'vim/'}
 
+Plug 'sindrets/diffview.nvim'
 Plug 'AndrewRadev/linediff.vim'
 
 Plug 'skywind3000/asyncrun.vim'
