@@ -23,11 +23,20 @@ ex()
 	fi
 }
 
+if [ -f "$(which zoxide)" ]; then
+    alias cd=z
+fi
+
 alias config='cd ~/.config'
 alias dotfiles='cd ~/git/dotfiles'
 
 # Changing "ls" to "exa"
-if [ -f $(which exa) ]; then 
+if [ -f $(which eza) ]; then 
+	alias ls='eza -l --header --color=always --group-directories-first' # my preferred listing
+	alias la='eza -a --color=always --group-directories-first'  # all files and dirs
+	alias ll='eza -al --header --color=always --group-directories-first'  # long format
+	alias lt='eza -aT --color=always --group-directories-first' # tree listing
+elif [ -f $(which exa) ]; then 
 	alias ls='exa -l --header --color=always --group-directories-first' # my preferred listing
 	alias la='exa -a --color=always --group-directories-first'  # all files and dirs
 	alias ll='exa -al --header --color=always --group-directories-first'  # long format
@@ -73,6 +82,19 @@ if [ -f "$(which git-safer)" ]; then
     alias git=git-safer
 fi
 
+vs() {
+    if [ -f 'Session.vim' ]; then
+        vim -S Session.vim
+    else
+        session_files=$(find . -type f -name '*.vim')
+        session_count=$(echo "$session_files" | wc -l)
+        if [ "$session_count" -gt 0 ]; then
+            vim -S $(echo "$session_files" | fzf)
+        else
+            vim
+        fi
+    fi
+}
 vf() { $EDITOR $(fzf --reverse --height=50% ) ;}
 vef() { $EDITOR $(du -a ~/.config/* ~/scripts/* | awk '{print $2}' | fzf --reverse --height=50% ) ;}
 gtp() { 
