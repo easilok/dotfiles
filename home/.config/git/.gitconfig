@@ -1,7 +1,7 @@
 [alias]
   aa = add --all
   bs = bselect
-  bselect = !git branch | grep -v '^*' | fzf | xargs git checkout
+  bselect = !git-branch-fzf
   ca = commit --amend --verbose
   car = commit --amend --no-edit
   co = checkout
@@ -70,3 +70,7 @@
 	ff = only
 [init]
 	defaultBranch = main
+[commit]
+	verbose = true
+[rerere]
+	enabled = true

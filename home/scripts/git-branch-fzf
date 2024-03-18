@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BRANCH=$( \git --no-pager branch | sed '/^*/d' | awk '{ print $1 }' | fzf )
+BRANCH=$( \git --no-pager branch -a | grep -v '^*' | sed -e 's/.*\///' -e 's/^[ \t]*//' | sort | uniq | fzf)
 
 if [[ -z $BRANCH ]]; then
     exit 0
