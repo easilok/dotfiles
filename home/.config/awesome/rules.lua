@@ -94,7 +94,7 @@ awful.rules.rules = {
     },
     { 
         rule_any = { 
-            class = {"Microsoft Teams - Preview"},
+            class = {"Microsoft Teams - Preview", "teams-for-linux"},
         },
         properties = { screen = 1, tag = tagnames[5] } 
     },
