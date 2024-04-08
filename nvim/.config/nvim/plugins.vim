@@ -55,6 +55,7 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Plug 'nvim-treesitter/playground'
 Plug 'liuchengxu/vista.vim'
 
@@ -66,7 +67,7 @@ Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'ThePrimeagen/harpoon'
+Plug 'ThePrimeagen/harpoon', {'branch': 'harpoon2'}
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
@@ -88,11 +89,14 @@ Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " debugging
 Plug 'mfussenegger/nvim-dap'
 " Plug 'leoluz/nvim-dap-go'
+Plug 'nvim-neotest/nvim-nio'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'folke/todo-comments.nvim'
-Plug 'L3MON4D3/LuaSnip'
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
+" This one should be removed after my own snippets
+Plug 'rafamadriz/friendly-snippets'
 Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
@@ -148,6 +152,7 @@ Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 
 Plug 'sindrets/diffview.nvim'
 Plug 'AndrewRadev/linediff.vim'
+Plug 'mechatroner/rainbow_csv'
 
 Plug 'skywind3000/asyncrun.vim'
 
@@ -159,7 +164,7 @@ Plug 'LunarVim/bigfile.nvim'
 " " Required by todotxt.nvim
 " Plug 'MunifTanjim/nui.nvim'
 
-Plug '~/.config/nvim/easilok'
+Plug '~/.config/nvim/lua/easilok'
 
 " Initialize plugin system
 call plug#end()

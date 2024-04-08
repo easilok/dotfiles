@@ -25,7 +25,6 @@ require("telescope").setup({
 })
 
 require("telescope").load_extension("fzf")
-require("telescope").load_extension("harpoon")
 require('telescope').load_extension('file_browser')
 
 -- vim.api.nvim_set_keymap("n", "<leader>fb", telescope.builtin.current_buffer_fuzzy_find, { sorting_strategy=ascending, prompt_position=top})
@@ -81,7 +80,6 @@ vim.keymap.set('n', '<leader>fb', function() builtin.current_buffer_fuzzy_find({
 vim.keymap.set('n', '<space>fb', function() builtin.current_buffer_fuzzy_find({ sorting_strategy = "ascending" }) end, { desc = '[F]ind [b]uffer text' })
 vim.keymap.set('n', '<leader>be', function() builtin.diagnostics({ bufnr = 0 }) end, { desc = '[B]uffer diagnostics' })
 vim.keymap.set('n', '<space>be', function() builtin.diagnostics({ bufnr = 0 }) end, { desc = '[B]uffer diagnostics' })
-vim.keymap.set('n', '<leader>ga', ":Telescope harpoon marks<cr>", { desc = '[G]rep h[a]rpoon marks' })
 vim.keymap.set('n', '<space>tr', builtin.resume, { desc = '[T]elescope [r]esume' })
 vim.keymap.set('n', '<space>tk', builtin.keymaps, { desc = '[T]elescope [k]eymaps' })
 vim.keymap.set('n', '<space>bf', ":Telescope file_browser<cr>", { noremap = true, desc = '[B]rowser [f]iles' })
