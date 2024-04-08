@@ -25,7 +25,7 @@ else
             echo "Could not pull rebase source branch $GIT_REBASE_BRANCH."
         else
             git checkout $GIT_CURRENT_BRANCH && \
-                git rebase $GIT_REBASE_BRANCH
+                git rebase --committer-date-is-author-date $GIT_REBASE_BRANCH
         fi
     fi
 fi
