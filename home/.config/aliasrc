@@ -29,6 +29,7 @@ fi
 
 alias config='cd ~/.config'
 alias dotfiles='cd ~/git/dotfiles'
+alias ncfg='cd ~/.config/nvim && nvim .'
 
 # Changing "ls" to "exa"
 if [ -f $(which eza) ]; then 
@@ -97,6 +98,7 @@ vs() {
 }
 vf() { $EDITOR $(fzf --reverse --height=50% ) ;}
 vef() { $EDITOR $(du -a ~/.config/* ~/scripts/* | awk '{print $2}' | fzf --reverse --height=50% ) ;}
+vev() { $EDITOR $(du -a ~/.config/nvim | awk '{print $2}' | fzf --reverse --height=50% ) ;}
 gtp() { 
     cd ${$(find ~/projects/ -type d | fzf):-.}
 }

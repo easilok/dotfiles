@@ -10,6 +10,7 @@
   dup = !git checkout develop && git fetch origin && echo && git sl develop..origin/develop && echo && git pull --quiet && git checkout -
   fad = !git add $(git ls-files --others --exclude-standard -m | fzf --reverse --multi)
   fall = fetch --all
+  fx = commit --fixup
   glog = log -E -i --grep
   la = log --oneline --decorate -20
   ll = log --oneline --decorate
@@ -17,6 +18,7 @@
   ls = log --oneline --decorate -20
   mup = !git checkout master && git fetch origin && echo && git sl master..origin/master && echo && git pull --quiet && git checkout -
   pf = push --force-with-lease
+  psf = pf
   pl = pull
   ps = push
   rbc = rebase --continue
@@ -58,7 +60,8 @@
   prompt = "\n%D %c(%b%#)%w ➜"
 [user]
 	name = Luis Pereira
-    useConfigOnly = true
+    email = "luispereira.tkd@gmail.com"
+    signingkey = "93823504C1F5FBEE"
 [credential]
 	helper = store
 [filter "lfs"]
@@ -72,5 +75,8 @@
 	defaultBranch = main
 [commit]
 	verbose = true
+    gpgsign = true
 [rerere]
 	enabled = true
+[includeIf "gitdir:~/projects/work/"]
+path = ~/projects/work/.gitconfig-work

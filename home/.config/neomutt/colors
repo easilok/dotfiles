@@ -11,7 +11,8 @@ mono underline underline
 mono indicator reverse
 mono error bold
 color normal default default
-color indicator red white # currently selected message. default makes bar clear, disabled arrow to save space.
+# color indicator red grey # currently selected message. default makes bar clear, disabled arrow to save space.
+color indicator black brightcyan # currently selected message. default makes bar clear, disabled arrow to save space.
 color sidebar_highlight red default
 color sidebar_divider brightblack black
 color sidebar_flagged red black
