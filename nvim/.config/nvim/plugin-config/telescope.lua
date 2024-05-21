@@ -47,6 +47,7 @@ if vim.g.finder_plugin == 'fzflua' then
     vim.keymap.set('n', '<space>we', require('fzf-lua').diagnostics_workspace, { desc = '[G]rep diagnostics' })
     vim.keymap.set('n', '<leader>gr', require('fzf-lua').lsp_references, { desc = '[G]rep [r]eferences' })
     vim.keymap.set('n', '<space>lds', require('fzf-lua').lsp_document_symbols, { desc = '[L]sp [D]ocument [S]ymbols' })
+    vim.keymap.set('n', '<space>ft', require('fzf-lua').tags, { desc = '[F]ind [T]ags' })
 else
     -- Set new commands to better name
     vim.cmd([[command! -nargs=0 GoToFile :Telescope find_files]])
@@ -75,6 +76,7 @@ else
     vim.keymap.set('n', '<leader>gr', builtin.lsp_references, { desc = '[G]rep [r]eferences' })
     vim.keymap.set('n', '<space>lds', builtin.lsp_document_symbols, { desc = '[L]sp [D]ocument [S]ymbols' })
     vim.keymap.set('n', '<space>lws', builtin.lsp_dynamic_workspace_symbols, { desc = '[L]sp [W]orkspace [S]ymbols' })
+    vim.keymap.set('n', '<space>ft', builtin.tags, { desc = '[F]ind [T]ags' })
 end
 vim.keymap.set('n', '<leader>fb', function() builtin.current_buffer_fuzzy_find({ sorting_strategy = "ascending" }) end, { desc = '[F]ind [b]uffer text' })
 vim.keymap.set('n', '<space>fb', function() builtin.current_buffer_fuzzy_find({ sorting_strategy = "ascending" }) end, { desc = '[F]ind [b]uffer text' })

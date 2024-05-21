@@ -44,6 +44,8 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-calc'
+Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind.nvim'
 Plug 'folke/trouble.nvim'
@@ -59,7 +61,8 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Plug 'nvim-treesitter/playground'
 Plug 'liuchengxu/vista.vim'
 
-let g:finder_plugin = 'fzflua'
+" let g:finder_plugin = 'fzflua'
+let g:finder_plugin = 'telescope'
 Plug 'folke/which-key.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -84,7 +87,7 @@ Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " let NERDTreeShowHidden = 1
 " let NERDTreeMinimalUI = 1
 " let g:netrw_menu  = 0
-" Plug 'stevearc/oil.nvim'
+Plug 'stevearc/oil.nvim'
 
 " debugging
 Plug 'mfussenegger/nvim-dap'
@@ -92,6 +95,7 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'mfussenegger/nvim-dap-python'
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'folke/todo-comments.nvim'
 Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
@@ -99,6 +103,7 @@ Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
 Plug 'rafamadriz/friendly-snippets'
 Plug 'saadparwaiz1/cmp_luasnip'
 
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " Prettier
@@ -120,7 +125,7 @@ Plug 'backdround/global-note.nvim'
 " Live markdown preview
 " Plug 'shime/vim-livedown'
 " Plug 'instant-markdown/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install'}
-Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install', 'branch' : 'wiki-filetype'}
+Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'npm install', 'branch' : 'wiki-filetype'}
 Plug 'ellisonleao/glow.nvim'
 
 Plug 'godlygeek/tabular'
@@ -141,8 +146,9 @@ Plug 'notjedi/nvim-rooter.lua'
 Plug 'tpope/vim-obsession'
 
 " Database interface
-" Plug 'tpope/vim-dadbod'
-" Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'kristijanhusak//vim-dadbod-completion', {'for': ['sql', 'mysql', 'plsql'] }
 
 " Plug 'github/copilot.vim'
 Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
@@ -159,10 +165,19 @@ Plug 'skywind3000/asyncrun.vim'
 " Open bif files without crashing neovim
 Plug 'LunarVim/bigfile.nvim'
 
+Plug 'folke/zen-mode.nvim'
+
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'quangnguyen30192/cmp-nvim-tags'
+
 " Plug 'freitass/todo.txt-vim'
 " Plug 'arnarg/todotxt.nvim'
 " " Required by todotxt.nvim
 " Plug 'MunifTanjim/nui.nvim'
+
+" Triage plugins
+Plug 'chrisgrieser/nvim-early-retirement'
+Plug 'dstein64/vim-startuptime'
 
 Plug '~/.config/nvim/lua/easilok'
 

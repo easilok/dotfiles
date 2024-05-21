@@ -32,6 +32,8 @@ set hidden
 set noswapfile
 set nobackup
 
+let g:netrw_altfile = 1
+
 " enable permanent undotree
 if has("persistent_undo")
     set undodir=$HOME/.cache/undodir
@@ -52,11 +54,6 @@ source ~/.config/nvim/plugin-config/init.vim
 " This script contains filetype settings
 source ~/.config/nvim/file_opt.vim
 
-if has('termguicolors')
-  set termguicolors
-endif
-
 " For per folder vim-settings
 set exrc
 set secure
-let g:netrw_altfile = 1

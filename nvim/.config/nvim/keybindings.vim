@@ -21,8 +21,8 @@ nmap <M--> <C-^>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <space>bq :bp <BAR> bd #<CR>
 " Close current buffer
-nmap <leader>:bd! #<CR>
-nmap <space>:bd! #<CR>
+nmap <leader>bk :bd! #<CR>
+nmap <space>bk :bd! #<CR>
 
 set splitbelow splitright
 
@@ -146,7 +146,7 @@ highlight LineHighlight ctermbg=darkgray guibg=darkgray
 " highlight the current line
 nnoremap <silent> <Space>ah :call matchadd('LineHighlight', '\%'.line('.').'l')<CR>
 " clear all the highlighted lines
-nnoremap <silent> <Space>ch :call clearmatches()<CR>
+nnoremap <silent> -h :call clearmatches()<CR>
 nmap <Space>yfp :let @" = expand("%")<cr>
 
 nnoremap <leader>gg :Git<CR>

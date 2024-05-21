@@ -12,7 +12,7 @@ nnoremap <silent> ]d <cmd>lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent> [d <cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap <silent> <space>D <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <space>rn <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> <space>ca <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <space>la <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <space>e <cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap <silent> -f <cmd>lua vim.lsp.buf.format({async = true})<CR>
 nnoremap <silent> <space>lws <cmd>lua vim.lsp.workspace_symbol()<CR>

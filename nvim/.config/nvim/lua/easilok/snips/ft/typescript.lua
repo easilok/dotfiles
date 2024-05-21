@@ -27,14 +27,36 @@ ls.add_snippets("typescriptreact", {
 import React from 'react'
 
 const {}: React.FC = () => {{
-    {}
+    return (
+        {}
+    );
 }}
+
 export default {};
             ]],
             {
                 start_from_filename(1),
                 i(0),
                 rep(1),
+            }
+        )
+    ),
+    s(
+        "async",
+        fmt(
+            [[
+const {} = async () => {{
+    try {{
+        {}
+    }} catch(err) {{
+        // eslint-disable-next-line no-console
+        console.log(err);
+    }}
+}}
+            ]],
+            {
+                i(1),
+                i(0),
             }
         )
     )

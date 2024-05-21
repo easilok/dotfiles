@@ -4,7 +4,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 require'lspconfig'.pyright.setup{
     capabilities = capabilities,
     on_attach = function(client, bufnr)
-        vim.keymap.set('n', '-f', function() vim.cmd('Neoformat black') end, { desc = '[F]ormat buffer' })
+        vim.keymap.set('n', '-f', function() vim.cmd('Neoformat ruff') end, { desc = '[F]ormat buffer' })
     end
 }
 
