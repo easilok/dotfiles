@@ -109,15 +109,17 @@ Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 " Prettier
 Plug 'sbdchd/neoformat'
 
+" fzf for searching
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 " Wiki
 Plug 'lervag/wiki.vim'
 " Plug 'lervag/wiki-ft.vim'
 Plug 'lervag/lists.vim'
 " Wiki addons
 Plug 'itchyny/calendar.vim'
-" fzf for searching
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
+" Obsidian
+Plug 'epwalsh/obsidian.nvim'
 " Should be replaced by one of my own
 Plug 'backdround/global-note.nvim'
 
@@ -127,6 +129,7 @@ Plug 'backdround/global-note.nvim'
 " Plug 'instant-markdown/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install'}
 Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'npm install', 'branch' : 'wiki-filetype'}
 Plug 'ellisonleao/glow.nvim'
+Plug 'MeanderingProgrammer/markdown.nvim'
 
 Plug 'godlygeek/tabular'
 " Plug 'preservim/vim-markdown'
@@ -135,8 +138,6 @@ Plug 'godlygeek/tabular'
 Plug 'solyarisoftware/Highlight.vim'
 
 Plug 'eliba2/vim-node-inspect'
-
-Plug 'metakirby5/codi.vim'
 
 Plug 'mbbill/undotree'
 
@@ -151,7 +152,7 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'kristijanhusak//vim-dadbod-completion', {'for': ['sql', 'mysql', 'plsql'] }
 
 " Plug 'github/copilot.vim'
-Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
+" Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 " Plug 'eandrju/cellular-automaton.nvim'
 
 " Plug 'vlime/vlime', {'rtp': 'vim/'}
@@ -167,7 +168,7 @@ Plug 'LunarVim/bigfile.nvim'
 
 Plug 'folke/zen-mode.nvim'
 
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'quangnguyen30192/cmp-nvim-tags'
 
 " Plug 'freitass/todo.txt-vim'
@@ -177,6 +178,7 @@ Plug 'quangnguyen30192/cmp-nvim-tags'
 
 " Triage plugins
 Plug 'chrisgrieser/nvim-early-retirement'
+Plug 'j-morano/buffer_manager.nvim'
 Plug 'dstein64/vim-startuptime'
 
 Plug '~/.config/nvim/lua/easilok'

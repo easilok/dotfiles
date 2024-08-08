@@ -1,4 +1,4 @@
-require("early-retirement").setup{
-    retirementAgeMins = 40,
-    minimumBufferNum = 6,
-}
+-- require("early-retirement").setup{
+--     retirementAgeMins = 60,
+--     minimumBufferNum = 8,
+-- }

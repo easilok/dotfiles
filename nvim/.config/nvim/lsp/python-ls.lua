@@ -1,10 +1,22 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require'lspconfig'.pyright.setup{
+function disable_lsp_watcher()
+    local ok, wf = pcall(require, "vim.lsp._watchfiles")
+    if ok then
+        -- disable lsp watcher. Too slow on linux
+        wf._watchfunc = function()
+            return function()
+            end
+        end
+    end
+end
+
+require 'lspconfig'.pyright.setup {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
         vim.keymap.set('n', '-f', function() vim.cmd('Neoformat ruff') end, { desc = '[F]ormat buffer' })
+        disable_lsp_watcher()
     end
 }
 

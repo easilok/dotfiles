@@ -17,7 +17,7 @@ require'lspconfig'.tsserver.setup{
 -- npm install -g @volar/vue-language-server
 require'lspconfig'.volar.setup{
     capabilities = capabilities,
-    filetypes = {'typescript', 'javascript', 'vue'},
+    filetypes = {'vue'},
     on_attach = function(client, bufnr)
         vim.keymap.set('n', '-f', function() vim.cmd('Neoformat prettier') end, { desc = '[F]ormat buffer' })
     end

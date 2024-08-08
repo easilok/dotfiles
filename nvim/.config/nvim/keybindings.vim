@@ -70,7 +70,10 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 nnoremap <Leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Custom buffer switcher
-nnoremap <C-e> :set nomore <Bar> :ls <Bar> :set more <CR>:b<Space>
+" nnoremap <C-e> :set nomore <Bar> :ls <Bar> :set more <CR>:b<Space>
+
+" Reselect pasted text
+nnoremap gp `[v`]
 
 " Change motion keys to work with line wrapper
 let s:wrapenabled = 0

@@ -57,6 +57,8 @@ else
     vim.keymap.set('n', '<space>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
     vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = '[F]ind [g]it files' })
     vim.keymap.set('n', '<space>fg', builtin.git_files, { desc = '[F]ind [g]it files' })
+    vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = '[F]ind [g]it files' })
+    vim.keymap.set('n', '<space><space>', builtin.git_files, { desc = '[F]ind [g]it files' })
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [f]iles' })
     vim.keymap.set('n', '<space>ff', builtin.find_files, { desc = '[F]ind [f]iles' })
     vim.keymap.set('n', '<leader>gs', function() builtin.grep_string({ search = vim.fn.input("Grep For > ") }) end, { desc = '[G]rep [s]earch' })
