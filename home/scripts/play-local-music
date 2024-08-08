@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+CHOICE=$(\ls ~/Music | fzf)
+
+if [[ -z $CHOICE ]]; then
+    exit 0
+fi
+
+mpv --no-video "$CHOICE"
