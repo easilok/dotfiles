@@ -2,26 +2,28 @@
 
 ping -q -c 1 1.1.1.1 > /dev/null || exit
 
-maildirs=("personal" "professional" "nibble" "luispereira" "uab" "nibble-smtp" "xyz")
+maildirs=("personal" "professional" "luispereira" "xyz")
 
 if test -x "$(which mbsync)"; then
     mbsync -a 
     if [ -d "$HOME/Mail" ]; then
-	hasNewMail=false
-	notifyMessage=""
-	for maildir in "${maildirs[@]}"
-	do
-	    unread=$(find $HOME/Mail/.*mail/$maildir/[Ii][Nn][Bb][Oo][Xx]/new/* -type f 2>/dev/null | wc -l )
+        hasNewMail=false
+        notifyMessage=""
+        for maildir in "${maildirs[@]}"
+        do
+            unread=$(find $HOME/Mail/.*mail/$maildir/[Ii][Nn][Bb][Oo][Xx]/new/* -type f 2>/dev/null | wc -l )
 
-	    if [ $unread -gt 0 ]; then
-		hasNewMail=true
-		notifyMessage=$notifyMessage"Unreaded ($maildir): $unread\n"
-	    fi
-	done
-	if [ "$hasNewMail" = true ]; then
-	    notify-send "Mail Synced" "$notifyMessage"
-	fi
+            if [ $unread -gt 0 ]; then
+                hasNewMail=true
+                notifyMessage=$notifyMessage"Unreaded ($maildir): $unread\n"
+            fi
+        done
+        if [ "$hasNewMail" = true ]; then
+            notify-send "Mail Synced" "$notifyMessage"
+        fi
     fi
+else
+    notify-send "mbsync binary not found in path"
 fi
 
 if test -x "$(which mu)"; then
