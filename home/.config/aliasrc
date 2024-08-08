@@ -69,7 +69,7 @@ alias tprj=tmux-sessionizer
 alias trp=tmux-resumer
 alias asdf=$HOME/scripts/DefaultKeyboardConfigs.sh
 alias bat=batcat
-alias va='source venv/bin/activate'
+alias va='source venv/bin/activate || source .venv/bin/activate'
 alias wo="pomo 'work'"
 alias br="pomo 'break'"
 alias t=todo
@@ -131,3 +131,8 @@ if [ -z $SSH_AUTH_SOCK ] && [ -e "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
     export SSH_AGENT_PID=$(ps -fC ssh-agent | grep $XDG_RUNTIME_DIR/ssh-agent.socket | head -n1 | awk '{ print $2 }')
 fi
+
+alias work="task rc.data.location=~/Nextcloud/task.warrior/work"
+alias twork=work
+alias p="task rc.data.location=~/Nextcloud/task.warrior/personal"
+alias personal=p
