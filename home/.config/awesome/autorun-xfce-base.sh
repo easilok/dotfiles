@@ -13,7 +13,7 @@ xmodmap -e "clear lock" &
 xmodmap -e "keycode 66 = Escape NoSymbol Escape" &
 setxkbmap -option caps:escape &
 setxkbmap -layout pt &
-xsetroot -cursor_name left_ptr &
+# xsetroot -cursor_name left_ptr &
 xss-lock -- i3lock &
 wmname compiz
 
@@ -24,11 +24,7 @@ else
 fi
 # xscreensaver -no-splash &
 
-if [ -f "$(which compton)" ]; then
-  run compton
-else 
-  run picom
-fi
+# Commented out as something in the config is locking the WM
 run nm-applet
 # run nitrogen --restore
 run ~/scripts/set_wallpaper
@@ -50,9 +46,14 @@ run mintupdate-launcher
 run mintreport-tray
 run /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 run start-pulseaudio-x11
-run xfce4-power-manager
+# run xfce4-power-manager
 # run xfce4-volumed
 run warpinator --autostart
-run /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd
+# run /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd
 run system-config-printer-applet
-# run /usr/bin/gnome-keyring-daemon --start --components=ssh
+run /usr/bin/gnome-keyring-daemon --start --components=ssh
+# run /usr/bin/gnome-keyring-daemon --start
+
+run picom
+
+run ssh-agent -D -a /run/user/1000/ssh-agent.socket
