@@ -105,6 +105,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'rebelot/kanagawa.nvim'
 
 " Prettier
 Plug 'sbdchd/neoformat'
