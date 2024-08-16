@@ -17,7 +17,7 @@ xmodmap -e "clear lock" &
 xmodmap -e "keycode 66 = Escape NoSymbol Escape" &
 setxkbmap -option caps:escape &
 setxkbmap -layout pt &
-xsetroot -cursor_name left_ptr &
+# xsetroot -cursor_name left_ptr &
 if [ -f "$(which i3lock-fancy)" ]; then 
   xss-lock -- i3lock-fancy &
 else
@@ -25,24 +25,32 @@ else
 fi
 wmname compiz
 
-# run lxsession
-run lxpolkit
-run gnome-keyring
+# base apps
 run picom
 run nm-applet
-# run nitrogen --restore
 run ~/scripts/set_wallpaper
 run parcellite
-# run clipmenud
-# run xfce4-clipman
+run xsettingsd
+run sxhkd
+run nextcloud
+# If there's a personal Xmodmap setup, use it
+[[ -f "$HOME/.Xmodmap" ]] && xmodmap ~/.Xmodmap
+run blueman-applet
+run ssh-agent -D -a /run/user/1000/ssh-agent.socket
+
+# XFCE base install
+run /usr/libexec/at-spi-bus-launcher --launch-immediately
+run mintupdate-launcher
+run mintreport-tray
+run /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+# run warpinator --autostart
+run system-config-printer-applet
+run /usr/bin/gnome-keyring-daemon --start --components=ssh
+
 if [ -f "$(which xfce4-notifyd)" ]; then
   run xfce4-notifyd
 else
   run dunst
 fi
-run xsettingsd
-run sxhkd
-run nextcloud
-xmodmap ~/.Xmodmap
 
 

@@ -47,20 +47,9 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+
 bindsym $mod+Tab focus next
 bindsym $mod+Shift+Tab focus prev
-
-# change output focus
-bindsym $mod+Alt+h focus output left
-bindsym $mod+Alt+j focus output down
-bindsym $mod+Alt+k focus output up
-bindsym $mod+Alt+l focus output right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus output left
-bindsym $mod+Down focus output down
-bindsym $mod+Up focus output up
-bindsym $mod+Right focus output right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -68,19 +57,34 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus output left
+bindsym $mod+Down focus output down
+bindsym $mod+Up focus output up
+bindsym $mod+Right focus output right
+
 # move the workspace to monitor
 bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Down move workspace to output down
 bindsym $mod+Shift+Up move workspace to output up
 bindsym $mod+Shift+Right move workspace to output right
 
+# move to screen
+bindsym $mod+Control+comma move container to output next
+bindsym $mod+Control+period move container to output next
+bindsym $mod+Shift+comma move workspace to output next
+bindsym $mod+Shift+period move workspace to output next
+bindsym $mod+comma focus output left 
+bindsym $mod+period focus output right
+
 
 # split in horizontal orientation
 bindsym $mod+minus split h;exec notify-send 'tile horizontally'
 
 # split in vertical orientation
+bindsym $mod+Shift+minus split v;exec notify-send 'tile vertically'
 bindsym $mod+backslash split v;exec notify-send 'tile vertically'
-# split toggle 
+# split toggle
 bindsym $mod+Shift+t split toggle
 
 # enter fullscreen mode for the focused container
@@ -99,13 +103,13 @@ bindsym $mod+Control+space floating toggle
 bindsym $mod+Shift+space focus mode_toggle
 
 # toggle sticky
-bindsym $mod+s sticky toggle
+bindsym $mod+Shift+s sticky toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+g focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+Control+m move scratchpad
@@ -141,7 +145,7 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+# bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -153,15 +157,7 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
-
-# move to screen
-bindsym $mod+Control+comma move container to output next
-bindsym $mod+Control+period move container to output next
-bindsym $mod+Shift+comma move workspace to output next
-bindsym $mod+Shift+period move workspace to output next
-bindsym $mod+comma focus output left 
-bindsym $mod+period focus output right
+# bindsym $mod+Shift+0 move container to workspace $ws10
 
 for_window [class="SpeedCrunch"] floating enable
 for_window [class="firefox"] layout tabbed
@@ -174,7 +170,7 @@ assign [class="Microsoft Teams - Preview"] $ws5
 assign [class="Pcmanfm"] $ws6
 
 # reload the configuration file
-bindsym $mod+Shift+r reload
+bindsym $mod+Control+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+Control+r restart
 # exit i3 (logs you out of your X session)
@@ -251,7 +247,8 @@ set $base0F #cc6633
 
 # Theme colors (MANJARO IMPORT)
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #7EC485 #556064 #80FFF9 #FDF6E3 #7EC485
+  # client.focused          #7EC485 #556064 #80FFF9 #FDF6E3 #7EC485
+  client.focused          #7EC485 #556064 #80FFF9 #FD0000 #7EC485
   client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
   client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
@@ -289,11 +286,12 @@ exec_always --no-startup-id i3-autostart
 # finds out, if available)
 bar {
     position top
-    status_command i3status
+    # status_command i3status
+    status_command i3blocks
 }
 
-# for_window [class=".*"] border pixel 0
-#smart_gaps on
-#smart_borders on
-#gaps inner 2
+# Gaps
+smart_gaps on
+smart_borders on
+gaps inner 2
 
