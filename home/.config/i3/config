@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:monospace 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -49,35 +49,28 @@ bindsym $mod+Shift+Control+d --release exec "killall dunst; exec notify-send 're
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ccedilla focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Tab focus next
+bindsym $mod+Shift+Tab focus next
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+ccedilla move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+h split h;exec notify-send 'tile horizontally'
+bindsym $mod+minus split h;exec notify-send 'tile horizontally'
+bindsym $mod+Shift+minus split v;exec notify-send 'tile vertically'
 
 # split in vertical orientation
-bindsym $mod+v split v;exec notify-send 'tile vertically'
-# split toggle 
+bindsym $mod+backslash split v;exec notify-send 'tile vertically'
+
+# split toggle
 bindsym $mod+q split toggle
 
 # enter fullscreen mode for the focused container
@@ -87,7 +80,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-bindsym $mod+x layout toggle stacking tabbed splith
+bindsym $mod+x layout toggle tabbed splith
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -102,14 +95,14 @@ bindsym $mod+Shift+s sticky toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+g focus child
 
 # move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+t move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+bindsym $mod+t scratchpad show
 
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
@@ -120,15 +113,15 @@ bindsym $mod+period move workspace to output next
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6:"
-set $ws7 7
-set $ws8 "8:"
-#set $ws9 "9"
+set $ws1 "1."
+set $ws2 "2."
+set $ws3 "3."
+set $ws4 "4."
+set $ws5 "5."
+set $ws6 "6."
+set $ws7 "7."
+set $ws8 "8."
+set $ws9 "9."
 #set $ws10 "10 wicd"
 
 # switch to workspace
@@ -140,7 +133,7 @@ bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
-#bindsym $mod+9 workspace $ws9
+bindsym $mod+9 workspace $ws9
 #bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
@@ -152,7 +145,7 @@ bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
-#bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+9 move container to workspace $ws9
 #bindsym $mod+Shift+0 move container to workspace $ws10
 
 for_window [class="SpeedCrunch"] floating enable
@@ -198,10 +191,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym ccedilla resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -244,7 +237,8 @@ set $base0F #cc6633
 
 # Theme colors (MANJARO IMPORT)
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #7EC485 #556064 #80FFF9 #FDF6E3 #7EC485
+  # client.focused          #7EC485 #556064 #80FFF9 #FDF6E3 #7EC485
+  client.focused          #7EC485 #556064 #80FFF9 #FD0000 #7EC485
   client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
   client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
@@ -266,8 +260,6 @@ mode "moveit" {
 }
 bindsym $mod+m focus floating; mode "moveit"
 
-bindsym $mod+Control+l exec "$lockScreen"
-
 # windows decorations
 #new_window pixel 2
 default_border pixel 2
@@ -278,50 +270,16 @@ workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
 bindsym $mod+Shift+z move container to workspace back_and_forth; workspace back_and_forth
 
-# swap caps lock and escape
+# Autostart applications
 exec --no-startup-id /home/luis/.config/awesome/autorun-xfce-base.sh
-#exec_always --no-startup-id xmodmap -e "clear lock"
-##exec_always --no-startup-id xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
-#exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
-#exec_always --no-startup-id setxkbmap -layout pt
-##autostart apps
-## exec --no-startup-id xfce4-power-manager
-#exec --no-startup-id nm-applet
-## exec --no-startup-id wicd-gtk -t
-## exec --no-startup-id nitrogen --restore
-#exec --no-startup-id parcellite
-## exec --no-startup-id clipit
-## exec --no-startup-id polybar one
-## exec_always --no-startup-id polybar_start
-#exec --no-startup-id $myTerminal
-#exec --no-startup-id lxsession
-# finds out, if available)
+
+# Bar
 bar {
-        status_command i3status
+        position top
+        status_command i3blocks
 }
 
-# Rof
-bindsym $mod+d exec --no-startup-id $HOME/.config/rofi/scripts/dmenu-simple.sh bindsym $mod+Shift+d exec --no-startup-id $HOME/.config/rofi/scripts/dmenu-edit-configs.sh 
-# bindsym $mod+Control+d exec --no-startup-id rofi -show 
-# bindsym $mod+Tab exec --no-startup-id rofi  -show window -config ~/.config/rofi/themes/Switch.rasi
-# bindsym $mod+9 exec --no-startup-id $HOME/.config/rofi/scripts/i3stratch.py
-# bindsym $mod+y exec --no-startup-id $HOME/.config/rofi/scripts/Powermenu.sh
-# bindsym $mod+Shift+m exec --no-startup-id $HOME/.config/rofi/scripts/mpdcontrol.sh
-# bindsym $mod+d exec --no-startup-id $HOME/.config/rofi/bins/appsmenu
-bindsym $mod+Control+d exec --no-startup-id $HOME/.config/rofi/bins/websearchmenu
-bindsym $mod+Tab exec --no-startup-id $HOME/.config/rofi/bins/windowsmenu
-bindsym $mod+9 exec --no-startup-id $HOME/.config/rofi/bins/i3layoutmenu
-bindsym $mod+Control+y exec --no-startup-id $HOME/.config/rofi/bins/powermenu
-bindsym $mod+Shift+m exec --no-startup-id $HOME/.config/rofi/bins/mpdmenu
-
-bindsym $mod+c exec --no-startup-id speedcrunch
-
-# Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-
-# for_window [class=".*"] border pixel 0
+# Gaps
 smart_gaps on
 smart_borders on
 gaps inner 2

@@ -1,0 +1,16 @@
+[i3-focusedwindow]
+label=[]= 
+align=center
+command=scripts/focusedwindow 40
+interval=persist
+
+[battery]
+command=scripts/battery
+interval=10
+
+# Update time every 5 seconds
+[time]
+command=date "+%d/%b (W%W) - %H:%M"
+interval=10
+
+# vim: set ft=toml:
