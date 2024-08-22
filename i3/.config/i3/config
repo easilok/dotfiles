@@ -79,11 +79,11 @@ bindsym $mod+period focus output right
 
 
 # split in horizontal orientation
-bindsym $mod+minus split h;exec notify-send 'tile horizontally'
+bindsym $mod+backslash split h;exec notify-send 'tile horizontally'
+bindsym $mod+shift+minus split h;exec notify-send 'tile horizontally'
 
 # split in vertical orientation
-bindsym $mod+Shift+minus split v;exec notify-send 'tile vertically'
-bindsym $mod+backslash split v;exec notify-send 'tile vertically'
+bindsym $mod+minus split v;exec notify-send 'tile vertically'
 # split toggle
 bindsym $mod+Shift+t split toggle
 
@@ -277,7 +277,8 @@ hide_edge_borders smart
 focus_follows_mouse no
 focus_wrapping workspace
 
-workspace_auto_back_and_forth yes
+# Switch to previous workspace when selecting current one
+# workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
 bindsym $mod+Shift+z move container to workspace back_and_forth; workspace back_and_forth
 
@@ -286,12 +287,12 @@ exec_always --no-startup-id i3-autostart
 # finds out, if available)
 bar {
     position top
-    # status_command i3status
-    status_command i3blocks
+    status_command i3status
+    # status_command i3blocks
 }
 
 # Gaps
-smart_gaps on
-smart_borders on
-gaps inner 2
+# smart_gaps on
+# smart_borders on
+# gaps inner 2
 

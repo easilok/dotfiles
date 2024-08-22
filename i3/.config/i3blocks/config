@@ -1,11 +1,12 @@
 [i3-focusedwindow]
 label=[]= 
 align=center
-command=scripts/focusedwindow 40
-interval=persist
+command=$HOME/.config/i3blocks/scripts/focusedwindow 40
+# interval=persist
+interval=5
 
 [battery]
-command=scripts/battery
+command=$HOME/.config/i3blocks/scripts/battery
 interval=10
 
 # Update time every 5 seconds

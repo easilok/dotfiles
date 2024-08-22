@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Author: Kn
 
-while :
-do
+# while :
+# do
   ID=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
   if [[ $1 ]] 
   then
@@ -12,5 +12,5 @@ do
     TITLE=$(xprop -id $ID | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2)
     echo "$TITLE"
   fi
-done
+# done
 
