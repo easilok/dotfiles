@@ -181,6 +181,8 @@ Plug 'quangnguyen30192/cmp-nvim-tags'
 Plug 'chrisgrieser/nvim-early-retirement'
 Plug 'j-morano/buffer_manager.nvim'
 Plug 'dstein64/vim-startuptime'
+" lsp replacement
+Plug 'pmizio/typescript-tools.nvim'
 
 Plug '~/.config/nvim/lua/easilok'
 
