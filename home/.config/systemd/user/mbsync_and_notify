@@ -18,7 +18,7 @@ if test -x "$(which mbsync)"; then
                 notifyMessage=$notifyMessage"Unreaded ($maildir): $unread\n"
             fi
         done
-        if [ "$hasNewMail" = true ]; then
+        if [ "$hasNewMail" = true ] && [ ! -z $EMAIL_SYNC_NOTIFY ]; then
             notify-send "Mail Synced" "$notifyMessage"
         fi
     fi
