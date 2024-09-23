@@ -159,14 +159,19 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 # bindsym $mod+Shift+0 move container to workspace $ws10
 
-for_window [class="SpeedCrunch"] floating enable
+# Browser apps for workspace 4
 for_window [class="firefox"] layout tabbed
 assign [class="firefox"] $ws4
 for_window [class="Firefox-esr"] layout tabbed
 assign [class="Firefox-esr"] $ws4
 for_window [class="qutebrowser"] layout tabbed
 assign [class="qutebrowser"] $ws4
+assign [class="brave-browser"] $ws4
+# for_window [class="brave-browser"] layout tabbed
+# Chat apps for workspace 5
 assign [class="Microsoft Teams - Preview"] $ws5
+assign [class="teams-for-linux"] $ws5
+# Filebrowser apps for workspace 6
 assign [class="Pcmanfm"] $ws6
 
 # reload the configuration file

@@ -19,7 +19,7 @@ setxkbmap -option caps:escape &
 setxkbmap -layout pt &
 # xsetroot -cursor_name left_ptr &
 if [ -f "$(which i3lock-fancy)" ]; then 
-  xss-lock -- i3lock-fancy &
+  xss-lock -- i3lock-fancy -p &
 else
   xss-lock -- i3lock &
 fi
