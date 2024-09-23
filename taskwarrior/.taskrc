@@ -86,9 +86,8 @@ include ~/.config/taskwarrior/sync.conf
 ############
 # Contexts #
 ############
-context.work.read=proj:addvolt or proj:
-context=work
-context.personal.read=proj:personal or proj:
+context.work.read=+addvolt or +work or proj:
+context.personal.read=+personal or proj:
 
 
 ########################
