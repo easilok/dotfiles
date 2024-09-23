@@ -1,0 +1,6 @@
+#!/bin/bash
+
+{ pkill teams &
+  sleep 2
+  teams &
+} &> /dev/null

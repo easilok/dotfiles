@@ -34,7 +34,7 @@ if [ -z "$GIT_CURRENT_BRANCH" ]; then
     \git "$@"
 elif [ $# -eq 0 ]; then
     # calling with no arguments, make it a status command
-    \git status
+    \git status --short --branch
 elif [ ! -z $IS_SAFE_COMMAND ] ; then
     # provided a safe command so go on
     \git "$@"
