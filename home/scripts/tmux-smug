@@ -15,7 +15,8 @@ fi
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/.config/smug/*.yml -type f | fzf)
+    # selected=$(find ~/.config/smug/*.yml -type f | fzf)
+    selected=$(smug list | fzf)
 fi
 
 if [[ -z $selected && "$MODE" == "Start" ]]; then
@@ -27,13 +28,13 @@ fi
 # tmux_running=$(pgrep tmux)
 
 if [[ "$MODE" == "Stop" ]]; then
-    smug stop -f $selected
+    smug stop $selected
 else
 
-    if [[ -z $TMUX ]]; then
-        smug start -f $selected
-    else
-        smug start -a -f $selected
-    fi
+    # if [[ -z $TMUX ]]; then
+    #     smug start $selected
+    # else
+        smug start $selected
+    # fi
 
 fi
