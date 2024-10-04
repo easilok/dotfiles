@@ -1,6 +1,26 @@
 #!/bin/bash
 
-{ pkill teams &
-  sleep 2
-  teams &
-} &> /dev/null
+[ -z $TEAMS_RUN_COMMAND ] && TEAMS_RUN_COMMAND="flatpak run com.github.IsmaelMartinez.teams_for_linux"
+
+
+find_teams() {
+    TEAMS_PIDS=( $(pgrep -l teams | grep -v teams-restart | awk '{ print $1 }') )
+    # TEAMS_PIDS=( $(pgrep -l teams) )
+}
+
+
+find_teams
+
+while [ ${#TEAMS_PIDS[@]} -gt 1 ]; do
+
+    for pid in "${TEAMS_PIDS[@]}"
+    do
+        echo "Killing $pid" 
+        kill $pid
+    done
+    # echo "$(find_teams)" | xargs kill
+    sleep 2
+    find_teams
+done
+
+$TEAMS_RUN_COMMAND &
