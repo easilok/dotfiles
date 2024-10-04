@@ -97,4 +97,5 @@ read_file outlook {
     format = "%content"
     path = "/tmp/outlookEvents/next_event"
     color_good = "#FFFFFF"
+    format_bad = "No Events Found"
 }
