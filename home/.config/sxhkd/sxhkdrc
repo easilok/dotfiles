@@ -89,7 +89,7 @@ super + F7
     $HOME/.screenlayout/internal_monitor
 
 super + shift + F7
-    /home/luis/.config/dmenu/scripts/dmenu-screen
+    $HOME/.config/sxhkd/scripts/change_monitors.sh
 
 XF86MonBrightnessDown
     sudo brightnessctl set 10%-
