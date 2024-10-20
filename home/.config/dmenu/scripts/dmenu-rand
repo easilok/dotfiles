@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+declare -a options=(" 8 
+ 16 
+ 32 
+ 64 ")
+
+choice=$(echo -e "${options[@]}" | $DMENU -p 'Select random string size')
+
+if [ -z "$choice" ]; then
+    echo "Exit Esc"
+    exit
+fi
+
+openssl rand -base64 $choice | sed 's/=/0/g' | xclip
