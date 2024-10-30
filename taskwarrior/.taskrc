@@ -54,10 +54,14 @@ news.version=3.1.0
 # Reports #
 ###########
 
+report.tomorrow.filter=status:pending -WAITING -BLOCKED due.before:tomorrow+1day
+report.tomorrow.columns=id,project,priority,due,start.active,urgency,description.desc,tags
+report.tomorrow.labels=ID,Proj,Pri,Due,A,Urg,Description,Tags
+
 # report.next.filter=status:pending -WAITING limit:page # default
 report.next.filter=status:pending -WAITING limit:page -BLOCKED
-report.next.columns=id,project,priority,due,start.active,entry.age,urgency,description.desc,tags
-report.next.labels=ID,Proj,Pri,Due,A,Age,Urg,Description,Tags
+report.next.columns=id,project,priority,due,scheduled,start.active,entry.age,urgency,description.desc,tags
+report.next.labels=ID,Proj,Pri,Due,SCH,A,Age,Urg,Description,Tags
 
 report.ready.columns=id,project,priority,due,start.active,entry.age,urgency,description,tags
 report.ready.labels=ID,Proj,Pri,Due,A,Age,Urg,Description,Tags
@@ -71,7 +75,7 @@ report.triage.sort=urgency-
 report.today.description=Tasks for Today
 report.today.columns=id,project,priority,start.active,urgency,due,description.desc,tags
 report.today.labels=ID,Proj,Pri,A,Urg,Due,Description,Tags
-report.today.filter=status:pending -BLOCKED -review and ( ( proj: or ( ( prio:H and due: ) or due.before:tomorrow or +respond or +today or +next or +inprogress or +yesterday) ) or +daytime )
+report.today.filter=status:pending -BLOCKED and ( proj: or prio:H or due.before:tomorrow or scheduled.before:tomorrow or +respond or +next or +ACTIVE )
 report.today.sort=urgency-
 
 report.active.description=Active Tasks
