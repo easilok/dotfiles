@@ -146,6 +146,7 @@ Plug 'notjedi/nvim-rooter.lua'
 
 " Managing auto session creator
 Plug 'tpope/vim-obsession'
+Plug 'superDross/ticket.vim'
 
 " Database interface
 Plug 'tpope/vim-dadbod'

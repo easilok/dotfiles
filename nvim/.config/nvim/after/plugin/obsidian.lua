@@ -8,7 +8,19 @@ obsidian.setup({
         },
         {
             name = "personal",
-            path = "~/Nextcloud/Obsidian/Personal", },
+            path = "~/Nextcloud/Obsidian/Personal",
+        },
+        {
+            name = "knowledge",
+            path = "~/Nextcloud/Obsidian/Knowledge",
+            overrides = {
+                templates = {
+                    folder = "99 - Templates",
+                    date_format = "%Y-%m-%d",
+                    time_format = "%H:%M",
+                },
+            }
+        },
     },
     daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
@@ -20,6 +32,13 @@ obsidian.setup({
         -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
         template = nil
     },
+    templates = {
+        folder = "templates",
+        date_format = "%Y-%m-%d",
+        time_format = "%H:%M",
+    },
+    preferred_link_style = "markdown",
+    disable_frontmatter = true,
     mappings = {
         -- Toggle check-boxes.
         ["<space>ch"] = {
