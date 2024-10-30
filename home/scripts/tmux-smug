@@ -34,7 +34,7 @@ else
     # if [[ -z $TMUX ]]; then
     #     smug start $selected
     # else
-        smug start $selected
+        smug start $selected -a
     # fi
 
 fi
