@@ -15,5 +15,16 @@ config.cell_width = 1.1
 
 -- GUI interface
 config.enable_tab_bar = false
+config.front_end = "WebGpu"
+-- config.max_fps = 60
+config.animation_fps = 1
+config.cursor_blink_ease_in = 'Constant'
+config.cursor_blink_ease_out = 'Constant'
+
+
+config.keys = {
+  -- CTRL-SHIFT-k activates the debug overlay
+  { key = 'K', mods = 'CTRL', action = wezterm.action.ShowDebugOverlay },
+}
 
 return config
