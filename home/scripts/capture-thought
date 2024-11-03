@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+THOUGHT=$(zenity --entry --text="Enter thought to capture")
+
+[[ -z $THOUGHT ]] && echo "No new thought" && exit 1
+
+DAILY_FILENAME="$(date +'%Y-%m-%d').md"
+
+DAILY_DIR="$HOME/Nextcloud/Obsidian/Personal/journal"
+
+[[ ! -d $DAILY_DIR ]] && echo "Could not find daily directory!" && exit 1
+
+[[ ! -f "$DAILY_DIR/$DAILY_FILENAME" ]] && \
+    echo "Daily file does not exist. Creating file..." && \
+    touch "$DAILY_DIR/$DAILY_FILENAME"
+
+echo "
+### $(date +'%Y-%m-%d %H:%M:%S') - Capture
+
+$THOUGHT
+
+" >> "$DAILY_DIR/$DAILY_FILENAME"
