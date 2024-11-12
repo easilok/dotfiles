@@ -136,4 +136,4 @@ alias t=task
 alias work="task context work && task"
 alias p="task context personal && task"
 alias tt="work today"
-alias day-progress="task end.after:yesterday-2day completed"
+alias day-progress="task end.after:yesterday completed"
