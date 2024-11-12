@@ -29,7 +29,7 @@ wmname compiz
 run picom
 run nm-applet
 run ~/scripts/set_wallpaper
-run parcellite
+run greenclip daemon
 run xsettingsd
 run sxhkd
 run nextcloud
