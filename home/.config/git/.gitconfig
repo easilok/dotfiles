@@ -22,7 +22,8 @@
   pl = pull
   ps = push
   rbc = rebase --continue
-  rba = rebase -i --autosquash --committer-date-is-author-date
+  ; rba = rebase -i --autosquash --committer-date-is-author-date
+  rba = rebase -i --autosquash
   rdup = !git dup && git rebase develop
   rid = !git rebase -i $(git merge-base develop HEAD)
   rim = !git rebase -i $(git merge-base master HEAD)
