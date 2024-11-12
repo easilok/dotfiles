@@ -23,6 +23,8 @@ super + b
     dmenu-bookmarks
 super + e
     pcmanfm
+control + alt + h
+  $HOME/.config/sxhkd/scripts/show_clipboard.sh
 
 Print
   $HOME/.config/sxhkd/scripts/print-screen.sh
