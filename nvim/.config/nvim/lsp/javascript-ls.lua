@@ -2,7 +2,7 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- npm install -g typescript typescript-language-server @vtsls/language-server
-require'lspconfig'.tsserver.setup{
+require'lspconfig'.ts_ls.setup{
     capabilities = capabilities,
     cmd = { "vtsls", "--stdio" },
     on_attach = function(client, bufnr)
