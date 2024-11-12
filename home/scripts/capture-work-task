@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+TASK=$(zenity --forms --title="New work task" --text="Enter task information" \
+    --separator=";" \
+    --add-entry="Description" \
+    --add-entry="Tags" \
+    --add-calendar="Due" \
+    --forms-date-format="%Y-%m-%d")
+
+[[ -z $TASK ]] && echo "No new task" && exit 1
+
+TASK_DESCRIPTION=$(echo $TASK | cut -d ';' -f 1)
+TASK_TAGS=$(echo $TASK | cut -d ';' -f 2)
+TASK_DUE=$(echo $TASK | cut -d ';' -f 3)
+
+task add project:capture +addvolt $TASK_TAGS $TASK_DESCRIPTION due:$TASK_DUE
+
+echo "Created '$TASK_DESCRIPTION' task with tags +addvolt '$TASK_TAGS', project 'capture' and due date to '$TASK_DUE'"
+
+
