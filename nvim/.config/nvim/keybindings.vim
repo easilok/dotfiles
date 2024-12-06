@@ -59,8 +59,6 @@ nnoremap gdl :diffget //3<CR>
 map - <Nop>
 map Q <Nop>
 
-set pastetoggle=<F3>
-
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
 
