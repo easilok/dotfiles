@@ -98,3 +98,9 @@ XF86MonBrightnessDown
 
 XF86MonBrightnessUp
     sudo brightnessctl set 10%+
+
+shift + alt + F6
+    brightnessctl set 10%-
+
+shift + alt + F7
+    brightnessctl set 10%+

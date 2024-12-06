@@ -137,3 +137,5 @@ alias work="task context work && task"
 alias p="task context personal && task"
 alias tt="work today"
 alias day-progress="task end.after:yesterday completed"
+alias cal="ncal -b -w"
+alias ncal=cal

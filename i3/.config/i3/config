@@ -292,7 +292,7 @@ focus_wrapping workspace
 bindsym $mod+z workspace back_and_forth
 bindsym $mod+Shift+z move container to workspace back_and_forth; workspace back_and_forth
 
-exec_always --no-startup-id i3-autostart
+exec_always --no-startup-id "$HOME/.local/bin/i3-autostart"
 
 # finds out, if available)
 bar {
