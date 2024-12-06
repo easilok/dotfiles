@@ -19,6 +19,7 @@ GIT_SAFE_COMMANDS=(
     "branch"
     "bselect"
     "ba"
+    "bs"
 )
 
 # Find if provided command is a safe command

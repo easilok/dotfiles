@@ -3,18 +3,24 @@
 TASK=$(zenity --forms --title="New work task" --text="Enter task information" \
     --separator=";" \
     --add-entry="Description" \
+    --add-entry="Project" \
     --add-entry="Tags" \
+    --add-entry="Ticket" \
     --add-calendar="Due" \
     --forms-date-format="%Y-%m-%d")
 
 [[ -z $TASK ]] && echo "No new task" && exit 1
 
 TASK_DESCRIPTION=$(echo $TASK | cut -d ';' -f 1)
-TASK_TAGS=$(echo $TASK | cut -d ';' -f 2)
-TASK_DUE=$(echo $TASK | cut -d ';' -f 3)
+TASK_PROJECT=$(echo $TASK | cut -d ';' -f 2)
+TASK_TAGS=$(echo $TASK | cut -d ';' -f 3 | sed -e 's/^ //' -e 's/ $//' -e 's/+//g' -e 's/-//g' -e 's/ / +/g' )
+TASK_TICKET=$(echo $TASK | cut -d ';' -f 4)
+TASK_DUE=$(echo $TASK | cut -d ';' -f 5)
 
-task add project:capture +addvolt $TASK_TAGS $TASK_DESCRIPTION due:$TASK_DUE
+[[ -z $TASK_PROJECT ]] && TASK_PROJECT=capture
 
-echo "Created '$TASK_DESCRIPTION' task with tags +addvolt '$TASK_TAGS', project 'capture' and due date to '$TASK_DUE'"
+task add project:$TASK_PROJECT +addvolt +$TASK_TAGS $TASK_DESCRIPTION due:$TASK_DUE ticket:$TASK_TICKET
+
+echo "Created '$TASK_DESCRIPTION' task with tags +addvolt '$TASK_TAGS', project '$TASK_PROJECT' and due date to '$TASK_DUE'"
 
 

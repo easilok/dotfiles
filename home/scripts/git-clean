@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# TODO: Check if in git repository
+
+echo "Updating branches..."
+
+git fetch --prune
+
+[[ ! $? -eq 0 ]] && echo "Failed to clean git branches. Is this a git repository?" && exit 1
+
+echo "Removing branches mark as gone on the remote..."
+
+git branch -vv | grep 'gone]' | awk '{print $1}' | xargs git branch -D
+
+
+if [[ $# -ge 1 ]]; then
+    if [[ "$1" == "--all" ]] || [[ "$1" == "-a" ]] || [[ "$1" == "-f" ]]; then
+        echo "Removing branches with no remote reference..."
+
+        git branch -vv | grep -v '\[origin' | awk '{print $1}' | xargs git branch -D
+    fi
+fi
+
