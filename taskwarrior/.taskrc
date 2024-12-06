@@ -48,7 +48,7 @@ default.project=inbox
 #########
 # Other #
 #########
-news.version=3.1.0
+news.version=3.2.0
 
 ###########
 # Reports #
@@ -60,8 +60,8 @@ report.tomorrow.labels=ID,Proj,Pri,Due,A,Urg,Description,Tags
 
 # report.next.filter=status:pending -WAITING limit:page # default
 report.next.filter=status:pending -WAITING limit:page -BLOCKED
-report.next.columns=id,project,priority,due,scheduled,start.active,entry.age,urgency,description.desc,tags
-report.next.labels=ID,Proj,Pri,Due,SCH,A,Age,Urg,Description,Tags
+report.next.columns=id,project,priority,due,scheduled,start.active,entry.age,urgency,description.desc,tags,ticket
+report.next.labels=ID,Proj,Pri,Due,SCH,A,Age,Urg,Description,Tags,Tck
 
 report.ready.columns=id,project,priority,due,start.active,entry.age,urgency,description,tags
 report.ready.labels=ID,Proj,Pri,Due,A,Age,Urg,Description,Tags
@@ -73,8 +73,8 @@ report.triage.filter=( due.before:tomorrow or due: ) status:pending -WAITING -id
 report.triage.sort=urgency-
 
 report.today.description=Tasks for Today
-report.today.columns=id,project,priority,start.active,urgency,due,description.desc,tags
-report.today.labels=ID,Proj,Pri,A,Urg,Due,Description,Tags
+report.today.columns=id,project,priority,start.active,urgency,due,description.desc,tags,ticket
+report.today.labels=ID,Proj,Pri,A,Urg,Due,Description,Tags,Tck
 report.today.filter=status:pending -BLOCKED and ( proj: or prio:H or due.before:tomorrow or scheduled.before:tomorrow or +respond or +next or +ACTIVE )
 report.today.sort=urgency-
 
@@ -102,3 +102,12 @@ urgency.user.tag.review.coefficient=-5
 urgency.user.tag.inprogress.coefficient=2.5
 urgency.user.tag.today.coefficient=2
 urgency.user.tag.yesterday.coefficient=3
+
+
+###########################
+# User Defined Attributes #
+###########################
+uda.ticket.type=string
+uda.ticket.label=Tck
+
+context=work
