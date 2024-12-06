@@ -149,6 +149,13 @@ Plug 'notjedi/nvim-rooter.lua'
 " Managing auto session creator
 Plug 'tpope/vim-obsession'
 Plug 'superDross/ticket.vim'
+let g:ticket_use_fzf_default = 1
+" Only allow the auto feature to work in git repo directories
+let g:auto_ticket_git_only = 1
+" Automatically open session files when only opening vim
+let g:auto_ticket_open = 1
+" Automatically open and save session files when opening/closing vim
+" let g:auto_ticket = 1
 
 " Database interface
 Plug 'tpope/vim-dadbod'
