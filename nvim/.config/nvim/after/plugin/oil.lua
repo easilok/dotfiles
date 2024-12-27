@@ -10,3 +10,4 @@ oil.setup({
 
 vim.keymap.set("", "<F7>", oil.open , { desc = "Open Oil file browser" })
 vim.keymap.set("", "<M-p>", oil.open , { desc = "Open Oil file browser" })
+vim.keymap.set("n", "-", oil.open , { desc = "Open Oil file browser" })
