@@ -53,7 +53,7 @@ local check_existing_session = function(session_path)
         return false
     end
 
-    return vim.fn.filereadable(session_path)
+    return vim.fn.filereadable(session_path) ~=0
 end
 
 -- Starts an 'Obsession' for the current project's checked out branch
