@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ ! -f $HOME/local_scripts/jira-stop ]; then
+    notify-send "Could not find jira-stop script"
+    exit 1
+fi
+
+$HOME/local_scripts/jira-stop --dmenu

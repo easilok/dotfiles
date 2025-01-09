@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ ! -f $HOME/local_scripts/jira-start ]; then
+    notify-send "Could not find jira-start script"
+    exit 1
+fi
+
+$HOME/local_scripts/jira-start --dmenu
