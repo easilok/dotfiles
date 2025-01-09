@@ -9,7 +9,7 @@ config.color_scheme = 'Tokyo Night'
 
 -- font
 config.font = wezterm.font 'Hack Nerd Font'
-config.font_size = 8
+config.font_size = 8.5
 config.line_height = 1.25
 config.cell_width = 1.1
 
@@ -21,6 +21,9 @@ config.animation_fps = 1
 config.cursor_blink_ease_in = 'Constant'
 config.cursor_blink_ease_out = 'Constant'
 
+config.window_padding = {
+    bottom = 0,
+}
 
 config.keys = {
   -- CTRL-SHIFT-k activates the debug overlay
