@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -f $HOME/.config/dmenu/dmenurc ]; then
+  . $HOME/.config/dmenu/dmenurc
+else
+  DMENU='dmenu -i'
+fi
+
+EMOJI_PATH=$HOME/.config/dmenu/scripts/emoji
+
+choice=$(cat $EMOJI_PATH | $DMENU -l 20 -p 'Select Emoji: ')
+
+if [ -z "$choice" ]; then
+    echo "Exit Esc"
+    exit
+fi
+
+echo $choice | awk '{ print $1 }'
+echo $choice | awk '{ print $1 }' | xclip -selection "clipboard"
