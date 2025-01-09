@@ -1,6 +1,6 @@
 require "easilok"
 
-local headster = require "plugin.headster"
+local headster = require "easilok.headster"
 local headster_root = "~/.headster"
 if vim.fn.isdirectory("~/Nextcloud/headster") ~= 0 then
     headster_root = "~/Nextcloud/headster"
