@@ -1,17 +1,5 @@
 #!/bin/bash
-#  ____ _____ 
-# |  _ \_   _|  Derek Taylor (DistroTube)
-# | | | || |    http://www.youtube.com/c/DistroTube
-# | |_| || |    http://www.gitlab.com/dwt1/ 
-# |____/ |_| 
-#
-# Dmenu script for editing some of my more frequently edited config files.
-
-# myTerminal=st
-myTerminal=termite
-myEditor=vim
-useQuotes=true
-commandType=exec
+editor=nvim
 
 if [ -f $HOME/.config/dmenu/dmenurc ]; then
   . $HOME/.config/dmenu/dmenurc
@@ -20,13 +8,9 @@ else
 fi
 
 declare -a options=(" awesome 
- bash 
  i3 
- polybar 
- st 
  sxhkd 
- vim 
- xmonad 
+ nvim 
  zsh 
  qutepage 
  edit-files 
@@ -34,66 +18,45 @@ declare -a options=(" awesome
 
 choice=$(echo -e "${options[@]}" | $DMENU -p 'Edit a config file: ')
 
-	if [ "$choice" == ' quit ' ]; then
-		echo "Program terminated."
+if [ "$choice" == ' quit ' ]; then
+    echo "Program terminated."
     exit
-	fi
+fi
 
-  if [ -z "$choice" ]; then
-		echo "Exit Esc"
-    exit
-  fi
+if [ -z "$choice" ]; then
+      echo "Exit Esc"
+      exit
+fi
 
-	if [ "$choice" == ' awesome ' ]; then
-        command="$HOME/.config/awesome/"
-				commandType=dir
-	fi
-	if [ "$choice" == ' bash ' ]; then
-        command=$myEditor" $HOME/.bashrc"
-	fi
-	if [ "$choice" == ' i3 ' ]; then
-        command=$myEditor" $HOME/.config/i3/config"
-	fi
-	if [ "$choice" == ' polybar ' ]; then
-        command=$myEditor" $HOME/.config/polybar/config"
-	fi
-	if [ "$choice" == ' qtile ' ]; then
-        command="$HOME/.config/qtile/"
-				commandType=dir
-	fi
-	if [ "$choice" == ' st ' ]; then
-        command=$myEditor" $HOME/st/config.h"
-	fi
-	if [ "$choice" == ' sxhkd ' ]; then
-        command=$myEditor" $HOME/.config/sxhkd/sxhkdrc"
-	fi
-	if [ "$choice" == ' xmonad ' ]; then
-        command=$myEditor" $HOME/.xmonad/xmonad.hs"
-	fi
-	if [ "$choice" == ' zsh ' ]; then
-        command=$myEditor" $HOME/.zshrc"
-	fi
-	if [ "$choice" == ' vim ' ]; then
-        command=$myEditor" $HOME/.vimrc"
-	fi
-	if [ "$choice" == ' edit-files ' ]; then
-        command=$myEditor" $HOME/.config/dmenu/dmenu-edit-configs.sh"
-	fi
-	if [ "$choice" == ' qutepage ' ]; then
-        command=$myEditor" $HOME/.config/qutebrowser/startup.html"
-	fi
+if [ "$choice" == ' awesome ' ]; then
+    command="$HOME/.config/awesome/"
+fi
+if [ "$choice" == ' bash ' ]; then
+    command="$HOME/.bashrc"
+fi
+if [ "$choice" == ' i3 ' ]; then
+    command="$HOME/.config/i3/config"
+fi
+if [ "$choice" == ' sxhkd ' ]; then
+    command="$HOME/.config/sxhkd/sxhkdrc"
+fi
+if [ "$choice" == ' xmonad ' ]; then
+    command="$HOME/.xmonad/xmonad.hs"
+fi
+if [ "$choice" == ' zsh ' ]; then
+    command="$HOME/.zshrc"
+fi
+if [ "$choice" == ' nvim ' ]; then
+    command="$HOME/.config/nvim"
+fi
+if [ "$choice" == ' edit-files ' ]; then
+    command="$HOME/.config/dmenu/dmenu-edit-configs.sh"
+fi
+if [ "$choice" == ' qutepage ' ]; then
+    command="$HOME/.config/qutebrowser/startup.html"
+fi
 
-  if [ "$useQuotes" = true ]; then
-		if [ "$commandType" == 'exec' ]; then
-        exec $myTerminal -e "$command"
-		else
-				exec $myTerminal -d "$command"
-		fi
-  else
-		if [ "$commandType" == 'exec' ]; then
-        exec $myTerminal -e $command
-		else
-        exec $myTerminal -d $command
-		fi
-  fi
-
+# Wezterm
+exec default_terminal -e $editor $command
+# Others
+# exec default_terminal -e "$editor $command"

@@ -6,6 +6,8 @@ else
   DMENU='dmenu -i'
 fi
 
+DMENU="$DMENU -fn 'HackNerdFont-11'"
+
 EMOJI_PATH=$HOME/.config/dmenu/scripts/emoji
 
 choice=$(cat $EMOJI_PATH | $DMENU -l 20 -p 'Select Emoji: ')

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# https://medium.com/@ezequiel.perez/cleaning-up-local-git-branches-that-no-longer-exist-on-remote-a038d777f8c7
+#
 # TODO: Check if in git repository
 
 echo "Updating branches..."
