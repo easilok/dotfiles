@@ -2,6 +2,8 @@
 " This replaces :tabnew which I used to bind to this mapping
 " nmap <leader>T :enew<cr>
 
+let mapleader = ','
+
 " Move to the next buffer
 nmap <leader>l :bnext<CR>
 
