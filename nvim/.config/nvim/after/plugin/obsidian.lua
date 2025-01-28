@@ -1,7 +1,7 @@
 local obsidian = require("obsidian")
 local base_dir = "~/Nextcloud/Obsidian"
 
-if vim.fn.isdirectory(base_dir) ~= 0 then
+if vim.fn.isdirectory(vim.fn.expand(base_dir)) ~= 0 then
     obsidian.setup({
         workspaces = {
             {

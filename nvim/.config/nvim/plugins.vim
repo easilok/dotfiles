@@ -32,6 +32,9 @@ Plug 'wellle/targets.vim'
 "Surround
 Plug 'tpope/vim-surround'
 
+Plug 'tpope/vim-endwise'
+
+
 " Plug 'mhinz/vim-startify'
 " latex
 Plug 'lervag/vimtex'
@@ -50,16 +53,12 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind.nvim'
 Plug 'folke/trouble.nvim'
 
-" Plug 'glepnir/lspsaga.nvim'
-" Plug 'rinx/lspsaga.nvim'
-" Plug 'tami5/lspsaga.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Plug 'nvim-treesitter/playground'
-Plug 'liuchengxu/vista.vim'
 
 " let g:finder_plugin = 'fzflua'
 let g:finder_plugin = 'telescope'
@@ -74,29 +73,16 @@ Plug 'ThePrimeagen/harpoon', {'branch': 'harpoon2'}
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-" Plug 'kyazdani42/nvim-tree.lua'
-" Plug 'nvim-neo-tree/neo-tree.nvim'
-" Plug 'MunifTanjim/nui.nvim' " required by neo-tree
-" NerdTree
-" Plug 'scrooloose/nerdtree'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" map <F6> :NERDTreeToggle<CR>
-" let g:NERDTreeDirArrowExpandable = '▸'
-" let g:NERDTreeDirArrowCollapsible = '▾'
-" let NERDTreeShowLineNumbers = 1
-" let NERDTreeShowHidden = 1
-" let NERDTreeMinimalUI = 1
-" let g:netrw_menu  = 0
 Plug 'stevearc/oil.nvim'
 
 " debugging
 Plug 'mfussenegger/nvim-dap'
-" Plug 'leoluz/nvim-dap-go'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'mfussenegger/nvim-dap-python'
 Plug 'nvim-telescope/telescope-dap.nvim'
+
 Plug 'folke/todo-comments.nvim'
 " TODO: The after update hook is always failing
 " Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
@@ -117,25 +103,19 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Wiki
 Plug 'lervag/wiki.vim'
-" Plug 'lervag/wiki-ft.vim'
 Plug 'lervag/lists.vim'
 " Wiki addons
 Plug 'itchyny/calendar.vim'
 " Obsidian
 Plug 'epwalsh/obsidian.nvim'
-" Should be replaced by one of my own
-Plug 'backdround/global-note.nvim'
 
 
 " Live markdown preview
-" Plug 'shime/vim-livedown'
 " Plug 'instant-markdown/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install'}
 Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'npm install', 'branch' : 'wiki-filetype'}
-Plug 'ellisonleao/glow.nvim'
 Plug 'MeanderingProgrammer/markdown.nvim'
 
 Plug 'godlygeek/tabular'
-" Plug 'preservim/vim-markdown'
 
 " Pattern based text background colorizer
 Plug 'solyarisoftware/Highlight.vim'
@@ -148,27 +128,13 @@ Plug 'notjedi/nvim-rooter.lua'
 
 " Managing auto session creator
 Plug 'tpope/vim-obsession'
-Plug 'superDross/ticket.vim'
-let g:ticket_use_fzf_default = 1
-" Only allow the auto feature to work in git repo directories
-let g:auto_ticket_git_only = 1
-" Automatically open session files when only opening vim
-let g:auto_ticket_open = 1
-" Automatically open and save session files when opening/closing vim
-" let g:auto_ticket = 1
 
 " Database interface
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'kristijanhusak//vim-dadbod-completion', {'for': ['sql', 'mysql', 'plsql'] }
 
-" Plug 'github/copilot.vim'
-" Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
-" Plug 'eandrju/cellular-automaton.nvim'
-
-" Plug 'vlime/vlime', {'rtp': 'vim/'}
-
-Plug 'sindrets/diffview.nvim'
+" Plug 'sindrets/diffview.nvim'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'mechatroner/rainbow_csv'
 
@@ -179,13 +145,9 @@ Plug 'LunarVim/bigfile.nvim'
 
 Plug 'folke/zen-mode.nvim'
 
+" Tags
 " Plug 'ludovicchabant/vim-gutentags'
-Plug 'quangnguyen30192/cmp-nvim-tags'
-
-" Plug 'freitass/todo.txt-vim'
-" Plug 'arnarg/todotxt.nvim'
-" " Required by todotxt.nvim
-" Plug 'MunifTanjim/nui.nvim'
+" Plug 'quangnguyen30192/cmp-nvim-tags'
 
 " Triage plugins
 Plug 'chrisgrieser/nvim-early-retirement'

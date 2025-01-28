@@ -1,3 +1,0 @@
--- require('todotxt-nvim').setup({
--- 	todo_file = "~/Nextcloud/todo.txt/todo.txt",
--- })
