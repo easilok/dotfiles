@@ -60,12 +60,12 @@ local save_buffer_content = function(buf)
     if has_content then
         local content = {}
         -- Prepare content lines by putting new content on top
-        vim.list_extend(content, { headster_title, '\n' })
+        vim.list_extend(content, { headster_title, '' })
         vim.list_extend(content, buf_content)
         if #previous_content > 0 then
             -- Append new line to buffer content
             -- to separate from previous content
-            vim.list_extend(content, { '\n' })
+            vim.list_extend(content, {''})
         end
         vim.list_extend(content, previous_content)
 
