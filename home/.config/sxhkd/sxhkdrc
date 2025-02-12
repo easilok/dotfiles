@@ -94,13 +94,13 @@ super + shift + F7
     $HOME/.config/sxhkd/scripts/change_monitors.sh
 
 XF86MonBrightnessDown
-    sudo brightnessctl set 10%-
+    sudo brightnessctl set 5%-
 
 XF86MonBrightnessUp
-    sudo brightnessctl set 10%+
+    sudo brightnessctl set 5%+
 
 shift + alt + F6
-    brightnessctl set 10%-
+    brightnessctl set 5%-
 
 shift + alt + F7
-    brightnessctl set 10%+
+    brightnessctl set 5%+
