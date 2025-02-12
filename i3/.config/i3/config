@@ -40,7 +40,7 @@ bindsym $mod+Shift+c kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Alt+p exec --no-startup-id '$HOME/.local/bin/dmenu-full'
 
 # change focus
 bindsym $mod+h focus left
@@ -231,6 +231,21 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# layout mode
+mode "layout" {
+        bindsym d layout toggle split
+        bindsym f layout toggle split
+        bindsym j layout tabbed
+        bindsym k layout toggle stacking tabbed splith splitv
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+f mode "default"
+        bindsym space mode "default"
+}
+
+bindsym $mod+f mode "layout"
 
 
 #color stuff
