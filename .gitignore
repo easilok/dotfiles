@@ -31,3 +31,7 @@ network-security.data
 emacs.d.raw/init-new.el
 Email.org
 myLibs
+.luarc.json
+eln-cache/
+**/qutebrowser/autoconfig.yml
+bookmarks.txt*
