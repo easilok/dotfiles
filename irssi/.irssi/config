@@ -70,7 +70,7 @@ servers = (
     port = "6697";
     use_tls = "yes";
     tls_verify = "yes";
-    autoconnect = "no";
+    autoconnect = "yes";
 
   },  
 );
@@ -161,8 +161,8 @@ channels = (
   { name = "#netfuze"; chatnet = "NetFuze"; autojoin = "No"; },
   { name = "#oftc"; chatnet = "OFTC"; autojoin = "No"; },
   { name = "silc"; chatnet = "SILC"; autojoin = "No"; },
-  { name = "#archlinux"; chatnet = "freenode"; autojoin = "yes"; }
   { name = "#systemcrafters"; chatnet = "liberachat"; autojoin = "yes"; },
+  { name = "#systemcrafters-live"; chatnet = "liberachat"; autojoin = "yes"; },
 );
 
 aliases = {
@@ -322,14 +322,15 @@ statusbar = {
 };
 settings = {
   core = { 
-    real_name = "Luís Pereira"; 
+    real_name = "Luis Pereira"; 
     user_name = "easilok"; 
     nick = "easilok"; 
     settings_autosave = "no";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "fe-common/core" = {
-    #theme = "pipeline";
+    # theme = "pipeline";
+    theme = "lime";
     beep_msg_level = "MSGS DCC DCCMSGS HILIGHT";
     #beep_msg_level = "MSGS DCC DCCMSGS HILIGHT NOTICES";
   };
