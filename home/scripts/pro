@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+gh pr view | grep https | awk '{print $2}' | xargs xdg-open

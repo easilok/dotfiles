@@ -19,4 +19,4 @@ if [ -z $selected ]; then
     exit 0
 fi
 
-sudo wg-quick $DIRECTION $selected
+sudo /usr/bin/wg-quick $DIRECTION $selected
