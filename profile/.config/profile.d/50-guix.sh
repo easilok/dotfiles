@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 	
 ## Extra Guix profiles section
-# unset GUIX_PROFILE
+ unset GUIX_PROFILE
 GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
 if [ -d "$GUIX_EXTRA_PROFILES" ]; then
     for i in $GUIX_EXTRA_PROFILES/*; do
@@ -18,10 +18,10 @@ if [ -d "$GUIX_EXTRA_PROFILES" ]; then
 fi
 
 ## Default Guix
-# export GUIX_PROFILE="$HOME/.guix-profile"
-# [ -d "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"
+export GUIX_PROFILE="$HOME/.guix-profile"
+[ -d "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"
 
 ## SSL CA path set
-export SSL_CERT_DIR="$HOME/.guix-profile/etc/ssl/certs"
-export SSL_CERT_FILE="$HOME/.guix-profile/etc/ssl/certs/ca-certificates.crt"
+export SSL_CERT_DIR="$GUIX_PROFILE/etc/ssl/certs"
+export SSL_CERT_FILE="$GUIX_PROFILE/etc/ssl/certs/ca-certificates.crt"
 export GIT_SSL_CAINFO="$SSL_CERT_FILE"

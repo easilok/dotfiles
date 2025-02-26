@@ -5,7 +5,7 @@ if [ -f "$HOME/.config/aliasrc" ]; then
 fi
 
 if [ -d "$HOME/.config/profile.d" ]; then
-	for i in "$HOME/.config/profile.d/*.sh"; do
+	for i in $HOME/.config/profile.d/*.sh; do
 		if [ -r $i ]; then
 			. $i
 		fi
