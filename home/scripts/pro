@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-gh pr view | grep https | awk '{print $2}' | xargs xdg-open
+gh pr view | grep 'url:.*https://github.com/' | awk '{print $2}' | xargs xdg-open
+
+

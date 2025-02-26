@@ -21,6 +21,7 @@
   psf = pf
   pl = pull
   ps = push
+  pro = !pro
   rbc = rebase --continue
   ; rba = rebase -i --autosquash --committer-date-is-author-date
   rba = rebase -i --autosquash
