@@ -25,10 +25,9 @@ require("telescope").setup({
 })
 
 require("telescope").load_extension("fzf")
-require('telescope').load_extension('file_browser')
 
--- vim.api.nvim_set_keymap("n", "<leader>fb", telescope.builtin.current_buffer_fuzzy_find, { sorting_strategy=ascending, prompt_position=top})
 local builtin = require('telescope.builtin')
+
 if vim.g.finder_plugin == 'fzflua' then
     -- Set new commands to better name
     vim.cmd([[command! -nargs=0 GoToFile :FzfLua files]])
@@ -36,7 +35,9 @@ if vim.g.finder_plugin == 'fzflua' then
 
     vim.keymap.set('n', '<space>?', require('fzf-lua').oldfiles, { desc = '[?] Find recently opened files' })
     vim.keymap.set('n', '<space>fg', require('fzf-lua').git_files, { desc = '[F]ind [g]it files' })
+    vim.keymap.set('n', '<space><space>', require('fzf-lua').git_files, { desc = '[F]ind [g]it files' })
     vim.keymap.set('n', '<space>ff', require('fzf-lua').files, { desc = '[F]ind [f]iles' })
+    vim.keymap.set('n', '<C-p>', require('fzf-lua').files, { desc = '[F]ind [f]iles' })
     vim.keymap.set('n', '<space>gs', require('fzf-lua').grep, { desc = '[G]rep [s]earch' })
     vim.keymap.set('n', '<space>gw', require('fzf-lua').grep_cword, { desc = '[G]rep current [w]ord' })
     vim.keymap.set('n', '<space>bl', require('fzf-lua').buffers, { desc = '[B]uffer [l]ist' })
@@ -48,6 +49,14 @@ if vim.g.finder_plugin == 'fzflua' then
     vim.keymap.set('n', '<leader>gr', require('fzf-lua').lsp_references, { desc = '[G]rep [r]eferences' })
     vim.keymap.set('n', '<space>lds', require('fzf-lua').lsp_document_symbols, { desc = '[L]sp [D]ocument [S]ymbols' })
     vim.keymap.set('n', '<space>ft', require('fzf-lua').tags, { desc = '[F]ind [T]ags' })
+    vim.keymap.set('n', '<space>tr', require('fzf-lua').resume, { desc = '[T]elescope [r]esume' })
+    vim.keymap.set('n', '<space>tk', require('fzf-lua').keymaps, { desc = '[T]elescope [k]eymaps' })
+    vim.keymap.set('v', '<leader>gs', require('fzf-lua').grep_visual, { desc = '[G]rep visual [s]earch' })
+    vim.keymap.set('v', '<space>gs', require('fzf-lua').grep_visual, { desc = '[G]rep visual [s]earch' })
+    vim.keymap.set('n', '<leader>fb', require('fzf-lua').lgrep_curbuf, { desc = '[F]ind [b]uffer text' })
+    vim.keymap.set('n', '<space>fb', require('fzf-lua').lgrep_curbuf, { desc = '[F]ind [b]uffer text' })
+    vim.keymap.set('n', '<leader>be', require('fzf-lua').diagnostics_document, { desc = '[B]uffer diagnostics' })
+    vim.keymap.set('n', '<space>be', require('fzf-lua').diagnostics_document, { desc = '[B]uffer diagnostics' })
 else
     -- Set new commands to better name
     vim.cmd([[command! -nargs=0 GoToFile :Telescope find_files]])
@@ -57,10 +66,10 @@ else
     vim.keymap.set('n', '<space>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
     vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = '[F]ind [g]it files' })
     vim.keymap.set('n', '<space>fg', builtin.git_files, { desc = '[F]ind [g]it files' })
-    vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = '[F]ind [g]it files' })
     vim.keymap.set('n', '<space><space>', builtin.git_files, { desc = '[F]ind [g]it files' })
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [f]iles' })
     vim.keymap.set('n', '<space>ff', builtin.find_files, { desc = '[F]ind [f]iles' })
+    vim.keymap.set('n', '<C-p>', builtin.find_files, {desc = '[F]ind [f]iles'})
     vim.keymap.set('n', '<leader>gs', function() builtin.grep_string({ search = vim.fn.input("Grep For > ") }) end, { desc = '[G]rep [s]earch' })
     vim.keymap.set('n', '<space>gs', function() builtin.grep_string({ search = vim.fn.input("Grep For > ") }) end, { desc = '[G]rep [s]earch' })
     vim.keymap.set('n', '<leader>gw', function() builtin.grep_string({ search = vim.fn.expand("<cword>") }) end, { desc = '[G]rep current [w]ord' })
@@ -79,14 +88,30 @@ else
     vim.keymap.set('n', '<space>lds', builtin.lsp_document_symbols, { desc = '[L]sp [D]ocument [S]ymbols' })
     vim.keymap.set('n', '<space>lws', builtin.lsp_dynamic_workspace_symbols, { desc = '[L]sp [W]orkspace [S]ymbols' })
     vim.keymap.set('n', '<space>ft', builtin.tags, { desc = '[F]ind [T]ags' })
+    vim.keymap.set('n', '<space>tr', builtin.resume, { desc = '[T]elescope [r]esume' })
+    vim.keymap.set('n', '<space>tk', builtin.keymaps, { desc = '[T]elescope [k]eymaps' })
+
+    vim.keymap.set('n', '<leader>fb', function() builtin.current_buffer_fuzzy_find({ sorting_strategy = "ascending" }) end, { desc = '[F]ind [b]uffer text' })
+    vim.keymap.set('n', '<space>fb', function() builtin.current_buffer_fuzzy_find({ sorting_strategy = "ascending" }) end, { desc = '[F]ind [b]uffer text' })
+    vim.keymap.set('n', '<leader>be', function() builtin.diagnostics({ bufnr = 0 }) end, { desc = '[B]uffer diagnostics' })
+    vim.keymap.set('n', '<space>be', function() builtin.diagnostics({ bufnr = 0 }) end, { desc = '[B]uffer diagnostics' })
+
+
+    local function grep_visual_selection()
+        vim.cmd('noau normal! "vy"')
+        local text = vim.fn.getreg('v')
+        vim.fn.setreg('v', {})
+
+        text = string.gsub(text, "\n", "")
+
+        builtin.grep_string({
+            search = text,
+        })
+    end
+
+    vim.keymap.set('v', '<leader>gs', grep_visual_selection, { desc = '[G]rep visual [s]earch' })
+    vim.keymap.set('v', '<space>gs', grep_visual_selection, { desc = '[G]rep visual [s]earch' })
 end
-vim.keymap.set('n', '<leader>fb', function() builtin.current_buffer_fuzzy_find({ sorting_strategy = "ascending" }) end, { desc = '[F]ind [b]uffer text' })
-vim.keymap.set('n', '<space>fb', function() builtin.current_buffer_fuzzy_find({ sorting_strategy = "ascending" }) end, { desc = '[F]ind [b]uffer text' })
-vim.keymap.set('n', '<leader>be', function() builtin.diagnostics({ bufnr = 0 }) end, { desc = '[B]uffer diagnostics' })
-vim.keymap.set('n', '<space>be', function() builtin.diagnostics({ bufnr = 0 }) end, { desc = '[B]uffer diagnostics' })
-vim.keymap.set('n', '<space>tr', builtin.resume, { desc = '[T]elescope [r]esume' })
-vim.keymap.set('n', '<space>tk', builtin.keymaps, { desc = '[T]elescope [k]eymaps' })
-vim.keymap.set('n', '<space>bf', ":Telescope file_browser<cr>", { noremap = true, desc = '[B]rowser [f]iles' })
 
 local actions = require 'telescope.actions'
 local action_state = require "telescope.actions.state"
@@ -203,18 +228,6 @@ local function wiki_content()
     })
 end
 
-local function grep_visual_selection()
-    vim.cmd('noau normal! "vy"')
-	local text = vim.fn.getreg('v')
-	vim.fn.setreg('v', {})
-
-	text = string.gsub(text, "\n", "")
-
-    builtin.grep_string({
-        search = text,
-    })
-end
-
 vim.keymap.set('n', '<leader>fw', files_wiki, { desc = '[Find] [W]iki files' })
 vim.keymap.set('n', '<space>wc', wiki_content, { desc = '[W]iki [C]ontent' })
 vim.keymap.set('n', '<leader>fc', files_wiki, { desc = '[Find] Wiki [C]ontent' })
@@ -222,6 +235,3 @@ vim.keymap.set('n', '<space>wf', files_wiki, { desc = '[W]iki [F]iles' })
 vim.keymap.set('n', '<leader>fv', files_nvim, { desc = '[F]ind Neo[v]im files' })
 vim.keymap.set('n', '<leader>fj', files_wiki_journal, { desc = '[Find] [J]ournal Wiki files' })
 vim.keymap.set('n', '<space>wj', files_wiki_journal, { desc = '[W]iki [J]ournal files' })
-
-vim.keymap.set('v', '<leader>gs', grep_visual_selection, { desc = '[G]rep visual [s]earch' })
-vim.keymap.set('v', '<space>gs', grep_visual_selection, { desc = '[G]rep visual [s]earch' })
