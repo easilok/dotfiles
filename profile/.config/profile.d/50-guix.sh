@@ -24,5 +24,9 @@ export GUIX_PROFILE="$HOME/.config/guix/current"
 
 ## SSL CA path set
 export SSL_CERT_DIR="$GUIX_PROFILE/etc/ssl/certs"
-export SSL_CERT_FILE="$GUIX_PROFILE/etc/ssl/certs/ca-certificates.crt"
+# Default to system profile if no ssl certs found
+[ ! -d "$SSL_CERT_DIR" ] && export SSL_CERT_DIR="$HOME/.guix-profile/etc/ssl/certs"
+
+export SSL_CERT_FILE="$SSL_CERT_DIR/ca-certificates.crt"
 export GIT_SSL_CAINFO="$SSL_CERT_FILE"
+export CURL_CA_BUNDLE="$SSL_CERT_FILE"
