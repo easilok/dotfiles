@@ -59,6 +59,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Plug 'nvim-treesitter/playground'
+Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
 
 let g:finder_plugin = 'fzflua'
 " let g:finder_plugin = 'telescope'
