@@ -18,9 +18,12 @@ if [ -d "$GUIX_EXTRA_PROFILES" ]; then
 fi
 
 ## Default Guix
-export GUIX_PROFILE="$HOME/.config/guix/current"
-[ ! -d "$GUIX_PROFILE" ] && export GUIX_PROFILE="$HOME/.guix-profile"
+GUIX_PROFILE="$HOME/.guix-profile"
 [ -f "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"
+GUIX_PROFILE="$HOME/.config/guix/current"
+[ -f "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"
+
+export GUIX_PROFILE
 
 ## SSL CA path set
 export SSL_CERT_DIR="$GUIX_PROFILE/etc/ssl/certs"
