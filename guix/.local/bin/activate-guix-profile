@@ -11,9 +11,9 @@ if [[ $# -eq 0 ]]; then
     manifests="$HOME/.config/guix/manifests/*.scm";
     newProfiles=()
     for manifest in $manifests; do
-	filename=$(basename $manifest)
-	filename="${filename%.*}"
-	newProfiles+=($filename)
+        filename=$(basename $manifest)
+        filename="${filename%.*}"
+        newProfiles+=($filename)
     done
     profiles=${newProfiles[*]}
 fi

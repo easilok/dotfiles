@@ -2,8 +2,10 @@
 
 (specifications->manifest
  '(
-     "neovim"
+     "nvim-latest"
      "tree-sitter-cli"
+     "libuv"
+     "lua-luv"
      "python-pynvim"
      "node"
      "zsh"
