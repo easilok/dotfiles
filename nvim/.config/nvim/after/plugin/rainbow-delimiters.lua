@@ -27,7 +27,8 @@ vim.g.rainbow_delimiters = {
       whitelist = {
 	      "guile",
           "scheme",
-	      "commonlisp"
+	      "commonlisp",
+          "lisp"
       }
 }
 
