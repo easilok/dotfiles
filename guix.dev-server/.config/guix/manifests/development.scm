@@ -2,7 +2,7 @@
 
 (specifications->manifest
  '(
-     "nvim-latest"
+     "neovim@0.10.4"
      "tree-sitter-cli"
      "libuv"
      "lua-luv"
