@@ -2,7 +2,7 @@
 
 (specifications->manifest
  '(
-     "neovim@0.10.4"
+     "neovim@0.11.0"
      "tree-sitter-cli"
      "libuv"
      "lua-luv"
