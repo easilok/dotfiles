@@ -44,7 +44,7 @@ elif [ -f $(which exa) ]; then
 	alias lt='exa -aT --color=always --group-directories-first' # tree listing
 fi
 
-if [ -f $(which nvim) ]; then 
+if [ -f "$(which nvim)" ]; then 
 	alias vim=nvim
 fi
 
@@ -73,6 +73,7 @@ alias va='source venv/bin/activate || source .venv/bin/activate'
 alias wo="pomo 'work'"
 alias br="pomo 'break'"
 alias journal="nvim +WikiJournal"
+alias vobisdian="nvim +ObsidianQuickSwitch"
 alias wiki="nvim +WikiIndex"
 alias bka="vim $HOME/.config/bookmarks/bookmarks.txt"
 alias fssh=sshf
@@ -82,19 +83,20 @@ if [ -f "$(which git-safer)" ]; then
     alias git=git-safer
 fi
 
-vs() {
-    if [ -f 'Session.vim' ]; then
-        vim -S Session.vim
-    else
-        session_files=$(find . -type f -name '*.vim')
-        session_count=$(echo "$session_files" | wc -l)
-        if [ "$session_count" -gt 0 ]; then
-            vim -S $(echo "$session_files" | fzf)
-        else
-            vim
-        fi
-    fi
-}
+alias vs='nvim +Sassy'
+# vs() {
+#     if [ -f 'Session.vim' ]; then
+#         vim -S Session.vim
+#     else
+#         session_files=$(find . -type f -name '*.vim')
+#         session_count=$(echo "$session_files" | wc -l)
+#         if [ "$session_count" -gt 0 ]; then
+#             vim -S $(echo "$session_files" | fzf)
+#         else
+#             vim
+#         fi
+#     fi
+# }
 vf() { $EDITOR $(fzf --reverse --height=50% ) ;}
 vef() { $EDITOR $(du -a ~/.config/* ~/scripts/* | awk '{print $2}' | fzf --reverse --height=50% ) ;}
 vev() { $EDITOR $(du -a ~/.config/nvim | awk '{print $2}' | fzf --reverse --height=50% ) ;}
