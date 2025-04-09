@@ -42,148 +42,226 @@ end
 
 -- setup dap adapters
 -- node/javascript
-dap.adapters.node2 = {
-    type = 'executable',
-    command = 'node',
-    args = { os.getenv('HOME') .. '/git/vscode-node-debug2/out/src/nodeDebug.js' },
-}
+-- dap.adapters["pwa-node"] = {
+--     type = "server",
+--     host = "localhost",
+--     port = "${port}",
+--     executable = {
+--         command = "node",
+--         args = {
+--             vim.fn.expand("~/git/vscode-js-debug/out/src/vsDebugServer.js")
+--             "${port}",
+--         },
+--     },
+-- }
 
-dap.configurations.javascript = {
-    {
-        name = 'Launch',
-        type = 'node2',
-        request = 'launch',
-        program = '${file}',
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = 'inspector',
-        console = 'integratedTerminal',
-    },
-    {
-        -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-        name = 'Attach to process',
-        type = 'node2',
-        request = 'attach',
-        processId = require 'dap.utils'.pick_process,
-    },
-    {
-        type = 'node2',
-        name = 'Run tests',
-        request = 'launch',
-        program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
-        env = {
-            NODE_ENV = "test",
-            ADDVOLT_DATABASE_HOST = "localhost",
-            ADDVOLT_DATABASE_PORT = "5444",
-        },
-        args = {
-            "inspect",
-            "--config",
-            "${workspaceFolder}/test/.mocharc.json",
-            -- "--reporter",
-            -- "dot",
-            "--exit",
-            "--colors",
-            "${workspaceFolder}/test/**/*.test.js"
-        },
-        cwd = '${workspaceFolder}',
-        sourceMaps = true,
-        restart = true,
-        protocol = 'inspector',
-        console = 'integratedTerminal',
-        skipFiles = {
-            '<node_internals>/**',
-            '**/node_modules/**',
-        },
-    },
-    {
-        type = 'node2',
-        name = 'Run test on file',
-        request = 'launch',
-        mode = 'test',
-        program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
-        env = {
-            NODE_ENV = "test",
-            ADDVOLT_DATABASE_HOST = "localhost",
-            ADDVOLT_DATABASE_PORT = "5444",
-        },
-        args = {
-            "inspect",
-            "--config",
-            "${workspaceFolder}/test/.mocharc.json",
-            "--file",
-            "${workspaceFolder}/test/bootstrap.test.js",
-            -- "--reporter",
-            -- "dot",
-            -- "--slow",
-            -- "5000",
-            "--exit",
-            "--colors",
-            "${file}"
-        },
-        cwd = '${workspaceFolder}',
-        sourceMaps = true,
-        restart = true,
-        protocol = 'inspector',
-        console = 'integratedTerminal',
-        skipFiles = {
-            '<node_internals>/**',
-            '**/node_modules/**',
-        },
-    },
-}
+-- dap.adapters["node"] = function(cb, config)
+--     if config.type == "node" then
+--         config.type = "pwa-node"
+--     end
+--     local nativeAdapter = dap.adapters["pwa-node"]
+--     if type(nativeAdapter) == "function" then
+--         nativeAdapter(cb, config)
+--     else
+--         cb(nativeAdapter)
+--     end
+-- end
 
-dap.configurations.typescript = {
-    {
-        type = 'node2',
-        name = 'Run tests',
-        request = 'launch',
-        mode = 'test',
-        program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
-        env = {
-            NODE_ENV = "test"
-        },
-        args = {
-            "--require=ts-node/register",
-            "--unhandled-rejections=strict",
-            "--colors",
-            "src/test/**/*.test.ts",
-        },
-        cwd = '${workspaceFolder}',
-        sourceMaps = true,
-        restart = true,
-        protocol = 'inspector',
-        console = 'integratedTerminal',
-        skipFiles = {
-            '<node_internals>/**',
-            '**/node_modules/**',
-        },
-        outFiles = { '${workspaceFolder}/dist/**/*.js', '!**/node_modules/**' },
-    },
-    {
-        type = 'node2',
-        name = 'Run test on file',
-        request = 'launch',
-        mode = 'test',
-        program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
-        args = {
-            "--require=ts-node/register",
-            "--unhandled-rejections=strict",
-            "--colors",
-            "${file}"
-        },
-        cwd = '${workspaceFolder}',
-        sourceMaps = true,
-        restart = true,
-        protocol = 'inspector',
-        console = 'integratedTerminal',
-        skipFiles = {
-            '<node_internals>/**',
-            '**/node_modules/**',
-        },
-        outFiles = { '${workspaceFolder}/dist/**/*.js', '!**/node_modules/**' },
-    },
-}
+require("dap-vscode-js").setup({
+            -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+            -- node_path = "node",
+
+            -- Path to vscode-js-debug installation.
+            -- debugger_path = vim.fn.expand("~/git/vscode-js-debug/"),
+            debugger_path = vim.fn.expand("~/git/vscode-js-debug/"),
+
+            -- Command to use to launch the debug server. Takes precedence over "node_path" and "debugger_path"
+            -- debugger_cmd = { "js-debug-adapter" },
+            -- debugger_cmd = {
+            --     "/out/src/vsDebugServer.js",
+            --     "${port}",
+            -- },
+
+            -- which adapters to register in nvim-dap
+            adapters = {
+              "chrome",
+              "pwa-node",
+              "pwa-chrome",
+              "pwa-msedge",
+              "pwa-extensionHost",
+              "node-terminal",
+            },
+        })
+
+
+-- for _, adapterType in ipairs({ "node", "chrome", "msedge", "pwa-node", "pwa-msedge", "node-terminal" }) do
+--     local pwaType = "pwa-" .. adapterType
+
+--     dap.adapters[pwaType] = {
+--         type = "server",
+--         host = "localhost",
+--         port = "${port}",
+--         executable = {
+--             command = "node",
+--             args = {
+--                 vim.fn.expand("~/git/vscode-js-debug/out/src/vsDebugServer.js"),
+--                 "${port}",
+--             },
+--         },
+--     }
+
+--     -- this allow us to handle launch.json configurations
+--     -- which specify type as "node" or "chrome" or "msedge"
+--     dap.adapters[adapterType] = function(cb, config)
+--         local nativeAdapter = dap.adapters[pwaType]
+
+--         config.type = pwaType
+
+--         if type(nativeAdapter) == "function" then
+--             nativeAdapter(cb, config)
+--         else
+--             cb(nativeAdapter)
+--         end
+--     end
+-- end
+
+
+-- dap.configurations.javascript = {
+--     {
+--         name = 'Launch',
+--         type = 'node2',
+--         request = 'launch',
+--         program = '${file}',
+--         cwd = vim.fn.getcwd(),
+--         sourceMaps = true,
+--         protocol = 'inspector',
+--         console = 'integratedTerminal',
+--     },
+--     {
+--         -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+--         name = 'Attach to process',
+--         type = 'node2',
+--         request = 'attach',
+--         processId = require 'dap.utils'.pick_process,
+--     },
+--     {
+--         type = 'node2',
+--         name = 'Run tests',
+--         request = 'launch',
+--         program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
+--         env = {
+--             NODE_ENV = "test",
+--             ADDVOLT_DATABASE_HOST = "localhost",
+--             ADDVOLT_DATABASE_PORT = "5444",
+--         },
+--         args = {
+--             "inspect",
+--             "--config",
+--             "${workspaceFolder}/test/.mocharc.json",
+--             -- "--reporter",
+--             -- "dot",
+--             "--exit",
+--             "--colors",
+--             "${workspaceFolder}/test/**/*.test.js"
+--         },
+--         cwd = '${workspaceFolder}',
+--         sourceMaps = true,
+--         restart = true,
+--         protocol = 'inspector',
+--         console = 'integratedTerminal',
+--         skipFiles = {
+--             '<node_internals>/**',
+--             '**/node_modules/**',
+--         },
+--     },
+--     {
+--         type = 'node2',
+--         name = 'Run test on file',
+--         request = 'launch',
+--         mode = 'test',
+--         program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
+--         env = {
+--             NODE_ENV = "test",
+--             ADDVOLT_DATABASE_HOST = "localhost",
+--             ADDVOLT_DATABASE_PORT = "5444",
+--         },
+--         args = {
+--             "inspect",
+--             "--config",
+--             "${workspaceFolder}/test/.mocharc.json",
+--             "--file",
+--             "${workspaceFolder}/test/bootstrap.test.js",
+--             -- "--reporter",
+--             -- "dot",
+--             -- "--slow",
+--             -- "5000",
+--             "--exit",
+--             "--colors",
+--             "${file}"
+--         },
+--         cwd = '${workspaceFolder}',
+--         sourceMaps = true,
+--         restart = true,
+--         protocol = 'inspector',
+--         console = 'integratedTerminal',
+--         skipFiles = {
+--             '<node_internals>/**',
+--             '**/node_modules/**',
+--         },
+--     },
+-- }
+
+-- dap.configurations.typescript = {
+--     {
+--         type = 'node2',
+--         name = 'Run tests',
+--         request = 'launch',
+--         mode = 'test',
+--         program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
+--         env = {
+--             NODE_ENV = "test"
+--         },
+--         args = {
+--             "--require=ts-node/register",
+--             "--unhandled-rejections=strict",
+--             "--colors",
+--             "src/test/**/*.test.ts",
+--         },
+--         cwd = '${workspaceFolder}',
+--         sourceMaps = true,
+--         restart = true,
+--         protocol = 'inspector',
+--         console = 'integratedTerminal',
+--         skipFiles = {
+--             '<node_internals>/**',
+--             '**/node_modules/**',
+--         },
+--         outFiles = { '${workspaceFolder}/dist/**/*.js', '!**/node_modules/**' },
+--     },
+--     {
+--         type = 'node2',
+--         name = 'Run test on file',
+--         request = 'launch',
+--         mode = 'test',
+--         program = '${workspaceFolder}/node_modules/mocha/bin/_mocha',
+--         args = {
+--             "--require=ts-node/register",
+--             "--unhandled-rejections=strict",
+--             "--colors",
+--             "${file}"
+--         },
+--         cwd = '${workspaceFolder}',
+--         sourceMaps = true,
+--         restart = true,
+--         protocol = 'inspector',
+--         console = 'integratedTerminal',
+--         skipFiles = {
+--             '<node_internals>/**',
+--             '**/node_modules/**',
+--         },
+--         outFiles = { '${workspaceFolder}/dist/**/*.js', '!**/node_modules/**' },
+--     },
+-- }
 
 local python_interpreter = ''
 if os.getenv("VIRTUAL_ENV") ~= nil then

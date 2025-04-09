@@ -69,7 +69,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'ThePrimeagen/harpoon', {'branch': 'harpoon2'}
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -81,8 +80,9 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
-Plug 'mfussenegger/nvim-dap-python'
 Plug 'nvim-telescope/telescope-dap.nvim'
+Plug 'williamboman/mason.nvim'
+Plug 'jay-babu/mason-nvim-dap.nvim'
 
 Plug 'folke/todo-comments.nvim'
 " TODO: The after update hook is always failing
@@ -92,7 +92,6 @@ Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*'}
 Plug 'rafamadriz/friendly-snippets'
 Plug 'saadparwaiz1/cmp_luasnip'
 
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'rebelot/kanagawa.nvim'
 
@@ -120,8 +119,6 @@ Plug 'godlygeek/tabular'
 
 " Pattern based text background colorizer
 Plug 'solyarisoftware/Highlight.vim'
-
-Plug 'eliba2/vim-node-inspect'
 
 Plug 'mbbill/undotree'
 
@@ -151,7 +148,6 @@ Plug 'folke/zen-mode.nvim'
 " Plug 'quangnguyen30192/cmp-nvim-tags'
 
 " Triage plugins
-Plug 'chrisgrieser/nvim-early-retirement'
 Plug 'j-morano/buffer_manager.nvim'
 Plug 'dstein64/vim-startuptime'
 " lsp replacement

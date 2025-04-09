@@ -1,28 +1,3 @@
--- Catppuccin theme
--- latte, frappe, macchiato, mocha
--- vim.g.catppuccin_flavour = "mocha"
-
-require("catppuccin").setup({
-    flavour = "mocha",
-    -- transparent_background = true,
-    integrations = {
-        markdown = true,
-        lsp_saga = true,
-        treesitter_context = true,
-        treesitter = true,
-        telescope = {
-            enabled = true,
-        },
-        gitgutter = true,
-        vimwiki = true,
-        which_key = true,
-        cmp = true,
-        fidget = true,
-        harpoon = true,
-        lsp_trouble = true,
-    }
-})
-
 -- Tokio Night theme
 require("tokyonight").setup({
   -- your configuration comes here
@@ -63,5 +38,4 @@ require("tokyonight").setup({
 })
 
 vim.cmd [[colorscheme tokyonight]]
--- vim.cmd [[colorscheme catppuccin]]
 
