@@ -48,30 +48,20 @@
 
 (setq vc-follow-symlinks t)
 
-(set-face-attribute 'default nil :font "Source Code Pro" :height lp/default-font-size)
+(set-face-attribute 'default nil :font "Hack Nerd Font" :height lp/default-font-size)
 (setq frame-resize-pixelwise t)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height lp/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "Hack Nerd Font" :height lp/default-font-size)
 
 ;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height lp/default-variable-font-size :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "Hack Nerd Font" :height lp/default-variable-font-size :weight 'regular)
 
 ;; Revert Dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
 
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
-
-(setq display-time-world-list
-  '(("Etc/UTC" "UTC")
-    ("America/Los_Angeles" "Seattle")
-    ("America/New_York" "New York")
-    ("Europe/Athens" "Athens")
-    ("Pacific/Auckland" "Auckland")
-    ("Asia/Shanghai" "Shanghai")
-    ("Asia/Kolkata" "Hyderabad")))
-(setq display-time-world-time-format "%a, %d %b %I:%M %p %Z"  )
 
 ;; (setq epa-pinentry-mode 'loopback)
 ;; (pinentry-start)
@@ -129,8 +119,9 @@
 (use-package doom-themes
     :straight t
     :init
-    (load-theme 'doom-one t)
-    (doom-themes-visual-bell-config))
+    (load-theme 'doom-tokyo-night t)
+    (doom-themes-visual-bell-config)
+    (set-frame-parameter (selected-frame) 'alpha '(95 95)))
 
 ;; (use-package modus-themes
 ;;   :straight t
@@ -516,16 +507,18 @@
     "og"  '(magit-status :which-key "magit")
     "f"  '(:ignore t :which-key "file")
     "ff"  '(counsel-find-file :which-key "find file")
-    "fp"  '(counsel-find-file "~/.emacs.d" :which-key "find configs")
+    "fe"  '(counsel-find-file "~/.emacs.d" :which-key "find configs")
+    "fg"  '(counsel-projectile-find-file :which-key "Projectile find file")
     "fr"  '(counsel-recentf :which-key "find recent")
     "b"  '(:ignore t :which-key "buffer")
     ;;"bb"  '(counsel-projectile-switch-to-buffer :which-key "switch project buffer")
     ;; "bb"  '(switch-workspace-buffer :which-key "switch project buffer")
-    "bb"  '(projectile-switch-to-buffer :which-key "switch project buffer")
+    "bl"  '(projectile-switch-to-buffer :which-key "switch project buffer")
     "bB"  '(counsel-switch-buffer :which-key "switch buffer")
     "bk"  '(kill-current-buffer :which-key "kill buffer")
     "bd"  '(kill-buffer :which-key "kill a buffer")
     "bi"  '(ibuffer :which-key "ibuffer")
+    "bb"  '(lp/switch-to-previous-buffer :which-key "previous buffer")
     "bp"  '(lp/switch-to-previous-buffer :which-key "previous buffer")
     "p"  '(:ignore t :which-key "project")
     ;; "pm"  '(:keymap projectile-command-map :which-key "projectile")
@@ -1210,7 +1203,9 @@
    erc-image-inline-rescale 400
    erc-server-reconnect-timeout 10
    erc-server-reconnect-attempts 5
-   erc-autojoin-channels-alist '(("irc.libera.chat" "#systemcrafters"))
+   erc-server "192.168.1.221"
+   erc-port 12445
+   ;; erc-autojoin-channels-alist '(("192.168.1.221"))
    erc-quit-reason (lambda (s) (or s "Going to another multiverse"))
    erc-modules
     '(autoaway autojoin button completion fill irccontrols keep-place
