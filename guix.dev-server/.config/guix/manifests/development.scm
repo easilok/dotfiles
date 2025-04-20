@@ -4,6 +4,7 @@
  '(
      "neovim@0.11.0"
      "tree-sitter-cli"
+     "parinfer-rust"
      "libuv"
      "lua-luv"
      "python-pynvim"
@@ -19,4 +20,4 @@
      "go-github-com-junegunn-fzf"
      "ripgrep"
      "git"
-  ))
+     "git:send-email"))

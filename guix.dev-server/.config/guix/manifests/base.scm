@@ -41,6 +41,4 @@
    "tmux"
    "stow"
    "eza"
-
-   ))
-
+   "recutils"))
