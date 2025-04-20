@@ -94,6 +94,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'rebelot/kanagawa.nvim'
+Plug 'srt0/codescope.nvim'
 
 " Prettier
 Plug 'sbdchd/neoformat'
@@ -152,6 +153,10 @@ Plug 'j-morano/buffer_manager.nvim'
 Plug 'dstein64/vim-startuptime'
 " lsp replacement
 Plug 'pmizio/typescript-tools.nvim'
+
+" repl
+Plug 'Olical/conjure'
+Plug 'PaterJason/cmp-conjure'
 
 Plug '~/.config/nvim/lua/easilok'
 

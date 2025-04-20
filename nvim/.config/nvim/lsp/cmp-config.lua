@@ -7,6 +7,7 @@ local source_mapping = {
     path = "[Path]",
     luasnip = "[LuaSnip]",
     tags = "[tags]",
+    conjure = "[conj]",
 }
 
 local cmp = require 'cmp'
@@ -71,6 +72,7 @@ cmp.setup({
                 current_buffer_only = false,
             },
         },
+        { name = 'conjure' },
     }, {
         { name = 'buffer' },
     })
