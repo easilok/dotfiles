@@ -1,4 +1,4 @@
-local theme = "codescope"
+local theme = "codescope" --"tokyonight"
 
 if theme == "codescope" then
     require("codescope").setup({

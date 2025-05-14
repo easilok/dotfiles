@@ -61,8 +61,8 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Plug 'nvim-treesitter/playground'
 Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
 
-let g:finder_plugin = 'fzflua'
-" let g:finder_plugin = 'telescope'
+" let g:finder_plugin = 'fzflua'
+let g:finder_plugin = 'telescope'
 Plug 'folke/which-key.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -95,6 +95,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'rebelot/kanagawa.nvim'
 Plug 'srt0/codescope.nvim'
+Plug 'AhmedAbdulrahman/vim-aylin'
 
 " Prettier
 Plug 'sbdchd/neoformat'
