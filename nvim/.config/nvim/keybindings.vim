@@ -75,9 +75,10 @@ nnoremap gp `[v`]
 
 " Change motion keys to work with line wrapper
 let s:wrapenabled = 0
+let s:defaulttw = 0
 function! ToggleWrap()
-  set wrap nolist
   if s:wrapenabled
+    set nowrap list
     set nolinebreak
     unmap j
     unmap k
@@ -85,7 +86,10 @@ function! ToggleWrap()
     unmap ^
     unmap $
     let s:wrapenabled = 0
+    " Restore previous 'textwidth'
+    exe 'set textwidth=' . s:defaulttw
   else
+    set wrap nolist
     set linebreak
     nnoremap j gj
     nnoremap k gk
@@ -98,9 +102,13 @@ function! ToggleWrap()
     vnoremap ^ g^
     vnoremap $ g$
     let s:wrapenabled = 1
+    " Saving previous 'textwidth' in case of wrap reversion
+    let s:defaulttw=&textwidth
+    set textwidth=0
   endif
 endfunction
 map <leader>wl :call ToggleWrap()<CR>
+command ToggleWrap :call ToggleWrap()
 
 " Run markdown live preview
 nmap gm :LivedownToggle<CR>
@@ -180,4 +188,5 @@ function! ToggleSpellHi()
     let s:spellhienabled = 1
   endif
 endfunction
+command ToggleSpellHi :call ToggleSpellHi()
 map <space>sh :call ToggleSpellHi()<CR> "[S]pell [H]ighlight toggle"
