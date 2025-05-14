@@ -53,12 +53,19 @@ local check_existing_session = function(session_path)
         return false
     end
 
-    return vim.fn.filereadable(session_path) ~=0
+    return vim.fn.filereadable(session_path) ~= 0
 end
 
 -- Starts an 'Obsession' for the current project's checked out branch
 -- If session file already exists, source it
 M.start_session = function(self)
+    -- If session already open just start it
+    local obsession_status = vim.fn['ObsessionStatus']()
+    if self.sassy_is_tracking and obsession_status == '[S]' then
+        vim.cmd('Obsession')
+        return
+    end
+
     local project = get_git_root() or get_root_directory()
     local session = get_git_branch() or self.options.default_name
 
@@ -71,8 +78,24 @@ M.start_session = function(self)
     ensure_directory(project_dir)
 
     if check_existing_session(session_path) then
-        vim.cmd('source ' .. session_path)
+        local ok, _ = pcall(
+            vim.api.nvim_exec2,
+            'source ' .. session_path,
+            {}
+        )
+
         self.sassy_is_tracking = true
+        if not ok then
+            obsession_status = vim.fn['ObsessionStatus']()
+            if obsession_status == '[S]' then
+                vim.notify("Error loading session but starting Obsession anyway...", vim.log.levels.INFO)
+                vim.cmd('Obsession')
+            else
+                vim.notify("Could not load session...", vim.log.levels.ERROR)
+                self.sassy_is_tracking = false
+            end
+        end
+
         return
     end
 
@@ -84,6 +107,13 @@ end
 M.stop_session = function(self)
     if not self.sassy_is_tracking then
         vim.notify("No current tracking session", vim.log.levels.ERROR)
+        return
+    end
+
+    -- If session already open just start it
+    local obsession_status = vim.fn['ObsessionStatus']()
+    if obsession_status ~= '[$]' then
+        vim.notify("Obsession not reporting onging session", vim.log.levels.ERROR)
         return
     end
 
