@@ -8,9 +8,16 @@ local config = wezterm.config_builder()
 config.color_scheme = 'Tokyo Night'
 
 -- font
-config.font = wezterm.font 'Hack Nerd Font'
+-- config.font = wezterm.font 'Hack Nerd Font'
+-- config.font_size = 8.5
+config.font = wezterm.font {
+    family = 'Iosevka Term',
+    stretch = 'Expanded',
+    weight = 'Regular',
+    -- Font options
+}
 config.font_size = 8.5
-config.line_height = 1.25
+config.line_height = 1.2
 config.cell_width = 1.1
 
 -- GUI interface
@@ -26,8 +33,8 @@ config.window_padding = {
 }
 
 config.keys = {
-  -- CTRL-SHIFT-k activates the debug overlay
-  { key = 'K', mods = 'CTRL', action = wezterm.action.ShowDebugOverlay },
+    -- CTRL-SHIFT-k activates the debug overlay
+    { key = 'K', mods = 'CTRL', action = wezterm.action.ShowDebugOverlay },
 }
 
 return config
