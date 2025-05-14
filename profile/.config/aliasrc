@@ -56,7 +56,6 @@ alias calc='eva'
 alias ..="cd .."
 alias dragdrop='dragon-drag-and-drop -t -k'
 alias dragfile='dragon-drag-and-drop'
-alias vifm=vifmrun
 alias cbat='bat --paging=never --style=plain'
 alias gbat='bat --paging=never --style=changes -d'
 alias mvp=mpv
@@ -77,6 +76,8 @@ alias vobisdian="nvim +ObsidianQuickSwitch"
 alias wiki="nvim +WikiIndex"
 alias bka="vim $HOME/.config/bookmarks/bookmarks.txt"
 alias fssh=sshf
+alias volume-up="cat $HOME/.config/sxhkd/sxhkdrc | grep -A1 -m 1 XF86AudioRaiseVolume | grep -v XF86AudioRaiseVolume | sh"
+alias volume-down="cat $HOME/.config/sxhkd/sxhkdrc | grep -A1 -m 1 XF86AudioLowerVolume | grep -v XF86AudioLowerVolume | sh"
 
 if [ -f "$(which git-safer)" ]; then
     alias g=git-safer
