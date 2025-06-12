@@ -19,3 +19,4 @@
   luafile ~/.config/nvim/lsp/bash-ls.lua
   luafile ~/.config/nvim/lsp/rust-ls.lua
   luafile ~/.config/nvim/lsp/eslint-ls.lua
+  luafile ~/.config/nvim/lsp/nix-ls.lua
