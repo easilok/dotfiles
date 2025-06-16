@@ -1,13 +1,19 @@
-local oil = require("oil")
-oil.setup({
-    keymaps = {
-        ["<BS>"] = "actions.parent",
-        ["<C-h>"] = false,
-        ["<M-s>"] = "actions.select_split",
-        ["<M-v>"] = "actions.select_vsplit",
-    }
-})
+local force_netrw = os.getenv("FORCE_NETRW")
 
-vim.keymap.set("", "<F7>", oil.open , { desc = "Open Oil file browser" })
-vim.keymap.set("", "<M-p>", oil.open , { desc = "Open Oil file browser" })
-vim.keymap.set("n", "-", oil.open , { desc = "Open Oil file browser" })
+if not force_netrw then
+
+    local oil = require("oil")
+    oil.setup({
+        keymaps = {
+            ["<BS>"] = "actions.parent",
+            ["<C-h>"] = false,
+            ["<M-s>"] = "actions.select_split",
+            ["<M-v>"] = "actions.select_vsplit",
+        }
+    })
+
+    vim.keymap.set("", "<F7>", oil.open , { desc = "Open Oil file browser" })
+    vim.keymap.set("", "<M-p>", oil.open , { desc = "Open Oil file browser" })
+    vim.keymap.set("n", "-", oil.open , { desc = "Open Oil file browser" })
+
+end
