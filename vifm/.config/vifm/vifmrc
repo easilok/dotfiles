@@ -1,18 +1,3 @@
-"  ____ _____ 
-" |  _ \_   _|  Derek Taylor (DistroTube)
-" | | | || |    http://www.youtube.com/c/DistroTube
-" | |_| || |    http://www.gitlab.com/dwt1/ 
-" |____/ |_|  	
-
-" vim: filetype=vifm :
-" Sample configuration file for vifm (last updated: 20 July, 2018)
-" You can edit this file by hand.
-" The " character at the beginning of a line comments out the line.
-" Blank lines are ignored.
-" The basic format for each item is shown with an example.
-
-" ------------------------------------------------------------------------------
-
 " This is the actual command used to start vi.  The default is vim.
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
@@ -39,7 +24,7 @@ set trash
 
 " This is how many directories to store in the directory history.
 
-set history=100
+set history=1000
 
 " Automatically resolve symbolic links on l or Enter.
 
