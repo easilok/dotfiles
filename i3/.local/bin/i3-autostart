@@ -18,7 +18,9 @@ xmodmap -e "keycode 66 = Escape NoSymbol Escape" &
 setxkbmap -option caps:escape &
 setxkbmap -layout pt &
 # xsetroot -cursor_name left_ptr &
-if [ -f "$(which i3lock-clock)" ]; then 
+if [ -f "$(which i3lock-clock-image)" ]; then 
+  xss-lock -- i3lock-clock-image &
+elif [ -f "$(which i3lock-clock)" ]; then 
   xss-lock -- i3lock-clock &
 elif [ -f "$(which i3lock-fancy)" ]; then 
   xss-lock -- i3lock-fancy -p &
