@@ -41,7 +41,7 @@ Avoid constant errors on Windows about the coding system by setting the default 
   (set-fringe-mode 10)        ; Give some breathing room
 
   (setq-default
-      delete-by-moving-to-trash t)
+   delete-by-moving-to-trash t)
 
   (global-subword-mode 1)                           ; Iterate through CamelCase words
 

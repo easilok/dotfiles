@@ -24,7 +24,7 @@
 (set-fringe-mode 10)        ; Give some breathing room
 
 (setq-default
-    delete-by-moving-to-trash t)
+ delete-by-moving-to-trash t)
 
 (global-subword-mode 1)                           ; Iterate through CamelCase words
 
@@ -37,9 +37,7 @@
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode t)
 
-(dolist (mode '(term-mode-hook
-                eshell-mode-hook
-                ))
+(dolist (mode '(term-mode-hook eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (column-number-mode)
@@ -48,14 +46,16 @@
 
 (setq vc-follow-symlinks t)
 
-(set-face-attribute 'default nil :font "Hack Nerd Font" :height lp/default-font-size)
+(set-face-attribute 'default nil :font "Hack Nerd Font Mono" :height lp/default-font-size :weight 'regular :width 'condensed)
 (setq frame-resize-pixelwise t)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Hack Nerd Font" :height lp/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "Hack Nerd Font Mono" :height lp/default-font-size :weight 'light)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Hack Nerd Font" :height lp/default-variable-font-size :weight 'regular)
+
+(setq line-spacing 4)
 
 ;; Revert Dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
@@ -66,30 +66,9 @@
 ;; (setq epa-pinentry-mode 'loopback)
 ;; (pinentry-start)
 
-(setq package-enable-at-startup nil)
+(add-to-list 'load-path "~/.emacs.d/modules")
 
-(defvar bootstrap-version)
-(let ((bootstrap-file
-      (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-        "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-        'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-;; Use straight.el for use-package expressions
-(straight-use-package 'use-package)
-
-;; Add my library path to load-path
-(push "~/.emacs.d/myLibs" load-path)
-
-;; (use-package ws-butler
-;;   :straight t
-;;   :hook (text-mode prog-mode))
+(require 'lp-straight)
 
 ;; M-x all-the-icons-install-fonts
 (use-package all-the-icons :straight t)
@@ -98,15 +77,15 @@
   :straight t
   :init (doom-modeline-mode 1)
   :custom (
-  (doom-modeline-height 15)
-  (doom-modeline-persp-name t)
-  (doom-modeline-m4ue t)
-  (doom-modeline-lsp t)
-  (doom-modeline-modal-icon nil) ;; vim modes
-  (doom-modeline-buffer-file-name-style 'truncate-except-project)
-  (custom-set-faces '(mode-line ((t (:height 0.85))))
-                    '(mode-line-inactive ((t (:height 0.85)))))
-  ))
+           (doom-modeline-height 15)
+           (doom-modeline-persp-name t)
+           (doom-modeline-m4ue t)
+           (doom-modeline-lsp t)
+           (doom-modeline-modal-icon nil) ;; vim modes
+           (doom-modeline-buffer-file-name-style 'truncate-except-project)
+           (custom-set-faces '(mode-line ((t (:height 0.85))))
+                             '(mode-line-inactive ((t (:height 0.85)))))
+           ))
 
 ;; (display-time-mode 1) ;; Enable time in the mode-line
 (unless (equal "Battery status not available"
@@ -114,14 +93,14 @@
   (display-battery-mode 1)) ; On laptops it's nice to know how much power you have
 
 (setq display-time-format "%l:%M %p %b %y"
-    display-time-default-load-average nil)
+      display-time-default-load-average nil)
 
 (use-package doom-themes
-    :straight t
-    :init
-    (load-theme 'doom-tokyo-night t)
-    (doom-themes-visual-bell-config)
-    (set-frame-parameter (selected-frame) 'alpha '(95 95)))
+  :straight t
+  :init
+  (load-theme 'doom-tokyo-night t)
+  (doom-themes-visual-bell-config)
+  (set-frame-parameter (selected-frame) 'alpha '(92 92)))
 
 ;; (use-package modus-themes
 ;;   :straight t
@@ -179,307 +158,28 @@
 
 (use-package rotate :straight t)
 
+(use-package no-littering :straight t)
+
 ;; NOTE: If you want to move everything out of the ~/.emacs.d folder
-  ;; reliably, set `user-emacs-directory` before loading no-littering!
-  ;(setq user-emacs-directory "~/.cache/emacs")
-
-  (use-package no-littering :straight t)
-
-  ;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
-  (setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
+;; reliably, set `user-emacs-directory` before loading no-littering!
+;(setq user-emacs-directory "~/.cache/emacs")
+; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
+(setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
       url-history-file (expand-file-name "url/history" user-emacs-directory))
 
-  ;; no-littering doesn't set this by default so we must place
-  ;; auto save files in the same path as it uses for sessions
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+;; no-littering doesn't set this by default so we must place
+;; auto save files in the same path as it uses for sessions
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
-
-  ;; Keep customization settings in a temporary file (thanks Ambrevar!)
-  (setq custom-file
+;; Keep customization settings in a temporary file (thanks Ambrevar!)
+(setq custom-file
       (if (boundp 'server-socket-dir)
           (expand-file-name "custom.el" server-socket-dir)
         (expand-file-name (format "emacs-custom-%s.el" (user-uid)) temporary-file-directory)))
 (load custom-file t)
 
-;; Org Mode Configuration ------------------------------------------------------
-
-(defun lp/org-font-setup ()
-  (with-eval-after-load 'org
-    ;; Increase the size of various headings
-    (set-face-attribute 'org-document-title nil :font "Iosevka Aile" :weight 'bold :height 1.3)
-    ;; Set faces for heading levels
-    (dolist (face '((org-level-1 . 1.2)
-                    (org-level-2 . 1.1)
-                    (org-level-3 . 1.05)
-                    (org-level-4 . 1.0)
-                    (org-level-5 . 1.1)
-                    (org-level-6 . 1.1)
-                    (org-level-7 . 1.1)
-                    (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'regular :height (cdr face)))
-    ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-    (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
-    (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
-    (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-    ;; (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
-    (custom-set-faces '(org-checkbox ((t (:foreground nil :inherit org-todo)))))
-    (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
-    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
-    (setq org-fontify-done-headline t)
-    (setq org-fontify-quote-and-verse-blocks t)
-    (setq org-fontify-whole-heading-line t)
-    (setq org-src-fontify-natively t)
-    (setq org-imenu-depth 8)
-    ;; Sub-lists should have different bullets
-    (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a.")))
-    ))
-
-(with-eval-after-load 'org-faces
-  (lp/org-font-setup))
-
-(font-lock-add-keywords
- 'org-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
- 'append)
-
-(use-package org-appear
-  :straight t
-  :hook (org-mode . org-appear-mode)
-  :custom
-  (org-hide-emphasis-markers t))
-
-(defun lp/org-mode-setup ()
-  (org-indent-mode)
-  ;; (variable-pitch-mode)
-  ;; (auto-fill-mode 0)
-  (visual-line-mode 1)
-  ;; (setq evil-auto-indent nil)
-  )
-
-
-(defun lp/capture-mail-follow-up (msg)
-  (interactive)
-  (call-interactively 'org-store-link)
-  (org-capture nil "mf"))
-
-(defun lp/capture-mail-read-later (msg)
-  (interactive)
-  (call-interactively 'org-store-link)
-  (org-capture nil "mr"))
-
-;; add :immediate-finish t at the end of each entry to void confirmation
-(defun lp/mu4e-org-setup()
-  (with-eval-after-load 'mu4e
-    (require 'mu4e-org)
-    (setq org-capture-templates
-          (append org-capture-templates
-                  `(("m" "Email Workflow")
-                    ("mf" "Follow Up" entry (file+olp lp/org-capture-mail "Follow Up")
-                     "* TODO Follow up with %:fromname on %a\n%i")
-                    ("mr" "Read Later" entry (file+olp lp/org-capture-mail "Read Later")
-                     "* TODO Read %:subject\n\n%a\n\n%i" ))))
-    ;; Add custom actions for our capture templates
-    (add-to-list 'mu4e-headers-actions
-                 '("follow up" . lp/capture-mail-follow-up) t)
-    (add-to-list 'mu4e-view-actions
-                 '("follow up" . lp/capture-mail-follow-up) t)
-    (add-to-list 'mu4e-headers-actions
-                 '("read later" . lp/capture-mail-read-later) t)
-    (add-to-list 'mu4e-view-actions
-                 '("read later" . lp/capture-mail-read-later) t)
-    ))
-
-(use-package org
-  :straight t
-  ;; :pin org
-  :hook (org-mode . lp/org-mode-setup)
-  :config
-  (setq-default org-adapt-indentation t)
-  (setq org-ellipsis " ▾"
-        org-hide-emphasis-markers t
-        org-src-fontify-natively t
-        org-fontify-quote-and-verse-blocks t
-        org-src-tab-acts-natively t
-        org-edit-src-content-indentation 2
-        org-hide-block-startup nil
-        org-src-preserve-indentation nil
-        org-startup-folded 'content
-        org-cycle-separator-lines 2
-        org-capture-bookmark nil)
-  (evil-define-key '(normal insert visual) org-mode-map (kbd "C-j") 'org-next-visible-heading)
-  (evil-define-key '(normal insert visual) org-mode-map (kbd "C-k") 'org-previous-visible-heading)
-
-  (evil-define-key '(normal insert visual) org-mode-map (kbd "M-j") 'org-metadown)
-  (evil-define-key '(normal insert visual) org-mode-map (kbd "M-k") 'org-metaup)
-
-  (setq org-directory "~/Nextcloud/org/")
-  (setq lp/org-capture-refile (concat org-directory "Refile.org"))
-  (setq lp/org-capture-mail (concat org-directory "Mail.org"))
-  (setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
-
-  (setq org-agenda-start-with-log-mode t)
-  (setq org-log-into-drawer t)
-  (setq org-log-done 'time
-        org-journal-dir "~/Nextcloud/org/journal/"
-        org-journal-date-format "%B %d, %Y (%A) "
-        org-journal-file-format "%Y-%m-%d.org"
-        org-agenda-skip-scheduled-if-done 1
-        ;; ex. of org-link-abbrev-alist in action
-        ;; [[arch-wiki:Name_of_Page][Description]]
-        org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
-        '(("google" . "http://www.google.com/search?q=")
-          ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
-          ("wiki" . "https://en.wikipedia.org/wiki/"))
-        org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
-        '((sequence
-           "TODO(t)"           ; A task that is ready to be tackled
-           "NEXT(n)"           ; Task to be considered next
-           "WAIT(w)"           ; Something is holding up this task
-           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-           "DONE(d)"           ; Task has been completed
-           "CANCELLED(c)" )    ; Task has been cancelled
-          ("INACTIVE(i)"       ; Some lost task waiting free time to be picked
-           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-           "MEETING(m)" )      ; Meeting
-          (sequence
-           "[ ](T)"   ; A task that needs doing
-           "[-](S)"   ; Task is in progress
-           "[?](W)"   ; Task is being held up or paused
-           "|"
-           "[X](D)")) ; Task was completed
-        )
-  ;; Set default column view headings: Task Total-Time Time-Stamp
-  (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
-  ;; Capture templates for: TODO tasks, Notes, meetings, etc
-  (setq org-capture-templates
-        (quote (("t" "todo" entry (file lp/org-capture-refile)
-                 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                ("r" "respond" entry (file lp/org-capture-refile)
-                 "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-                ("i" "idea" entry (file lp/org-capture-refile)
-                 "* %? :IDEA:\n%t\n" :clock-in t :clock-resume t)
-                ("n" "note" entry (file lp/org-capture-refile)
-                 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                ("g" "Meeting" entry (file lp/org-capture-refile)
-                 "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                ("p" "Phone call" entry (file lp/org-capture-refile)
-                 "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t))))
-  (setq org-tag-alist
-        '((:startgroup)
-                                        ; Put mutually exclusive tags here
-          (:endgroup)
-          ("@errand" . ?E)
-          ("@home" . ?H)
-          ("@work" . ?W)
-          ("agenda" . ?a)
-          ("planning" . ?p)
-          ("publish" . ?P)
-          ("batch" . ?b)
-          ("note" . ?n)
-          ("idea" . ?i)))
-
-  ;; Configure custom agenda views
-  (setq org-agenda-custom-commands
-        '(("d" "Dashboard"
-           ((agenda "" ((org-deadline-warning-days 7)))
-            (todo "NEXT"
-                  ((org-agenda-overriding-header "Next Tasks")))
-            (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
-
-          ("n" "Next Tasks"
-           ((todo "NEXT"
-                  ((org-agenda-overriding-header "Next Tasks")))))
-
-          ("W" "Work Tasks" tags-todo "+work-email")
-
-          ;; Low-effort next actions
-          ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
-           ((org-agenda-overriding-header "Low Effort Tasks")
-            (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
-
-          ("w" "Workflow Status"
-           ((todo "WAIT"
-                  ((org-agenda-overriding-header "Waiting on External")
-                   (org-agenda-files org-agenda-files)))
-            (todo "REVIEW"
-                  ((org-agenda-overriding-header "In Review")
-                   (org-agenda-files org-agenda-files)))
-            (todo "PLAN"
-                  ((org-agenda-overriding-header "In Planning")
-                   (org-agenda-todo-list-sublevels nil)
-                   (org-agenda-files org-agenda-files)))
-            (todo "BACKLOG"
-                  ((org-agenda-overriding-header "Project Backlog")
-                   (org-agenda-todo-list-sublevels nil)
-                   (org-agenda-files org-agenda-files)))
-            (todo "READY"
-                  ((org-agenda-overriding-header "Ready for Work")
-                   (org-agenda-files org-agenda-files)))
-            (todo "ACTIVE"
-                  ((org-agenda-overriding-header "Active Projects")
-                   (org-agenda-files org-agenda-files)))
-            (todo "COMPLETED"
-                  ((org-agenda-overriding-header "Completed Projects")
-                   (org-agenda-files org-agenda-files)))
-            (todo "CANC"
-                  ((org-agenda-overriding-header "Cancelled Projects")
-                   (org-agenda-files org-agenda-files)))))))
-  ;; (setq org-startup-indented t)
-  (lp/mu4e-org-setup)
-  )
-
-(use-package org-bullets
-  :straight t
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
-  )
-
-(defun lp/org-mode-visual-fill ()
-  (setq visual-fill-column-width 120
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
-
-(use-package visual-fill-column
-  :straight t
-  :hook (org-mode . lp/org-mode-visual-fill))
-
-(with-eval-after-load 'org
-  (require 'org-tempo)
-  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("py" . "src python"))
-  (add-to-list 'org-structure-template-alist '("scm" . "src scheme"))
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (python . t)))
-  (push '("conf-unix" . conf-unix) org-src-lang-modes)
-  )
-
-
-;; Automatically tangle our Emacs.org config file when we save it
-(defun lp/org-babel-tangle-config ()
-  (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/dotfiles/home/.config/emacs.d.raw/Emacs_Conf.org"))
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
-
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'lp/org-babel-tangle-config)))
-
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-;; Because evil took care of C-u
-(global-set-key (kbd "C-M-u") 'universal-argument)
+(require 'lp-org)
 
 (setq tab-always-indent nil)
 
@@ -528,95 +228,7 @@
     "wq" '(persp-kill :which-key "kill workspace")
     ))
 
-(use-package evil
-      :straight t
-       :init
-       (setq x-select-enable-clipboard nil) ;; This is for disabling global clipboard on copy/cut
-       (setq evil-want-integration t)
-       (setq evil-want-keybinding nil)
-       (setq evil-want-C-u-scroll t)
-       (setq evil-want-fine-undo t)
-       (setq evil-want-C-i-jump nil)
-       (setq evil-respect-visual-line-mode t)
-       (setq evil-undo-system 'undo-tree)
-       :config
-       (evil-mode 1)
-       (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-       (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
-      ;; change :q to close windows instead of emacs
-       (evil-ex-define-cmd "q[uit]" 'evil-window-delete)      
-
-       ;; Use visual line motions even outside of visual-line-mode buffers
-       (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-       (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-       (evil-set-initial-state 'messages-buffer-mode 'normal)
-       (evil-set-initial-state 'dashboard-mode 'normal))
-
-     (use-package undo-tree
-       :straight t
-       :after evil
-       :config
-       (global-undo-tree-mode 1))
-
-     (use-package evil-collection
-       :straight t
-       :after evil
-       :config
-       (evil-collection-init))
-
-     (use-package evil-commentary
-       :straight t
-       :after evil
-       :config
-       (evil-commentary-mode))
-
-     (use-package evil-surround
-      :straight t
-       :after evil
-       :config
-       (global-evil-surround-mode 1))
-
-   ;; (with-eval-after-load 'org
-   ;;   (evil-define-key* 'insert org-mode-map
-   ;;     [tab] #'indent-for-tab-command
-   ;;     [backtab] (lambda ()
-   ;;                 (interactive)
-   ;;                 (indent-rigidly (line-beginning-position)
-   ;;                                 (line-end-position)
-   ;;                                 (- tab-width)))))
- (defun +org-indent-maybe-h ()
-   "Indent the current item (header or item), if possible.
- Made for `org-tab-first-hook' in evil-mode."
-   (interactive)
-   (cond ((not (and (bound-and-true-p evil-local-mode)
-                    (or (evil-insert-state-p)
-                        (evil-emacs-state-p))))
-          nil)
-         ((org-at-item-p)
-          (if (eq this-command 'org-shifttab)
-              (org-outdent-item-tree)
-            (org-indent-item-tree))
-          t)
-         ((org-at-heading-p)
-          (ignore-errors
-            (if (eq this-command 'org-shifttab)
-                (org-promote)
-              (org-demote)))
-          t)
-         ((org-in-src-block-p t)
-          (org-babel-do-in-edit-buffer
-           (call-interactively #'indent-for-tab-command))
-          t)
-         ((and (save-excursion
-                 (skip-chars-backward " \t")
-                 (bolp))
-               (org-in-subtree-not-table-p))
-          (call-interactively #'tab-to-tab-stop)
-          t)))
-
-(add-hook 'org-cycle-tab-first-hook #'+org-indent-maybe-h)
+(require 'lp-evil)
 
 (use-package which-key
   :straight t
@@ -688,9 +300,9 @@
   :after ivy
   :init
   (ivy-rich-mode 1))
-  ;:config
-  ;(ivy-set-display-transformer 'ivy-switch-buffer
-  ;                             'ivy-rich-switch-buffer-transformer))
+                                        ;:config
+                                        ;(ivy-set-display-transformer 'ivy-switch-buffer
+                                        ;                             'ivy-rich-switch-buffer-transformer))
 
 (use-package swiper
   :straight t
@@ -700,8 +312,8 @@
   :straight t
   :init
   (setq completion-styles '(orderless)
-      completion-category-defaults nil
-      completion-category-overrides '((file (styles . (partial-completion)))))
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles . (partial-completion)))))
   )
 
 (use-package helpful
@@ -717,19 +329,19 @@
   ([remap describe-key] . helpful-key))
 
 (defun lp/lsp-mode-setup ()
-    (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-    (lsp-headerline-breadcrumb-mode))
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
 
-  (use-package lsp-mode
-    :straight t
-    :commands (lsp lsp-deferred)
-    :hook (lsp-mode . lp/lsp-mode-setup)
-    :init
-    (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
-    :config
-    (lsp-enable-which-key-integration t))
-    (setq lsp-enable-snippet nil)
-    (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
+(use-package lsp-mode
+  :straight t
+  :commands (lsp lsp-deferred)
+  :hook (lsp-mode . lp/lsp-mode-setup)
+  :init
+  (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+  :config
+  (lsp-enable-which-key-integration t))
+(setq lsp-enable-snippet nil)
+(setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
 
 (lp/leader-keys
   "l"  '(:ignore t :which-key "lsp")
@@ -740,22 +352,23 @@
   "ls" 'counsel-imenu
   "le" 'lsp-ui-flycheck-list
   "lS" 'lsp-ui-sideline-mode
+  "lk" 'lsp-ui-doc-show
   "lX" 'lsp-execute-code-action)
 
 (use-package lsp-ui
-      :straight t
-      :hook (lsp-mode . lsp-ui-mode)
-      :custom
-      (lsp-ui-doc-position 'bottom))
+  :straight t
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom))
 
-    (use-package lsp-ivy
-      :straight t
-      :commands (lsp lsp-deferred))
+(use-package lsp-ivy
+  :straight t
+  :commands (lsp lsp-deferred))
 
 (use-package flycheck
-        :straight t
-        :defer t
-        :hook (lsp-mode . flycheck-mode))
+  :straight t
+  :defer t
+  :hook (lsp-mode . flycheck-mode))
 
 (use-package lsp-treemacs
   :straight t
@@ -766,9 +379,9 @@
   :after lsp-mode
   :hook (lsp-mode . company-mode)
   :bind (:map company-active-map
-         ("TAB" . company-complete-selection))
-        ;; (:map lsp-mode-map
-        ;;  ("<tab>" . company-indent-or-complete-common))
+              ("TAB" . company-complete-selection))
+  ;; (:map lsp-mode-map
+  ;;  ("<tab>" . company-indent-or-complete-common))
   :custom
   (company-minimum-prefix-length 2)
   (company-idle-delay 0.0))
@@ -798,7 +411,7 @@
   :general
   (lp/leader-keys
     "pm"  '(:keymap projectile-command-map :which-key "projectile")
-  )
+    )
   ;;:init
   ;; NOTE: Set this to the folder where you keep your Git repos!
   ;;(when (file-directory-p "~/Projects/Code")
@@ -813,7 +426,8 @@
 
 (use-package nvm
   :straight t
-   :defer t)
+  :defer t)
+
 (use-package typescript-mode
   :straight t
   :mode "\\.ts\\'"
@@ -849,20 +463,20 @@
   (setq prettier-js-show-errors nil))
 
 (use-package web-mode
-    :straight t
-    :hook (web-mode . lsp)
-    :mode "(\\.\\(html?\\|ejs\\|tsx\\|jsx\\|vue\\)\\'"
-    :config
-    (setq-default web-mode-code-indent-offset 2)
-    (setq-default web-mode-markup-indent-offset 2)
-    (setq-default web-mode-attribute-indent-offset 2))
+  :straight t
+  :hook (web-mode . lsp)
+  :mode "(\\.\\(html?\\|ejs\\|tsx\\|jsx\\|vue\\)\\'"
+  :config
+  (setq-default web-mode-code-indent-offset 2)
+  (setq-default web-mode-markup-indent-offset 2)
+  (setq-default web-mode-attribute-indent-offset 2))
 
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
 (use-package lsp-tailwindcss
   :straight t
-   :after lsp)
+  :after lsp)
 
 (add-hook 'scss-mode-hook 'lsp)
 (add-hook 'css-mode-hook 'lsp)
@@ -874,34 +488,34 @@
          (lambda () (require 'ccls) (lsp))))
 
 (use-package irony
-      :straight t
-      :commands (irony-mode)
-    )
+  :straight t
+  :commands (irony-mode)
+  )
 
-  (use-package company-irony
-    :straight t
-     :after irony
-   )
+(use-package company-irony
+  :straight t
+  :after irony
+  )
 
-  ;; Use irony's completion functions.
-  (add-hook 'irony-mode-hook
-            (lambda ()
-              (define-key irony-mode-map [remap completion-at-point]
-                'irony-completion-at-point-async)
+;; Use irony's completion functions.
+(add-hook 'irony-mode-hook
+          (lambda ()
+            (define-key irony-mode-map [remap completion-at-point]
+                        'irony-completion-at-point-async)
 
-              (define-key irony-mode-map [remap complete-symbol]
-                'irony-completion-at-point-async)
+            (define-key irony-mode-map [remap complete-symbol]
+                        'irony-completion-at-point-async)
 
-              (irony-cdb-autosetup-compile-options)))
+            (irony-cdb-autosetup-compile-options)))
 
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
-    (use-package platformio-mode
-      :straight t
-      :hook (c++-mode .
-             (lambda()
-               (irony-mode)
-               ;; (irony-eldoc) 
-               (platformio-conditionally-enable))))
+(use-package platformio-mode
+  :straight t
+  :hook (c++-mode .
+                  (lambda()
+                    (irony-mode)
+                    ;; (irony-eldoc) 
+                    (platformio-conditionally-enable))))
 
 (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
 
@@ -1002,9 +616,9 @@
   )
 
 (use-package scheme-mode
-    ;; :straight t
-    :ensure nil
-    :mode "\\.sld\\'")
+  ;; :straight t
+  :ensure nil
+  :mode "\\.sld\\'")
 
 (use-package geiser
   :straight t
@@ -1016,86 +630,21 @@
   (setq geiser-implementations-alist '(((regexp "\\.scm$") scheme)
                                        ((regexp "\\.sld") scheme))))
 
-(setq lp/mu4e-enable? nil)
-
-
-(when (require 'lp-mail nil 'noerror)
-  (setq lp/mu4e-enable? t))
-
-(use-package mu4e
-  ;; :straight t
-  :commands (mu4e lp/mu4e-org-setup mu4e-compose-new)
-  ;; :defer 2
-  :ensure nil
-  :config
-  ;; for new message view on next update
-  (setq mu4e-view-use-gnus t)
-  ;; This is set to 't' to avoid mail syncing issues when using mbsync
-  (setq mu4e-change-filenames-when-moving t)
-
-  (setq mu4e-update-interval (* 10 60))
-  (setq mu4e-get-mail-command "mbsync -a")
-  (setq mu4e-root-maildir "~/Mail/.mumail")
-  (setq mu4e-compose-context-policy 'always-ask)
-  (setq mu4e-context-policy 'pick-first)
-
-  ;; enable inline images
-  (setq mu4e-view-show-images t)
-  ;; use imagemagick, if available
-  (when (fboundp 'imagemagick-register-types)
-    (imagemagick-register-types))
-  (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "qutebrowser")
-  ;; (add-to-list 'mu4e-view-actions
-  ;;              '("viewInBrowser" . mu4e-action-view-in-browser) t)
-
-  ;; From Doom - Html mails might be better rendered in a browser
-  (add-to-list 'mu4e-view-actions '("View in browser" . mu4e-action-view-in-browser))
-
-  (when lp/mu4e-enable? (lp/mail-set-mu4e-contexts))
-
-  (add-to-list 'mu4e-bookmarks '("(m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox or m:/xyz/Inbox) and flag:unread" "Unread inbox" ?n))
-  (add-to-list 'mu4e-bookmarks '("m:/personal/Inbox or m:/professional/Inbox or m:/nibble/Inbox or m:/luispereira/Inbox or m:/nibble-smtp/Inbox or m:/xyz/Inbox" "All Inboxes" ?i))
-
-
-  (setq mu4e-headers-time-format "%H:%M")
-  ;; the headers to show in the headers list -- a pair of a field
-  ;; and its width, with `nil' meaning 'unlimited'
-  ;; better only use that for the last field.
-  ;; These are the defaults:
-  (setq mu4e-headers-fields
-        '( (:date          .  15)    ;; alternatively, use :human-date
-          (:flags         .   8)
-          (:from          .  22)
-          (:maildir       . 20)
-          (:subject       .  nil))) ;; alternatively, use :thread-subject
-
-  ;; smtp mail setting
-  ;; use mu4e for e-mail in emacs
-  (setq mail-user-agent 'mu4e-user-agent)
-  (setq mu4e-compose-format-flowed t)
-  (setq message-send-mail-function 'smtpmail-send-it)
-  (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "qutebrowser")
-  (add-to-list 'mu4e-view-actions
-              '("viewInBrowser" . mu4e-action-view-in-browser) t)
-  (lp/leader-keys
-    "om"  '(mu4e :which-key "mail"))
-  )
+(require 'lp-mail)
 
 (use-package org-mime
   :straight t
   :after mu4e)
 
 (setq org-mime-export-options '(:section-numbers nil
-                                :with-author nil
-                                :with-toc nil))
+                                                 :with-author nil
+                                                 :with-toc nil))
 
 (add-hook 'org-mime-html-hook
           (lambda ()
             (org-mime-change-element-style
-            "pre" (format "color: %s; background-color: %s; padding: 0.5em;"
-                          "#E6E1DC" "#232323"))))
+             "pre" (format "color: %s; background-color: %s; padding: 0.5em;"
+                           "#E6E1DC" "#232323"))))
 
 ;; (add-hook 'message-send-hook 'org-mime-htmlize)
 
@@ -1182,51 +731,51 @@
 ;;                         :files (:defaults "logo.png" "matrix-client-standalone.el.sh")))
 
 ;; Set our nickname & real-name as constant variables
-  (setq
-   erc-nick "easilok"     ; Our IRC nick
-   erc-nick-uniquifier "_"
-   erc-user-full-name "Luis Pereira"
-   erc-prompt-for-password t
-   erc-auto-query 'bury
-   erc-join-buffer 'bury
-   erc-track-shorten-start 8
-   erc-interpret-mirc-color t
-   erc-rename-buffers t
-   erc-kill-buffer-on-part t
-   erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE" "AWAY")
-   erc-track-enable-keybindings nil
-   erc-track-visibility nil ; Only use the selected frame for visibility
-   erc-track-exclude-server-buffer t
-   erc-fill-column 120
-   erc-fill-function 'erc-fill-static
-   erc-fill-static-center 20
-   erc-image-inline-rescale 400
-   erc-server-reconnect-timeout 10
-   erc-server-reconnect-attempts 5
-   erc-server "192.168.1.221"
-   erc-port 12445
-   ;; erc-autojoin-channels-alist '(("192.168.1.221"))
-   erc-quit-reason (lambda (s) (or s "Going to another multiverse"))
-   erc-modules
-    '(autoaway autojoin button completion fill irccontrols keep-place
-        list match menu move-to-prompt netsplit networks noncommands
-        readonly ring stamp track image hl-nicks notify notifications)
-   ) 
+(setq
+ erc-nick "easilok"     ; Our IRC nick
+ erc-nick-uniquifier "_"
+ erc-user-full-name "Luis Pereira"
+ erc-prompt-for-password t
+ erc-auto-query 'bury
+ erc-join-buffer 'bury
+ erc-track-shorten-start 8
+ erc-interpret-mirc-color t
+ erc-rename-buffers t
+ erc-kill-buffer-on-part t
+ erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE" "AWAY")
+ erc-track-enable-keybindings nil
+ erc-track-visibility nil ; Only use the selected frame for visibility
+ erc-track-exclude-server-buffer t
+ erc-fill-column 120
+ erc-fill-function 'erc-fill-static
+ erc-fill-static-center 20
+ erc-image-inline-rescale 400
+ erc-server-reconnect-timeout 10
+ erc-server-reconnect-attempts 5
+ erc-server "192.168.1.221"
+ erc-port 12445
+ ;; erc-autojoin-channels-alist '(("192.168.1.221"))
+ erc-quit-reason (lambda (s) (or s "Going to another multiverse"))
+ erc-modules
+ '(autoaway autojoin button completion fill irccontrols keep-place
+            list match menu move-to-prompt netsplit networks noncommands
+            readonly ring stamp track image hl-nicks notify notifications)
+ ) 
 
 (use-package erc-hl-nicks
-             :straight t
-             :after erc)
+  :straight t
+  :after erc)
 
 (use-package erc-image
-             :straight t
-             :after erc)
+  :straight t
+  :after erc)
 
-  ;; Or assign it to a keybinding
-  ;; This example is also using erc's TLS capabilities:
-  (defun erc-liberachat()
-    (interactive)
-    (erc-tls :server "irc.libera.chat"
-             :port   "6697"))
+;; Or assign it to a keybinding
+;; This example is also using erc's TLS capabilities:
+(defun erc-liberachat()
+  (interactive)
+  (erc-tls :server "irc.libera.chat"
+           :port   "6697"))
 
 (use-package guix
   :straight t
@@ -1242,8 +791,8 @@
 
 (use-package transmission
   :straight t
-   :commands transmission
-)
+  :commands transmission
+  )
 
 ;; (use-package elpher
 ;;   :straight t
@@ -1258,7 +807,7 @@
   (emms-all)
   (emms-default-players)
   (setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music")
-)
+  )
 
 (defun lp/load-clockify-package()
   (interactive)
