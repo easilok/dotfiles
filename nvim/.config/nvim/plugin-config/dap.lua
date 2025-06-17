@@ -16,9 +16,11 @@ local function dap_terminate_and_close()
 end
 
 vim.keymap.set("n", "<F5>", dap.continue, { desc = 'Dap Continue' })
-vim.keymap.set("n", "<F3>", dap.step_over, { desc = 'Dap Step Over' })
-vim.keymap.set("n", "<F2>", dap.step_into, { desc = 'Dap Step Into' })
-vim.keymap.set("n", "<F4>", dap.step_out, { desc = 'Dap Step Out' })
+vim.keymap.set("n", "<S-F5>", dap.terminate, { desc = 'Dap Terminate' })
+vim.keymap.set("n", "<F10>", dap.step_over, { desc = 'Dap Step Over' })
+vim.keymap.set("n", "<F11>", dap.step_into, { desc = 'Dap Step Into' })
+vim.keymap.set("n", "<S-F11>", dap.step_out, { desc = 'Dap Step Out' })
+vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, { desc = '[D]ap toggle [b]reakpoint' })
 vim.keymap.set("n", "<space>db", dap.toggle_breakpoint, { desc = '[D]ap toggle [b]reakpoint' })
 vim.keymap.set("n", "<space>dB", function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
     { desc = '[D]ap [B]reakpoint condition' })

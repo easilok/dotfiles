@@ -113,8 +113,8 @@ Plug 'epwalsh/obsidian.nvim'
 
 
 " Live markdown preview
-" Plug 'instant-markdown/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'yarn install'}
-Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'npm install', 'branch' : 'wiki-filetype'}
+Plug 'instant-markdown/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'npm install'}
+" Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'npm install', 'branch' : 'wiki-filetype'}
 Plug 'MeanderingProgrammer/markdown.nvim'
 
 Plug 'godlygeek/tabular'
@@ -160,6 +160,9 @@ Plug 'Olical/conjure'
 Plug 'PaterJason/cmp-conjure'
 
 Plug '~/.config/nvim/lua/easilok'
+
+" AI trial
+source ~/.config/nvim/plugins-ai.vim
 
 " Initialize plugin system
 call plug#end()

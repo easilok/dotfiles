@@ -1,6 +1,12 @@
 require('render-markdown').setup( {
     pipe_table = {
         enabled = false
+    },
+    checkbox = {
+        -- enabled = false,
+        render_modes = false,
+        bullet = true,
+        right_pad = 0,
     }
 })
 
