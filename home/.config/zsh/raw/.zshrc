@@ -220,10 +220,14 @@ fi
 
 [[ -f "$(which git-safer)" ]] && compdef git-safer=git
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.config/nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias luamake=/home/luis/git/lua-language-server/3rd/luamake/luamake
+
+if [ -f "$(which mise)" ]; then
+  eval "$(mise activate zsh)"
+fi

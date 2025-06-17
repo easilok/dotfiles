@@ -12,6 +12,11 @@ if [[ -n "$database_env_vars" ]]; then
   if echo "$database_env_vars" | grep -q "ro"; then
     output="$output  RO"
   fi
+  #
+  # Now check for "ro" in the filtered variables and append to output if found
+  if echo "$database_env_vars" | grep -q "addvolt_developer"; then
+    output="$output  DEV"
+  fi
 
   # Now check for "rw" in the filtered variables and append to output if found
   if echo "$database_env_vars" | grep -q "rw"; then
