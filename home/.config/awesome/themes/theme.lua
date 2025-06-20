@@ -18,8 +18,8 @@ local theme = {}
 theme.xcolor7     = "#8581a0"
 
 -- Fonts
-theme.font = "Roboto Medium 8"
-theme.taglist_font = "Roboto Medium 8"
+theme.font = "Iosevka Aile 8"
+theme.taglist_font = "Iosevka Aile 8"
 -- theme.iconFont = "Font Awesome 5 Free Regular 9"
 theme.iconFont = "FontAwesome Regular 9"
 theme.taglist_font = "FontAwesome Regular 9"
