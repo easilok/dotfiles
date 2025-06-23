@@ -51,7 +51,7 @@ XF86Display
 
 #TODO add microphone mute
 XF86AudioMicMute
-        wpctl set-mute @DEFAULT_SINK@ toggle
+        wpctl set-mute @DEFAULT_SOURCE@ toggle
 
 # mixer super + m
 super + shift + control + m
@@ -76,7 +76,7 @@ shift + XF86AudioLowerVolume
 
 #; super + shift + m
 XF86AudioMute
-	wpctl set-mute @DEFAULT_SOURCE@ toggle
+	wpctl set-mute @DEFAULT_SINK@ toggle
 
 XF86AudioPlay
 	playerctl play-pause
