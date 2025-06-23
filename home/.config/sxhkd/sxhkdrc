@@ -1,12 +1,6 @@
 # Basic binds
-super + Return
-    default_terminal
-super + d
-    dmenu-simple
 super + p
     dmenu-simple
-shift + super + d
-    dmenu-full
 shift + super + p
     dmenu-full
 shift + super + Escape

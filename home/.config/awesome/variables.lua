@@ -1,7 +1,7 @@
 local awful = require("awful")
 
 -- This is used later as the default terminal and editor to run.
-terminal = os.getenv("TERMINAL") or "termite"
+terminal = os.getenv("TERMINAL") or "xterm"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 lockscreen = "betterlockscreen -l dim"
