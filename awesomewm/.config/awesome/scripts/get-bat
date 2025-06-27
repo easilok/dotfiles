@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+
+# ac-adapter-symbolic
+# battery-missing-symbolic
+# battery-empty-symbolic
+# battery-full-charged-symbolic
+# battery-caution-charging-symbolic
+# battery-caution-symbolic
+# battery-low-charging-symbolic
+# battery-low-symbolic
+# battery-good-charging-symbolic
+# battery-good-symbolic
+# battery-full-charging-symbolic
+# battery-full-symbolic
+
+
+
+if command -v upower >/dev/null 2>/dev/null; then
+
+	# upower -i $(upower -e | grep 'BAT') | grep -E "state|to\ full|percentage" | tr '\n' ' ' | awk '{print " "$4}'
+
+	BAT_INFO=$(upower -i `upower -e | grep 'BAT'`)
+	# echo $BAT_INFO && exit
+
+	BAT_ICON_NAME=$(upower -i `upower -e | grep 'BAT'` | awk ' /icon-name/ {print $2 }')
+	BAT_PERCENTAGE=$(upower -i `upower -e | grep 'BAT'` | awk ' /percentage/ {print $2 }')
+	BAT_STATE=$(upower -i `upower -e | grep 'BAT'` | awk ' /state/ {print $2 }')
+	# BAT_PRESENT=$(upower -i `upower -e | grep 'BAT'` | awk ` /(?<=present:\ )[\w%\'-.]+/ {print $2 }`)
+	BAT_PRESENT=$(upower -i `upower -e | grep 'BAT'` | awk ' /present/ {print $2 }')
+	BAT_TIME=$(upower -i `upower -e | grep 'BAT'` | awk ' /time*/ {print $2 }')
+
+	# echo "State: $BAT_STATE, Icon: $BAT_ICON_NAME, Percentage: $BAT_PERCENTAGE"
+
+	if [ "$BAT_PRESENT" == "yes" ]; then
+		if [ "$BAT_STATE" == "charging" ]; then
+			case "$BAT_ICON_NAME" in
+				"'battery-full-charging-symbolic'") BAT_ICON=" ";;
+				"'battery-full-charged-symbolic'") BAT_ICON=" ";;
+				"'battery-good-charging-symbolic'") BAT_ICON=" ";;
+				"'battery-low-charging-symbolic'") BAT_ICON=" ";;
+				"'battery-caution-charging-symbolic'") BAT_ICON=" ";;
+				*) BAT_ICON=" ";;
+			esac
+			echo "$BAT_ICON $BAT_PERCENTAGE"
+		else
+			case "$BAT_ICON_NAME" in
+				"'battery-full-charging-symbolic'") BAT_ICON=" ";;
+				"'battery-full-symbolic'") BAT_ICON=" ";;
+				"'battery-full-charged-symbolic'") BAT_ICON=" ";;
+				"'battery-good-symbolic'") BAT_ICON=" ";;
+				"'battery-low-symbolic'") BAT_ICON=" ";;
+				"'battery-caution-symbolic'") BAT_ICON=" ";;
+				"'battery-empty-symbolic'") BAT_ICON=" ";;
+				*) BAT_ICON=" ";;
+			esac
+			echo "$BAT_ICON $BAT_PERCENTAGE"
+		fi
+	else
+		echo " X"
+	fi
+fi

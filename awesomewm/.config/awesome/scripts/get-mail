@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+MAIL_DIR=$HOME/Mail
+
+if [ -d "$MAIL_DIR" ]; then
+    unread="$(find $MAIL_DIR/.*mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+
+    echo "$unread"
+else
+    echo ""
+fi
+
+
+

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+SCRIPT_HELP="""Usage flags:
+
+--out-volume        for getting the volume level of the default output. Default option if none is provided.
+--out-mute          for getting the muted state of the default output.
+--mic-mute          for getting the muted state of the default input.
+--out-subscribe     subscribes to changes on outputs
+--mic-subscribe     subscribes to changes in inputs
+"""
+
+COMMAND="--out-volume"
+
+if [[ $# -ge 1 ]]; then
+    COMMAND="$1"
+fi
+
+if [[ "$COMMAND" == "--out-volume" ]]; then
+    VOLUME_LEVEL=$(wpctl get-volume @DEFAULT_SINK@ | awk '{ print $2 }' | sed 's/\s+//g')
+    VOLUME_LEVEL=$(bc <<< "$VOLUME_LEVEL*100")
+    echo $VOLUME_LEVEL
+elif [[ "$COMMAND" == "--out-mute" ]]; then
+    VOLUME_MUTED=$(wpctl get-volume @DEFAULT_SINK@ | grep -i muted)
+    [[ -z $VOLUME_MUTED ]] && VOLUME_MUTED="no" || VOLUME_MUTED="yes"
+    echo $VOLUME_MUTED
+elif [[ "$COMMAND" == "--mic-mute" ]]; then
+    MIC_MUTED=$(wpctl get-volume @DEFAULT_SOURCE@ | grep -i muted)
+    [[ -z $MIC_MUTED ]] && MIC_MUTED="no" || MIC_MUTED="yes"
+    echo $MIC_MUTED
+elif [[ "$COMMAND" == "--out-subscribe" ]]; then
+    pw-mon 2> /dev/null | grep --line-buffered "sink"
+elif [[ "$COMMAND" == "--mic-subscribe" ]]; then
+    pw-mon 2> /dev/null | grep --line-buffered "source"
+else
+    echo "$SCRIPT_HELP"
+fi
+
