@@ -6,7 +6,8 @@ editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 lockscreen = "betterlockscreen -l dim"
 
-tagnames = {"1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9."}
+-- tagnames = {"1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9."}
+tagnames = {"1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10."}
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -39,6 +40,7 @@ awful.util.tagnames = {
         {name = tagnames[7]},
         {name = tagnames[8]},
         {name = tagnames[9]},
+        {name = tagnames[10]},
     },
     {
         {name = tagnames[1], sel = true},
@@ -50,6 +52,7 @@ awful.util.tagnames = {
         {name = tagnames[7]},
         {name = tagnames[8]},
         {name = tagnames[9]},
+        {name = tagnames[10]},
     }
 }
 

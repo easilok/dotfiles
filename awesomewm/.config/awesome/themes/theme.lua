@@ -22,7 +22,6 @@ theme.font = "Iosevka Aile 8"
 theme.taglist_font = "Iosevka Aile 8"
 -- theme.iconFont = "Font Awesome 5 Free Regular 9"
 theme.iconFont = "FontAwesome Regular 9"
-theme.taglist_font = "FontAwesome Regular 9"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
