@@ -77,6 +77,7 @@ myawesomemenu = {
     { "manual",      terminal .. " -e man awesome" },
     { "edit config", editor_cmd .. " " .. awesome.conffile },
     { "restart",     awesome.restart },
+    { "shutdown",    "shutdown now" },
     { "quit",        function() awesome.quit() end },
 }
 
