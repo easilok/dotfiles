@@ -1,0 +1,15 @@
+CONFIG:=$HOME/.config/kanata
+
+config:
+    mkdir -p $(CONFIG)
+    ln -sfr laptop.kbd $(CONFIG)/laptop.kbd
+
+install:
+    sudo groupadd uinput
+    sudo usermod -aG input $USER
+    sudo usermod -aG uinput $USER
+    sudo echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' > /etc/udev/rules.d/99-input.rules
+    sudo udevadm control --reload && udevadm trigger --verbose --sysname-match=uniput
+    sudo modprobe uinput
+
+.PHONY: config install

@@ -1,0 +1,47 @@
+;; vim: ft=lisp:
+
+#|
+  This configuration will process all keys pressed inside of kanata, even if
+  they are not mapped in defsrc. This is so that certain actions can activate
+  at the right time for certain input sequences. By default, unmapped keys are
+  not processed through kanata due to a Windows issue related to AltGr. If you
+  use AltGr in your keyboard, you will likely want to follow the simple.kbd
+  file while unmapping lctl and ralt from defsrc.
+  |#
+(defcfg
+      process-unmapped-keys yes
+      ;; This logging setting is useful for testing but should be removed on production
+      log-layer-changes yes
+)
+
+;; Only one defsrc is allowed.
+;;
+;; defsrc defines the keys that will be intercepted by kanata. The order of the
+;; keys matches with deflayer declarations and all deflayer declarations must
+;; have the same number of keys as defsrc. Any keys not listed in defsrc will
+;; be passed straight to the operating system.
+(defsrc
+  grv
+  q    w    e    r    t    y    u    i    o    p
+  caps a    s    d    f    j    k    l    ;
+  ralt rctl
+)
+
+(deflayer default
+  _
+  _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _
+  @ra  @rc
+)
+
+(deflayer number
+  _
+  1    2    3    4    5    6    7    8    9    0
+  _    _    _    _    _    _    _    _    _
+  @ra  @rc
+)
+
+(defalias
+  ra (layer-while-held number)
+  rc (layer-while-held number)
+)
