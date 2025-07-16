@@ -24,24 +24,38 @@
   grv
   q    w    e    r    t    y    u    i    o    p
   caps a    s    d    f    j    k    l    ;
-  ralt rctl
+  ralt rmet menu rctl
 )
 
 (deflayer default
   _
   _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    _    _
-  @ra  @rc
+  @cap @a   @s   @d   @f   @j   @k   @l   @scln
+  _    @rm  @rm  @rc
 )
 
 (deflayer number
   _
   1    2    3    4    5    6    7    8    9    0
-  _    _    _    _    _    _    _    _    _
-  @ra  @rc
+  @cap _    _    _    _    _    _    _    _
+  _    @rm  @rm  @rc
 )
 
 (defalias
-  ra (layer-while-held number)
+  cap esc
+  rm (layer-while-held number)
   rc (layer-while-held number)
+  a (tap-hold $tap-time $hold-time a lmet)
+  s (tap-hold $tap-time $hold-time s lalt)
+  d (tap-hold $tap-time $hold-time d lsft)
+  f (tap-hold $tap-time $hold-time f lctl)
+  j (tap-hold $tap-time $hold-time j rctl)
+  k (tap-hold $tap-time $hold-time k rsft)
+  l (tap-hold $tap-time $hold-time l lalt)
+  scln (tap-hold $tap-time $hold-time scln lmet)
+)
+
+(defvar
+    tap-time 200
+    hold-time 250
 )
