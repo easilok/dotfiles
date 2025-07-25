@@ -22,29 +22,40 @@
 ;; be passed straight to the operating system.
 (defsrc
   grv
-  q    w    e    r    t    y    u    i    o    p
-  caps a    s    d    f    j    k    l    ;
+  q    w    e    r    t    y    u    i    o    p    [
+  caps a    s    d    f    j    k    l    ;    '
   ralt rmet menu rctl
 )
 
 (deflayer default
   _
-  _    _    _    _    _    _    _    _    _    _
-  @cap @a   @s   @d   @f   @j   @k   @l   @scln
-  _    @rm  @rm  @rc
+  _    _    _    _    _    _    _    _    _    _    _
+  @cap @a   @s   @d   @f   @j   @k   @l   @ced _
+  @ra  @rm  @rm  @rc
 )
 
 (deflayer number
   _
-  1    2    3    4    5    6    7    8    9    0
-  @cap _    _    _    _    _    _    _    _
-  _    @rm  @rm  @rc
+  1    2    3    4    5    6    7    8    9    0    [
+  @cap _    _    _    _    _    _    _    _    _
+  @ra  @rm  @rm  @rc
+)
+
+(deflayer alt-symbol
+  @ae
+;; q   w    e    r    t    y    u    i    o    p   +
+;; !   "    #    $    %    &    /    (    )    =   '
+  S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0 S-[
+;; cap a    s    d    f    j    k    l    ç    º
+  @cap @a2  @a3  _    _    @a7  @a8  @a9  @a0  _
+  @ra  @rm  @rm  @rc
 )
 
 (defalias
   cap esc
   rm (layer-while-held number)
   rc (layer-while-held number)
+  ra (layer-while-held alt-symbol)
   a (tap-hold $tap-time $hold-time a lmet)
   s (tap-hold $tap-time $hold-time s lalt)
   d (tap-hold $tap-time $hold-time d lsft)
@@ -52,7 +63,14 @@
   j (tap-hold $tap-time $hold-time j rctl)
   k (tap-hold $tap-time $hold-time k rsft)
   l (tap-hold $tap-time $hold-time l lalt)
-  scln (tap-hold $tap-time $hold-time scln lmet)
+  ced (tap-hold $tap-time $hold-time scln lmet)
+  ae (unshift ralt e)
+  a2 (unshift ralt 2)
+  a3 (unshift ralt 3)
+  a7 (unshift ralt 7)
+  a8 (unshift ralt 8)
+  a9 (unshift ralt 9)
+  a0 (unshift ralt 0)
 )
 
 (defvar
