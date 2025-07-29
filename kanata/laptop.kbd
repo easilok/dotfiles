@@ -12,6 +12,7 @@
       process-unmapped-keys yes
       ;; This logging setting is useful for testing but should be removed on production
       log-layer-changes yes
+      linux-dev-names-exclude  "foostan Corne"
 )
 
 ;; Only one defsrc is allowed.
@@ -22,32 +23,39 @@
 ;; be passed straight to the operating system.
 (defsrc
   grv
-  q    w    e    r    t    y    u    i    o    p    [
-  caps a    s    d    f    j    k    l    ;    '
+  q    w    e    r    t    y    u    i    o    p
+  caps a    s    d    f    g    h    j    k    l    ;
+  z    x    c    v    b    n    m    ,    .    /
   ralt rmet menu rctl
 )
 
 (deflayer default
   _
-  _    _    _    _    _    _    _    _    _    _    _
-  @cap @a   @s   @d   @f   @j   @k   @l   @ced _
+  _    _    _    _    _    _    _    _    _    _
+  @cap @a   @s   @d   @f   _    _    @j   @k   @l   @ced
+  _    _    _    _    _    _    _    _    _    _
   @ra  @rm  @rm  @rc
 )
 
 (deflayer number
   _
-  1    2    3    4    5    6    7    8    9    0    [
-  @cap _    _    _    _    _    _    _    _    _
+  1    2    3    4    5    6    7    8    9    0
+  @cap 4    5    6    0    _    _    _    _    _    _
+  7    8    9    _    _    _    _    _    _    _
   @ra  @rm  @rm  @rc
 )
 
 (deflayer alt-symbol
   @ae
-;; q   w    e    r    t    y    u    i    o    p   +
-;; !   "    #    $    %    &    /    (    )    =   '
-  S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0 S-[
-;; cap a    s    d    f    j    k    l    ç    º
-  @cap @a2  @a3  _    _    @a7  @a8  @a9  @a0  _
+;; q   w    e    r    t    y    u    i    o    p
+;; '   <    >    "    .    _    &    [    ]    %
+   -   <    S-<  S-2  .    S-/  S-6  @a8  @a9 S-5
+;;caps a    s    d    f    g    h    j    k    l    ;
+;;caps !    -    +    =    #    |    :    (    )    ?
+  @cap S-1  /    [    S-0  S-3  S-`  S-.  S-8  S-9  S--
+;; z   x    c    v    b    n    m    ,    .    /
+;; ^   /    *    \    @    ~    $    {    }    ;
+  S-\  S-7  S-[  `    @a2  \    S-4  @a7  @a0  S-,
   @ra  @rm  @rm  @rc
 )
 
