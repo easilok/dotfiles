@@ -5,13 +5,14 @@
 # install lolcat for a cull feedback
 
 declare -A pomo_options
-pomo_options["work"]="25"
+pomo_options["work"]="45"
 pomo_options["break"]="10"
 
 POMO_TAG=$1
 
 if [[ $# -lt 1 ]]; then
     echo "Must provide at least one argument either with the pomodoro tag or the pomodoro time"
+    exit 1
 fi
 
 if [ -n "$1" -a -n "${pomo_options["$1"]}" ]; then

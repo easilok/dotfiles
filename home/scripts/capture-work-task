@@ -13,7 +13,7 @@ TASK=$(zenity --forms --title="New work task" --text="Enter task information" \
 
 TASK_DESCRIPTION=$(echo $TASK | cut -d ';' -f 1)
 TASK_PROJECT=$(echo $TASK | cut -d ';' -f 2)
-TASK_TAGS=$(echo $TASK | cut -d ';' -f 3 | sed -e 's/^ //' -e 's/ $//' -e 's/+//g' -e 's/-//g' -e 's/ / +/g' )
+TASK_TAGS=$(echo $TASK | cut -d ';' -f 3 | sed -e 's/^ //' -e 's/ $//' -e 's/+//g' -e 's/ / +/g' -e 's/-/_/g' )
 TASK_TICKET=$(echo $TASK | cut -d ';' -f 4)
 TASK_DUE=$(echo $TASK | cut -d ';' -f 5)
 
