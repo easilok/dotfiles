@@ -5,7 +5,21 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- theme
-config.color_scheme = 'Tokyo Night'
+local light_color_scheme = "Tokyo Night Day"
+local dark_color_scheme = "Tokyo Night"
+config.color_scheme = dark_color_scheme
+
+-- light/dark theme toggler event 
+wezterm.on("toggle-dark-mode", function(window,pane)
+  local overrides = window:get_config_overrides() or {}
+  if (overrides.color_scheme == light_color_scheme)
+  then
+    overrides.color_scheme = dark_color_scheme
+  else
+    overrides.color_scheme = light_color_scheme
+  end
+  window:set_config_overrides(overrides)
+end)
 
 -- font
 -- config.font = wezterm.font 'Hack Nerd Font'
@@ -32,9 +46,12 @@ config.window_padding = {
     bottom = 0,
 }
 
+
 config.keys = {
     -- CTRL-SHIFT-k activates the debug overlay
     { key = 'K', mods = 'CTRL', action = wezterm.action.ShowDebugOverlay },
+    -- CTRL-SHIFT-j toggles dark/light theme
+    { key = 'J', mods = 'CTRL', action = wezterm.action{EmitEvent="toggle-dark-mode"} },
 }
 
 return config
