@@ -9,6 +9,9 @@ source ~/.config/neomutt/alias
 macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/personal<enter><change-folder>!<enter>'
 macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/professional<enter><change-folder>!<enter>'
 macro index,pager <f4> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/xyz<enter><change-folder>!<enter>'
+macro index,pager \e2 '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/personal<enter><change-folder>!<enter>'
+macro index,pager \e3 '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/professional<enter><change-folder>!<enter>'
+macro index,pager \e4 '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/xyz<enter><change-folder>!<enter>'
 # macro index,pager <f6> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/luispereira<enter><change-folder>!<enter>'
 # macro index,pager <f5> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/isep<enter><change-folder>!<enter>'
 
