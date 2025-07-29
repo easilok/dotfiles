@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+for thermal_zone in /sys/class/thermal/thermal_zone*; do
+    THERMAL_TYPE=$(cat $thermal_zone/type)
+    if [ "$THERMAL_TYPE" = "TCPU" ]; then
+        thermal_temp=$(cat $thermal_zone/temp)
+        echo $(($thermal_temp / 1000))
+        exit 0
+    fi
+done
