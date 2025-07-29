@@ -115,7 +115,7 @@ Plug 'epwalsh/obsidian.nvim'
 " Live markdown preview
 Plug 'instant-markdown/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'npm install'}
 " Plug 'easilok/vim-instant-markdown', {'for': ['markdown', 'wiki'], 'do': 'npm install', 'branch' : 'wiki-filetype'}
-Plug 'MeanderingProgrammer/markdown.nvim'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
 
 Plug 'godlygeek/tabular'
 

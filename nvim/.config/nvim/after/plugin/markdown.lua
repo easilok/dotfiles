@@ -1,12 +1,23 @@
-require('render-markdown').setup( {
+require('render-markdown').setup({
+    code = {
+        sign = false,
+        width = "block",
+        right_pad = 1,
+        inline_right = '`',
+        inline_left = '`',
+    },
+    heading = {
+        sign = false,
+        icons = {},
+    },
     pipe_table = {
         enabled = false
     },
     checkbox = {
-        -- enabled = false,
-        render_modes = false,
-        bullet = true,
-        right_pad = 0,
+        enabled = false,
+        -- render_modes = false,
+        -- bullet = true,
+        -- right_pad = 0,
     }
 })
 
