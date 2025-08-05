@@ -28,7 +28,7 @@ data.location=/home/luis/Nextcloud/task.warrior/work
 #include light-16.theme
 #include light-256.theme
 #include dark-16.theme
-include dark-256.theme
+#include dark-256.theme
 #include dark-red-256.theme
 #include dark-green-256.theme
 #include dark-blue-256.theme
@@ -97,11 +97,10 @@ context.personal.read=+personal or proj:
 ########################
 # Urgency coefficients #
 ########################
-urgency.user.tag.respond.coefficient=10
-urgency.user.tag.review.coefficient=-5
-urgency.user.tag.inprogress.coefficient=2.5
-urgency.user.tag.today.coefficient=2
+urgency.user.tag.respond.coefficient=20
+#urgency.due.coefficient=10
 urgency.user.tag.yesterday.coefficient=3
+urgency.user.tag.today.coefficient=2
 
 
 ###########################
