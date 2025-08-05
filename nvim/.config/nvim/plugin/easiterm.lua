@@ -40,7 +40,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 
-vim.keymap.set("n", "<space>to", M.open_term_split, { desc = "[T]erminal [o]pen on split" })
+vim.keymap.set("n", "<space>tt", M.open_term_split, { desc = "[T]erminal toggle on split" })
+
+vim.keymap.set("n", "<space>to", function() M.open_term_split(true) end, { desc = "[T]erminal [o]pen detached on split" })
 
 vim.keymap.set("n", "<space>ti", function()
     state.current_command = vim.fn.input("Command: ")
