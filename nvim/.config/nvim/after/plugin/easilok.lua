@@ -1,4 +1,5 @@
 require "easilok"
+require "easilok.quit-confirm"
 
 local headster = require "easilok.headster"
 local headster_root = vim.fn.expand("~/.headster")
@@ -10,3 +11,4 @@ end
 headster.setup({ root_path = headster_root })
 
 vim.keymap.set('n', '<space>hc', headster.capture, { desc = "[H]eadester [C]apture" })
+
