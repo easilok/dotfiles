@@ -12,7 +12,7 @@
       process-unmapped-keys yes
       ;; This logging setting is useful for testing but should be removed on production
       log-layer-changes yes
-      linux-dev-names-exclude  "foostan Corne"
+      linux-dev-names-exclude  ( "foostan Corne" "foostan Corne v4" )
 )
 
 ;; Only one defsrc is allowed.
