@@ -159,6 +159,10 @@ Plug 'pmizio/typescript-tools.nvim'
 Plug 'Olical/conjure'
 Plug 'PaterJason/cmp-conjure'
 
+" Fennel
+Plug 'Olical/nfnl'
+Plug 'gpanders/nvim-parinfer'
+
 Plug '~/.config/nvim/lua/easilok'
 
 " AI trial
