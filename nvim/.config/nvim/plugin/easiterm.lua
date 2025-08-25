@@ -30,13 +30,25 @@ vim.api.nvim_create_user_command("Easiterm", M.open_term_split, {})
 
 vim.api.nvim_create_user_command("EasitermDetach", function() M.open_term_split(true) end, {})
 
+local custom_term_group = vim.api.nvim_create_augroup("custom-term-open", { clear = true })
+
 vim.api.nvim_create_autocmd("TermOpen", {
-    group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+    group = custom_term_group,
     callback = function()
+        -- vim.cmd(":startinsert")
         vim.opt.number = false
         vim.opt.relativenumber = false
     end,
 })
+
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     group = custom_term_group,
+--     callback = function()
+--         if vim.opt.buftype:get() == "terminal" then
+--             vim.cmd(":startinsert")
+--         end
+--     end,
+-- })
 
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 
