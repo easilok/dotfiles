@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 export EDITOR="vim"
-export TERMINAL="wezterm"
+export TERMINAL="kitty"
 # export TERMINAL="kitty"
 # export BROWSER="qutebrowser"
 # export BROWSER="brave-browser"
