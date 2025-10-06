@@ -30,6 +30,13 @@
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -42,7 +49,9 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Notes/org/")
+(if (file-directory-p "~/Nextcloud/org")
+  (setq org-directory "~/Nextcloud/org")
+  (setq org-directory "~/Documents/org"))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -77,8 +86,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(add-to-list 'load-path "~/git/LASS/")
-(require 'lass)
+(when (file-directory-p "~/git/LASS/")
+    (add-to-list 'load-path "~/git/LASS/")
+    (require 'lass))
 
 (map! :leader
       :desc "Switch workspace buffer"
@@ -102,3 +112,17 @@
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-down)
   (evil-ex-define-cmd "q[uit]" 'evil-window-delete))
+
+
+(setq undo-limit 80000                         ; Raise undo-limit to 80KB
+      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
+      truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
+
+(display-time-mode 1)                             ; Enable time in the mode-line
+(unless (equal "Battery status not available"
+               (battery))
+  (display-battery-mode 1))                       ; On laptops it's nice to know how much power you have
+
+;; don't keep message buffers around
+(setq message-kill-buffer-on-exit t)
+(setq visible-bell t)
