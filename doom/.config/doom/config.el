@@ -34,6 +34,10 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
+
+(set-frame-parameter nil 'alpha-background 90)
+
+
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
