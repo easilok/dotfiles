@@ -122,7 +122,10 @@
       auto-save-default t                         ; Nobody likes to loose work, I certainly don't
       truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
 
-(display-time-mode 1)                             ; Enable time in the mode-line
+(setq display-time-24hr-format t)
+(setq display-time-format "%H:%M - %d %B (%W)")
+(display-time-mode 1)
+
 (unless (equal "Battery status not available"
                (battery))
   (display-battery-mode 1))                       ; On laptops it's nice to know how much power you have
