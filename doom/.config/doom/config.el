@@ -94,6 +94,11 @@
     (add-to-list 'load-path "~/git/LASS/")
     (require 'lass))
 
+;; https://github.com/glenneth1/crafterbin.el.git
+(when (file-directory-p "~/git/crafterbin.el")
+    (add-to-list 'load-path "~/git/crafterbin.el")
+    (require 'crafterbin))
+
 (map! :leader
       :desc "Switch workspace buffer"
       "b l" #'+vertico/switch-workspace-buffer
