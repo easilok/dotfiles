@@ -105,6 +105,11 @@
       :desc "Switch to last buffer"
       "b l" #'evil-switch-to-windows-last-buffer)
 
+(map!
+ ;; :mode eglot--managed-mode
+ :n "- d" #'+lookup/definition)
+
+
 
 (after! evil
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -119,7 +124,7 @@
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-down)
+  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
   (evil-ex-define-cmd "q[uit]" 'evil-window-delete))
 
 

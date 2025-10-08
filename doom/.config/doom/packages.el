@@ -54,3 +54,4 @@
 ;; (unpin! t)
 
 (package! 0x0)
+(package! jabber)
