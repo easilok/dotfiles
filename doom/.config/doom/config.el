@@ -34,7 +34,6 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
-
 (set-frame-parameter nil 'alpha-background 90)
 
 
@@ -112,21 +111,27 @@
 
 
 (after! evil
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal)
-  ;; (setq evil-respect-visual-line-mode t)
+  (modify-syntax-entry ?_ "w")
+  (setq evil-symbol-word-search nil) ;; * and # search for words not symbols
+  (setq evil-respect-visual-line-mode t)
   (setq select-enable-clipboard nil) ;; This is for disabling global clipboard on copy/cut
-  ;; (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  ;; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+  (setq evil-want-fine-undo t)
+  ;; (setq evil-undo-system 'undo-tree)
+  ;; State change keybindings
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
   ;; quick navigation keys
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  ;; (define-key evil-insert-state-map (kbd "C-r") 'evil-past-from-register)
   (evil-ex-define-cmd "q[uit]" 'evil-window-delete))
-
 
 (setq undo-limit 80000                         ; Raise undo-limit to 80KB
       auto-save-default t                         ; Nobody likes to loose work, I certainly don't
@@ -143,3 +148,13 @@
 ;; don't keep message buffers around
 (setq message-kill-buffer-on-exit t)
 (setq visible-bell t)
+
+;; (add-hook 'after-init-hook #'global-mise-mode)
+;; CLI tools installed by Mise
+;; See: https://www.emacswiki.org/emacs/ExecPath
+(when (file-directory-p "~/.local/share/mise/shims")
+  (setenv "PATH" (concat (getenv "PATH") ":~/.local/share/mise/shims"))
+  (setq exec-path (append exec-path '("~/.local/share/mise/shims"))))
+
+;; Tab will always ident the line the cursor is at
+(setq tab-always-indent nil) ;; Also set in custom variables

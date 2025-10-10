@@ -55,3 +55,5 @@
 
 (package! 0x0)
 (package! jabber)
+(package! mise)
+(package! evil-owl)
