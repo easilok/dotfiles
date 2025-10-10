@@ -61,7 +61,7 @@
   (add-to-list 'mu4e-view-actions
               '("viewInBrowser" . mu4e-action-view-in-browser) t)
   (lp/leader-keys
-    "om"  '(mu4e :which-key "mail"))
-  )
+    "om"  '(mu4e :which-key "mail")))
+  
 
 (provide 'lp-mail)

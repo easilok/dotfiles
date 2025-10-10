@@ -84,8 +84,8 @@
            (doom-modeline-modal-icon nil) ;; vim modes
            (doom-modeline-buffer-file-name-style 'truncate-except-project)
            (custom-set-faces '(mode-line ((t (:height 0.85))))
-                             '(mode-line-inactive ((t (:height 0.85)))))
-           ))
+                             '(mode-line-inactive ((t (:height 0.85)))))))
+           
 
 ;; (display-time-mode 1) ;; Enable time in the mode-line
 (unless (equal "Battery status not available"
@@ -225,8 +225,8 @@
     "pp"  '(projectile-switch-project :which-key "open project")
     "w"  '(:ignore t :which-key "workspaces")
     "ws" '(persp-switch :which-key "switch workspace")
-    "wq" '(persp-kill :which-key "kill workspace")
-    ))
+    "wq" '(persp-kill :which-key "kill workspace")))
+    
 
 (require 'lp-evil)
 
@@ -281,9 +281,9 @@
   :custom
   (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
   :config
-  (setq ivy-initial-inputs-alist nil) ;; Don't start searches with ^
+  (setq ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
   ;; (counsel-mode 1)
-  )
+  
 
 (use-package ivy-prescient
   :straight t
@@ -313,8 +313,8 @@
   :init
   (setq completion-styles '(orderless)
         completion-category-defaults nil
-        completion-category-overrides '((file (styles . (partial-completion)))))
-  )
+        completion-category-overrides '((file (styles . (partial-completion))))))
+  
 
 (use-package helpful
   :straight t
@@ -410,14 +410,14 @@
   ("C-c p" . projectile-command-map)
   :general
   (lp/leader-keys
-    "pm"  '(:keymap projectile-command-map :which-key "projectile")
-    )
+    "pm"  '(:keymap projectile-command-map :which-key "projectile")))
+    
   ;;:init
   ;; NOTE: Set this to the folder where you keep your Git repos!
   ;;(when (file-directory-p "~/Projects/Code")
   ;;  (setq projectile-project-search-path '("~/Projects/Code")))
   ;;(setq projectile-switch-project-action #'projectile-dired))
-  )
+  
 
 (use-package counsel-projectile
   :straight t
@@ -489,13 +489,13 @@
 
 (use-package irony
   :straight t
-  :commands (irony-mode)
-  )
+  :commands (irony-mode))
+  
 
 (use-package company-irony
   :straight t
-  :after irony
-  )
+  :after irony)
+  
 
 ;; Use irony's completion functions.
 (add-hook 'irony-mode-hook
@@ -526,14 +526,14 @@
   ;; (python-mode . lsp-deferred)
   (python-mode . pyvenv-mode)
   ;; (python-mode . flycheck-mode)
-  (python-mode . company-mode)
+  (python-mode . company-mode))
   ;; (python-mode . blacken-mode)
   ;; (python-mode . yas-minor-mode)
   ;; :custom
   ;; (dap-python-debugger 'debugpy)
   ;; :config
   ;; (require 'dap-python)
-  )
+  
 
 ;; (use-package lsp-pyright
 ;;   :straight t
@@ -572,8 +572,8 @@
   (clojurec-mode . lsp)
   :config
   ;; (setq lsp-lens-enable t) ; enable function reference usage counter
-  (setq lsp-clojure-custom-server-command '("bash" "-c" "~/git/clojure-lsp/target/clojure-lsp"))
-  )
+  (setq lsp-clojure-custom-server-command '("bash" "-c" "~/git/clojure-lsp/target/clojure-lsp")))
+  
 
 (use-package cider
   :straight t
@@ -596,12 +596,12 @@
                                   company-lua
                                   company-keywords
                                   company-gtags
-                                  company-yasnippet
-                                  )
+                                  company-yasnippet)
+                                  
                                  company-capf
                                  company-dabbrev-code
-                                 company-files
-                                 )))
+                                 company-files)))
+                                 
 
 (use-package lua-mode
   :straight t
@@ -612,8 +612,8 @@
   :config
   (setq lua-indent-level 4)
   (setq lua-indent-string-contents t)
-  (setq lua-prefix-key nil)
-  )
+  (setq lua-prefix-key nil))
+  
 
 (use-package scheme-mode
   ;; :straight t
@@ -759,8 +759,8 @@
  erc-modules
  '(autoaway autojoin button completion fill irccontrols keep-place
             list match menu move-to-prompt netsplit networks noncommands
-            readonly ring stamp track image hl-nicks notify notifications)
- ) 
+            readonly ring stamp track image hl-nicks notify notifications))
+  
 
 (use-package erc-hl-nicks
   :straight t
@@ -791,8 +791,8 @@
 
 (use-package transmission
   :straight t
-  :commands transmission
-  )
+  :commands transmission)
+  
 
 ;; (use-package elpher
 ;;   :straight t
@@ -806,14 +806,14 @@
   :config
   (emms-all)
   (emms-default-players)
-  (setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music")
-  )
+  (setq emms-source-file-default-directory "/mnt/nfs/mnt/coisas/music"))
+  
 
 (defun lp/load-clockify-package()
   (interactive)
   (when (require 'clockify "~/git/clockify.el/clockify.el"  'noerror)
     (message "clockify loaded")
     (setq clockify-auth-token "X5/I9nEVphTPFvOk")
-    (clockify--user-info)
-    )
-  )
+    (clockify--user-info)))
+    
+  
