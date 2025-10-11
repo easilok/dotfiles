@@ -102,11 +102,12 @@
       :desc "Switch workspace buffer"
       "b l" #'+vertico/switch-workspace-buffer
       :desc "Switch to last buffer"
-      "b l" #'evil-switch-to-windows-last-buffer)
+      "b b" #'evil-switch-to-windows-last-buffer)
 
 (map!
  ;; :mode eglot--managed-mode
- :n "- d" #'+lookup/definition)
+ :n "- d" #'+lookup/definition
+ :n "- f" #'+format/region-or-buffer)
 
 
 
@@ -114,7 +115,7 @@
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal)
   (modify-syntax-entry ?_ "w")
-  (setq evil-symbol-word-search nil) ;; * and # search for words not symbols
+  ;; (setq evil-symbol-word-search nil) ;; * and # search for words not symbols
   (setq evil-respect-visual-line-mode t)
   (setq select-enable-clipboard nil) ;; This is for disabling global clipboard on copy/cut
   (setq evil-want-fine-undo t)
