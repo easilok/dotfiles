@@ -134,6 +134,11 @@
   ;; (define-key evil-insert-state-map (kbd "C-r") 'evil-past-from-register)
   (evil-ex-define-cmd "q[uit]" 'evil-window-delete))
 
+(add-hook 'sly-mrepl-mode-hook
+          (lambda ()
+            (keymap-set sly-mrepl-mode-map "C-c r"
+                        'comint-history-isearch-backward)))
+
 (setq undo-limit 80000                         ; Raise undo-limit to 80KB
       auto-save-default t                         ; Nobody likes to loose work, I certainly don't
       truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
