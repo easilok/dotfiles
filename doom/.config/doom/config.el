@@ -186,22 +186,21 @@
 (setq message-kill-buffer-on-exit t)
 (setq visible-bell t)
 
-;; (add-hook 'after-init-hook #'global-mise-mode)
-;; CLI tools installed by Mise
-;; See: https://www.emacswiki.org/emacs/ExecPath
-;; (when (file-directory-p "~/.local/share/mise/shims")
-;;   (setenv "PATH" (concat (getenv "PATH") ":~/.local/share/mise/shims"))
-;;   (setq exec-path (append exec-path '("~/.local/share/mise/shims"))))
-
 ;; Tab will always ident the line the cursor is at
 (setq-default indent-tabs-mode nil) ; for converting tabs to spaces on identation
 
-(set-lsp-priority! 'python-pyright -1)
-(set-lsp-priority! 'pyright-langserver 10)
-(set-eglot-client! 'python-ts-mode '("pyright-langserver"))
-(set-eglot-client! 'python-mode '("pyright-langserver"))
-
 (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
+
+(after! eglot
+  :config
+  (set-eglot-client! '(python-mode python-ts-mode)
+                     '("basedpyright" "--stdio")
+                     '("basedpyright-langserver" "--stdio")
+                     '("pyright-langserver" "--stdio")
+                     '("pyright" "--stdio")
+                     '("ruff" "server")
+                     "pylsp" "pyls"
+                     "ruff-lsp")
 
 (add-hook 'python-mode-hook #'mise-mode)
 (add-hook 'python-ts-mode-hook #'mise-mode)
