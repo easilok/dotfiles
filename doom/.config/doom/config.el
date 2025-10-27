@@ -202,7 +202,7 @@
                      '("pyright" "--stdio")
                      '("ruff" "server")
                      "pylsp" "pyls"
-                     "ruff-lsp")
+                     "ruff-lsp"))
 
 (add-hook 'python-mode-hook #'mise-mode)
 (add-hook 'python-ts-mode-hook #'mise-mode)
