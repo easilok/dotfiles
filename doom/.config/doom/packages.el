@@ -57,3 +57,4 @@
 (package! jabber)
 (package! mise)
 (package! evil-owl)
+(package! org-bullets)

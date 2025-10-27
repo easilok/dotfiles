@@ -37,6 +37,11 @@
 (set-frame-parameter nil 'alpha-background 90)
 
 
+(setq doom-font (font-spec :family "Iosevka" :size 15 :weight 'normal :width 'expanded)
+      doom-variable-pitch-font (font-spec :family "IosevkaAile" :size 14 :weight 'normal)
+      doom-symbol-font (font-spec :family "Iosevka")
+      doom-big-font (font-spec :family "Iosevka" :size 22))
+
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
@@ -52,9 +57,6 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(if (file-directory-p "~/Nextcloud/org")
-  (setq org-directory "~/Nextcloud/org")
-  (setq org-directory "~/Documents/org"))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -98,11 +100,28 @@
     (add-to-list 'load-path "~/git/crafterbin.el")
     (require 'crafterbin))
 
+(when (file-directory-p "~/.config/doom/lp")
+    (add-to-list 'load-path "~/.config/doom/lp")
+    (require 'lp-org-config))
+
+(when (file-directory-p "~/.config/.emacs.priv/lp")
+    (add-to-list 'load-path "~/.config/.emacs.priv/lp")
+    (require 'lp-private-config))
+
 (map! :leader
       :desc "Switch workspace buffer"
       "b l" #'+vertico/switch-workspace-buffer
+      "b a" #'consult-buffer
       :desc "Switch to last buffer"
       "b b" #'evil-switch-to-windows-last-buffer)
+
+(map! :leader
+      :desc "Switch jabber conversation"
+      "j l" #'jabber-chat-buffer-switch
+      :desc "Start jabber message"
+      "j m" #'jabber-chat-with
+      :desc "Connect all jabber connections"
+      "j c" #'jabber-connect-all)
 
 (map!
  ;; :mode eglot--managed-mode
@@ -117,17 +136,29 @@
   (modify-syntax-entry ?_ "w")
   ;; (setq evil-symbol-word-search nil) ;; * and # search for words not symbols
   (setq evil-respect-visual-line-mode t)
-  (setq select-enable-clipboard nil) ;; This is for disabling global clipboard on copy/cut
+  ;; Disables global clipboard on copy/cut
+  (setq select-enable-clipboard nil)
+  ;; Adds C-S-c/v to copy/past from clipboard
+  (map! "C-S-c" #'clipboard-kill-ring-save)
+  (map! "C-S-v" #'clipboard-yank)
+
   (setq evil-want-fine-undo t)
   ;; (setq evil-undo-system 'undo-tree)
   ;; State change keybindings
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
   ;; quick navigation keys
-  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+  ;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+  ;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+  ;; (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+  ;; (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+  ;; Disable keys to avoid muscle memory errors
+  (define-key evil-normal-state-map (kbd "C-l") nil)
+  (define-key evil-normal-state-map (kbd "C-k") nil)
+  (define-key evil-normal-state-map (kbd "C-j") nil)
+  (map! "C-l" nil)
+  (map! "C-k" nil)
+  (map! "C-j" nil)
   ;; Use visual line motions even outside of visual-line-mode buffers
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
@@ -144,7 +175,7 @@
       truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
 
 (setq display-time-24hr-format t)
-(setq display-time-format "%H:%M - %d %B (%W)")
+(setq display-time-format "%H:%M - %d %b (W%W)")
 (display-time-mode 1)
 
 (unless (equal "Battery status not available"
@@ -158,9 +189,25 @@
 ;; (add-hook 'after-init-hook #'global-mise-mode)
 ;; CLI tools installed by Mise
 ;; See: https://www.emacswiki.org/emacs/ExecPath
-(when (file-directory-p "~/.local/share/mise/shims")
-  (setenv "PATH" (concat (getenv "PATH") ":~/.local/share/mise/shims"))
-  (setq exec-path (append exec-path '("~/.local/share/mise/shims"))))
+;; (when (file-directory-p "~/.local/share/mise/shims")
+;;   (setenv "PATH" (concat (getenv "PATH") ":~/.local/share/mise/shims"))
+;;   (setq exec-path (append exec-path '("~/.local/share/mise/shims"))))
 
 ;; Tab will always ident the line the cursor is at
-(setq tab-always-indent nil) ;; Also set in custom variables
+(setq-default indent-tabs-mode nil) ; for converting tabs to spaces on identation
+
+(set-lsp-priority! 'python-pyright -1)
+(set-lsp-priority! 'pyright-langserver 10)
+(set-eglot-client! 'python-ts-mode '("pyright-langserver"))
+(set-eglot-client! 'python-mode '("pyright-langserver"))
+
+(add-hook 'jabber-chat-mode-hook #'visual-line-mode)
+
+(add-hook 'python-mode-hook #'mise-mode)
+(add-hook 'python-ts-mode-hook #'mise-mode)
+(add-hook 'typescript-mode-hook #'mise-mode)
+(add-hook 'typescript-ts-mode-hook #'mise-mode)
+
+(after! doom-modeline
+  (setq doom-modeline-modal-icon nil) ;; vim modes
+  (setq doom-modeline-buffer-file-name-style 'truncate-except-project))
