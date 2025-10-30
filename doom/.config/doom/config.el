@@ -108,6 +108,7 @@
     (add-to-list 'load-path "~/.config/.emacs.priv/lp")
     (require 'lp-private-config))
 
+;; Buffer Keys
 (map! :leader
       :desc "Switch workspace buffer"
       "b l" #'+vertico/switch-workspace-buffer
@@ -115,6 +116,7 @@
       :desc "Switch to last buffer"
       "b b" #'evil-switch-to-windows-last-buffer)
 
+;; Jabber defined keys
 (map! :leader
       :desc "Switch jabber conversation"
       "j l" #'jabber-chat-buffer-switch
@@ -123,11 +125,16 @@
       :desc "Connect all jabber connections"
       "j c" #'jabber-connect-all)
 
+;; Lsp quick keybindings
 (map!
  ;; :mode eglot--managed-mode
  :n "- d" #'+lookup/definition
  :n "- f" #'+format/region-or-buffer)
 
+;; Clean some default bindings
+(map!
+ :leader
+ "g s" nil) ;; default set to stage hunk at point)
 
 
 (after! evil
@@ -212,3 +219,13 @@
 (after! doom-modeline
   (setq doom-modeline-modal-icon nil) ;; vim modes
   (setq doom-modeline-buffer-file-name-style 'truncate-except-project))
+
+
+(defun lp/search-project-symbol-at-point ()
+  (interactive)
+  (project-find-regexp (thing-at-point 'symbol t)))
+
+(defun lp/consult-project-symbol-at-point ()
+  (interactive)
+  (consult-ripgrep (project-root (project-current))
+                   (thing-at-point 'symbol t)))
