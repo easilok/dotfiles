@@ -322,7 +322,6 @@ bar {
 }
 
 # Gaps
-# smart_gaps on
-# smart_borders on
-# gaps inner 2
-
+smart_gaps on
+smart_borders on
+gaps inner 3
