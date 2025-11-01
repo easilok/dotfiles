@@ -27,20 +27,35 @@
       org-journal-file-format (lp-org-get-current-journal-filepath)
       org-agenda-skip-scheduled-if-done 1)
 
+(defun lp-org-get-project-capture ()
+  "Create a new project org file, capturing the initial description."
+  (let* ((project-name (read-string "Project name: "))
+         (filename (format "projects/%s-%s.org"
+                           (format-time-string "%Y%m%d")
+                           (replace-regexp-in-string " " "-" project-name)))
+         (filepath (expand-file-name (downcase filename) org-directory)))
+    (with-temp-file filepath
+      (insert (format "#+title: %s\n#+date: %s\n#+keywords:\n\n"
+                      project-name
+                      (format-time-string "%Y-%m-%d")))
+      (insert "* Introduction\n\n"))
+    (find-file filepath)
+    (goto-char (point-max))))
+
 ;; Capture templates for: TODO tasks, Notes, meetings, etc
 (setq org-capture-templates
       `(("t" "todo" entry (file lp/org-capture-file)
-               "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t :prepend t)
-              ("i" "idea" entry (file lp/org-capture-file)
-               "* %? :IDEA:\n%t\n" :clock-in t :clock-resume t)
-              ("n" "note" entry (file lp/org-capture-file)
-               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("r" "respond" entry (file lp/org-capture-file)
-               "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-              ("g" "meeting" entry (file lp/org-capture-meeting)
-               "* TODO Meeting with %? :MEETING:\n%U" :clock-in t :clock-resume t :prepend t)
-              ("p" "phone call" entry (file lp/org-capture-meeting)
-               "* TODO Call with %? :PHONE:\n%U" :clock-in t :clock-resume t :prepend t)))
+         "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t :prepend t)
+        ("i" "idea" entry (file lp/org-capture-file)
+         "* %? :IDEA:\n%t\n" :clock-in t :clock-resume t)
+        ("n" "note" entry (file lp/org-capture-file)
+         "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+        ("r" "respond" entry (file lp/org-capture-file)
+         "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+        ("g" "meeting" entry (file lp/org-capture-meeting)
+         "* TODO Meeting with %? :MEETING:\n%U" :clock-in t :clock-resume t :prepend t)
+        ("p" "New Project" plain (file lp-org-get-project-capture)
+         "" :immediate-finish nil)))
 
 
 (after! org
