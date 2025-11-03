@@ -16,7 +16,7 @@
 
 # Files
 #data.location=/home/luis/Nextcloud/task.warrior/personal
-data.location=/home/luis/Nextcloud/task.warrior/work
+data.location=$HOME/Nextcloud/task.warrior/work
 
 # To use the default location of the XDG directories,
 # move this configuration file from ~/.taskrc to ~/.config/task/taskrc and uncomment below
