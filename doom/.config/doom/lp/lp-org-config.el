@@ -6,25 +6,16 @@
   (setq org-directory "~/Nextcloud/org")
   (setq org-directory "~/Documents/org"))
 
-(defun lp-org-get-current-journal-filepath ()
-  (let ((year (format-time-string "%Y"))
-        (month (format-time-string "%m"))
-        (dayfile (format-time-string "%Y-%m-%d.org")))
-     (file-name-concat year month dayfile)))
-
 (setq lp/org-capture-file (concat org-directory "/Inbox.org"))
 (setq lp/org-capture-mail (concat org-directory "/Mail.org"))
 (setq lp/org-capture-meeting (concat org-directory "/Meeting.org"))
 (setq org-agenda-files (list org-directory))
 
+;; Set general org-mode configurations
 (setq org-log-done 'time ;; logs time of task state change
       org-M-RET-may-split-line '((default . nil)) ;; Don't split headers when M-Ret for new heading
       org-insert-heading-respect-content t ;; Add new heading below content of previous heading on M-Ret
       org-log-into-drawer t ;; Insert logging information into logbook drawer
-      org-journal-dir (concat org-directory "/journal/")
-      org-journal-date-format "%B %d, %Y (%A) "
-      ;; org-journal-file-format "%Y-%m-%d.org"
-      org-journal-file-format (lp-org-get-current-journal-filepath)
       org-agenda-skip-scheduled-if-done 1)
 
 (defun lp-org-get-project-capture ()
@@ -41,6 +32,21 @@
       (insert "* Introduction\n\n"))
     (find-file filepath)
     (goto-char (point-max))))
+
+(defun lp-org-journal-file-header (time)
+  "Creates the weekly journal file header"
+  (format "#+title: %s Weekly Journal - %s, W%s\n#+created: %s\n#+keywords: journal\n#+STARTUP: show2levels\n\n"
+          (format-time-string "%Y")
+          (format-time-string "%B")
+          (format-time-string "%V")
+          (format-time-string "%Y-%m-%d")))
+
+;; Set journal variables
+(setq org-journal-enable-agenda-integration t
+      org-journal-file-type 'weekly
+      org-journal-date-format "%B %d, %Y (%A)"
+      org-journal-file-header #'lp-org-journal-file-header
+      org-journal-file-format "%Y-%m-%d.org")
 
 ;; Capture templates for: TODO tasks, Notes, meetings, etc
 (setq org-capture-templates
