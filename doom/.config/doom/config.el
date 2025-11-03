@@ -35,7 +35,9 @@
         doom-themes-enable-italic t))
 
 (set-frame-parameter nil 'alpha-background 90)
-
+(add-to-list 'default-frame-alist '(alpha-background . 90))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (setq doom-font (font-spec :family "Iosevka" :size 15 :weight 'normal :width 'expanded)
       doom-variable-pitch-font (font-spec :family "IosevkaAile" :size 14 :weight 'normal)
@@ -136,6 +138,11 @@
  :leader
  "g s" nil) ;; default set to stage hunk at point)
 
+;; Dired folder deph navigation
+(map! :map dirvish-mode-map
+      :n  "DEL"   #'dired-up-directory
+      :n  "h"   nil
+      :n  "l"   nil)
 
 (after! evil
   (evil-set-initial-state 'messages-buffer-mode 'normal)
@@ -199,6 +206,9 @@
 (setq-default indent-tabs-mode nil) ; for converting tabs to spaces on identation
 
 (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
+(remove-hook 'jabber-alert-message-hooks #'jabber-message-echo)
+(remove-hook 'jabber-alert-muc-hooks #'jabber-muc-echo)
+(remove-hook 'jabber-alert-presence-hooks #'jabber-presence-echo)
 
 (after! eglot
   :config
