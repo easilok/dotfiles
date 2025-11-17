@@ -49,6 +49,7 @@
       org-journal-file-format "%Y-%m-%d.org")
 
 ;; Capture templates for: TODO tasks, Notes, meetings, etc
+;; Doom uses this hook to load their config `(add-hook! 'org-load-hook`. Maybe needs it to override with mine.
 (setq org-capture-templates
       `(("t" "todo" entry (file lp/org-capture-file)
          "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t :prepend t)

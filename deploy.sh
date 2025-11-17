@@ -38,6 +38,16 @@ case $HOSTNAME in
           "taskwarrior"
       )
     ;;
+  "671XLD4")
+      stowFolders=(
+          "awesomewm"
+          "picom"
+          "nvim"
+          "taskwarrior"
+	  "greenclip"
+	  "doom"
+      )
+    ;;
 
   "cloud-nix")
       stowFolders=(
@@ -54,5 +64,5 @@ esac
 
 for folder in ${stowFolders[@]}; do
     echo "stowing $folder"
-    stow --target=$HOME --simulate $folder
+    stow --target=$HOME $folder
 done

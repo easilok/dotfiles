@@ -114,6 +114,7 @@
 (map! :leader
       :desc "Switch workspace buffer"
       "b l" #'+vertico/switch-workspace-buffer
+      :desc "Switch or open buffer"
       "b a" #'consult-buffer
       :desc "Switch to last buffer"
       "b b" #'evil-switch-to-windows-last-buffer)
@@ -139,10 +140,11 @@
  "g s" nil) ;; default set to stage hunk at point)
 
 ;; Dired folder deph navigation
-(map! :map dirvish-mode-map
-      :n  "DEL"   #'dired-up-directory
-      :n  "h"   nil
-      :n  "l"   nil)
+(after! dirvish
+  (map! :map dirvish-mode-map
+        :n  "DEL"   #'dired-up-directory
+        :n  "h"   nil
+        :n  "l"   nil))
 
 (after! evil
   (evil-set-initial-state 'messages-buffer-mode 'normal)
@@ -239,3 +241,20 @@
   (interactive)
   (consult-ripgrep (project-root (project-current))
                    (thing-at-point 'symbol t)))
+
+(defun lp/dev-test-file ()
+  "Send project-defined test command to vterm-test using current buffer file path."
+  (interactive)
+  (let* ((file (buffer-file-name))
+         ;; (cmd-template (or (bound-and-true-p lp/dev-test-command)
+         ;;                   (user-error "No lp/dev-test-command defined for this project")))
+         (cmd-template "mise test-file %s")
+         (cmd (format cmd-template (shell-quote-argument file)))
+         (vterm-name "vterm-test")
+         (vterm-buf (get-buffer vterm-name)))
+    (unless file
+      (user-error "Current buffer is not visiting a file"))
+    (unless vterm-buf
+      (setq vterm-buf (vterm vterm-name)))
+    (with-current-buffer vterm-buf
+      (vterm-send-string (concat cmd "\n")))))
