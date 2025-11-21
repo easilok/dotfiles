@@ -48,21 +48,21 @@
       org-journal-file-header #'lp-org-journal-file-header
       org-journal-file-format "%Y-%m-%d.org")
 
-;; Capture templates for: TODO tasks, Notes, meetings, etc
-;; Doom uses this hook to load their config `(add-hook! 'org-load-hook`. Maybe needs it to override with mine.
-(setq org-capture-templates
-      `(("t" "todo" entry (file lp/org-capture-file)
-         "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t :prepend t)
-        ("i" "idea" entry (file lp/org-capture-file)
-         "* %? :IDEA:\n%t\n" :clock-in t :clock-resume t)
-        ("n" "note" entry (file lp/org-capture-file)
-         "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-        ("r" "respond" entry (file lp/org-capture-file)
-         "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-        ("g" "meeting" entry (file lp/org-capture-meeting)
-         "* TODO Meeting with %? :MEETING:\n%U" :clock-in t :clock-resume t :prepend t)
-        ("p" "New Project" plain (file lp-org-get-project-capture)
-         "" :immediate-finish nil)))
+(defun lp-org-load-init-h ()
+  ;; Capture templates for: TODO tasks, Notes, meetings, etc
+  (setq org-capture-templates
+        `(("t" "todo" entry (file lp/org-capture-file)
+           "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t :prepend t)
+          ("i" "idea" entry (file lp/org-capture-file)
+           "* %? :IDEA:\n%t\n" :clock-in t :clock-resume t)
+          ("n" "note" entry (file lp/org-capture-file)
+           "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+          ("r" "respond" entry (file lp/org-capture-file)
+           "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+          ("g" "meeting" entry (file lp/org-capture-meeting)
+           "* TODO Meeting with %? :MEETING:\n%U" :clock-in t :clock-resume t :prepend t)
+          ("p" "New Project" plain (file lp-org-get-project-capture)
+           "" :immediate-finish nil))))
 
 
 (after! org
@@ -78,5 +78,8 @@
             (visual-line-mode 1)
             (setq fill-column 120)
             (setq org-startup-folded 'content)))
+
+(add-hook 'org-load-hook #'lp-org-load-init-h 100)
+
 
 (provide 'lp-org-config)
