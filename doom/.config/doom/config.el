@@ -258,3 +258,19 @@
       (setq vterm-buf (vterm vterm-name)))
     (with-current-buffer vterm-buf
       (vterm-send-string (concat cmd "\n")))))
+(use-package! pinentry
+  :init (setq epa-pinentry-mode 'loopback)
+  (pinentry-start))
+
+
+;; doom's `persp-mode' disables uniquify, as it causes some issues when switching workspaces.
+;; I'm trying to  override it for better buffer navigatio..
+;; `persp-mode' is activated in the `doom-init-ui-hook',
+;; so this new hook at at the end of the list of hooks should prevail my options.
+(defun lp-set-buffer-autonaming-h ()
+  (require 'uniquify)
+  (setq uniquify-buffer-name-style 'forward))
+
+(add-hook! 'doom-init-ui-hook
+           :append ;; ensure it gets added to the end.
+           #'lp-set-buffer-autonaming-h)
