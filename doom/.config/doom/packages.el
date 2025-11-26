@@ -58,5 +58,6 @@
 (package! mise)
 (package! evil-owl)
 (package! org-bullets)
-;; (package! pinentry)
+(package! breadcrumb)
 (package! beacon)
+;; (package! pinentry)

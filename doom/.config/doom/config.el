@@ -48,6 +48,14 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
+(defun lp-config-fill-column ()
+  (interactive)
+  (set-fill-column 120)
+  (display-fill-column-indicator-mode))
+
+(add-hook 'prog-mode-hook #'breadcrumb-local-mode)
+(add-hook 'prog-mode-hook #'lp-config-fill-column)
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -127,6 +135,11 @@
       "j m" #'jabber-chat-with
       :desc "Connect all jabber connections"
       "j c" #'jabber-connect-all)
+
+;; Seach keys
+(map! :leader
+      :desc "Search symbol in project"
+      "s w" #'lp-consult-project-symbol-at-point)
 
 ;; Lsp quick keybindings
 (map!
@@ -233,17 +246,15 @@
   (setq doom-modeline-buffer-file-name-style 'truncate-except-project))
 
 
-(defun lp/search-project-symbol-at-point ()
+(defun lp-search-project-symbol-at-point ()
   (interactive)
   (project-find-regexp (thing-at-point 'symbol t)))
 
-(defun lp/consult-project-symbol-at-point ()
+(defun lp-consult-project-symbol-at-point ()
   (interactive)
-  (consult-ripgrep (project-root (project-current))
-                   (thing-at-point 'symbol t)))
-(use-package! pinentry
-  :init (setq epa-pinentry-mode 'loopback)
-  (pinentry-start))
+  (let ((consult-ripgrep-args (concat consult-ripgrep-args " --hidden")))
+    (consult-ripgrep (project-root (project-current))
+                     (thing-at-point 'symbol t))))
 
 
 ;; doom's `persp-mode' disables uniquify, as it causes some issues when switching workspaces.
