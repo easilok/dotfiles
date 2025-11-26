@@ -58,4 +58,5 @@
 (package! mise)
 (package! evil-owl)
 (package! org-bullets)
-(package! pinentry)
+;; (package! pinentry)
+(package! beacon)
