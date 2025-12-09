@@ -112,11 +112,12 @@
 
 (when (file-directory-p "~/.config/doom/lp")
     (add-to-list 'load-path "~/.config/doom/lp")
-    (require 'lp-org-config))
+    (require 'lp-org-config)
+    (require 'lp-email-config))
 
 (when (file-directory-p "~/.config/.emacs.priv/lp")
     (add-to-list 'load-path "~/.config/.emacs.priv/lp")
-    (require 'lp-private-config))
+    (require 'lp-private-config nil 'noerror))
 
 ;; Buffer Keys
 (map! :leader
