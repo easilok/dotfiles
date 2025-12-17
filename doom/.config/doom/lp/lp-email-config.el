@@ -62,7 +62,6 @@
   (when (fboundp 'imagemagick-register-types)
     (imagemagick-register-types))
   (setq browse-url-browser-function 'browse-url-generic)
-  ;; (setq browse-url-generic-program "qutebrowser")
   ;; From Doom - Html mails might be better rendered in a browser
   (add-to-list 'mu4e-view-actions
                '("View in browser" . mu4e-action-view-in-browser))
@@ -71,8 +70,10 @@
 
   (when lp-email-extra? (lp-set-mu4e-contexts))
 
-  (add-to-list 'mu4e-bookmarks '("(m:/personal/Inbox or m:/professional/Inbox or m:/xyz/Inbox or m:/box/Inbox) and flag:unread" "Unread inbox" ?n))
-  (add-to-list 'mu4e-bookmarks '("m:/personal/Inbox or m:/professional/Inbox or m:/xyz/Inbox or m:/box/Inbox" "All Inboxes" ?i))
+  (add-to-list 'mu4e-bookmarks
+               '("(m:/personal/Inbox or m:/professional/Inbox or m:/xyz/Inbox or m:/box/Inbox) and flag:unread" "Unread inbox" ?n))
+  (add-to-list 'mu4e-bookmarks
+               '("m:/personal/Inbox or m:/professional/Inbox or m:/xyz/Inbox or m:/box/Inbox" "All Inboxes" ?i))
 
 
   (setq mu4e-headers-time-format "%H:%M")
