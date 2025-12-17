@@ -113,6 +113,7 @@
 (when (file-directory-p "~/.config/doom/lp")
     (add-to-list 'load-path "~/.config/doom/lp")
     (require 'lp-org-config)
+    (require 'lp-denote-config)
     (require 'lp-email-config))
 
 (when (file-directory-p "~/.config/.emacs.priv/lp")

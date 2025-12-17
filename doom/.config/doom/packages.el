@@ -60,4 +60,5 @@
 (package! org-bullets)
 (package! breadcrumb)
 (package! beacon)
+(package! denote)
 ;; (package! pinentry)
