@@ -22,6 +22,11 @@ GIT_SAFE_COMMANDS=(
     "bs"
 )
 
+if [[ "$1" == "--unsafe" ]]; then
+    FORCE_SAFE_COMMAND=True
+    shift
+fi
+
 # Find if provided command is a safe command
 for safe_command in "${GIT_SAFE_COMMANDS[@]}"; do
     if [[ "$1" == "$safe_command" ]]; then
@@ -43,13 +48,18 @@ else
     # commands that does not require confirmation
     for branch in "${GIT_PROTECTED_BRANCHES[@]}"; do
         if [[ "$GIT_CURRENT_BRANCH" == "$branch" ]]; then
-            echo "Are you sure you want to take actions on $GIT_CURRENT_BRANCH?"
-            read -p "[y]es/[a]bort: " confirmation
-            case $confirmation in
-                [Yy]* ) ;;
-                # "" ) ;; # works with enter and space
-                * ) exit;;
-            esac
+            if [ -z "$FORCE_SAFE_COMMAND" ]; then
+                echo "Are you sure you want to take actions on $GIT_CURRENT_BRANCH?"
+                read -p "[y]es/[a]bort: " confirmation
+                case $confirmation in
+                    [Yy]* ) ;;
+                    # "" ) ;; # works with enter and space
+                    * ) exit;;
+                esac
+            else
+                echo "Actions on $GIT_CURRENT_BRANCH are forbidden"
+                exit 1
+            fi
         fi
     done
     \git "$@"
