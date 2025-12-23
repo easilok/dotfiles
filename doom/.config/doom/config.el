@@ -53,7 +53,6 @@
   (set-fill-column 120)
   (display-fill-column-indicator-mode))
 
-(add-hook 'prog-mode-hook #'breadcrumb-local-mode)
 (add-hook 'prog-mode-hook #'lp-config-fill-column)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
@@ -114,7 +113,8 @@
     (add-to-list 'load-path "~/.config/doom/lp")
     (require 'lp-org-config)
     (require 'lp-denote-config)
-    (require 'lp-email-config))
+    (require 'lp-email-config)
+    (require 'lp-dev-test))
 
 (when (file-directory-p "~/.config/.emacs.priv/lp")
     (add-to-list 'load-path "~/.config/.emacs.priv/lp")
@@ -127,7 +127,12 @@
       :desc "Switch or open buffer"
       "b a" #'consult-buffer
       :desc "Switch to last buffer"
-      "b b" #'evil-switch-to-windows-last-buffer)
+      "b b" #'evil-switch-to-windows-last-buffer
+      :desc "Echo buffer filepath"
+      "b f" #'lp-echo-buffer-filepath
+      :desc "Close all other windows"
+      "w o" #'delete-other-windows)
+      
 
 ;; Jabber defined keys
 (map! :leader
@@ -221,6 +226,7 @@
 
 ;; Tab will always ident the line the cursor is at
 (setq-default indent-tabs-mode nil) ; for converting tabs to spaces on identation
+(setq-default tab-always-indent t)
 
 (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
 (remove-hook 'jabber-alert-message-hooks #'jabber-message-echo)
@@ -242,6 +248,8 @@
 (add-hook 'python-ts-mode-hook #'mise-mode)
 (add-hook 'typescript-mode-hook #'mise-mode)
 (add-hook 'typescript-ts-mode-hook #'mise-mode)
+(add-hook 'prog-mode-hook #'breadcrumb-local-mode)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (after! doom-modeline
   (setq doom-modeline-modal-icon nil) ;; vim modes
@@ -258,6 +266,13 @@
     (consult-ripgrep (project-root (project-current))
                      (thing-at-point 'symbol t))))
 
+(defun lp-echo-buffer-filepath ()
+  (interactive)
+  (message (buffer-file-name)))
+
+;; (use-package! pinentry
+;;   :init (setq epa-pinentry-mode 'loopback)
+;;   (pinentry-start))
 
 ;; doom's `persp-mode' disables uniquify, as it causes some issues when switching workspaces.
 ;; I'm trying to  override it for better buffer navigatio..
