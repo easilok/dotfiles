@@ -61,4 +61,5 @@
 (package! breadcrumb)
 (package! beacon)
 (package! denote)
+(package! rainbow-delimiters)
 ;; (package! pinentry)
