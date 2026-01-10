@@ -59,7 +59,7 @@
        (setq denote-known-keywords '("emacs" "asteroid" "lisp"))
        (setq denote-infer-keywords t)
        (setq denote-sort-keywords t)
-       (setq denote-prompts '(title keywords subdirectory))
+       (setq denote-prompts '(file-type title keywords subdirectory))
        ;; (setq denote-excluded-directories-regexp nil)
        ;; (setq denote-keywords-to-not-infer-regexp nil)
        (setq denote-rename-confirmations '(rewrite-front-matter modify-file-name))
