@@ -1,0 +1,3 @@
+[submodule "nvim-fnl/.config/nvim"]
+	path = nvim-fnl/.config/nvim
+	url = https://github.com/easilok/nvim-config.git
