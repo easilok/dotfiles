@@ -67,6 +67,10 @@
        ;; Pick dates, where relevant, with Org's advanced interface:
        (setq denote-date-prompt-use-org-read-date t)
 
+       ;; Delete unused denote file types from allowed list
+       (assoc-delete-all 'text denote-file-types)
+       (assoc-delete-all 'markdown-toml denote-file-types)
+
        ;; Automatically rename Denote buffers using the `denote-rename-buffer-format'.
        (denote-rename-buffer-mode 1))
 

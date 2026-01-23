@@ -9,7 +9,7 @@
 ;; (setq user-full-name "John Doe"
 ;;       user-mail-address "john@doe.com")
 (setq user-full-name "Luis Pereira"
-    user-mail-address "luispereira.tkd@gmail.com")
+      user-mail-address "luispereira.tkd@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -101,24 +101,24 @@
 ;; they are implemented.
 
 (when (file-directory-p "~/git/LASS/")
-    (add-to-list 'load-path "~/git/LASS/")
-    (require 'lass))
+  (add-to-list 'load-path "~/git/LASS/")
+  (require 'lass))
 
 ;; https://github.com/glenneth1/crafterbin.el.git
 (when (file-directory-p "~/git/crafterbin.el")
-    (add-to-list 'load-path "~/git/crafterbin.el")
-    (require 'crafterbin))
+  (add-to-list 'load-path "~/git/crafterbin.el")
+  (require 'crafterbin))
 
 (when (file-directory-p "~/.config/doom/lp")
-    (add-to-list 'load-path "~/.config/doom/lp")
-    (require 'lp-org-config)
-    (require 'lp-denote-config)
-    (require 'lp-email-config)
-    (require 'lp-dev-test))
+  (add-to-list 'load-path "~/.config/doom/lp")
+  (require 'lp-org-config)
+  (require 'lp-denote-config)
+  (require 'lp-email-config)
+  (require 'lp-dev-test))
 
 (when (file-directory-p "~/.config/.emacs.priv/lp")
-    (add-to-list 'load-path "~/.config/.emacs.priv/lp")
-    (require 'lp-private-config nil 'noerror))
+  (add-to-list 'load-path "~/.config/.emacs.priv/lp")
+  (require 'lp-private-config nil 'noerror))
 
 ;; Buffer Keys
 (map! :leader
@@ -132,7 +132,7 @@
       "b f" #'lp-echo-buffer-filepath
       :desc "Close all other windows"
       "w o" #'delete-other-windows)
-      
+
 
 ;; Jabber defined keys
 (map! :leader
@@ -213,7 +213,7 @@
       truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
 
 (setq display-time-24hr-format t)
-(setq display-time-format "%H:%M - %d %b (W%W)")
+(setq display-time-format "%H:%M - %d %b (W%V)")
 (display-time-mode 1)
 
 (unless (equal "Battery status not available"
@@ -250,6 +250,10 @@
 (add-hook 'typescript-ts-mode-hook #'mise-mode)
 (add-hook 'prog-mode-hook #'breadcrumb-local-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;; Define extra apheleia formatters
+(after! apheleia
+  (setf (alist-get 'yamlfmt apheleia-formatters) '("yamlfmt" "-")))
 
 (after! doom-modeline
   (setq doom-modeline-modal-icon nil) ;; vim modes

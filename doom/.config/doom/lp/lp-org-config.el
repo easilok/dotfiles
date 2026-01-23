@@ -35,7 +35,7 @@
 
 (defun lp-org-journal-file-header (time)
   "Creates the weekly journal file header"
-  (format "#+title: %s Weekly Journal - %s, W%s\n#+created: %s\n#+keywords: journal\n#+STARTUP: show2levels\n\n"
+  (format "#+title: %s Weekly Journal - %s, W%s\n#+created: %s\n#+keywords: journal\n#+STARTUP: overview hideblocks \n\n"
           (format-time-string "%Y")
           (format-time-string "%B")
           (format-time-string "%V")
