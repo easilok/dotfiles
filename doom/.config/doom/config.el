@@ -235,6 +235,10 @@
 
 (after! eglot
   :config
+  (add-to-list 'eglot-server-programs
+               '(lisp-mode . ("sextant")))
+  (add-hook 'lisp-mode-hook 'eglot-ensure)
+  (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
   (set-eglot-client! '(python-mode python-ts-mode)
                      '("basedpyright" "--stdio")
                      '("basedpyright-langserver" "--stdio")
