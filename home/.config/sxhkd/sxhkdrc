@@ -28,7 +28,7 @@ shift + Print
 
 # make sxhkd reload its configuration files:
 super + Escape
-	pkill -USR1 -x sxhkd
+	pkill -USR1 -x sxhkd && notify-send "Reloaded sxhkd"
 
 # lockscreen
 shift + super + x
@@ -82,10 +82,10 @@ super + {F12, F10, F11}
 	playerctl {play-pause,previous,next}
 
 super + F7
-    $HOME/.screenlayout/internal_monitor
+    screen-realtor --layout laptop-only
 
 super + shift + F7
-    $HOME/.config/sxhkd/scripts/change_monitors.sh
+    screen-realtor
 
 XF86MonBrightnessDown
     sudo brightnessctl set 5%-
