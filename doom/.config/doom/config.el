@@ -123,7 +123,8 @@
 ;; Buffer Keys
 (map! :leader
       :desc "Switch workspace buffer"
-      "b l" #'+vertico/switch-workspace-buffer
+      ;; "b l" #'+vertico/switch-workspace-buffer
+      "b l" #'project-switch-to-buffer
       :desc "Switch or open buffer"
       "b a" #'consult-buffer
       :desc "Switch to last buffer"
@@ -298,3 +299,27 @@
 (use-package! beacon
   :config
   (beacon-mode 1))
+
+
+(defun lp-name-tab-by-project-or-default ()
+  "Return project name if in a project, or default tab-bar name if not.
+The default tab-bar name uses the buffer name."
+  (let ((project-name (projectile-project-name)))
+    (if (string= "-" project-name)
+        (tab-bar-tab-name-current)
+      (projectile-project-name))))
+
+(setq tab-bar-mode t)
+;; (setq tab-bar-show nil)
+(setq tab-bar-new-tab-choice "*scratch*")
+(setq tab-bar-tab-name-function #'lp-name-tab-by-project-or-default)
+
+(map! :leader
+      (:prefix-map ("TAB" . "Tabs")
+       :desc "Switch tab" "TAB" #'tab-bar-select-tab-by-name
+       :desc "New tab" "n" #'tab-bar-new-tab
+       :desc "Rename tab" "r" #'tab-bar-rename-tab
+       :desc "Rename tab by name" "R" #'tab-bar-rename-tab-by-name
+       :desc "Close tab" "d" #'tab-bar-close-tab
+       :desc "Close tab by name" "D" #'tab-bar-close-tab-by-name
+       :desc "Close other tabs" "1" #'tab-bar-close-other-tabs))
