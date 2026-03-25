@@ -54,6 +54,10 @@
   (display-fill-column-indicator-mode))
 
 (add-hook 'prog-mode-hook #'lp-config-fill-column)
+(add-hook 'markdown-mode-hook #'lp-config-fill-column)
+
+;; Sets the color of window splits.
+;; (set-face-foreground 'vertical-border "orange")
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -67,13 +71,15 @@
       ;; modus-themes-completions 'opinionated
       ;; modus-themes-org-blocks 'tinted-background
       modus-themes-headings
-      '((1 . (rainbow overline background 1.4))
-        (2 . (rainbow background 1.3))
-        (3 . (rainbow bold 1.2))
-        (t . (semilight 1.1))))
+      '((1 . (rainbow overline background 1.1)) ;; was 1.4
+        (2 . (rainbow background 1.08)) ;; was 1.3
+        (3 . (rainbow bold 1.07)) ;; was 1.2
+        (t . (semilight 1.05)))) ;; was 1.1
 
 ;; Load the dark theme by default
 (load-theme 'modus-vivendi t)
+
+;; (setq doom-theme 'modus-vivendi-tinted)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -182,6 +188,29 @@
         :n  "h"   nil
         :n  "l"   nil))
 
+(defun lp-split-window-below()
+  (interactive)
+  (split-window-below)
+  (other-window 1))
+
+(defun lp-split-window-right()
+  (interactive)
+  (split-window-right)
+  (other-window 1))
+
+(defun lp-evil-window-vsplit ()
+  (interactive)
+  (evil-window-vsplit)
+  (other-window 1))
+
+(defun lp-evil-window-split ()
+  (interactive)
+  (evil-window-split)
+  (other-window 1))
+
+(define-key (current-global-map) [remap split-window-below] 'lp-split-window-below)
+(define-key (current-global-map) [remap split-window-right] 'lp-split-window-right)
+
 (after! evil
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal)
@@ -209,6 +238,8 @@
   (define-key evil-normal-state-map (kbd "C-l") nil)
   (define-key evil-normal-state-map (kbd "C-k") nil)
   (define-key evil-normal-state-map (kbd "C-j") nil)
+  (define-key evil-normal-state-map [remap evil-window-split] 'lp-evil-window-split)
+  (define-key evil-normal-state-map [remap evil-window-vsplit] 'lp-evil-window-vsplit)
   (map! "C-l" nil)
   (map! "C-k" nil)
   (map! "C-j" nil)
@@ -245,6 +276,7 @@
 (setq-default indent-tabs-mode nil) ; for converting tabs to spaces on identation
 (setq-default tab-always-indent t)
 
+;; Jabber customizations
 (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
 (remove-hook 'jabber-alert-message-hooks #'jabber-message-echo)
 (remove-hook 'jabber-alert-muc-hooks #'jabber-muc-echo)
@@ -271,6 +303,12 @@
 (add-hook 'typescript-ts-mode-hook #'mise-mode)
 (add-hook 'prog-mode-hook #'breadcrumb-local-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+(use-package! treesit
+  :config
+  (cl-pushnew '(dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" nil nil nil nil)
+              treesit-language-source-alist :test #'eq :key #'car))
+
 
 ;; Define extra apheleia formatters
 (after! apheleia
@@ -316,7 +354,6 @@
   :config
   (beacon-mode 1))
 
-
 (defun lp-name-tab-by-project-or-default ()
   "Return project name if in a project, or default tab-bar name if not.
 The default tab-bar name uses the buffer name."
@@ -333,6 +370,7 @@ The default tab-bar name uses the buffer name."
 (map! :leader
       (:prefix-map ("TAB" . "Tabs")
        :desc "Switch tab" "TAB" #'tab-bar-select-tab-by-name
+       :desc "Switch tab" "." #'tab-bar-select-tab-by-name
        :desc "New tab" "n" #'tab-bar-new-tab
        :desc "Rename tab" "r" #'tab-bar-rename-tab
        :desc "Rename tab by name" "R" #'tab-bar-rename-tab-by-name
