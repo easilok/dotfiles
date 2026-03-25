@@ -260,8 +260,10 @@
       auto-save-default t                         ; Nobody likes to loose work, I certainly don't
       truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
 
-(setq display-time-24hr-format t)
-(setq display-time-format "%H:%M - %d %b (W%V)")
+;; Time display
+(setq display-time-load-average nil
+      display-time-24hr-format t
+      display-time-format "%H:%M - %d %b (W%V)")
 (display-time-mode 1)
 
 (unless (equal "Battery status not available"
@@ -362,11 +364,20 @@ The default tab-bar name uses the buffer name."
         (tab-bar-tab-name-current)
       (projectile-project-name))))
 
-(setq tab-bar-mode t)
+;; Move global mode string to the tab-bar, hide tab close buttons and set default naming
+(setq tab-bar-close-button-show nil
+      tab-bar-separator " "
+      tab-bar-new-tab-choice "*scratch*"
+      tab-bar-tab-name-function #'lp-name-tab-by-project-or-default
+      tab-bar-format '(tab-bar-format-tabs-groups
+                       tab-bar-separator
+                       tab-bar-format-align-right
+                       tab-bar-format-global))
+;; Turn on the tab-bar
+(tab-bar-mode 1)
 ;; (setq tab-bar-show nil)
-(setq tab-bar-new-tab-choice "*scratch*")
-(setq tab-bar-tab-name-function #'lp-name-tab-by-project-or-default)
 
+;; Keybindings for tab-bar
 (map! :leader
       (:prefix-map ("TAB" . "Tabs")
        :desc "Switch tab" "TAB" #'tab-bar-select-tab-by-name
@@ -381,3 +392,34 @@ The default tab-bar name uses the buffer name."
 
 ;; Make vertical window separators look nicer in terminal Emacs
 (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│))
+
+(defun lp-tab-buffers ()
+  "Return live buffers recorded in the selected tab's buffer lists."
+  (let* ((buffers (frame-parameter nil 'buffer-list))
+         (buried-buffers (frame-parameter nil 'buried-buffer-list)))
+    (seq-uniq
+     (seq-filter (lambda (buf)
+                   (and (buffer-live-p buf)
+                        (not (minibufferp buf))))
+                 (append buffers buried-buffers))
+     #'eq)))
+
+
+(defun lp-tab-buffer-names ()
+  "Return names of buffers recorded in the selected tab."
+  (mapcar #'buffer-name (lp-tab-buffers)))
+
+(defun lp-tab-switch-buffer ()
+  "Switch to a buffer recorded in the selected tab."
+  (interactive)
+  (let ((buffers (lp-tab-buffers)))
+    (unless buffers
+      (user-error "No buffers are recorded in the current tab"))
+    (let ((names (lp-tab-buffer-names)))
+      (minibuffer-with-setup-hook
+          (lambda ()
+            (setq-local minibuffer-completion-table names))
+        (switch-to-buffer
+         (read-buffer "Tab buffer: " (other-buffer (current-buffer))
+                      (confirm-nonexistent-file-or-buffer)))))))
+
