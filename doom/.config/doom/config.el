@@ -58,7 +58,22 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-tokyo-night)
+
+;; (setq doom-theme 'modus-vivendi)
+;; Configure the Modus Themes' appearance
+(setq modus-themes-bold-constructs t
+      modus-themes-italic-constructs t
+      modus-themes-prompts '(bold intense)
+      ;; modus-themes-completions 'opinionated
+      ;; modus-themes-org-blocks 'tinted-background
+      modus-themes-headings
+      '((1 . (rainbow overline background 1.4))
+        (2 . (rainbow background 1.3))
+        (3 . (rainbow bold 1.2))
+        (t . (semilight 1.1))))
+
+;; Load the dark theme by default
+(load-theme 'modus-vivendi t)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -160,7 +175,7 @@
  :leader
  "g s" nil) ;; default set to stage hunk at point)
 
-;; Dired folder deph navigation
+;; Dired folder deph navivgation
 (after! dirvish
   (map! :map dirvish-mode-map
         :n  "DEL"   #'dired-up-directory
@@ -170,6 +185,7 @@
 (after! evil
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal)
+  (setq evil-mode-line-format 'before)
   (modify-syntax-entry ?_ "w")
   ;; (setq evil-symbol-word-search nil) ;; * and # search for words not symbols
   (setq evil-respect-visual-line-mode t)
@@ -323,3 +339,7 @@ The default tab-bar name uses the buffer name."
        :desc "Close tab" "d" #'tab-bar-close-tab
        :desc "Close tab by name" "D" #'tab-bar-close-tab-by-name
        :desc "Close other tabs" "1" #'tab-bar-close-other-tabs))
+
+
+;; Make vertical window separators look nicer in terminal Emacs
+(set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│))

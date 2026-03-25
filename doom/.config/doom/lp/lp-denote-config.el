@@ -13,6 +13,7 @@
 
 (use-package! denote
        ;; :ensure t
+       :after ('org)
        :hook
        ( ;; If you use Markdown or plain text files, then you want to make
         ;; the Denote links clickable (Org renders links as buttons right
