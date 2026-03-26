@@ -3,7 +3,7 @@
 ;;; Personal Configuration for Org-Mode
 
 (if (file-directory-p "~/Nextcloud/org")
-  (setq org-directory "~/Nextcloud/org")
+    (setq org-directory "~/Nextcloud/org")
   (setq org-directory "~/Documents/org"))
 
 (setq lp/org-capture-file (concat org-directory "/Inbox.org"))
@@ -62,15 +62,22 @@
           ("g" "meeting" entry (file lp/org-capture-meeting)
            "* TODO Meeting with %? :MEETING:\n%U" :clock-in t :clock-resume t :prepend t)
           ("p" "New Project" plain (file lp-org-get-project-capture)
-           "" :immediate-finish nil))))
+           "" :immediate-finish nil)))
+  (add-to-list 'org-structure-template-alist '("j" . "src javascrip"))
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("ym" . "src yaml"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("cl" . "src lisp"))
+  (add-to-list 'org-structure-template-alist '("js" . "src javascript")))
 
 
 (after! org
-       (require 'org-bullets)
-       (add-hook 'org-mode-hook
-                 (lambda()
-                   (org-bullets-mode 1)
-                   (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))))
+  (require 'org-bullets)
+  (add-hook 'org-mode-hook
+            (lambda()
+              (org-bullets-mode 1)
+              (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))))
 
 ;; Some visual customizations
 (add-hook 'org-mode-hook

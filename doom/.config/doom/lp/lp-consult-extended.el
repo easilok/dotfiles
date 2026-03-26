@@ -65,8 +65,10 @@
 (defun lp-consult-project-buffer ()
   "Custom consult project buffer switcher with buffer filenames."
   (interactive)
-  (let* ((persp (get-current-persp))
-         (persp-buffers (when persp (persp-buffers persp)))
+  (let* (
+         ;; (persp (get-current-persp))
+         ;; (persp-buffers (when persp (persp-buffers persp)))
+         (persp-buffers (lp-tab-buffers))
          (buffers (seq-filter (lambda (buf)
                                 (and (lp--buffer-name-allowed-p buf)
                                      (lp--buffer-mode-allowed-p buf)))
