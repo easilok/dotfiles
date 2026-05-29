@@ -135,7 +135,8 @@
   (require 'lp-org-config)
   (require 'lp-denote-config)
   (require 'lp-email-config)
-  (require 'lp-dev-test))
+  (require 'lp-dev-test)
+  (require 'lp-clatter))
 
 (when (file-directory-p "~/.config/.emacs.priv/lp")
   (add-to-list 'load-path "~/.config/.emacs.priv/lp")
