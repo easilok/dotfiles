@@ -394,33 +394,4 @@ The default tab-bar name uses the buffer name."
 ;; Make vertical window separators look nicer in terminal Emacs
 (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│))
 
-(defun lp-tab-buffers ()
-  "Return live buffers recorded in the selected tab's buffer lists."
-  (let* ((buffers (frame-parameter nil 'buffer-list))
-         (buried-buffers (frame-parameter nil 'buried-buffer-list)))
-    (seq-uniq
-     (seq-filter (lambda (buf)
-                   (and (buffer-live-p buf)
-                        (not (minibufferp buf))))
-                 (append buffers buried-buffers))
-     #'eq)))
-
-
-(defun lp-tab-buffer-names ()
-  "Return names of buffers recorded in the selected tab."
-  (mapcar #'buffer-name (lp-tab-buffers)))
-
-(defun lp-tab-switch-buffer ()
-  "Switch to a buffer recorded in the selected tab."
-  (interactive)
-  (let ((buffers (lp-tab-buffers)))
-    (unless buffers
-      (user-error "No buffers are recorded in the current tab"))
-    (let ((names (lp-tab-buffer-names)))
-      (minibuffer-with-setup-hook
-          (lambda ()
-            (setq-local minibuffer-completion-table names))
-        (switch-to-buffer
-         (read-buffer "Tab buffer: " (other-buffer (current-buffer))
-                      (confirm-nonexistent-file-or-buffer)))))))
 
