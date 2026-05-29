@@ -63,6 +63,48 @@
            "* TODO Meeting with %? :MEETING:\n%U" :clock-in t :clock-resume t :prepend t)
           ("p" "New Project" plain (file lp-org-get-project-capture)
            "" :immediate-finish nil)))
+  (setq org-todo-keywords      ; This overwrites the default Doom org-todo-keywords
+        '((sequence
+           "TODO(t)"           ; A task that is ready to be tackled
+           "NEXT(n)"           ; Task to be considered next
+           "WAIT(w)"           ; Something is holding up this task
+           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+           "DONE(d)"           ; Task has been completed
+           "KILL(k)" )         ; Task has been cancelled/killed
+          ("INACTIVE(i)"       ; Some lost task waiting free time to be picked
+           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+           "MEETING(m)" )      ; Meeting
+          (sequence
+           "[ ](T)"   ; A task that needs doing
+           "[-](S)"   ; Task is in progress
+           "[?](W)"   ; Task is being held up or paused
+           "|"
+           "[X](D)")) ; Task was completed
+        org-agenda-custom-commands
+        '(("d" "Daily Agenda"
+           ((agenda "" ((org-agenda-span 'day)
+                        (org-deadline-warning-days 5)))
+            (todo "NEXT" ((org-agenda-overriding-header "Next in queue")))
+            (tags-todo "+PRIORITY=\"A\"" ((org-agenda-overriding-header "Hight Priority")))))
+          ("n" "Next Tasks"
+           ((todo "NEXT" ((org-agenda-overriding-header "Next in queue")))
+            (tags-todo "+PRIORITY=\"A\"" ((org-agenda-overriding-header "Hight Priority")))))
+          ("p" "Plan next"
+           ((todo "WAIT" ((org-agenda-overriding-header "Waiting for something")))
+            (todo "TODO" ((org-agenda-overriding-header "TODO tasks")))))
+          ("r" "Week Review"
+           ((agenda "" ((org-agenda-overriding-header "Completed Tasks")
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo 'done))
+                        (org-agenda-span 'week)))
+            (agenda "" ((org-agenda-overriding-header "Unfinished Scheduled Tasks")
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'nottimestamp))
+                        (org-agenda-span 'week)))
+            ))
+          ;; Low-effort next actions
+          ("l" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+           ((org-agenda-overriding-header "Low Effort Tasks")
+            ;; (org-agenda-files org-agenda-files)
+            (org-agenda-max-todos 20)))))
   (add-to-list 'org-structure-template-alist '("j" . "src javascrip"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("ym" . "src yaml"))
@@ -84,9 +126,80 @@
           (lambda()
             (visual-line-mode 1)
             (setq fill-column 120)
-            (setq org-startup-folded 'content)))
+            (setq org-startup-folded 'content)
+            (display-line-numbers-mode 0)))
 
 (add-hook 'org-load-hook #'lp-org-load-init-h 100)
 
+;; Document Centering (from Daviwil)
+
+(defvar center-document-desired-width 0.6
+  "The desired width (or percentage of the window size if less than 0) of a document centered in the window.")
+
+(defun center-document--adjust-margins ()
+  ;; Reset margins first before recalculating
+  (set-window-parameter nil 'min-margins nil)
+  (set-window-margins nil nil)
+
+  ;; Adjust margins if the mode is on
+  (when center-document-mode
+    (let* ((total-margin-width (if (> center-document-desired-width 1)
+                                   (- (window-width) center-document-desired-width)
+                                 (* (window-width) (- 1 center-document-desired-width))))
+           (margin-width (max 0 (truncate
+                                 (/ total-margin-width 2.0)))))
+      (when (> margin-width 0)
+        (set-window-parameter nil 'min-margins '(0 . 0))
+        (set-window-margins nil margin-width margin-width)))))
+
+(define-minor-mode center-document-mode
+  "Toggle centered text layout in the current buffer."
+  :lighter " Centered"
+  :group 'editing
+  (if center-document-mode
+      (add-hook 'window-configuration-change-hook #'center-document--adjust-margins 'append 'local)
+    (remove-hook 'window-configuration-change-hook #'center-document--adjust-margins 'local))
+  (center-document--adjust-margins))
+
+;; (after! org (add-hook 'org-mode-hook #'center-document-mode))
+;; (dolist (mode '(markdown-mode-hook text-mode-hook))
+;;   (add-hook mode (lambda ()
+;;                    (center-document-mode)
+;;                    (display-line-numbers-mode 0))))
+
+;; Event Notification
+(defun lp-setup-agenda-notifier ()
+  (require 'appt)
+  (require 'org-agenda)
+  (require 'notifications)
+
+  ;; Setup appt scheduler
+  (setq appt-message-warning-time 20)
+  (setq appt-display-interval 10)
+  (setq appt-display-mode-line t)
+  (appt-activate 1)
+
+  (defun lp-org-refresh-appts ()
+    (setq appt-time-msg-list nil)
+    (org-agenda-to-appt t))
+
+
+  (add-hook 'org-agenda-finalize-hook #'lp-org-refresh-appts)
+  (run-at-time "00:05" 600 #'lp-org-refresh-appts)
+
+  (setq appt-disp-window-function
+        (lambda (min-to-app _new-time msg)
+          (let ((clean-msg (replace-regexp-in-string
+                            ":[^ ]+:" "" msg)))
+            (message clean-msg)
+            (notifications-notify
+             :app-name "Emacs Notifier"
+             :title (format "Meeting in %s minutes" min-to-app)
+             :body clean-msg
+             :timeout 15000))))
+
+  (setq appt-delete-window-function (lambda (&rest _))))
+
+(lp-setup-agenda-notifier)
 
 (provide 'lp-org-config)
