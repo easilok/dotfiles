@@ -98,8 +98,7 @@
                         (org-agenda-span 'week)))
             (agenda "" ((org-agenda-overriding-header "Unfinished Scheduled Tasks")
                         (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'nottimestamp))
-                        (org-agenda-span 'week)))
-            ))
+                        (org-agenda-span 'week)))))
           ;; Low-effort next actions
           ("l" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
            ((org-agenda-overriding-header "Low Effort Tasks")
@@ -119,7 +118,8 @@
   (add-hook 'org-mode-hook
             (lambda()
               (org-bullets-mode 1)
-              (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))))
+              (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
+  (global-set-key (kbd "C-c a") #'org-agenda))
 
 ;; Some visual customizations
 (add-hook 'org-mode-hook
