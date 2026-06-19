@@ -365,6 +365,14 @@ The default tab-bar name uses the buffer name."
         (tab-bar-tab-name-current)
       (projectile-project-name))))
 
+(defun lp-tab-bar-new-tab-at-end ()
+  "Creates a new tab after the last existing tab"
+  (interactive)
+  ;; Select last available tab
+  (tab-bar-select-tab (length (tab-bar-tabs)))
+  ;; Create new tab after selection
+  (tab-bar-new-tab))
+
 ;; Move global mode string to the tab-bar, hide tab close buttons and set default naming
 (setq tab-bar-close-button-show nil
       tab-bar-separator " "
@@ -383,7 +391,7 @@ The default tab-bar name uses the buffer name."
       (:prefix-map ("TAB" . "Tabs")
        :desc "Switch tab" "TAB" #'tab-bar-select-tab-by-name
        :desc "Switch tab" "." #'tab-bar-select-tab-by-name
-       :desc "New tab" "n" #'tab-bar-new-tab
+       :desc "New tab" "n" #'lp-tab-bar-new-tab-at-end
        :desc "Rename tab" "r" #'tab-bar-rename-tab
        :desc "Rename tab by name" "R" #'tab-bar-rename-tab-by-name
        :desc "Close tab" "d" #'tab-bar-close-tab

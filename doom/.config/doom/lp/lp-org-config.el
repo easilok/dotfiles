@@ -9,7 +9,10 @@
 (setq lp/org-capture-file (concat org-directory "/Inbox.org"))
 (setq lp/org-capture-mail (concat org-directory "/Mail.org"))
 (setq lp/org-capture-meeting (concat org-directory "/Meeting.org"))
-(setq org-agenda-files (list org-directory))
+(setq org-agenda-files (list (expand-file-name "journal" org-directory)
+                             (expand-file-name "work" org-directory)
+                             (expand-file-name "projects" org-directory)
+                             (expand-file-name "meetings" org-directory)))
 
 ;; Set general org-mode configurations
 (setq org-log-done 'time ;; logs time of task state change
@@ -82,13 +85,59 @@
            "[X](D)")) ; Task was completed
         org-agenda-custom-commands
         '(("d" "Daily Agenda"
-           ((agenda "" ((org-agenda-span 'day)
-                        (org-deadline-warning-days 5)))
+           ((agenda "" ((org-agenda-span 1)
+                        (org-agenda-start-day nil)
+                        (org-deadline-warning-days 3)
+                        (org-agenda-block-separator nil)
+                        (org-scheduled-past-days 0)
+                        (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                        (org-agenda-format-date "%A %-e %B %Y")
+                        (org-agenda-overriding-header "\nToday's agenda\n")))
             (todo "NEXT" ((org-agenda-overriding-header "Next in queue")))
-            (tags-todo "+PRIORITY=\"A\"" ((org-agenda-overriding-header "Hight Priority")))))
+            (tags-todo "+PRIORITY=\"A\"" ((org-agenda-overriding-header "Hight Priority")))
+            (todo "WAIT" ((org-agenda-overriding-header "Waiting for something")))))
+          ;; Prots custom agenda
+          ("A" "Daily agenda and top priority tasks"
+           ((tags-todo "*"
+                       ((org-agenda-skip-function '(org-agenda-skip-if nil '(timestamp)))
+                        (org-agenda-skip-function
+                         `(org-agenda-skip-entry-if
+                           'notregexp ,(format "\\[#%s\\]" (char-to-string org-priority-highest))))
+                        (org-agenda-block-separator nil)
+                        (org-agenda-overriding-header "Important tasks without a date\n")))
+            (agenda "" ((org-agenda-span 1)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-block-separator nil)
+                        (org-scheduled-past-days 0)
+                        ;; We don't need the `org-agenda-date-today'
+                        ;; highlight because that only has a practical
+                        ;; utility in multi-day views.
+                        (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                        (org-agenda-format-date "%A %-e %B %Y")
+                        (org-agenda-overriding-header "\nToday's agenda\n")))
+            (agenda "" ((org-agenda-start-on-weekday nil)
+                        (org-agenda-start-day "+1d")
+                        (org-agenda-span 3)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-block-separator nil)
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                        (org-agenda-overriding-header "\nNext three days\n")))
+            (agenda "" ((org-agenda-time-grid nil)
+                        (org-agenda-start-on-weekday nil)
+                        ;; We don't want to replicate the previous section's
+                        ;; three days, so we start counting from the day after.
+                        (org-agenda-start-day "+4d")
+                        (org-agenda-span 14)
+                        (org-agenda-show-all-dates nil)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-block-separator nil)
+                        (org-agenda-entry-types '(:deadline))
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                        (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))
           ("n" "Next Tasks"
-           ((todo "NEXT" ((org-agenda-overriding-header "Next in queue")))
-            (tags-todo "+PRIORITY=\"A\"" ((org-agenda-overriding-header "Hight Priority")))))
+           ((tags-todo "+PRIORITY=\"A\"" ((org-agenda-overriding-header "Hight Priority")))
+            (todo "NEXT" ((org-agenda-overriding-header "Next in queue")))
+            (todo "WAIT" ((org-agenda-overriding-header "Waiting for something")))))
           ("p" "Plan next"
            ((todo "WAIT" ((org-agenda-overriding-header "Waiting for something")))
             (todo "TODO" ((org-agenda-overriding-header "TODO tasks")))))
