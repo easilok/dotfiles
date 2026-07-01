@@ -40,7 +40,10 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (setq doom-font (font-spec :family "Iosevka" :size 15 :weight 'normal :width 'expanded)
-      doom-variable-pitch-font (font-spec :family "IosevkaAile" :size 14 :weight 'normal)
+      doom-variable-pitch-font (font-spec :family (if (member "IosevkaAile" (font-family-list))
+                                                      "IosevkaAile"
+                                                    "Iosevka")
+                                          :size 14 :weight 'normal)
       doom-symbol-font (font-spec :family "Iosevka")
       doom-big-font (font-spec :family "Iosevka" :size 22))
 

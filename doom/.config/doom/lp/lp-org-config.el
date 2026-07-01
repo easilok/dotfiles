@@ -57,15 +57,17 @@
         `(("t" "todo" entry (file lp/org-capture-file)
            "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t :prepend t)
           ("i" "idea" entry (file lp/org-capture-file)
-           "* %? :IDEA:\n%t\n" :clock-in t :clock-resume t)
+           "* NEXT %? :idea:\n%t\n" :clock-in t :clock-resume t)
           ("n" "note" entry (file lp/org-capture-file)
-           "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+           "* NEXT %? :note:\n%U\n%a\n" :clock-in t :clock-resume t)
           ("r" "respond" entry (file lp/org-capture-file)
            "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
           ("g" "meeting" entry (file lp/org-capture-meeting)
            "* TODO Meeting with %? :MEETING:\n%U" :clock-in t :clock-resume t :prepend t)
           ("p" "New Project" plain (file lp-org-get-project-capture)
            "" :immediate-finish nil)))
+  (when-let ((cell (assoc "KILL" org-todo-keyword-faces)))
+    (setcdr cell 'org-done))
   (setq org-todo-keywords      ; This overwrites the default Doom org-todo-keywords
         '((sequence
            "TODO(t)"           ; A task that is ready to be tackled
