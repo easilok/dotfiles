@@ -1,5 +1,5 @@
 [aws]
-disabled=true
+format='on [$symbol($profile )(\[$duration\] )]($style)'
 
 [custom.production_env]
 command =  '~/.local/bin/detect_production_env.sh'
