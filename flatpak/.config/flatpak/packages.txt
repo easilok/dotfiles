@@ -1,0 +1,9 @@
+# Official distributions
+md.obsidian.Obsidian
+org.kicad.KiCad
+com.usebruno.Bruno
+app.zen_browser.zen
+com.github.PintaProject.Pinta
+
+# Unverified distributions
+org.speedcrunch.SpeedCrunch
