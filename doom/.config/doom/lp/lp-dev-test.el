@@ -30,11 +30,27 @@
   :type 'string
   :safe #'stringp)
 
+;; (defun lp-dev-test--ensure-vterm ()
+;;   "Ensures that a vterm instance exists with the provided configuration."
+;;   (let ((vterm-buf (get-buffer lp-dev-test-shell-name)))
+;;     (unless vterm-buf
+;;       (setq vterm-buf (vterm lp-dev-test-shell-name)))
+;;     vterm-buf))
+
+(defun lp-dev-test--get-vterm-buffer ()
+  "Ensure a vterm buffer exists overriding any buffer management action."
+  (or (get-buffer lp-dev-test-shell-name)
+      (let ((display-buffer-overriding-action
+             '((display-buffer-no-window))))
+        (vterm lp-dev-test-shell-name))))
+
 (defun lp-dev-test--ensure-vterm ()
-  "Ensures that a vterm instance exists with the provided configuration."
-  (let ((vterm-buf (get-buffer lp-dev-test-shell-name)))
-    (unless vterm-buf
-      (setq vterm-buf (vterm lp-dev-test-shell-name)))
+  "Ensure the vterm buffer exists and show it in the other window."
+  (let ((vterm-buf (lp-dev-test--get-vterm-buffer)))
+    (if-let ((window (get-buffer-window vterm-buf t)))
+        (select-window window)
+      (other-window 1)
+      (switch-to-buffer vterm-buf))
     vterm-buf))
 
 (defun lp-dev-test ()
