@@ -1,17 +1,28 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+shopt -s nullglob
 
 REMOTE="flathub"
+CONFIG_DIR="$HOME/.config/flatpak"
 
-while read -r package; do
-    [[ -z "$package" || "$package" =~ ^# ]] && continue
+for file in "$CONFIG_DIR"/*.txt; do
 
-    if flatpak info "$package" >/dev/null 2>&1; then
-        echo "✓ $package is already installed."
-    else
-        echo "→ Installing $package..."
-        flatpak install -y "$REMOTE" "$package"
-        echo "✓ Installed $package."
-    fi
-done < $HOME/.config/flatpak/packages.txt
+    echo "==> Processing $(basename "$file")"
+
+    while read -r package; do
+        [[ -z "$package" || "$package" =~ ^# ]] && continue
+
+        if flatpak info "$package" >/dev/null 2>&1; then
+            echo "✓ $package is already installed."
+        else
+            echo "→ Installing $package..."
+            flatpak install -y "$REMOTE" "$package"
+            echo
+            echo "✓ Installed $package."
+        fi
+    done < $file
+
+    echo
+
+done
