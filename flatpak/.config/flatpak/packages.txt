@@ -7,3 +7,7 @@ com.github.PintaProject.Pinta
 
 # Unverified distributions
 org.speedcrunch.SpeedCrunch
+
+# Themes
+org.gtk.Gtk3theme.Arc
+org.gtk.Gtk3theme.Arc-Dark
