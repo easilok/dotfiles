@@ -170,7 +170,11 @@
             (lambda()
               (org-bullets-mode 1)
               (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
-  (global-set-key (kbd "C-c a") #'org-agenda))
+  (global-set-key (kbd "C-c a") #'org-agenda)
+  (map! :leader
+        :desc "Open current journal"
+        "n j c" #'org-journal-open-current-journal-file
+        "n j j" #'org-journal-open-current-journal-file))
 
 ;; Some visual customizations
 (add-hook 'org-mode-hook
