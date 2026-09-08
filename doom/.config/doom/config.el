@@ -303,12 +303,14 @@
                      "pylsp" "pyls"
                      "ruff-lsp"))
 
-(add-hook 'python-mode-hook #'mise-mode)
-(add-hook 'python-ts-mode-hook #'mise-mode)
-(add-hook 'typescript-mode-hook #'mise-mode)
-(add-hook 'typescript-ts-mode-hook #'mise-mode)
 (add-hook 'prog-mode-hook #'breadcrumb-local-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+(when (executable-find "mise")
+  (add-hook 'python-mode-hook #'mise-mode)
+  (add-hook 'python-ts-mode-hook #'mise-mode)
+  (add-hook 'typescript-mode-hook #'mise-mode)
+  (add-hook 'typescript-ts-mode-hook #'mise-mode))
 
 (use-package! treesit
   :config
