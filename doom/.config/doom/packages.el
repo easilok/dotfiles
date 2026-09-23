@@ -62,4 +62,5 @@
 (package! beacon)
 (package! denote)
 (package! rainbow-delimiters)
+(package! kdl-mode)
 ;; (package! pinentry)

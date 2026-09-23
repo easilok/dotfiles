@@ -315,6 +315,8 @@
 (use-package! treesit
   :config
   (cl-pushnew '(dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" nil nil nil nil)
+              treesit-language-source-alist :test #'eq :key #'car)
+  (cl-pushnew '(kdl "https://github.com/tree-sitter-grammars/tree-sitter-kdl" nil nil nil nil)
               treesit-language-source-alist :test #'eq :key #'car))
 
 
