@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ ! -f $HOME/local_scripts/jira-stop ]; then
     notify-send "Could not find jira-stop script"

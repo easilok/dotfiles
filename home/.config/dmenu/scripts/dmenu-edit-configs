@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 editor=nvim
 
 if [ -f $HOME/.config/dmenu/dmenurc ]; then

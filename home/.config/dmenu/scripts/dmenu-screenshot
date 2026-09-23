@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NEXT_APP=""
 COMMON_FLAGS="--delay 2 --count --quality 100 --freeze"
