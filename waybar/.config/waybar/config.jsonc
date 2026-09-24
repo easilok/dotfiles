@@ -4,23 +4,24 @@
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 24, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "spacing": 2, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
         "niri/workspaces",
-    ],
-    "modules-center": [
+        "custom/separator",
         "niri/window",
     ],
+    // "modules-center": [
+    // ],
     "modules-right": [
         "idle_inhibitor",
+        "battery",
         "pulseaudio",
         "cpu",
-        "temperature",
         "memory",
         "disk",
+        "temperature",
         // "battery#bat2",
-        "battery",
         "clock",
         "tray",
     ],
@@ -42,25 +43,26 @@
     //     }
     // },
     "niri/workspaces": {
-        "format": "{icon} {windows}",
-        "format-window-separator": " ",
-        "window-rewrite-default": "",
-        "window-rewrite": {
-            "app_id<firefox>": "",
-            "app_id<dolphin>": "",
-            "app_id<org.gnome.Nautilus>": "",
-            "app_id<thunar>": "",
-            "app_id<foot>": ""
-        },
-        "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "active": "",
-            "default": ""
-        }
+        // "format": "{icon} {windows}",
+        "format": "{icon}",
+        // "format-window-separator": " ",
+        // "window-rewrite-default": "",
+        // "window-rewrite": {
+        //     "app_id<firefox>": "",
+        //     "app_id<dolphin>": "",
+        //     "app_id<org.gnome.Nautilus>": "",
+        //     "app_id<thunar>": "",
+        //     "app_id<foot>": ""
+        // },
+        // "format-icons": {
+        //     "1": "1",
+        //     "2": "2",
+        //     "3": "3",
+        //     "4": "4",
+        //     "5": "5",
+        //     "active": "",
+        //     "default": ""
+        // }
     },
     "keyboard-state": {
         "numlock": true,
@@ -129,18 +131,18 @@
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "   {usage}%",
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "format": "   {}%"
     },
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
+        "format": "{icon}   {temperatureC}°C",
         "format-icons": ["󰉬", "", "󰉪"]
     },
     "backlight": {
@@ -155,11 +157,11 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% 󰃨",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
+        "format": "{icon}   {capacity}%",
+        "format-full": "{icon}   {capacity}%",
+        "format-charging": "󰃨   {capacity}%",
+        "format-plugged": "   {capacity}%",
+        "format-alt": "{icon}   {time}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
@@ -239,5 +241,10 @@
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
+    },
+    "custom/separator": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
     }
 }

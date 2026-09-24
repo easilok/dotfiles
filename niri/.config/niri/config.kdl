@@ -21,6 +21,7 @@ input {
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
+            file "~/.config/niri/personal-lap.xkb"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -37,7 +38,7 @@ input {
         // dwtp
         // drag false
         // drag-lock
-        natural-scroll
+        // natural-scroll
         // accel-speed 0.2
         // accel-profile "flat"
         // scroll-method "two-finger"
@@ -114,6 +115,8 @@ input {
 layout {
     // Set gaps around windows in logical pixels.
     gaps 6
+
+    empty-workspace-above-first false
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -332,6 +335,13 @@ window-rule {
     open-floating true
 }
 
+window-rule {
+    match app-id=r#"dmenu"#
+    open-floating true
+
+    default-floating-position x=0 y=0 relative-to="top-left"
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
@@ -361,7 +371,6 @@ workspace "6"
 workspace "7"
 workspace "8"
 workspace "9"
-workspace "0"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -445,11 +454,16 @@ binds {
     Mod+Alt+J     { focus-monitor-down; }
     Mod+Alt+K     { focus-monitor-up; }
     Mod+Alt+L     { focus-monitor-right; }
+    Mod+Comma     { focus-monitor-next; }
+    Mod+Period    { focus-monitor-previous; }
 
     Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
     Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+    Mod+Shift+Comma      { move-workspace-to-monitor-next; }
+    Mod+Shift+Period     { move-workspace-to-monitor-previous; }
+
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
@@ -530,7 +544,7 @@ binds {
     Mod+7 { focus-workspace "7"; }
     Mod+8 { focus-workspace "8"; }
     Mod+9 { focus-workspace "9"; }
-    Mod+0 { focus-workspace "10"; }
+    Mod+0 { focus-workspace 10; }
     // Mod+Ctrl+1 { move-column-to-workspace 1; }
     // Mod+Ctrl+2 { move-column-to-workspace 2; }
     // Mod+Ctrl+3 { move-column-to-workspace 3; }
@@ -551,21 +565,23 @@ binds {
     Mod+Shift+7 { move-window-to-workspace "7"; }
     Mod+Shift+8 { move-window-to-workspace "8"; }
     Mod+Shift+9 { move-window-to-workspace "9"; }
-    Mod+Shift+0 { move-window-to-workspace "10"; }
+    Mod+Shift+0 { move-window-to-workspace 10; }
 
     // Switches focus between the current and the previous workspace.
-    Mod+Shift+Z { focus-workspace-previous; }
+    Mod+Z { focus-workspace-previous; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
     // If the window is already in a column, they will expel it out.
-    Mod+BracketLeft  { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
+    // Mod+BracketLeft  { consume-or-expel-window-left; }
+    // Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+G            { consume-or-expel-window-left; }
+    Mod+Shift+G      { consume-or-expel-window-right; }
 
     // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
+    // Mod+Comma  { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    // Mod+Period { expel-window-from-column; }
 
     // Cycle through widths set in preset-column-widths.
     Mod+R { switch-preset-column-width; }
@@ -645,4 +661,8 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     // Mod+Shift+P { power-off-monitors; }
+}
+
+switch-events {
+    lid-close { spawn "swaylock"; }
 }
