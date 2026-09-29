@@ -31,6 +31,7 @@ floating_modifier $mod
 
 # start a terminal
 set $myTerminal "$TERMINAL"
+set $myTerminal "kitty"
 set $lockScreen "$HOME/.config/i3/lock.sh"
 bindsym $mod+Return exec $myTerminal
 

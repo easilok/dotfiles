@@ -359,7 +359,7 @@ window-rule {
 window-rule {
     geometry-corner-radius 4
     clip-to-geometry true
-    open-maximized true
+    // open-maximized true
 }
 
 workspace "1"
@@ -393,6 +393,7 @@ binds {
     Mod+Shift+p hotkey-overlay-title="Run an Application: rofi" { spawn "dmenu-full"; }
     Mod+Shift+x hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+Shift+Escape hotkey-overlay-title="Power menu" { spawn "dmenu-power"; }
+    Mod+Ctrl+p hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.

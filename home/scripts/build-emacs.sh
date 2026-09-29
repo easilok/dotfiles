@@ -7,7 +7,7 @@
 
 num_jobs=$(cat /proc/cpuinfo | grep 'core id' | wc -l)
 source_location=$HOME/git/emacs
-source_tag=emacs-30.2
+source_tag=emacs-31.1
 emacs_repo="https://github.com/emacs-mirror/emacs.git"
 # do the options
 
@@ -41,6 +41,15 @@ else
     echo [Done.]
 fi
 
+echo "Refreshing sources from upstream..."
+echo "Checking out $source_tag ..."
+
+sleep 3
+git fetch --all && git pull --all &&
+git checkout $source_tag &&
+
+echo "[ Done. ]"
+
 sleep 5
 
 ./autogen.sh &&
@@ -59,17 +68,8 @@ sleep 5
 
 git stash
 
-echo "Refreshing sources from upstream..."
-echo "Checking out $source_tag ..."
 
-sleep 3
-git checkout $source_tag &&
-
-echo "[ Done. ]"
-
-git fetch --all && git pull --all &&
-
-    echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "Configuring emacs source code for version $source_tag... "
 
 sleep 3
@@ -77,7 +77,7 @@ sleep 3
 
 ## native comp
 echo "Configuring with emacs Native Compilation for elisp..."
-./configure --with-native-compilation --with-gnutls --with-imagemagick --with-jpeg --with-png --with-rsvg --with-tiff --with-wide-int --with-xml2 --with-json
+./configure --with-native-compilation --with-gnutls --with-imagemagick --with-jpeg --with-png --with-rsvg --with-tiff --with-wide-int --with-xml2 --with-json --with-pgtk
 
 ## no native comp
 # ./configure --with-gnutls --with-imagemagick --with-jpeg --with-png --with-rsvg --with-tiff --with-wide-int --with-xml2
