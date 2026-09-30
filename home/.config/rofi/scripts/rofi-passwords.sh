@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+PASSWORD_STORE_DIR=${PASSWORD_STORE_DIR:-$HOME/.password-store}
+
+password=$(\
+    find $PASSWORD_STORE_DIR -type f -name '*.gpg' \
+        | sed "s#^$PASSWORD_STORE_DIR/##; s/\.gpg$//" | \
+        rofi -dmenu -i -p 'Find Password:'\
+)
+
+
+if [ -z "$password" ]; then
+    echo "Exit Esc"
+    exit
+fi
+
+echo "Using $password"
+
+echo $(pass show $password 2> /dev/null) | wl-copy

@@ -394,6 +394,7 @@ binds {
     Mod+Shift+x hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+Shift+Escape hotkey-overlay-title="Power menu" { spawn "dmenu-power"; }
     Mod+Ctrl+p hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+b hotkey-overlay-title="Run Bookmarks Selection" { spawn "dmenu-bookmarks"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -480,8 +481,8 @@ binds {
     Mod+I              { focus-workspace-up; }
     Mod+Ctrl+Down      { move-column-to-workspace-down; }
     Mod+Ctrl+Up        { move-column-to-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
+    // Mod+Ctrl+U         { move-column-to-workspace-down; }
+    // Mod+Ctrl+I         { move-column-to-workspace-up; }
     Mod+Shift+Down     { move-window-to-workspace-down; }
     Mod+Shift+Up       { move-window-to-workspace-up; }
     Mod+Shift+U        { move-window-to-workspace-down; }
@@ -493,8 +494,8 @@ binds {
 
     // Mod+Shift+Page_Down { move-workspace-down; }
     // Mod+Shift+Page_Up   { move-workspace-up; }
-    // Mod+Shift+U         { move-workspace-down; }
-    // Mod+Shift+I         { move-workspace-up; }
+    Mod+Ctrl+U         { move-workspace-down; }
+    Mod+Ctrl+I         { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -666,4 +667,14 @@ binds {
 
 switch-events {
     lid-close { spawn "swaylock"; }
+}
+
+gestures {
+    hot-corners {
+            off
+            // top-left
+            // top-right
+            // bottom-left
+            // bottom-right
+        }
 }
