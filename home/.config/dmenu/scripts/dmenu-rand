@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-if [ -f $HOME/.config/dmenu/dmenurc ]; then
+if [ ! -z $WAYLAND_DISPLAY ]; then
+    DMENU='rofi -dmenu -i'
+elif [ -f $HOME/.config/dmenu/dmenurc ]; then
   . $HOME/.config/dmenu/dmenurc
 else
   DMENU='dmenu -i'

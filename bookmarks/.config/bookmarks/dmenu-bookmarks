@@ -2,7 +2,9 @@
 
 BOOKMARKS_FILE="$HOME/.config/bookmarks/bookmarks.txt"
 
-if [ -f $HOME/.config/dmenu/dmenurc ]; then
+if command -v rofi >/dev/null 2>&1; then
+    DMENU='rofi -dmenu -i'
+elif [ -f $HOME/.config/dmenu/dmenurc ]; then
   . $HOME/.config/dmenu/dmenurc
 else
   DMENU='dmenu -i'

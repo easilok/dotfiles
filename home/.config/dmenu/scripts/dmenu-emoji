@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-if [ -f $HOME/.config/dmenu/dmenurc ]; then
+if [ ! -z $WAYLAND_DISPLAY ]; then
+    DMENU='rofi -dmenu -i'
+elif [ -f $HOME/.config/dmenu/dmenurc ]; then
   . $HOME/.config/dmenu/dmenurc
 else
   DMENU='dmenu -i'
@@ -18,4 +20,9 @@ if [ -z "$choice" ]; then
 fi
 
 echo $choice | awk '{ print $1 }'
-echo $choice | awk '{ print $1 }' | xclip -selection "clipboard"
+
+if [ ! -z $WAYLAND_DISPLAY ]; then
+    echo $choice | awk '{ print $1 }' | wl-copy
+else
+    echo $choice | awk '{ print $1 }' | xclip -selection "clipboard"
+fi

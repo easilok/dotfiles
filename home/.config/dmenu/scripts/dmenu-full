@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-if [ -f $HOME/.config/dmenu/dmenurc ]; then
+if command -v rofi >/dev/null 2>&1; then
+    rofi -show "run"
+elif [ -f $HOME/.config/dmenu/dmenurc ]; then
   . $HOME/.config/dmenu/dmenurc
+  exec $DMENU_RUN
 else
-  DMENU_RUN='dmenu_run -i'
+  dmenu_run -i -nb '#292d3e' -nf '#bbc5ff' -sb '#82AAFF' -sf '#292d3e' -fn 'UbuntuMono Nerd Font:bold:pixelsize=14'
 fi
-
-### dmenu_run -i -nb '#292d3e' -nf '#bbc5ff' -sb '#82AAFF' -sf '#292d3e' -fn 'UbuntuMono Nerd Font:bold:pixelsize=14'
-#$DMENU_RUN 
-rofi -show "run"
 
