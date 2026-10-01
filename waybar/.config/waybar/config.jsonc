@@ -44,7 +44,11 @@
     // },
     "niri/workspaces": {
         // "format": "{icon} {windows}",
-        "format": "{icon}",
+        "format": "{name}",
+        // "all-outputs": true,
+        // "sort-by-name": true,
+        "sort-by-id": true,
+        "only-populated": true,
         // "format-window-separator": " ",
         // "window-rewrite-default": "",
         // "window-rewrite": {
@@ -119,10 +123,6 @@
     "tray": {
         // "icon-size": 21,
         "spacing": 10,
-        // "icons": {
-        //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-        // }
     },
     "clock": {
         // "timezone": "America/New_York",

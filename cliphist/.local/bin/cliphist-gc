@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+ROTATION_TIME=48h
+
+echo "Deleting clipboard history older than $ROTATION_TIME"
+
+cliphist wipe -older-than $ROTATION_TIME

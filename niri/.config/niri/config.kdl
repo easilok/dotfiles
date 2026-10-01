@@ -276,13 +276,15 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
+spawn-at-startup "cliphist-daemon"
+spawn-at-startup "swaylock-inactivity"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-    // skip-at-startup
+    skip-at-startup
 }
 
 
@@ -324,6 +326,14 @@ window-rule {
     // You can get away with just app-id="wezterm" if you want.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
+}
+
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"#
+    open-maximized true
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
@@ -391,10 +401,11 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+p hotkey-overlay-title="Run an Application: rofi" { spawn "dmenu-simple"; }
     Mod+Shift+p hotkey-overlay-title="Run an Application: rofi" { spawn "dmenu-full"; }
-    Mod+Shift+x hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Shift+x hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock-screen"; }
     Mod+Shift+Escape hotkey-overlay-title="Power menu" { spawn "dmenu-power"; }
     Mod+Ctrl+p hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+b hotkey-overlay-title="Run Bookmarks Selection" { spawn "dmenu-bookmarks"; }
+    Ctrl+Alt+h hotkey-overlay-title="Run Clipboard history" { spawn "rofi-cliphist"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -666,7 +677,7 @@ binds {
 }
 
 switch-events {
-    lid-close { spawn "swaylock"; }
+    lid-close { spawn "swaylock-screen"; }
 }
 
 gestures {

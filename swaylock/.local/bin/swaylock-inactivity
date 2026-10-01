@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+swayidle -w \
+    timeout 60 'swaylock-screen -f' \
+    before-sleep 'swaylock-screen -f'

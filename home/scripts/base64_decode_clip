@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-xclip -selection clipboard -o | sed 's/^"//;s/"$//' | base64 -d
+if [ -z $WAYLAND_DISPLAY ]; then
+    xclip -selection clipboard -o | sed 's/^"//;s/"$//' | base64 -d
+else
+    wl-paste | sed 's/^"//;s/"$//' | base64 -d
+fi

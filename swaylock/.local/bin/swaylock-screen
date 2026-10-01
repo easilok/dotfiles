@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+
+BLANK='#00000000'
+CLEAR='#ffffff22'
+DEFAULT='#ff00ffcc'
+TEXT='#ee00eeee'
+WRONG='#880000bb'
+VERIFYING='#bb00bbbb'
+
+# -e -> ignore empty passwords
+swaylock -e                            \
+ --inside-ver-color=$CLEAR             \
+ --ring-ver-color=$VERIFYING           \
+\
+ --inside-wrong-color=$CLEAR           \
+ --ring-wrong-color=$WRONG             \
+\
+--inside-color=$BLANK                  \
+--ring-color=$DEFAULT                  \
+--line-color=$BLANK                    \
+--separator-color=$DEFAULT             \
+\
+--text-ver-color=$TEXT                 \
+--text-wrong-color=$TEXT               \
+--layout-text-color=$TEXT              \
+--key-hl-color=$WRONG                  \
+--bs-hl-color=$WRONG                   \
+\
+--indicator-radius 100                 \
+--indicator-thickness 5                \
+\
+--scaling fill                         \
+--image=$HOME/wallpapers/wallpaper.jpg \
+--indicator-idle-visible               \
+"$@"
