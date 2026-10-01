@@ -1,0 +1,5 @@
+//spawn-at-startup "waybar"
+spawn-at-startup "cliphist-daemon"
+spawn-at-startup "swaylock-inactivity"
+spawn-at-startup "sleep 10 && swaybg -i $HOME/wallpapers/wallpaper.jpg"
+spawn-at-startup "$HOME/.config/niri/scripts/set-theme-settings"
