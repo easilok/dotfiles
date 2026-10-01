@@ -7,6 +7,8 @@ binds {
     Mod+Ctrl+p hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+b hotkey-overlay-title="Run Bookmarks Selection" { spawn "dmenu-bookmarks"; }
     Ctrl+Alt+h hotkey-overlay-title="Run Clipboard history" { spawn "rofi-cliphist"; }
+    Mod+Shift+W hotkey-overlay-title="Run window selection" { spawn "rofi" "-show" "window"; }
+    Mod+e hotkey-overlay-title="Run file browser" { spawn "pcmanfm"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -29,4 +31,6 @@ binds {
     // but you need to manually put each argument in separate "" quotes.
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    Shift+Alt+F6 { spawn "brightnessctl" "set" "5%-"; }
+    Shift+Alt+F7 { spawn "brightnessctl" "set" "5%+"; }
 }
