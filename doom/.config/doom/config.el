@@ -215,6 +215,33 @@
 (define-key (current-global-map) [remap split-window-below] 'lp-split-window-below)
 (define-key (current-global-map) [remap split-window-right] 'lp-split-window-right)
 
+(defun lp-clipboard-wl-copy (text)
+  "Send text to the Wayland clipboard."
+  (let ((wl-copy-process (make-process :name "wl-copy"
+                                       :command '("wl-copy")
+                                       :connection-type 'pipe)))
+    (process-send-string wl-copy-process text)
+    (process-send-eof wl-copy-process)))
+
+(defun lp-clipboard-wl-paste ()
+  "Return the contents of the Wayland clipboard as a string, or nil."
+  (let ((wl-paste-output (with-temp-buffer
+			   (call-process "wl-paste" nil t nil)
+			   (buffer-string))))
+    (when (and wl-paste-output (not (string= wl-paste-output "")))
+      ;; Remove a single trailing newline that wl-paste adds
+      (replace-regexp-in-string "\n\\'" "" wl-paste-output))))
+
+(defun wl-clipboard-kill-ring-save()
+  "Wrapper to the clipboard-kill-ring-save function with wayland clipboard set"
+  (let ((interprogram-cut-function 'lp-clipboard-wl-copy))
+    #'clipboard-kill-ring-save))
+
+(defun wl-clipboard-yank()
+  "Wrapper to the clipboard-yank function with wayland clipboard set"
+  (let ((interprogram-cut-function 'lp-clipboard-wl-past))
+    #'clipboard-yank))
+
 (after! evil
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal)
@@ -225,8 +252,14 @@
   ;; Disables global clipboard on copy/cut
   (setq select-enable-clipboard nil)
   ;; Adds C-S-c/v to copy/past from clipboard
-  (map! "C-S-c" #'clipboard-kill-ring-save)
-  (map! "C-S-v" #'clipboard-yank)
+
+  (if (> (length (getenv "WAYLAND_DISPLAY")) 0)
+      (progn
+        (map! "C-S-c" (wl-clipboard-kill-ring-save))
+        (map! "C-S-v" (wl-clipboard-yank)))
+    (progn
+      (map! "C-S-c" #'clipboard-kill-ring-save)
+      (map! "C-S-v" #'clipboard-yank)))
 
   (setq evil-want-fine-undo t)
   ;; (setq evil-undo-system 'undo-tree)
