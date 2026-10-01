@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+swaybg -i $HOME/wallpapers/wallpaper.jpg
