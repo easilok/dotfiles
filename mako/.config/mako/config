@@ -1,0 +1,28 @@
+# Tokyo night theme
+background-color=#24283b
+text-color=#c0caf5
+border-color=#414868
+font=Hack 10
+
+# positioning
+anchor=top-right
+width=350
+margin=0,10,10
+padding=10
+border-size=2
+border-radius=5
+default-timeout=6000
+
+group-by=summary
+
+[grouped]
+format=<b>%s</b>\n%b
+
+[urgency=low]
+default-timeout=4000
+
+[urgency=critical]
+default-timeout=10000
+
+[mode=do-not-disturb]
+invisible=1
