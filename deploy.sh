@@ -17,6 +17,12 @@ desktopFolders=(
     "i3lock"
     "wezterm"
     "greenclip"
+    "cliphist"
+    "gtk"
+    "mako"
+    "niri"
+    "swaylock"
+    "waybar"
 )
 
 extraFolders=(
@@ -42,10 +48,16 @@ case $HOSTNAME in
       stowFolders=(
           "awesomewm"
           "picom"
-          "nvim"
           "taskwarrior"
-	  "greenclip"
-	  "doom"
+          "greenclip"
+          "doom"
+          "cliphist"
+          "gtk"
+          "mako"
+          "niri"
+          "swaylock"
+          "waybar"
+          "kanshi-work"
       )
     ;;
 
