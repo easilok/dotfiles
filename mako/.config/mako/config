@@ -26,3 +26,6 @@ default-timeout=10000
 
 [mode=do-not-disturb]
 invisible=1
+
+[summary~=^4;]
+invisible=1
