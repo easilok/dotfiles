@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
 
-WORKSPACE_ID=$(niri msg focused-window | grep -i workspace | awk '{print $3}')
+while :
+do
 
-[ -z $WORKSPACE_ID ] && exit 1
+    WORKSPACE_ID=$(niri msg focused-window | grep -i workspace | awk '{print $3}' 2> /tmp/niri-cmd.log)
 
-WORKSPACE_WINDOWS_COUNT=$(niri msg windows | grep -i "workspace id: $WORKSPACE_ID" | wc -l)
+    [ -z $WORKSPACE_ID ] && exit 1
 
-[ -z $WORKSPACE_WINDOWS_COUNT ] && exit 1
+    WORKSPACE_WINDOWS_COUNT=$(niri msg windows | grep -i "workspace id: $WORKSPACE_ID" | wc -l 2> /tmp/niri-cmd.log)
 
-echo $WORKSPACE_WINDOWS_COUNT
+    [ -z $WORKSPACE_WINDOWS_COUNT ] && exit 1
+
+    echo "{\"text\": $WORKSPACE_WINDOWS_COUNT}"
+
+    sleep 5
+done

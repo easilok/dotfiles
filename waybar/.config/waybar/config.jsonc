@@ -257,9 +257,10 @@
         "tooltip": false
     },
     "custom/niri-workspace-windows": {
-        "format": "{text}: ",
-        "interval": "5",
-        "restart-interval": "5",
-        "exec": "niri-get-window-count.sh",
+        "format": " {text}: ",
+        // "interval": "5",
+        "return-type": "json",
+        // "signal": 8,
+        "exec": "$HOME/.local/bin/niri-get-window-count.sh",
     }
 }
