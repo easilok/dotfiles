@@ -12,7 +12,7 @@ xkb_keymap {
     };
 
     xkb_symbols {
-        include "pc+pt"
+        include "pc+pt+inet(evdev)"
 
         key <AE12> {
             [ less, greater ]
