@@ -38,11 +38,11 @@
 
 (defun lp-org-journal-file-header (time)
   "Creates the weekly journal file header"
-  (format "#+title: %s Weekly Journal - %s, W%s\n#+created: %s\n#+keywords: journal\n#+STARTUP: overview hideblocks \n\n"
-          (format-time-string "%Y")
-          (format-time-string "%B")
-          (format-time-string "%V")
-          (format-time-string "%Y-%m-%d")))
+  (format "#+title: %s Weekly Journal - %s, W%s\n#+created: %s\n#+keywords: journal\n#+STARTUP: overview hideblocks\n\n"
+          (format-time-string "%Y" time)
+          (format-time-string "%B" time)
+          (format-time-string "%V" time)
+          (format-time-string "%Y-%m-%d" time)))
 
 ;; Set journal variables
 (setq org-journal-enable-agenda-integration t
