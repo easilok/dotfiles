@@ -1,9 +1,7 @@
 # -*- mode: snippet -*-
-# name: D2 based diagrams for org-mode
-# key: d2
-# condition: t
+# name: Starts a D2 compatible diagram block
+# key: d2diag
 # --
-
 #+begin_src d2 :file ${1:file.svg} :flags "--scale 1"
 $0
 #+end_src
