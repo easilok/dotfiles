@@ -1,6 +1,21 @@
 profile {
+    output "ASUSTek COMPUTER INC VA24DQLB LCLMQS038424" mode 1920x1080 position 0,0
+    output eDP-1 mode 1920x1200 position 0,1080
+}
+
+profile {
     output "ASUSTek COMPUTER INC ASUS VA24EQSB S6LMTF165309" mode 1920x1080 position 0,0
     output eDP-1 mode 1920x1200 position 0,1080
+}
+
+profile {
+    output "Hewlett Packard HP E201 CNC3390139" mode 1600x900 position 0,0
+    output eDP-1 mode 1920x1200 position 900,0
+}
+
+profile {
+    output "MS Telematica XGIMI TV 0x00000001" mode 1280x720 position 0,0
+    output eDP-1 mode 1920x1200 position 0,720
 }
 
 profile {
