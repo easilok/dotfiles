@@ -442,4 +442,22 @@ The default tab-bar name uses the buffer name."
 ;; Make vertical window separators look nicer in terminal Emacs
 (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│))
 
+(setq world-clock-list
+      '(("Europe/Lisbon" "Portugal")
+        ("America/Toronto" "Toronto")
+        ("America/New_York" "Boston")
+        ("Asia/Amman" "Jordan")
+        ("Europe/London" "London")
+        ("America/Sao_Paulo" "San Paulo")))
 
+
+(use-package! magit
+  :custom
+  magit-ediff-dwim-show-on-hunks t)
+
+(use-package! clocktable-by-tag
+  :after org)
+
+(use-package! d2-mode
+  :init
+  (setq d2-flags (list "--layout" "elk" "--theme" "200")))
