@@ -62,10 +62,10 @@
 (package! beacon)
 (package! denote)
 (package! rainbow-delimiters)
-; (package! kdl-mode)
 (package! protobuf-mode)
 (package! clocktable-by-tag
   :recipe (:host github
            :repo "cashpw/clocktable-by-tag"))
-(package! d2-mode)
+(package! templ-ts-mode)
+;; (package! kdl-mode)
 ;; (package! pinentry)

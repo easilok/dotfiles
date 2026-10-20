@@ -347,11 +347,15 @@
 
 (use-package! treesit
   :config
-  (cl-pushnew '(dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" nil nil nil nil)
+  (cl-pushnew '(templ "https://github.com/vrischmann/tree-sitter-templ" nil nil nil nil)
               treesit-language-source-alist :test #'eq :key #'car)
-  (cl-pushnew '(kdl "https://github.com/tree-sitter-grammars/tree-sitter-kdl" nil nil nil nil)
+  ;; (cl-pushnew '(kdl "https://github.com/tree-sitter-grammars/tree-sitter-kdl" nil nil nil nil)
+  ;; treesit-language-source-alist :test #'eq :key #'car)
+  (cl-pushnew '(dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" nil nil nil nil)
               treesit-language-source-alist :test #'eq :key #'car))
 
+(defun go-ts-mode--iota-query-supported-p ()
+  nil)
 
 ;; Define extra apheleia formatters
 (after! apheleia
@@ -360,7 +364,6 @@
 (after! doom-modeline
   (setq doom-modeline-modal-icon nil) ;; vim modes
   (setq doom-modeline-buffer-file-name-style 'truncate-except-project))
-
 
 (defun lp-search-project-symbol-at-point ()
   (interactive)
@@ -449,7 +452,6 @@ The default tab-bar name uses the buffer name."
         ("Asia/Amman" "Jordan")
         ("Europe/London" "London")
         ("America/Sao_Paulo" "San Paulo")))
-
 
 (use-package! magit
   :custom
