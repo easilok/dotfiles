@@ -143,7 +143,10 @@
 
 (when (file-directory-p "~/.config/.emacs.priv/lp")
   (add-to-list 'load-path "~/.config/.emacs.priv/lp")
-  (require 'lp-private-config nil 'noerror))
+  ;; Dynamicaly load all files in the folder
+  (mapc (lambda (name)
+        (require (intern (file-name-sans-extension name)) nil 'noerror))
+      (directory-files "~/.config/.emacs.priv/lp" nil "\\.el$")))
 
 ;; Buffer Keys
 (map! :leader
