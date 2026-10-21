@@ -145,8 +145,8 @@
   (add-to-list 'load-path "~/.config/.emacs.priv/lp")
   ;; Dynamicaly load all files in the folder
   (mapc (lambda (name)
-        (require (intern (file-name-sans-extension name)) nil 'noerror))
-      (directory-files "~/.config/.emacs.priv/lp" nil "\\.el$")))
+          (require (intern (file-name-sans-extension name)) nil 'noerror))
+        (directory-files "~/.config/.emacs.priv/lp" nil "\\.el$")))
 
 ;; Buffer Keys
 (map! :leader
@@ -218,32 +218,34 @@
 (define-key (current-global-map) [remap split-window-below] 'lp-split-window-below)
 (define-key (current-global-map) [remap split-window-right] 'lp-split-window-right)
 
-(defun lp-clipboard-wl-copy (text)
-  "Send text to the Wayland clipboard."
-  (let ((wl-copy-process (make-process :name "wl-copy"
-                                       :command '("wl-copy")
-                                       :connection-type 'pipe)))
-    (process-send-string wl-copy-process text)
-    (process-send-eof wl-copy-process)))
+(defun lp-clipboard-wl-copy ()
+  "Copy the active region to the Wayland clipboard."
+  (interactive)
+  (unless (use-region-p)
+    (user-error "No active region to copy"))
+  (let ((process (make-process
+                  :name "lp-wl-copy"
+                  :command '("wl-copy")
+                  :connection-type 'pipe
+                  :noquery t)))
+    (process-send-string process
+                         (buffer-substring-no-properties (region-beginning) (region-end)))
+    (process-send-eof process)
+    (deactivate-mark)))
 
 (defun lp-clipboard-wl-paste ()
-  "Return the contents of the Wayland clipboard as a string, or nil."
-  (let ((wl-paste-output (with-temp-buffer
-			   (call-process "wl-paste" nil t nil)
-			   (buffer-string))))
-    (when (and wl-paste-output (not (string= wl-paste-output "")))
-      ;; Remove a single trailing newline that wl-paste adds
-      (replace-regexp-in-string "\n\\'" "" wl-paste-output))))
+  "Insert text from the Wayland clipboard at point."
+  (interactive)
+  (let ((text (with-temp-buffer
+                (let ((status
+                       (call-process "wl-paste" nil t nil
+                                     "--no-newline")))
+                  (unless (and (integerp status)
+                               (zerop status))
+                    (user-error "wl-paste failed"))
+                  (buffer-string)))))
+    (insert text)))
 
-(defun wl-clipboard-kill-ring-save()
-  "Wrapper to the clipboard-kill-ring-save function with wayland clipboard set"
-  (let ((interprogram-cut-function 'lp-clipboard-wl-copy))
-    #'clipboard-kill-ring-save))
-
-(defun wl-clipboard-yank()
-  "Wrapper to the clipboard-yank function with wayland clipboard set"
-  (let ((interprogram-cut-function 'lp-clipboard-wl-past))
-    #'clipboard-yank))
 
 (after! evil
   (evil-set-initial-state 'messages-buffer-mode 'normal)
@@ -255,11 +257,10 @@
   ;; Disables global clipboard on copy/cut
   (setq select-enable-clipboard nil)
   ;; Adds C-S-c/v to copy/past from clipboard
-
   (if (> (length (getenv "WAYLAND_DISPLAY")) 0)
       (progn
-        (map! "C-S-c" (wl-clipboard-kill-ring-save))
-        (map! "C-S-v" (wl-clipboard-yank)))
+        (map! "C-S-c" #'lp-clipboard-wl-copy)
+        (map! "C-S-v" #'lp-clipboard-wl-paste))
     (progn
       (map! "C-S-c" #'clipboard-kill-ring-save)
       (map! "C-S-v" #'clipboard-yank)))
