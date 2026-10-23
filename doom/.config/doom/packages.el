@@ -67,5 +67,6 @@
   :recipe (:host github
            :repo "cashpw/clocktable-by-tag"))
 (package! templ-ts-mode)
+(package! d2-mode)
 ;; (package! kdl-mode)
 ;; (package! pinentry)
