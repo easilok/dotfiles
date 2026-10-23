@@ -30,27 +30,51 @@
   :type 'string
   :safe #'stringp)
 
-;; (defun lp-dev-test--ensure-vterm ()
-;;   "Ensures that a vterm instance exists with the provided configuration."
-;;   (let ((vterm-buf (get-buffer lp-dev-test-shell-name)))
-;;     (unless vterm-buf
-;;       (setq vterm-buf (vterm lp-dev-test-shell-name)))
-;;     vterm-buf))
+(defcustom lp-dev-test-split-side 'right
+  "Side used to open the test terminal when a new split is required.
+`right' creates a vertical split, `below' a horizontal one.  A split is
+only created when the frame has no other window that can be reused."
+  :type '(choice (const :tag "Right (vertical)" right)
+                 (const :tag "Below (horizontal)" below))
+  :safe #'symbolp)
 
 (defun lp-dev-test--get-vterm-buffer ()
-  "Ensure a vterm buffer exists overriding any buffer management action."
+  "Ensure a vterm buffer exists overriding any buffer management action.
+The buffer is created without being displayed so that creating it does
+not move the focus away from the current window."
   (or (get-buffer lp-dev-test-shell-name)
       (let ((display-buffer-overriding-action
-             '((display-buffer-no-window))))
+             (cons '(display-buffer-no-window) '((allow-no-window . t)))))
         (vterm lp-dev-test-shell-name))))
 
+(defun lp-dev-test--reusable-window-p (window)
+  "Return non-nil when WINDOW can be used for the test terminal.
+The selected window, dedicated windows and side windows are excluded."
+  (and (not (eq window (selected-window)))
+       (not (window-dedicated-p window))
+       (null (window-parameter window 'window-side))))
+
+(defun lp-dev-test--display-buffer (buffer _alist)
+  "Display BUFFER in another window without selecting it.
+Reuse the window already showing BUFFER when there is one, otherwise
+reuse the next reusable window of the frame and, failing that, split the
+selected window according to `lp-dev-test-split-side'.  The selected
+window always keeps the focus."
+  (let ((window (or (get-buffer-window buffer t)
+                    (seq-find #'lp-dev-test--reusable-window-p
+                              (cdr (window-list nil 'no-mini))))))
+    (unless window
+      (setq window (if (eq lp-dev-test-split-side 'below)
+                       (split-window-below)
+                     (split-window-right))))
+    (set-window-buffer window buffer)
+    window))
+
 (defun lp-dev-test--ensure-vterm ()
-  "Ensure the vterm buffer exists and show it in the other window."
+  "Ensure the vterm buffer exists and show it in another window.
+The currently selected window is never left."
   (let ((vterm-buf (lp-dev-test--get-vterm-buffer)))
-    (if-let ((window (get-buffer-window vterm-buf t)))
-        (select-window window)
-      (other-window 1)
-      (switch-to-buffer vterm-buf))
+    (display-buffer vterm-buf '((lp-dev-test--display-buffer)))
     vterm-buf))
 
 (defun lp-dev-test ()
