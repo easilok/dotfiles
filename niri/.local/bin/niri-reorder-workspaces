@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+"""Reorder niri workspaces so numeric names ascend within each monitor.
+
+Per-monitor ordering: on a monitor holding workspaces "1".."N" this means
+each name matches its index (name "8" at index 8); a second monitor holding
+"5","6" just gets them sorted 5,6 at indices 1,2 — indices are per monitor.
+
+Runs per-output: every monitor's workspaces are sorted independently. Because
+`move-workspace-to-index` only acts on the *focused* monitor, the script
+focuses each monitor it needs to fix, and restores the originally focused
+monitor at the end.
+
+The niri CLI parses an all-numeric --reference string as an *index*, never as
+a name (FromStr for WorkspaceReferenceArg in niri-ipc), so we cannot address
+the workspace named "6" by name. Instead we read the live layout, plan a
+selection-sort sequence purely in memory, and apply it with
+`niri msg action move-workspace-to-index <target> --reference <source>`.
+
+Sort order within a monitor: workspaces with numeric names first, ascending;
+unnamed or non-numeric workspaces keep their relative order at the end.
+
+Usage:
+    niri-reorder-workspaces            # reorder
+    niri-reorder-workspaces --dry-run  # show planned moves only
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+
+NUMERIC = re.compile(r"^[0-9]+$")
+
+
+def run(*args: str) -> str:
+    proc = subprocess.run(args, capture_output=True, text=True)
+    if proc.returncode != 0:
+        sys.exit(f"command failed: {' '.join(args)}\n{proc.stderr.strip()}")
+    return proc.stdout
+
+
+def fetch_workspaces() -> list[dict]:
+    return json.loads(run("niri", "msg", "-j", "workspaces"))
+
+
+def focused_output() -> str:
+    return json.loads(run("niri", "msg", "-j", "focused-output"))["name"]
+
+
+def sort_key(ws: dict, position: int) -> tuple[int, int, int]:
+    name = ws["name"] or ""
+    if NUMERIC.match(name):
+        return (0, int(name), position)
+    return (1, 0, position)
+
+
+def plan_moves(workspaces: list[dict]) -> list[tuple[int, int]]:
+    """Return (source_index, target_index) 1-based selection-sort moves."""
+    cur = sorted(workspaces, key=lambda w: w["idx"])
+    want_ids = [w["id"] for w in sorted(cur, key=lambda w: sort_key(w, w["idx"]))]
+
+    moves: list[tuple[int, int]] = []
+    for target in range(len(cur)):
+        source = next(i for i in range(target, len(cur)) if cur[i]["id"] == want_ids[target])
+        if source != target:
+            moves.append((source + 1, target + 1))
+            cur.insert(target, cur.pop(source))
+    return moves
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--dry-run", action="store_true",
+                        help="print the planned moves without touching niri")
+    args = parser.parse_args()
+
+    workspaces = fetch_workspaces()
+    by_output: dict[str, list[dict]] = {}
+    for w in workspaces:
+        by_output.setdefault(w["output"], []).append(w)
+
+    originally_focused = focused_output()
+    total = 0
+
+    for output, ws in sorted(by_output.items()):
+        name_at = {w["idx"]: (w["name"] or "(unnamed)") for w in ws}
+        moves = plan_moves(ws)
+        if not moves:
+            if not args.dry_run or len(by_output) > 1:
+                print(f'{output}: already in order')
+            continue
+
+        print(f"{output}: {len(moves)} move(s)")
+        if not args.dry_run and output != focused_output():
+            run("niri", "msg", "action", "focus-monitor", output)
+        for source, target in moves:
+            print(f'  move workspace at index {source} ("{name_at[source]}") -> index {target}'
+                  + (" [dry-run]" if args.dry_run else ""))
+            if not args.dry_run:
+                run("niri", "msg", "action", "move-workspace-to-index",
+                    str(target), "--reference", str(source))
+        total += len(moves)
+
+    if args.dry_run:
+        print(f"planned {total} move(s)" if total else "already in order")
+        return
+
+    if total and originally_focused and focused_output() != originally_focused:
+        run("niri", "msg", "action", "focus-monitor", originally_focused)
+
+    if not args.dry_run:
+        ws2 = fetch_workspaces()
+        by_output2: dict[str, list[dict]] = {}
+        for w in ws2:
+            by_output2.setdefault(w["output"], []).append(w)
+        remaining = sum(len(plan_moves(v)) for v in by_output2.values())
+        print("verified: every monitor's workspaces are in name order"
+              if remaining == 0 else f"WARNING: {remaining} move(s) still needed")
+
+
+if __name__ == "__main__":
+    main()
