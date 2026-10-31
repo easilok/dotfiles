@@ -66,7 +66,10 @@
 (package! clocktable-by-tag
   :recipe (:host github
            :repo "cashpw/clocktable-by-tag"))
-(package! templ-ts-mode)
+(package! templ-ts-mode
+  :recipe (:host github
+           :repo "easilok/templ-ts-mode"
+           :branch "fix-emacs-31"))
 (package! d2-mode)
 ;; (package! kdl-mode)
 ;; (package! pinentry)

@@ -358,9 +358,6 @@
   (cl-pushnew '(dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" nil nil nil nil)
               treesit-language-source-alist :test #'eq :key #'car))
 
-(defun go-ts-mode--iota-query-supported-p ()
-  nil)
-
 ;; Define extra apheleia formatters
 (after! apheleia
   (setf (alist-get 'yamlfmt apheleia-formatters) '("yamlfmt" "-")))
