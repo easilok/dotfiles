@@ -148,6 +148,8 @@
           (require (intern (file-name-sans-extension name)) nil 'noerror))
         (directory-files "~/.config/.emacs.priv/lp" nil "\\.el$")))
 
+(setq load-prefer-newer t)
+
 ;; Buffer Keys
 (map! :leader
       :desc "Switch workspace buffer"

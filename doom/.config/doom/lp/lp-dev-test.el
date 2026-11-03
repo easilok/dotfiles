@@ -34,8 +34,8 @@
   "Side used to open the test terminal when a new split is required.
 `right' creates a vertical split, `below' a horizontal one.  A split is
 only created when the frame has no other window that can be reused."
-  :type '(choice (const :tag "Right (vertical)" right)
-                 (const :tag "Below (horizontal)" below))
+  :type '(choice (const :tag "Right" right)
+                 (const :tag "Left" left))
   :safe #'symbolp)
 
 (defun lp-dev-test--get-vterm-buffer ()
@@ -47,34 +47,12 @@ not move the focus away from the current window."
              (cons '(display-buffer-no-window) '((allow-no-window . t)))))
         (vterm lp-dev-test-shell-name))))
 
-(defun lp-dev-test--reusable-window-p (window)
-  "Return non-nil when WINDOW can be used for the test terminal.
-The selected window, dedicated windows and side windows are excluded."
-  (and (not (eq window (selected-window)))
-       (not (window-dedicated-p window))
-       (null (window-parameter window 'window-side))))
-
-(defun lp-dev-test--display-buffer (buffer _alist)
-  "Display BUFFER in another window without selecting it.
-Reuse the window already showing BUFFER when there is one, otherwise
-reuse the next reusable window of the frame and, failing that, split the
-selected window according to `lp-dev-test-split-side'.  The selected
-window always keeps the focus."
-  (let ((window (or (get-buffer-window buffer t)
-                    (seq-find #'lp-dev-test--reusable-window-p
-                              (cdr (window-list nil 'no-mini))))))
-    (unless window
-      (setq window (if (eq lp-dev-test-split-side 'below)
-                       (split-window-below)
-                     (split-window-right))))
-    (set-window-buffer window buffer)
-    window))
-
 (defun lp-dev-test--ensure-vterm ()
   "Ensure the vterm buffer exists and show it in another window.
 The currently selected window is never left."
+  (interactive)
   (let ((vterm-buf (lp-dev-test--get-vterm-buffer)))
-    (display-buffer vterm-buf '((lp-dev-test--display-buffer)))
+    (display-buffer vterm-buf)
     vterm-buf))
 
 (defun lp-dev-test ()
@@ -112,6 +90,13 @@ The currently selected window is never left."
              (vterm-buf (lp-dev-test--ensure-vterm)))
         (with-current-buffer vterm-buf
           (vterm-send-string (concat cmd "\n")))))))
+
+(add-to-list 'display-buffer-alist
+ `("^\\*vterm-test"
+   (display-buffer-reuse-window display-buffer-in-side-window)
+   (side . ,lp-dev-test-split-side)
+   (slot . 0)
+   (window-width . .5)))
 
 (provide 'lp-dev-test)
 
