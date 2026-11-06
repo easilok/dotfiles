@@ -73,3 +73,6 @@
 (package! d2-mode)
 ;; (package! kdl-mode)
 ;; (package! pinentry)
+(package! shell-maker) ;; Dependency of agent-shell
+(package! acp) ;; Dependency of agent-shell
+(package! agent-shell)
