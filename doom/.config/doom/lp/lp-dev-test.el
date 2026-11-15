@@ -91,12 +91,27 @@ The currently selected window is never left."
         (with-current-buffer vterm-buf
           (vterm-send-string (concat cmd "\n")))))))
 
+(defun lp-dev-vterm-buffer-rules (buffer alist)
+  "Display BUFFER in another window or create a side window."
+  (if (>= (count-windows) 2)
+      (display-buffer-use-some-window
+       buffer
+       '((inhibit-same-window . t)))
+    ;; (display-buffer-in-side-window
+    ;;  buffer
+    ;;  '((side . right)
+    ;;    (slot . 0)
+    ;;    (window-width . 0.5)))
+    (display-buffer-in-direction
+     buffer
+     '((side . right)
+       (slot . 0)
+       (window-width . 0.5)))
+    ))
+
 (add-to-list 'display-buffer-alist
- `("^\\*vterm-test"
-   (display-buffer-reuse-window display-buffer-in-side-window)
-   (side . ,lp-dev-test-split-side)
-   (slot . 0)
-   (window-width . .5)))
+             `("^\\*vterm-test"
+               (display-buffer-reuse-window lp-dev-vterm-buffer-rules)))
 
 (provide 'lp-dev-test)
 
