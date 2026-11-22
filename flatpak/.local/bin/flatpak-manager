@@ -10,7 +10,7 @@ for file in "$CONFIG_DIR"/*.txt; do
 
     echo "==> Processing $(basename "$file")"
 
-    while read -r package; do
+    while IFS= read -r package <&3; do
         [[ -z "$package" || "$package" =~ ^# ]] && continue
 
         if flatpak info "$package" >/dev/null 2>&1; then
@@ -21,7 +21,7 @@ for file in "$CONFIG_DIR"/*.txt; do
             echo
             echo "✓ Installed $package."
         fi
-    done < $file
+    done 3< "$file"
 
     echo
 
