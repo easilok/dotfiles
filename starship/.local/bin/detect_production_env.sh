@@ -4,7 +4,7 @@
 output=""
 
 # Store the result of filtering DB and rds.amazon into a variable
-database_env_vars=$(printenv | grep -E "DB" | grep -E "rds\.amazon")
+database_env_vars=$(printenv | grep -E "ADDVOLT_DATABASE")
 
 # Check if any environment variables match the DB and rds.amazon criteria
 if [[ -n "$database_env_vars" ]]; then

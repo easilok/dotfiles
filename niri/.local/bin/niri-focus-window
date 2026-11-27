@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+window_id=$(niri msg windows | grep -B 2 $1 | grep "Window ID" | awk '{print $3}' | head -n 1 | sed 's/://')
+
+[[ -z $window_id ]] && echo "No window found with name $1" && exit 1
+
+# TODO: Ensure window id exists
+
+niri msg action focus-window --id $window_id

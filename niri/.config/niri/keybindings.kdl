@@ -8,7 +8,10 @@ binds {
     Mod+b hotkey-overlay-title="Run Bookmarks Selection" { spawn "dmenu-bookmarks"; }
     Ctrl+Alt+h hotkey-overlay-title="Run Clipboard history" { spawn "rofi-cliphist"; }
     Mod+Shift+W hotkey-overlay-title="Run window selection" { spawn "rofi" "-show" "window"; }
-    Mod+e hotkey-overlay-title="Run file browser" { spawn "pcmanfm"; }
+    Mod+Shift+e hotkey-overlay-title="Run file browser" { spawn "pcmanfm"; }
+    Mod+Ctrl+e hotkey-overlay-title="Show Emacs" { spawn "niri-focus-window" "emacs"; }
+    Mod+Ctrl+w hotkey-overlay-title="Show Firefox" { spawn "niri-focus-window" "firefox"; }
+    Mod+Ctrl+a hotkey-overlay-title="Show Cursor" { spawn "niri-focus-window" "cursor"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
