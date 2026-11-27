@@ -2,15 +2,22 @@
 ;;;
 ;;; Personal Configuration for Org-Mode
 
+(defcustom lp-org-config-environment (or (getenv "WORKSTATION_ENV") "work")
+  "Sets the name to give for the term shell buffer used to run the test commands."
+  :type 'string
+  :safe #'stringp)
+
 (if (file-directory-p "~/Nextcloud/org")
-    (setq org-directory "~/Nextcloud/org")
+    (setq org-directory
+          (cond ((equal lp-org-config-environment "work") "~/Nextcloud/org/work")
+                ((equal lp-org-config-environment "personal") "~/Nextcloud/org/personal")
+                (t "~/Nextcloud/org")))
   (setq org-directory "~/Documents/org"))
 
 (setq lp/org-capture-file (concat org-directory "/Inbox.org"))
 (setq lp/org-capture-mail (concat org-directory "/Mail.org"))
 (setq lp/org-capture-meeting (concat org-directory "/Meeting.org"))
 (setq org-agenda-files (list (expand-file-name "journal" org-directory)
-                             (expand-file-name "work" org-directory)
                              (expand-file-name "projects" org-directory)
                              (expand-file-name "meetings" org-directory)))
 

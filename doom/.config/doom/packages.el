@@ -77,3 +77,7 @@
 (package! shell-maker) ;; Dependency of agent-shell
 (package! acp) ;; Dependency of agent-shell
 (package! agent-shell)
+(package! agent-shell-notifications
+  :recipe (:host github
+           :repo "zackattackz/agent-shell-notifications"))
+(package! gptel :recipe (:nonrecursive t))

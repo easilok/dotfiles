@@ -106,32 +106,32 @@ The currently selected window is never left."
         (with-current-buffer term-buf
           (lp-dev-test--term-send-string (concat cmd "\n")))))))
 
-(defun lp-dev-term-buffer-rules (buffer _alist)
-  "Display BUFFER in another window or create a side window."
-  (if (>= (count-windows) 2)
-      (display-buffer-use-some-window
-       buffer
-       '((inhibit-same-window . t)))
-    (display-buffer-in-side-window
-     buffer
-     '((side . right)
-       (slot . 0)
-       (inhibit-same-window . t)
-       (window-width . 0.5)))
-    ;; (display-buffer-in-direction
-    ;;  buffer
-    ;;  '((side . right)
-    ;;    (inhibit-same-window . t)
-    ;;    (window-width . 0.5)))
-    ))
+;; (defun lp-dev-term-buffer-rules (buffer _alist)
+;;   "Display BUFFER in another window or create a side window."
+;;   (if (>= (count-windows) 2)
+;;       (display-buffer-use-some-window
+;;        buffer
+;;        '((inhibit-same-window . t)))
+;;     (display-buffer-in-side-window
+;;      buffer
+;;      '((side . right)
+;;        (slot . 0)
+;;        (inhibit-same-window . t)
+;;        (window-width . 0.5)))
+;;     ;; (display-buffer-in-direction
+;;     ;;  buffer
+;;     ;;  '((side . right)
+;;     ;;    (inhibit-same-window . t)
+;;     ;;    (window-width . 0.5)))
+;;     ))
 
-(add-to-list 'display-buffer-alist
-              `((derived-mode-p ghostel-mode)
-                (display-buffer-reuse-window lp-dev-term-buffer-rules)))
+;; (add-to-list 'display-buffer-alist
+;;               `((derived-mode-p ghostel-mode)
+;;                 (display-buffer-reuse-window lp-dev-term-buffer-rules)))
 
-(add-to-list 'display-buffer-alist
-              `((derived-mode-p vterm-mode)
-                (display-buffer-reuse-window lp-dev-term-buffer-rules)))
+;; (add-to-list 'display-buffer-alist
+;;               `((derived-mode-p vterm-mode)
+;;                 (display-buffer-reuse-window lp-dev-term-buffer-rules)))
 
 (provide 'lp-dev-test)
 

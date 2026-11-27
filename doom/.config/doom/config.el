@@ -135,12 +135,13 @@
 
 (when (file-directory-p "~/.config/doom/lp")
   (add-to-list 'load-path "~/.config/doom/lp")
-  (require 'lp-ai-config)
+  (require 'lp-window-config)
   (require 'lp-org-config)
   (require 'lp-denote-config)
   (require 'lp-email-config)
   (require 'lp-dev-test)
-  (require 'lp-clatter))
+  (require 'lp-clatter)
+  (require 'lp-ai-config))
 
 (when (file-directory-p "~/.config/.emacs.priv/lp")
   (add-to-list 'load-path "~/.config/.emacs.priv/lp")
@@ -363,7 +364,9 @@
 
 ;; Define extra apheleia formatters
 (after! apheleia
-  (setf (alist-get 'yamlfmt apheleia-formatters) '("yamlfmt" "-")))
+  (setf (alist-get 'yamlfmt apheleia-formatters) '("yamlfmt" "-"))
+  (setf (alist-get 'biome-global apheleia-formatters)
+        '("biome" "format" "--stdin-file-path" filepath)))
 
 (after! doom-modeline
   (setq doom-modeline-modal-icon nil) ;; vim modes
